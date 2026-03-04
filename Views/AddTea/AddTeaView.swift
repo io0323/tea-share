@@ -167,6 +167,26 @@ struct AddTeaView: View {
               .scaledToFit()
               .frame(maxHeight: 180)
               .clipShape(RoundedRectangle(cornerRadius: 12))
+
+            HStack(spacing: 10) {
+              Button {
+                rerunImageSuggestion()
+              } label: {
+                Label("再抽出", systemImage: "sparkles")
+              }
+              .buttonStyle(.bordered)
+              .disabled(isAnalyzingImage)
+
+              Button(role: .destructive) {
+                clearSelectedImage()
+              } label: {
+                Label("画像を削除", systemImage: "trash")
+              }
+              .buttonStyle(.bordered)
+              .disabled(isAnalyzingImage)
+
+              Spacer()
+            }
           }
 
           if isAnalyzingImage {
@@ -553,6 +573,22 @@ struct AddTeaView: View {
       value: preset.monthOffset,
       to: today
     ) ?? today
+  }
+
+  /*
+   現在の画像で情報抽出を再実行します。
+   */
+  private func rerunImageSuggestion() {
+    guard let selectedImage else { return }
+    suggestTeaInfo(image: selectedImage)
+  }
+
+  /*
+   選択済み画像をフォームから取り除きます。
+   */
+  private func clearSelectedImage() {
+    selectedImage = nil
+    pickedPhotoItem = nil
   }
 
   /*
