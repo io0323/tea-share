@@ -115,6 +115,31 @@ struct AddTeaView: View {
     "\(descriptionText.count)/\(descriptionLimit)"
   }
 
+  /*
+   賞味期限のクイック選択を管理する列挙型です。
+   */
+  private enum ExpiryPreset: String, CaseIterable, Identifiable {
+    case oneMonth = "1か月"
+    case threeMonths = "3か月"
+    case sixMonths = "6か月"
+
+    var id: String { rawValue }
+
+    /*
+     現在日付から加算する月数を返します。
+     */
+    var monthOffset: Int {
+      switch self {
+      case .oneMonth:
+        return 1
+      case .threeMonths:
+        return 3
+      case .sixMonths:
+        return 6
+      }
+    }
+  }
+
   var body: some View {
     NavigationStack {
       Form {
@@ -168,7 +193,11 @@ struct AddTeaView: View {
             in: 5...500,
             step: 5
           )
+          quickRemainingButtons
+
           DatePicker("賞味期限", selection: $expiryDate, displayedComponents: .date)
+          expiryPresetButtons
+
           TextField("説明文", text: $descriptionText, axis: .vertical)
             .lineLimit(3...6)
           HStack {
@@ -278,6 +307,51 @@ struct AddTeaView: View {
         }
       }
     }
+  }
+
+  /*
+   残量のクイック入力ボタン群を返します。
+   */
+  private var quickRemainingButtons: some View {
+    HStack(spacing: 8) {
+      Text("クイック")
+        .font(.caption)
+        .foregroundStyle(.secondary)
+      quickAmountButton(25)
+      quickAmountButton(50)
+      quickAmountButton(100)
+      Spacer()
+    }
+  }
+
+  /*
+   賞味期限のクイック入力ボタン群を返します。
+   */
+  private var expiryPresetButtons: some View {
+    HStack(spacing: 8) {
+      Text("期限プリセット")
+        .font(.caption)
+        .foregroundStyle(.secondary)
+      ForEach(ExpiryPreset.allCases) { preset in
+        Button(preset.rawValue) {
+          applyExpiryPreset(preset)
+        }
+        .font(.caption.weight(.semibold))
+        .buttonStyle(.bordered)
+      }
+      Spacer()
+    }
+  }
+
+  /*
+   指定gに残量を更新するボタンを返します。
+   */
+  private func quickAmountButton(_ grams: Int) -> some View {
+    Button("\(grams)g") {
+      remainingGrams = grams
+    }
+    .font(.caption.weight(.semibold))
+    .buttonStyle(.bordered)
   }
 
   /*
@@ -467,6 +541,18 @@ struct AddTeaView: View {
     selectedImage = nil
     pickedPhotoItem = nil
     clearDraft()
+  }
+
+  /*
+   賞味期限プリセットを適用します。
+   */
+  private func applyExpiryPreset(_ preset: ExpiryPreset) {
+    let today = Calendar.current.startOfDay(for: Date())
+    expiryDate = Calendar.current.date(
+      byAdding: .month,
+      value: preset.monthOffset,
+      to: today
+    ) ?? today
   }
 
   /*
