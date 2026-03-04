@@ -60,6 +60,37 @@ struct TeaTimelineView: View {
   }
 
   /*
+   現在有効なフィルタ条件ラベルを返します。
+   */
+  private var activeFilterLabels: [String] {
+    var labels: [String] = []
+    let keyword = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+    if !keyword.isEmpty {
+      labels.append("検索: \(keyword)")
+    }
+    if let selectedCategory {
+      labels.append("カテゴリ: \(selectedCategory.rawValue)")
+    }
+    if statusScope != .active {
+      labels.append("範囲: \(statusScope.rawValue)")
+    }
+    if showExpiringOnly {
+      labels.append("期限注意のみ")
+    }
+    if sortOption != .expirySoon {
+      labels.append("並び: \(sortOption.rawValue)")
+    }
+    return labels
+  }
+
+  /*
+   フィルタ条件が一つでも有効か判定します。
+   */
+  private var hasActiveFilters: Bool {
+    !activeFilterLabels.isEmpty
+  }
+
+  /*
    期限切れまたは期限間近の件数を返します。
    */
   private var expiringCount: Int {
@@ -89,6 +120,7 @@ struct TeaTimelineView: View {
             statusScopeSelector
             expiryToggle
             categorySelector
+            activeFilterSummary
             timelineSummary
 
             if filteredTeaLeaves.isEmpty {
@@ -142,6 +174,14 @@ struct TeaTimelineView: View {
       TextField("茶葉名・ブランド・エリアで検索", text: $searchText)
         .textInputAutocapitalization(.never)
         .autocorrectionDisabled()
+      if !searchText.isEmpty {
+        Button {
+          searchText = ""
+        } label: {
+          Image(systemName: "xmark.circle.fill")
+            .foregroundStyle(.secondary)
+        }
+      }
     }
     .padding(.horizontal, 12)
     .padding(.vertical, 10)
@@ -243,6 +283,48 @@ struct TeaTimelineView: View {
     .padding(.vertical, 26)
     .background(Color.white.opacity(0.86))
     .clipShape(RoundedRectangle(cornerRadius: 14))
+  }
+
+  /*
+   アクティブなフィルタ状態と解除操作を返します。
+   */
+  private var activeFilterSummary: some View {
+    VStack(alignment: .leading, spacing: 8) {
+      if hasActiveFilters {
+        ScrollView(.horizontal, showsIndicators: false) {
+          HStack(spacing: 8) {
+            ForEach(activeFilterLabels, id: \.self) { label in
+              Text(label)
+                .font(.caption.weight(.semibold))
+                .padding(.horizontal, 10)
+                .padding(.vertical, 6)
+                .background(Color.white.opacity(0.9))
+                .clipShape(Capsule())
+            }
+          }
+        }
+
+        Button("条件をすべて解除") {
+          resetAllFilters()
+        }
+        .font(.footnote.weight(.semibold))
+      } else {
+        Text("フィルタ条件は未設定です")
+          .font(.footnote)
+          .foregroundStyle(.secondary)
+      }
+    }
+  }
+
+  /*
+   フィルタ条件を初期状態へ戻します。
+   */
+  private func resetAllFilters() {
+    selectedCategory = nil
+    searchText = ""
+    sortOption = .expirySoon
+    statusScope = .active
+    showExpiringOnly = false
   }
 }
 
