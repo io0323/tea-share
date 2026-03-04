@@ -240,7 +240,9 @@ struct TeaMapView: View {
  マップピン選択時のハーフモーダル詳細です。
  */
 private struct TeaMapDetailSheet: View {
-  let teaLeaf: TeaLeaf
+  @Environment(\.modelContext) private var modelContext
+  @Bindable var teaLeaf: TeaLeaf
+  @State private var isShowingSaveError = false
 
   var body: some View {
     VStack(alignment: .leading, spacing: 12) {
@@ -263,10 +265,90 @@ private struct TeaMapDetailSheet: View {
         .font(.body)
         .foregroundStyle(.secondary)
 
+      VStack(alignment: .leading, spacing: 8) {
+        Text("取引ステータスを更新")
+          .font(.subheadline.weight(.semibold))
+        Picker("取引ステータス", selection: $teaLeaf.tradeStatus) {
+          ForEach(TradeStatus.allCases) { status in
+            Text(status.rawValue).tag(status)
+          }
+        }
+        .pickerStyle(.segmented)
+        .onChange(of: teaLeaf.tradeStatus) { _, _ in
+          saveStatusChange()
+        }
+      }
+
+      Button {
+        moveToNextStatus()
+      } label: {
+        HStack {
+          Image(systemName: "arrow.right.circle.fill")
+          Text(nextActionTitle)
+            .fontWeight(.semibold)
+        }
+        .frame(maxWidth: .infinity)
+      }
+      .buttonStyle(.borderedProminent)
+      .disabled(nextStatus == nil)
+
       Spacer()
     }
     .padding(.horizontal, 20)
     .padding(.bottom, 20)
+    .alert("保存に失敗しました", isPresented: $isShowingSaveError) {
+      Button("OK", role: .cancel) {}
+    } message: {
+      Text("ステータス更新を保存できませんでした。再度お試しください。")
+    }
+  }
+
+  /*
+   現在ステータスから次に進めるステータスを返します。
+   */
+  private var nextStatus: TradeStatus? {
+    switch teaLeaf.tradeStatus {
+    case .available:
+      return .pending
+    case .pending:
+      return .completed
+    case .completed:
+      return nil
+    }
+  }
+
+  /*
+   クイック更新ボタンの表示文言を返します。
+   */
+  private var nextActionTitle: String {
+    switch teaLeaf.tradeStatus {
+    case .available:
+      return "交渉中へ進める"
+    case .pending:
+      return "交換完了へ進める"
+    case .completed:
+      return "この取引は完了済みです"
+    }
+  }
+
+  /*
+   次ステータスへ進めて保存を行います。
+   */
+  private func moveToNextStatus() {
+    guard let nextStatus else { return }
+    teaLeaf.tradeStatus = nextStatus
+    saveStatusChange()
+  }
+
+  /*
+   ステータス変更を永続化します。
+   */
+  private func saveStatusChange() {
+    do {
+      try modelContext.save()
+    } catch {
+      isShowingSaveError = true
+    }
   }
 }
 
