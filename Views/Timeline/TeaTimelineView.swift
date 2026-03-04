@@ -9,6 +9,7 @@ struct TeaTimelineView: View {
   @State private var selectedCategory: TeaCategory?
   @State private var searchText = ""
   @State private var sortOption: TeaTimelineSortOption = .expirySoon
+  @State private var statusScope: TeaTimelineStatusScope = .active
   @State private var showExpiringOnly = false
   @State private var isPresentingAddTea = false
 
@@ -21,8 +22,7 @@ struct TeaTimelineView: View {
    表示条件に合う茶葉一覧を返します。
    */
   private var filteredTeaLeaves: [TeaLeaf] {
-    let categoryFiltered = teaLeaves
-      .filter { $0.tradeStatus == .available }
+    let categoryFiltered = scopedTeaLeaves
       .filter { tea in
         guard let selectedCategory else { return true }
         return tea.category == selectedCategory
@@ -46,18 +46,24 @@ struct TeaTimelineView: View {
   }
 
   /*
-   募集中の全件数を返します。
+   ステータス表示範囲適用後の件数を返します。
    */
-  private var allAvailableCount: Int {
-    teaLeaves.filter { $0.tradeStatus == .available }.count
+  private var scopedTeaLeaves: [TeaLeaf] {
+    teaLeaves.filter { statusScope.matches($0.tradeStatus) }
+  }
+
+  /*
+   絞り込み適用後の件数を返します。
+   */
+  private var filteredCount: Int {
+    filteredTeaLeaves.count
   }
 
   /*
    期限切れまたは期限間近の件数を返します。
    */
   private var expiringCount: Int {
-    teaLeaves
-      .filter { $0.tradeStatus == .available }
+    scopedTeaLeaves
       .filter { $0.expiryStatus != .fresh }
       .count
   }
@@ -80,6 +86,7 @@ struct TeaTimelineView: View {
           VStack(alignment: .leading, spacing: 16) {
             searchField
             sortSelector
+            statusScopeSelector
             expiryToggle
             categorySelector
             timelineSummary
@@ -155,6 +162,18 @@ struct TeaTimelineView: View {
   }
 
   /*
+   募集状態の表示範囲を切り替えるセレクターを返します。
+   */
+  private var statusScopeSelector: some View {
+    Picker("表示範囲", selection: $statusScope) {
+      ForEach(TeaTimelineStatusScope.allCases) { scope in
+        Text(scope.rawValue).tag(scope)
+      }
+    }
+    .pickerStyle(.segmented)
+  }
+
+  /*
    期限切れ・期限間近の絞り込みトグルを返します。
    */
   private var expiryToggle: some View {
@@ -196,7 +215,9 @@ struct TeaTimelineView: View {
    */
   private var timelineSummary: some View {
     HStack {
-      Text("募集中: \(allAvailableCount)件")
+      Text("対象: \(scopedTeaLeaves.count)件")
+      Spacer()
+      Text("結果: \(filteredCount)件")
       Spacer()
       Text("期限注意: \(expiringCount)件")
     }
@@ -253,6 +274,28 @@ private enum TeaTimelineSortOption: String, CaseIterable, Identifiable {
 }
 
 /*
+ タイムラインで表示する取引状態の範囲を管理する列挙型です。
+ */
+private enum TeaTimelineStatusScope: String, CaseIterable, Identifiable {
+  case active = "募集中+交渉中"
+  case availableOnly = "募集中のみ"
+
+  var id: String { rawValue }
+
+  /*
+   ステータスが表示対象か判定します。
+   */
+  func matches(_ status: TradeStatus) -> Bool {
+    switch self {
+    case .active:
+      return status == .available || status == .pending
+    case .availableOnly:
+      return status == .available
+    }
+  }
+}
+
+/*
  茶葉情報をカードで表示する子ビューです。
  */
 private struct TeaLeafCardView: View {
@@ -273,12 +316,15 @@ private struct TeaLeafCardView: View {
         .font(.headline)
         .lineLimit(2)
 
-      Text(tea.category.rawValue)
-        .font(.caption.weight(.semibold))
-        .padding(.horizontal, 8)
-        .padding(.vertical, 4)
-        .background(Color.green.opacity(0.12))
-        .clipShape(Capsule())
+      HStack(spacing: 6) {
+        Text(tea.category.rawValue)
+          .font(.caption.weight(.semibold))
+          .padding(.horizontal, 8)
+          .padding(.vertical, 4)
+          .background(Color.green.opacity(0.12))
+          .clipShape(Capsule())
+        statusBadge
+      }
 
       expiryBadge
 
@@ -352,6 +398,33 @@ private struct TeaLeafCardView: View {
       return "clock.fill"
     case .fresh:
       return "checkmark.seal.fill"
+    }
+  }
+
+  /*
+   取引状態のバッジ表示を返します。
+   */
+  private var statusBadge: some View {
+    Text(tea.tradeStatus.rawValue)
+      .font(.caption2.weight(.semibold))
+      .foregroundStyle(statusColor)
+      .padding(.horizontal, 8)
+      .padding(.vertical, 4)
+      .background(statusColor.opacity(0.12))
+      .clipShape(Capsule())
+  }
+
+  /*
+   取引状態に応じた色を返します。
+   */
+  private var statusColor: Color {
+    switch tea.tradeStatus {
+    case .available:
+      return .green
+    case .pending:
+      return .orange
+    case .completed:
+      return .gray
     }
   }
 }
