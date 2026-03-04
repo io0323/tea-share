@@ -21,6 +21,7 @@ struct TeaLeafDetailView: View {
       VStack(alignment: .leading, spacing: 16) {
         headerCard
         statusSection
+        quickStatusSection
         detailSection
       }
       .padding(16)
@@ -77,6 +78,35 @@ struct TeaLeafDetailView: View {
   }
 
   /*
+   ワンタップで次ステータスへ進めるセクションを返します。
+   */
+  private var quickStatusSection: some View {
+    VStack(alignment: .leading, spacing: 10) {
+      Text("クイック操作")
+        .font(.headline)
+
+      Button {
+        guard let nextStatus else { return }
+        teaLeaf.tradeStatus = nextStatus
+        saveContext()
+      } label: {
+        HStack {
+          Image(systemName: "arrow.right.circle.fill")
+          Text(quickActionTitle)
+            .fontWeight(.semibold)
+        }
+        .frame(maxWidth: .infinity)
+      }
+      .buttonStyle(.borderedProminent)
+      .disabled(nextStatus == nil)
+    }
+    .padding(14)
+    .frame(maxWidth: .infinity, alignment: .leading)
+    .background(Color.white.opacity(0.92))
+    .clipShape(RoundedRectangle(cornerRadius: 14))
+  }
+
+  /*
    残量や期限などの詳細情報を返します。
    */
   private var detailSection: some View {
@@ -114,6 +144,34 @@ struct TeaLeafDetailView: View {
       return .orange
     case .completed:
       return .gray
+    }
+  }
+
+  /*
+   現在のステータスから遷移可能な次ステータスを返します。
+   */
+  private var nextStatus: TradeStatus? {
+    switch teaLeaf.tradeStatus {
+    case .available:
+      return .pending
+    case .pending:
+      return .completed
+    case .completed:
+      return nil
+    }
+  }
+
+  /*
+   クイック操作ボタンに表示する文言を返します。
+   */
+  private var quickActionTitle: String {
+    switch teaLeaf.tradeStatus {
+    case .available:
+      return "交渉中へ進める"
+    case .pending:
+      return "交換完了へ進める"
+    case .completed:
+      return "この取引は完了済みです"
     }
   }
 
