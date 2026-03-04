@@ -27,6 +27,15 @@ enum TradeStatus: String, Codable, CaseIterable, Identifiable {
 }
 
 /*
+ 賞味期限の状態を表現する列挙型です。
+ */
+enum TeaExpiryStatus: String, Codable {
+  case expired = "期限切れ"
+  case expiringSoon = "期限間近"
+  case fresh = "余裕あり"
+}
+
+/*
  ユーザー情報を表現するSwiftDataモデルです。
  */
 @Model
@@ -69,6 +78,34 @@ final class User: Codable, Identifiable {
     case id
     case username
     case location
+  }
+}
+
+/*
+ TeaLeafに期限関連の補助ロジックを追加します。
+ */
+extension TeaLeaf {
+  /*
+   今日から賞味期限までの日数を返します。
+   */
+  var daysUntilExpiry: Int {
+    let start = Calendar.current.startOfDay(for: Date())
+    let target = Calendar.current.startOfDay(for: expiryDate)
+    return Calendar.current.dateComponents([.day], from: start, to: target).day
+      ?? 0
+  }
+
+  /*
+   日数に応じた賞味期限状態を返します。
+   */
+  var expiryStatus: TeaExpiryStatus {
+    if daysUntilExpiry < 0 {
+      return .expired
+    }
+    if daysUntilExpiry <= 7 {
+      return .expiringSoon
+    }
+    return .fresh
   }
 }
 

@@ -9,6 +9,7 @@ struct TeaTimelineView: View {
   @State private var selectedCategory: TeaCategory?
   @State private var searchText = ""
   @State private var sortOption: TeaTimelineSortOption = .expirySoon
+  @State private var showExpiringOnly = false
   @State private var isPresentingAddTea = false
 
   private let columns = [
@@ -36,7 +37,29 @@ struct TeaTimelineView: View {
         || (tea.owner?.location ?? "").localizedCaseInsensitiveContains(keyword)
     }
 
-    return sortOption.sorted(textFiltered)
+    let expiryFiltered = textFiltered.filter { tea in
+      guard showExpiringOnly else { return true }
+      return tea.expiryStatus != .fresh
+    }
+
+    return sortOption.sorted(expiryFiltered)
+  }
+
+  /*
+   募集中の全件数を返します。
+   */
+  private var allAvailableCount: Int {
+    teaLeaves.filter { $0.tradeStatus == .available }.count
+  }
+
+  /*
+   期限切れまたは期限間近の件数を返します。
+   */
+  private var expiringCount: Int {
+    teaLeaves
+      .filter { $0.tradeStatus == .available }
+      .filter { $0.expiryStatus != .fresh }
+      .count
   }
 
   var body: some View {
@@ -57,16 +80,22 @@ struct TeaTimelineView: View {
           VStack(alignment: .leading, spacing: 16) {
             searchField
             sortSelector
+            expiryToggle
             categorySelector
+            timelineSummary
 
-            LazyVGrid(columns: columns, spacing: 12) {
-              ForEach(filteredTeaLeaves) { tea in
-                NavigationLink {
-                  TeaLeafDetailView(teaLeaf: tea)
-                } label: {
-                  TeaLeafCardView(tea: tea)
+            if filteredTeaLeaves.isEmpty {
+              emptyStateView
+            } else {
+              LazyVGrid(columns: columns, spacing: 12) {
+                ForEach(filteredTeaLeaves) { tea in
+                  NavigationLink {
+                    TeaLeafDetailView(teaLeaf: tea)
+                  } label: {
+                    TeaLeafCardView(tea: tea)
+                  }
+                  .buttonStyle(.plain)
                 }
-                .buttonStyle(.plain)
               }
             }
           }
@@ -126,6 +155,17 @@ struct TeaTimelineView: View {
   }
 
   /*
+   期限切れ・期限間近の絞り込みトグルを返します。
+   */
+  private var expiryToggle: some View {
+    Toggle(isOn: $showExpiringOnly) {
+      Text("期限切れ/期限間近のみ")
+        .font(.subheadline.weight(.medium))
+    }
+    .toggleStyle(.switch)
+  }
+
+  /*
    横スクロール可能なカテゴリ選択UIを返します。
    */
   private var categorySelector: some View {
@@ -149,6 +189,39 @@ struct TeaTimelineView: View {
       }
       .padding(.vertical, 2)
     }
+  }
+
+  /*
+   一覧の集計情報を返します。
+   */
+  private var timelineSummary: some View {
+    HStack {
+      Text("募集中: \(allAvailableCount)件")
+      Spacer()
+      Text("期限注意: \(expiringCount)件")
+    }
+    .font(.footnote.weight(.medium))
+    .foregroundStyle(.secondary)
+  }
+
+  /*
+   結果が0件のときの空状態ビューを返します。
+   */
+  private var emptyStateView: some View {
+    VStack(spacing: 10) {
+      Image(systemName: "tray")
+        .font(.system(size: 30))
+        .foregroundStyle(.secondary)
+      Text("条件に一致する茶葉がありません")
+        .font(.subheadline.weight(.semibold))
+      Text("検索条件やカテゴリを変更してください")
+        .font(.footnote)
+        .foregroundStyle(.secondary)
+    }
+    .frame(maxWidth: .infinity)
+    .padding(.vertical, 26)
+    .background(Color.white.opacity(0.86))
+    .clipShape(RoundedRectangle(cornerRadius: 14))
   }
 }
 
@@ -207,6 +280,8 @@ private struct TeaLeafCardView: View {
         .background(Color.green.opacity(0.12))
         .clipShape(Capsule())
 
+      expiryBadge
+
       VStack(alignment: .leading, spacing: 2) {
         Text("残量: \(tea.remainingGrams)g")
           .font(.caption)
@@ -220,6 +295,64 @@ private struct TeaLeafCardView: View {
     .background(Color.white.opacity(0.92))
     .clipShape(RoundedRectangle(cornerRadius: 16))
     .shadow(color: .black.opacity(0.07), radius: 7, x: 0, y: 2)
+  }
+
+  /*
+   期限情報のバッジ表示を返します。
+   */
+  private var expiryBadge: some View {
+    HStack(spacing: 6) {
+      Image(systemName: expiryIcon)
+      Text(expiryText)
+    }
+    .font(.caption2.weight(.semibold))
+    .foregroundStyle(expiryColor)
+    .padding(.horizontal, 8)
+    .padding(.vertical, 4)
+    .background(expiryColor.opacity(0.12))
+    .clipShape(Capsule())
+  }
+
+  /*
+   期限状態に応じたラベル文言を返します。
+   */
+  private var expiryText: String {
+    switch tea.expiryStatus {
+    case .expired:
+      return "期限切れ"
+    case .expiringSoon:
+      return "残り\(tea.daysUntilExpiry)日"
+    case .fresh:
+      return "余裕あり"
+    }
+  }
+
+  /*
+   期限状態に応じた色を返します。
+   */
+  private var expiryColor: Color {
+    switch tea.expiryStatus {
+    case .expired:
+      return .red
+    case .expiringSoon:
+      return .orange
+    case .fresh:
+      return .green
+    }
+  }
+
+  /*
+   期限状態に応じたアイコンを返します。
+   */
+  private var expiryIcon: String {
+    switch tea.expiryStatus {
+    case .expired:
+      return "exclamationmark.triangle.fill"
+    case .expiringSoon:
+      return "clock.fill"
+    case .fresh:
+      return "checkmark.seal.fill"
+    }
   }
 }
 
