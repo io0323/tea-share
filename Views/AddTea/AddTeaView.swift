@@ -14,6 +14,10 @@ struct AddTeaView: View {
   @State private var pickedPhotoItem: PhotosPickerItem?
   @State private var selectedImage: UIImage?
   @State private var isShowingCamera = false
+  @State private var isAnalyzingImage = false
+  @State private var isSaving = false
+  @State private var isShowingErrorAlert = false
+  @State private var errorMessage = ""
 
   @State private var name = ""
   @State private var brand = ""
@@ -28,7 +32,7 @@ struct AddTeaView: View {
    必須項目の入力状態を判定します。
    */
   private var canSave: Bool {
-    !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    validationMessages.isEmpty && !isSaving
   }
 
   /*
@@ -36,6 +40,58 @@ struct AddTeaView: View {
    */
   private var canUseCamera: Bool {
     UIImagePickerController.isSourceTypeAvailable(.camera)
+  }
+
+  /*
+   保存前に表示する入力チェックメッセージを返します。
+   */
+  private var validationMessages: [String] {
+    var messages: [String] = []
+    if trimmedName.isEmpty {
+      messages.append("茶葉名は必須です。")
+    }
+    if trimmedLocation.isEmpty {
+      messages.append("エリアは必須です。")
+    }
+    if expiryDate < Calendar.current.startOfDay(for: Date()) {
+      messages.append("賞味期限は本日以降を選択してください。")
+    }
+    return messages
+  }
+
+  /*
+   前後空白を除いた茶葉名を返します。
+   */
+  private var trimmedName: String {
+    name.trimmingCharacters(in: .whitespacesAndNewlines)
+  }
+
+  /*
+   前後空白を除いたブランド名を返します。
+   */
+  private var trimmedBrand: String {
+    brand.trimmingCharacters(in: .whitespacesAndNewlines)
+  }
+
+  /*
+   前後空白を除いたユーザー名を返します。
+   */
+  private var trimmedUsername: String {
+    username.trimmingCharacters(in: .whitespacesAndNewlines)
+  }
+
+  /*
+   前後空白を除いたエリア名を返します。
+   */
+  private var trimmedLocation: String {
+    location.trimmingCharacters(in: .whitespacesAndNewlines)
+  }
+
+  /*
+   前後空白を除いた説明文を返します。
+   */
+  private var trimmedDescription: String {
+    descriptionText.trimmingCharacters(in: .whitespacesAndNewlines)
   }
 
   var body: some View {
@@ -66,6 +122,15 @@ struct AddTeaView: View {
               .frame(maxHeight: 180)
               .clipShape(RoundedRectangle(cornerRadius: 12))
           }
+
+          if isAnalyzingImage {
+            HStack(spacing: 8) {
+              ProgressView()
+              Text("画像から情報を抽出中...")
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+            }
+          }
         }
 
         Section("茶葉情報") {
@@ -91,11 +156,22 @@ struct AddTeaView: View {
           TextField("ユーザー名", text: $username)
           TextField("エリア", text: $location)
         }
+
+        if !validationMessages.isEmpty {
+          Section("入力チェック") {
+            ForEach(validationMessages, id: \.self) { message in
+              Text(message)
+                .font(.footnote)
+                .foregroundStyle(.red)
+            }
+          }
+        }
       }
       .navigationTitle("新規出品")
       .toolbar {
         ToolbarItem(placement: .topBarLeading) {
           Button("キャンセル") { dismiss() }
+            .disabled(isSaving)
         }
         ToolbarItem(placement: .topBarTrailing) {
           Button("保存") {
@@ -115,6 +191,23 @@ struct AddTeaView: View {
         guard let newImage else { return }
         suggestTeaInfo(image: newImage)
       }
+      .alert("保存できませんでした", isPresented: $isShowingErrorAlert) {
+        Button("OK", role: .cancel) {}
+      } message: {
+        Text(errorMessage)
+      }
+      .overlay {
+        if isSaving {
+          ZStack {
+            Color.black.opacity(0.15)
+              .ignoresSafeArea()
+            ProgressView("保存中...")
+              .padding(14)
+              .background(.regularMaterial)
+              .clipShape(RoundedRectangle(cornerRadius: 10))
+          }
+        }
+      }
     }
   }
 
@@ -125,6 +218,9 @@ struct AddTeaView: View {
     Task {
       guard let data = try? await item.loadTransferable(type: Data.self),
             let image = UIImage(data: data) else {
+        await MainActor.run {
+          presentError("画像の読み込みに失敗しました。別の画像を選択してください。")
+        }
         return
       }
       await MainActor.run {
@@ -138,16 +234,23 @@ struct AddTeaView: View {
    */
   private func suggestTeaInfo(image: UIImage) {
     guard let cgImage = image.cgImage else { return }
+    isAnalyzingImage = true
     let request = VNRecognizeTextRequest { request, _ in
       guard let observations = request.results
         as? [VNRecognizedTextObservation] else {
-        applyMockSuggestion()
+        Task { @MainActor in
+          applyMockSuggestion()
+          isAnalyzingImage = false
+        }
         return
       }
       let recognized = observations
         .compactMap { $0.topCandidates(1).first?.string }
         .joined(separator: " ")
-      applySuggestedText(recognized)
+      Task { @MainActor in
+        applySuggestedText(recognized)
+        isAnalyzingImage = false
+      }
     }
     request.recognitionLevel = .accurate
     request.usesLanguageCorrection = true
@@ -157,6 +260,7 @@ struct AddTeaView: View {
       try handler.perform([request])
     } catch {
       applyMockSuggestion()
+      isAnalyzingImage = false
     }
   }
 
@@ -199,30 +303,47 @@ struct AddTeaView: View {
    入力値からTeaLeafを作成して保存します。
    */
   private func saveTeaLeaf() {
+    guard validationMessages.isEmpty else {
+      presentError(validationMessages.joined(separator: "\n"))
+      return
+    }
+    isSaving = true
+
     let owner = User(
-      username: username.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-        ? "new_user" : username,
-      location: location.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-        ? "未設定" : location
+      username: trimmedUsername.isEmpty ? "new_user" : trimmedUsername,
+      location: trimmedLocation
     )
 
     let teaLeaf = TeaLeaf(
-      name: name.trimmingCharacters(in: .whitespacesAndNewlines),
-      brand: brand.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-        ? "不明" : brand,
+      name: trimmedName,
+      brand: trimmedBrand.isEmpty ? "不明" : trimmedBrand,
       category: category,
       remainingGrams: remainingGrams,
       expiryDate: expiryDate,
-      description: descriptionText,
+      description: trimmedDescription,
       latitude: 35.68 + Double.random(in: -0.04...0.04),
       longitude: 139.76 + Double.random(in: -0.04...0.04),
       tradeStatus: .available,
       owner: owner
     )
 
-    modelContext.insert(owner)
-    modelContext.insert(teaLeaf)
-    dismiss()
+    do {
+      modelContext.insert(owner)
+      modelContext.insert(teaLeaf)
+      try modelContext.save()
+      dismiss()
+    } catch {
+      isSaving = false
+      presentError("保存処理に失敗しました。時間をおいて再度お試しください。")
+    }
+  }
+
+  /*
+   エラー表示用のアラート状態を更新します。
+   */
+  private func presentError(_ message: String) {
+    errorMessage = message
+    isShowingErrorAlert = true
   }
 }
 
