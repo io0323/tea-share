@@ -34,6 +34,7 @@ struct TeaMapView: View {
   @Query(sort: \TeaLeaf.name) private var teaLeaves: [TeaLeaf]
   @State private var selectedTeaLeaf: TeaLeaf?
   @State private var selectedFilter: TeaMapFilter = .allActive
+  @State private var selectedCategory: TeaCategory?
   @State private var cameraPosition: MapCameraPosition = .region(
     MKCoordinateRegion(
       center: CLLocationCoordinate2D(
@@ -48,7 +49,12 @@ struct TeaMapView: View {
    マップ上に表示する茶葉のみを返します。
    */
   private var mapTeaLeaves: [TeaLeaf] {
-    teaLeaves.filter { selectedFilter.matches($0) }
+    teaLeaves
+      .filter { selectedFilter.matches($0) }
+      .filter { teaLeaf in
+        guard let selectedCategory else { return true }
+        return teaLeaf.category == selectedCategory
+      }
   }
 
   var body: some View {
@@ -101,6 +107,30 @@ struct TeaMapView: View {
             }
           }
 
+          ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+              categoryChip(title: "すべて", category: nil)
+              ForEach(TeaCategory.allCases) { category in
+                categoryChip(title: category.rawValue, category: category)
+              }
+            }
+          }
+
+          Button {
+            resetFilters()
+          } label: {
+            HStack(spacing: 6) {
+              Image(systemName: "arrow.counterclockwise")
+              Text("フィルタ解除")
+            }
+            .font(.caption.weight(.semibold))
+            .padding(.horizontal, 10)
+            .padding(.vertical, 7)
+            .background(Color.white.opacity(0.9))
+            .clipShape(Capsule())
+          }
+          .buttonStyle(.plain)
+
           Text("表示中: \(mapTeaLeaves.count)件")
             .font(.footnote.weight(.medium))
             .padding(.horizontal, 10)
@@ -150,6 +180,42 @@ struct TeaMapView: View {
         .clipShape(Capsule())
     }
     .buttonStyle(.plain)
+  }
+
+  /*
+   カテゴリ選択チップを返します。
+   */
+  private func categoryChip(
+    title: String,
+    category: TeaCategory?
+  ) -> some View {
+    let isSelected = selectedCategory == category
+    return Button {
+      selectedCategory = category
+    } label: {
+      Text(title)
+        .font(.caption.weight(.semibold))
+        .foregroundStyle(
+          isSelected ? Color.white : Color.blue.opacity(0.9)
+        )
+        .padding(.horizontal, 10)
+        .padding(.vertical, 7)
+        .background(
+          isSelected
+            ? Color.blue.opacity(0.85)
+            : Color.white.opacity(0.9)
+        )
+        .clipShape(Capsule())
+    }
+    .buttonStyle(.plain)
+  }
+
+  /*
+   ステータスとカテゴリの絞り込みを初期化します。
+   */
+  private func resetFilters() {
+    selectedFilter = .allActive
+    selectedCategory = nil
   }
 
   /*
