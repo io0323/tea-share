@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import MapKit
 
 /*
  茶葉カードから遷移する詳細画面です。
@@ -180,6 +181,20 @@ struct TeaLeafDetailView: View {
         detailRow("賞味期限", value: dateFormatter.string(from: teaLeaf.expiryDate))
         detailRow("出品者", value: teaLeaf.owner?.username ?? "未設定")
         detailRow("エリア", value: teaLeaf.owner?.location ?? "未設定")
+        detailRow("緯度", value: String(format: "%.5f", teaLeaf.latitude))
+        detailRow("経度", value: String(format: "%.5f", teaLeaf.longitude))
+
+        Button {
+          openInMaps()
+        } label: {
+          HStack {
+            Image(systemName: "map.fill")
+            Text("マップで開く")
+              .fontWeight(.semibold)
+          }
+          .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(.borderedProminent)
 
         VStack(alignment: .leading, spacing: 6) {
           Text("説明")
@@ -306,6 +321,20 @@ struct TeaLeafDetailView: View {
     } catch {
       isShowingSaveError = true
     }
+  }
+
+  /*
+   Apple Mapsで茶葉の位置情報を開きます。
+   */
+  private func openInMaps() {
+    let coordinate = CLLocationCoordinate2D(
+      latitude: teaLeaf.latitude,
+      longitude: teaLeaf.longitude
+    )
+    let placemark = MKPlacemark(coordinate: coordinate)
+    let mapItem = MKMapItem(placemark: placemark)
+    mapItem.name = teaLeaf.name
+    mapItem.openInMaps()
   }
 }
 
