@@ -99,6 +99,18 @@ struct TeaTimelineView: View {
       .count
   }
 
+  /*
+   取引ステータス別の件数を返します。
+   */
+  private var tradeStatusCounts: [TradeStatus: Int] {
+    let grouped = Dictionary(grouping: teaLeaves, by: \.tradeStatus)
+    return [
+      .available: grouped[.available]?.count ?? 0,
+      .pending: grouped[.pending]?.count ?? 0,
+      .completed: grouped[.completed]?.count ?? 0
+    ]
+  }
+
   var body: some View {
     NavigationStack {
       ZStack(alignment: .bottomTrailing) {
@@ -122,6 +134,7 @@ struct TeaTimelineView: View {
             categorySelector
             activeFilterSummary
             timelineSummary
+            tradeStatusSummaryCards
 
             if filteredTeaLeaves.isEmpty {
               emptyStateView
@@ -263,6 +276,61 @@ struct TeaTimelineView: View {
     }
     .font(.footnote.weight(.medium))
     .foregroundStyle(.secondary)
+  }
+
+  /*
+   取引ステータス別サマリーカード群を返します。
+   */
+  private var tradeStatusSummaryCards: some View {
+    ScrollView(.horizontal, showsIndicators: false) {
+      HStack(spacing: 10) {
+        statusSummaryCard(
+          title: TradeStatus.available.rawValue,
+          count: tradeStatusCounts[.available] ?? 0,
+          icon: "leaf.fill",
+          tint: .green
+        )
+        statusSummaryCard(
+          title: TradeStatus.pending.rawValue,
+          count: tradeStatusCounts[.pending] ?? 0,
+          icon: "bubble.left.and.bubble.right.fill",
+          tint: .orange
+        )
+        statusSummaryCard(
+          title: TradeStatus.completed.rawValue,
+          count: tradeStatusCounts[.completed] ?? 0,
+          icon: "checkmark.seal.fill",
+          tint: .gray
+        )
+      }
+      .padding(.vertical, 2)
+    }
+  }
+
+  /*
+   ステータス件数表示カードを返します。
+   */
+  private func statusSummaryCard(
+    title: String,
+    count: Int,
+    icon: String,
+    tint: Color
+  ) -> some View {
+    HStack(spacing: 8) {
+      Image(systemName: icon)
+        .foregroundStyle(tint)
+      VStack(alignment: .leading, spacing: 2) {
+        Text(title)
+          .font(.caption)
+          .foregroundStyle(.secondary)
+        Text("\(count)件")
+          .font(.subheadline.weight(.semibold))
+      }
+    }
+    .padding(.horizontal, 12)
+    .padding(.vertical, 10)
+    .background(Color.white.opacity(0.9))
+    .clipShape(RoundedRectangle(cornerRadius: 12))
   }
 
   /*
