@@ -7,6 +7,8 @@ import SwiftData
 struct TeaTimelineView: View {
   @Query(sort: \TeaLeaf.expiryDate) private var teaLeaves: [TeaLeaf]
   @State private var selectedCategory: TeaCategory?
+  @State private var searchText = ""
+  @State private var sortOption: TeaTimelineSortOption = .expirySoon
   @State private var isPresentingAddTea = false
 
   private let columns = [
@@ -18,12 +20,23 @@ struct TeaTimelineView: View {
    表示条件に合う茶葉一覧を返します。
    */
   private var filteredTeaLeaves: [TeaLeaf] {
-    teaLeaves
+    let categoryFiltered = teaLeaves
       .filter { $0.tradeStatus == .available }
       .filter { tea in
         guard let selectedCategory else { return true }
         return tea.category == selectedCategory
       }
+
+    let textFiltered = categoryFiltered.filter { tea in
+      let keyword = searchText
+        .trimmingCharacters(in: .whitespacesAndNewlines)
+      guard !keyword.isEmpty else { return true }
+      return tea.name.localizedCaseInsensitiveContains(keyword)
+        || tea.brand.localizedCaseInsensitiveContains(keyword)
+        || (tea.owner?.location ?? "").localizedCaseInsensitiveContains(keyword)
+    }
+
+    return sortOption.sorted(textFiltered)
   }
 
   var body: some View {
@@ -42,11 +55,18 @@ struct TeaTimelineView: View {
 
         ScrollView {
           VStack(alignment: .leading, spacing: 16) {
+            searchField
+            sortSelector
             categorySelector
 
             LazyVGrid(columns: columns, spacing: 12) {
               ForEach(filteredTeaLeaves) { tea in
-                TeaLeafCardView(tea: tea)
+                NavigationLink {
+                  TeaLeafDetailView(teaLeaf: tea)
+                } label: {
+                  TeaLeafCardView(tea: tea)
+                }
+                .buttonStyle(.plain)
               }
             }
           }
@@ -77,6 +97,35 @@ struct TeaTimelineView: View {
   }
 
   /*
+   検索キーワード入力欄を返します。
+   */
+  private var searchField: some View {
+    HStack(spacing: 8) {
+      Image(systemName: "magnifyingglass")
+        .foregroundStyle(.secondary)
+      TextField("茶葉名・ブランド・エリアで検索", text: $searchText)
+        .textInputAutocapitalization(.never)
+        .autocorrectionDisabled()
+    }
+    .padding(.horizontal, 12)
+    .padding(.vertical, 10)
+    .background(Color.white.opacity(0.9))
+    .clipShape(RoundedRectangle(cornerRadius: 12))
+  }
+
+  /*
+   並び替えを切り替えるセレクターを返します。
+   */
+  private var sortSelector: some View {
+    Picker("並び替え", selection: $sortOption) {
+      ForEach(TeaTimelineSortOption.allCases) { option in
+        Text(option.rawValue).tag(option)
+      }
+    }
+    .pickerStyle(.segmented)
+  }
+
+  /*
    横スクロール可能なカテゴリ選択UIを返します。
    */
   private var categorySelector: some View {
@@ -99,6 +148,33 @@ struct TeaTimelineView: View {
         }
       }
       .padding(.vertical, 2)
+    }
+  }
+}
+
+/*
+ タイムラインの並び順を管理する列挙型です。
+ */
+private enum TeaTimelineSortOption: String, CaseIterable, Identifiable {
+  case expirySoon = "期限順"
+  case remainingHigh = "残量順"
+  case name = "名前順"
+
+  var id: String { rawValue }
+
+  /*
+   選択された並び順で配列をソートします。
+   */
+  func sorted(_ teaLeaves: [TeaLeaf]) -> [TeaLeaf] {
+    switch self {
+    case .expirySoon:
+      return teaLeaves.sorted { $0.expiryDate < $1.expiryDate }
+    case .remainingHigh:
+      return teaLeaves.sorted { $0.remainingGrams > $1.remainingGrams }
+    case .name:
+      return teaLeaves.sorted {
+        $0.name.localizedCompare($1.name) == .orderedAscending
+      }
     }
   }
 }
