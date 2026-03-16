@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 /*
  TeaShareのルート画面です。
@@ -14,6 +15,11 @@ struct ContentView: View {
       TeaMapView()
         .tabItem {
           Label("マップ", systemImage: "map.fill")
+        }
+
+      ProfileView()
+        .tabItem {
+          Label("プロファイル", systemImage: "person.fill")
         }
     }
   }
