@@ -6,6 +6,9 @@ import SwiftData
  */
 struct ProfileView: View {
   @Query private var users: [User]
+  @State private var isEditing = false
+  @State private var editedUsername = ""
+  @State private var editedLocation = ""
 
   var body: some View {
     NavigationStack {
