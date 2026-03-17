@@ -5,10 +5,12 @@ import SwiftData
  ユーザープロファイルを表示するビューです。
  */
 struct ProfileView: View {
+  @Environment(\.modelContext) private var modelContext
   @Query private var users: [User]
   @State private var isEditing = false
   @State private var editedUsername = ""
   @State private var editedLocation = ""
+  @State private var isShowingSaveError = false
 
   var body: some View {
     NavigationStack {
@@ -19,26 +21,35 @@ struct ProfileView: View {
             .fontWeight(.bold)
 
           VStack(alignment: .leading, spacing: 16) {
-            HStack {
-              Text("ユーザー名:")
-                .font(.headline)
-              Text(user.username)
-                .font(.body)
-            }
+            if isEditing {
+              VStack(alignment: .leading, spacing: 12) {
+                TextField("ユーザー名", text: $editedUsername)
+                  .textFieldStyle(RoundedBorderTextFieldStyle())
+                TextField("場所", text: $editedLocation)
+                  .textFieldStyle(RoundedBorderTextFieldStyle())
+              }
+            } else {
+              HStack {
+                Text("ユーザー名:")
+                  .font(.headline)
+                Text(user.username)
+                  .font(.body)
+              }
 
-            HStack {
-              Text("ID:")
-                .font(.headline)
-              Text(user.id.uuidString)
-                .font(.body)
-                .foregroundColor(.secondary)
-            }
+              HStack {
+                Text("ID:")
+                  .font(.headline)
+                Text(user.id.uuidString)
+                  .font(.body)
+                  .foregroundColor(.secondary)
+              }
 
-            HStack {
-              Text("場所:")
-                .font(.headline)
-              Text(user.location)
-                .font(.body)
+              HStack {
+                Text("場所:")
+                  .font(.headline)
+                Text(user.location)
+                  .font(.body)
+              }
             }
           }
           .padding()
@@ -55,6 +66,72 @@ struct ProfileView: View {
       }
     }
     .navigationTitle("プロファイル")
+    .toolbar {
+      ToolbarItem(placement: .topBarTrailing) {
+        Button(isEditing ? "完了" : "編集") {
+          if isEditing {
+            saveProfileChanges()
+          } else {
+            startEditing()
+          }
+        }
+      }
+      if isEditing {
+        ToolbarItem(placement: .topBarLeading) {
+          Button("キャンセル", role: .cancel) {
+            cancelEditing()
+          }
+        }
+      }
+    }
+    .alert("保存に失敗しました", isPresented: $isShowingSaveError) {
+      Button("OK", role: .cancel) {}
+    } message: {
+      Text("プロファイルの変更を保存できませんでした。時間をおいて再度お試しください。")
+    }
+  }
+
+  /*
+   編集モードを開始します。
+   */
+  private func startEditing() {
+    if let user = users.first {
+      editedUsername = user.username
+      editedLocation = user.location
+    }
+    isEditing = true
+  }
+
+  /*
+   編集をキャンセルして表示モードに戻します。
+   */
+  private func cancelEditing() {
+    isEditing = false
+  }
+
+  /*
+   プロファイルの変更を保存します。
+   */
+  private func saveProfileChanges() {
+    guard let user = users.first else { return }
+    
+    let trimmedUsername = editedUsername.trimmingCharacters(in: .whitespacesAndNewlines)
+    let trimmedLocation = editedLocation.trimmingCharacters(in: .whitespacesAndNewlines)
+    
+    guard !trimmedUsername.isEmpty else {
+      isShowingSaveError = true
+      return
+    }
+    
+    user.username = trimmedUsername
+    user.location = trimmedLocation.isEmpty ? "未設定" : trimmedLocation
+    
+    do {
+      try modelContext.save()
+      isEditing = false
+    } catch {
+      isShowingSaveError = true
+    }
   }
 }
 
