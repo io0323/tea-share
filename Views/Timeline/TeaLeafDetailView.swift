@@ -27,9 +27,13 @@ struct TeaLeafDetailView: View {
   var body: some View {
     ScrollView {
       VStack(alignment: .leading, spacing: 16) {
+        if !teaLeaf.imagePath.isEmpty {
+          imageSection
+        }
         headerCard
         statusSection
         quickStatusSection
+        tradeRequestSection
         detailSection
       }
       .padding(16)
