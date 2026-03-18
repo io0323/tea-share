@@ -216,6 +216,73 @@ struct TeaLeafDetailView: View {
   }
 
   /*
+   茶葉画像を表示するセクションを返します。
+   */
+  private var imageSection: some View {
+    Group {
+      if let uiImage = loadImage(from: teaLeaf.imagePath) {
+        Image(uiImage: uiImage)
+          .resizable()
+          .scaledToFit()
+          .clipShape(RoundedRectangle(cornerRadius: 14))
+          .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 3)
+      } else {
+        RoundedRectangle(cornerRadius: 14)
+          .fill(Color.gray.opacity(0.2))
+          .overlay {
+            VStack(spacing: 8) {
+              Image(systemName: "photo")
+                .font(.system(size: 40))
+                .foregroundStyle(.secondary)
+              Text("画像を読み込めません")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            }
+          }
+          .frame(height: 200)
+      }
+    }
+  }
+
+  /*
+   取引リクエストセクションを返します。
+   */
+  private var tradeRequestSection: some View {
+    VStack(alignment: .leading, spacing: 10) {
+      Text("取引リクエスト")
+        .font(.headline)
+
+      if teaLeaf.tradeStatus == .available {
+        Button {
+          // TODO: 実際の取引リクエスト機能を実装
+        } label: {
+          HStack {
+            Image(systemName: "envelope.fill")
+            Text("取引を申し込む")
+              .fontWeight(.semibold)
+          }
+          .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(.borderedProminent)
+        .tint(.blue)
+      } else {
+        HStack {
+          Image(systemName: "info.circle.fill")
+          Text(teaLeaf.tradeStatus == .pending ? "交渉中のため新規リクエストはできません" : "この取引は完了済みです")
+            .font(.subheadline)
+        }
+        .foregroundStyle(.secondary)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.vertical, 8)
+      }
+    }
+    .padding(14)
+    .frame(maxWidth: .infinity, alignment: .leading)
+    .background(Color.white.opacity(0.92))
+    .clipShape(RoundedRectangle(cornerRadius: 14))
+  }
+
+  /*
    ステータスに応じた色を返します。
    */
   private var statusColor: Color {
@@ -268,6 +335,16 @@ struct TeaLeafDetailView: View {
       .padding(.vertical, 4)
       .background(tint.opacity(0.12))
       .clipShape(Capsule())
+  }
+
+  /*
+   ファイルパスから画像を読み込みます。
+   */
+  private func loadImage(from path: String) -> UIImage? {
+    guard !path.isEmpty else { return nil }
+    let fileManager = FileManager.default
+    guard fileManager.fileExists(atPath: path) else { return nil }
+    return UIImage(contentsOfFile: path)
   }
 
   /*
