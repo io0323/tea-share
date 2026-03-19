@@ -13,6 +13,10 @@ struct TeaLeafDetailView: View {
   @State private var editableExpiryDate = Date()
   @State private var editableDescription = ""
   @State private var isShowingSaveError = false
+  @State private var saveErrorMessage = ""
+  @State private var isShowingTradeRequestAlert = false
+  @State private var tradeRequestMessage = ""
+  @Query private var users: [User]
 
   private let descriptionLimit = 300
 
@@ -61,7 +65,12 @@ struct TeaLeafDetailView: View {
     .alert("保存に失敗しました", isPresented: $isShowingSaveError) {
       Button("OK", role: .cancel) {}
     } message: {
-      Text("変更内容を保存できませんでした。時間をおいて再度お試しください。")
+      Text(saveErrorMessage)
+    }
+    .alert("取引リクエスト", isPresented: $isShowingTradeRequestAlert) {
+      Button("OK", role: .cancel) {}
+    } message: {
+      Text(tradeRequestMessage)
     }
     .onChange(of: editableDescription) { _, newValue in
       if newValue.count > descriptionLimit {
@@ -254,7 +263,7 @@ struct TeaLeafDetailView: View {
 
       if teaLeaf.tradeStatus == .available {
         Button {
-          // TODO: 実際の取引リクエスト機能を実装
+          submitTradeRequest()
         } label: {
           HStack {
             Image(systemName: "envelope.fill")
@@ -368,7 +377,8 @@ struct TeaLeafDetailView: View {
     do {
       try modelContext.save()
     } catch {
-      /* 保存失敗時はUIを継続し、次回保存で再試行します。 */
+      saveErrorMessage = "変更内容を保存できませんでした。時間をおいて再度お試しください。"
+      isShowingSaveError = true
     }
   }
 
@@ -400,7 +410,52 @@ struct TeaLeafDetailView: View {
       try modelContext.save()
       isEditingDetail = false
     } catch {
+      saveErrorMessage = "変更内容を保存できませんでした。時間をおいて再度お試しください。"
       isShowingSaveError = true
+    }
+  }
+
+  /*
+   取引リクエストを送信します。
+   */
+  private func submitTradeRequest() {
+    guard let currentUser = users.first else {
+      tradeRequestMessage = "ユーザーデータが見つかりません。プロファイルを設定してください。"
+      isShowingTradeRequestAlert = true
+      return
+    }
+    
+    guard let owner = teaLeaf.owner else {
+      tradeRequestMessage = "出品者情報が見つかりません。"
+      isShowingTradeRequestAlert = true
+      return
+    }
+    
+    // 自分自身の茶葉にはリクエストできない
+    if currentUser.id == owner.id {
+      tradeRequestMessage = "自分が出品した茶葉には取引リクエストを送信できません。"
+      isShowingTradeRequestAlert = true
+      return
+    }
+    
+    let trade = Trade(
+      teaLeaf: teaLeaf,
+      requester: currentUser,
+      owner: owner,
+      status: .pending
+    )
+    
+    modelContext.insert(trade)
+    
+    do {
+      try modelContext.save()
+      teaLeaf.tradeStatus = .pending
+      try modelContext.save()
+      tradeRequestMessage = "取引リクエストを送信しました。出品者の承認をお待ちください。"
+      isShowingTradeRequestAlert = true
+    } catch {
+      tradeRequestMessage = "取引リクエストの送信に失敗しました。時間をおいて再度お試しください。"
+      isShowingTradeRequestAlert = true
     }
   }
 
