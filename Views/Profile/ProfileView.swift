@@ -11,6 +11,7 @@ struct ProfileView: View {
   @State private var editedUsername = ""
   @State private var editedLocation = ""
   @State private var isShowingSaveError = false
+  @State private var saveErrorMessage = ""
 
   var body: some View {
     NavigationStack {
@@ -87,7 +88,7 @@ struct ProfileView: View {
     .alert("保存に失敗しました", isPresented: $isShowingSaveError) {
       Button("OK", role: .cancel) {}
     } message: {
-      Text("プロファイルの変更を保存できませんでした。時間をおいて再度お試しください。")
+      Text(saveErrorMessage)
     }
   }
 
@@ -113,12 +114,17 @@ struct ProfileView: View {
    プロファイルの変更を保存します。
    */
   private func saveProfileChanges() {
-    guard let user = users.first else { return }
+    guard let user = users.first else {
+      saveErrorMessage = "ユーザーデータが見つかりません。"
+      isShowingSaveError = true
+      return
+    }
     
     let trimmedUsername = editedUsername.trimmingCharacters(in: .whitespacesAndNewlines)
     let trimmedLocation = editedLocation.trimmingCharacters(in: .whitespacesAndNewlines)
     
     guard !trimmedUsername.isEmpty else {
+      saveErrorMessage = "ユーザー名は必須です。"
       isShowingSaveError = true
       return
     }
@@ -130,6 +136,7 @@ struct ProfileView: View {
       try modelContext.save()
       isEditing = false
     } catch {
+      saveErrorMessage = "プロファイルの変更を保存できませんでした。時間をおいて再度お試しください。"
       isShowingSaveError = true
     }
   }
