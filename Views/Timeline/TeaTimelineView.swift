@@ -453,14 +453,23 @@ private struct TeaLeafCardView: View {
 
   var body: some View {
     VStack(alignment: .leading, spacing: 8) {
-      RoundedRectangle(cornerRadius: 12)
-        .fill(Color.green.opacity(0.10))
-        .overlay {
-          Image(systemName: "leaf.fill")
-            .font(.system(size: 26))
-            .foregroundStyle(Color.green.opacity(0.65))
-        }
-        .frame(height: 86)
+      // 画像表示エリア
+      if !tea.imagePath.isEmpty, let uiImage = loadImage(from: tea.imagePath) {
+        Image(uiImage: uiImage)
+          .resizable()
+          .scaledToFill()
+          .frame(height: 86)
+          .clipShape(RoundedRectangle(cornerRadius: 12))
+      } else {
+        RoundedRectangle(cornerRadius: 12)
+          .fill(Color.green.opacity(0.10))
+          .overlay {
+            Image(systemName: "leaf.fill")
+              .font(.system(size: 26))
+              .foregroundStyle(Color.green.opacity(0.65))
+          }
+          .frame(height: 86)
+      }
 
       Text(tea.name)
         .font(.headline)
@@ -576,6 +585,16 @@ private struct TeaLeafCardView: View {
     case .completed:
       return .gray
     }
+  }
+
+  /*
+   ファイルパスから画像を読み込みます。
+   */
+  private func loadImage(from path: String) -> UIImage? {
+    guard !path.isEmpty else { return nil }
+    let fileManager = FileManager.default
+    guard fileManager.fileExists(atPath: path) else { return nil }
+    return UIImage(contentsOfFile: path)
   }
 }
 
