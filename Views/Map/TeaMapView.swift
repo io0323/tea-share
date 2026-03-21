@@ -243,6 +243,7 @@ private struct TeaMapDetailSheet: View {
   @Environment(\.modelContext) private var modelContext
   @Bindable var teaLeaf: TeaLeaf
   @State private var isShowingSaveError = false
+  @State private var saveErrorMessage = ""
 
   var body: some View {
     VStack(alignment: .leading, spacing: 12) {
@@ -299,7 +300,7 @@ private struct TeaMapDetailSheet: View {
     .alert("保存に失敗しました", isPresented: $isShowingSaveError) {
       Button("OK", role: .cancel) {}
     } message: {
-      Text("ステータス更新を保存できませんでした。再度お試しください。")
+      Text(saveErrorMessage)
     }
   }
 
@@ -347,6 +348,7 @@ private struct TeaMapDetailSheet: View {
     do {
       try modelContext.save()
     } catch {
+      saveErrorMessage = "ステータス更新を保存できませんでした。時間をおいて再度お試しください。"
       isShowingSaveError = true
     }
   }
