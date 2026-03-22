@@ -11,16 +11,7 @@ struct AddTeaView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(\.modelContext) private var modelContext
 
-  @AppStorage("addtea_draft_name") private var draftName = ""
-  @AppStorage("addtea_draft_brand") private var draftBrand = ""
-  @AppStorage("addtea_draft_category")
-  private var draftCategory = TeaCategory.greenTea.rawValue
-  @AppStorage("addtea_draft_expiry")
-  private var draftExpiry = Date().timeIntervalSince1970
-  @AppStorage("addtea_draft_description") private var draftDescription = ""
-  @AppStorage("addtea_draft_remaining") private var draftRemaining = 50
-  @AppStorage("addtea_draft_location") private var draftLocation = "未設定"
-  @AppStorage("addtea_draft_username") private var draftUsername = "new_user"
+  @AppStorage("addtea_draft") private var draftData: Data = Data()
 
   @State private var pickedPhotoItem: PhotosPickerItem?
   @State private var selectedImage: UIImage?
@@ -32,6 +23,7 @@ struct AddTeaView: View {
   @State private var errorMessage = ""
   @State private var hasLoadedDraft = false
 
+  @State private var draftTeaLeaf: TeaLeaf?
   @State private var name = ""
   @State private var brand = ""
   @State private var category: TeaCategory = .greenTea
@@ -508,42 +500,60 @@ struct AddTeaView: View {
   private func loadDraftIfNeeded() {
     guard !hasLoadedDraft else { return }
     hasLoadedDraft = true
-    name = draftName
-    brand = draftBrand
-    category = TeaCategory(rawValue: draftCategory) ?? .greenTea
-    expiryDate = Date(timeIntervalSince1970: draftExpiry)
-    descriptionText = draftDescription
-    remainingGrams = draftRemaining
-    location = draftLocation
-    username = draftUsername
+    
+    guard !draftData.isEmpty else { return }
+    
+    do {
+      draftTeaLeaf = try JSONDecoder().decode(TeaLeaf.self, from: draftData)
+      name = draftTeaLeaf?.name ?? ""
+      brand = draftTeaLeaf?.brand ?? ""
+      category = draftTeaLeaf?.category ?? .greenTea
+      expiryDate = draftTeaLeaf?.expiryDate ?? Date()
+      descriptionText = draftTeaLeaf?.description ?? ""
+      remainingGrams = draftTeaLeaf?.remainingGrams ?? 50
+      location = draftTeaLeaf?.owner?.location ?? "未設定"
+      username = draftTeaLeaf?.owner?.username ?? "new_user"
+    } catch {
+      print("Failed to load draft: \(error)")
+      clearDraft()
+    }
   }
 
   /*
    現在の入力内容を下書きとして保存します。
    */
   private func persistDraft() {
-    draftName = name
-    draftBrand = brand
-    draftCategory = category.rawValue
-    draftExpiry = expiryDate.timeIntervalSince1970
-    draftDescription = descriptionText
-    draftRemaining = remainingGrams
-    draftLocation = location
-    draftUsername = username
+    let draftOwner = User(
+      username: trimmedUsername.isEmpty ? "new_user" : trimmedUsername,
+      location: trimmedLocation
+    )
+    
+    draftTeaLeaf = TeaLeaf(
+      name: trimmedName,
+      brand: trimmedBrand.isEmpty ? "不明" : trimmedBrand,
+      category: category,
+      remainingGrams: remainingGrams,
+      expiryDate: expiryDate,
+      description: trimmedDescription,
+      latitude: 35.68,
+      longitude: 139.76,
+      tradeStatus: .available,
+      owner: draftOwner
+    )
+    
+    do {
+      draftData = try JSONEncoder().encode(draftTeaLeaf)
+    } catch {
+      print("Failed to save draft: \(error)")
+    }
   }
 
   /*
    下書き保存内容を初期値に戻します。
    */
   private func clearDraft() {
-    draftName = ""
-    draftBrand = ""
-    draftCategory = TeaCategory.greenTea.rawValue
-    draftExpiry = Date().timeIntervalSince1970
-    draftDescription = ""
-    draftRemaining = 50
-    draftLocation = "未設定"
-    draftUsername = "new_user"
+    draftData = Data()
+    draftTeaLeaf = nil
   }
 
   /*
