@@ -38,10 +38,13 @@ struct TeaMapView: View {
   @State private var cameraPosition: MapCameraPosition = .region(
     MKCoordinateRegion(
       center: CLLocationCoordinate2D(
-        latitude: 35.681236,
-        longitude: 139.767125
+        latitude: AppConstants.Location.defaultLatitude,
+        longitude: AppConstants.Location.defaultLongitude
       ),
-      span: MKCoordinateSpan(latitudeDelta: 0.15, longitudeDelta: 0.15)
+      span: MKCoordinateSpan(
+        latitudeDelta: AppConstants.Map.defaultLatitudeDelta,
+        longitudeDelta: AppConstants.Map.defaultLongitudeDelta
+      )
     )
   )
 
@@ -224,12 +227,12 @@ struct TeaMapView: View {
   private func focusOnDefaultRegion() {
     let region = MKCoordinateRegion(
       center: CLLocationCoordinate2D(
-        latitude: 35.681236,
-        longitude: 139.767125
+        latitude: AppConstants.Location.defaultLatitude,
+        longitude: AppConstants.Location.defaultLongitude
       ),
       span: MKCoordinateSpan(
-        latitudeDelta: 0.15,
-        longitudeDelta: 0.15
+        latitudeDelta: AppConstants.Map.defaultLatitudeDelta,
+        longitudeDelta: AppConstants.Map.defaultLongitudeDelta
       )
     )
     cameraPosition = .region(region)

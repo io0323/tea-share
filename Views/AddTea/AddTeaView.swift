@@ -476,8 +476,8 @@ struct AddTeaView: View {
       remainingGrams: remainingGrams,
       expiryDate: expiryDate,
       description: trimmedDescription,
-      latitude: 35.68 + Double.random(in: -0.04...0.04),
-      longitude: 139.76 + Double.random(in: -0.04...0.04),
+      latitude: AppConstants.Location.defaultLatitude + Double.random(in: AppConstants.Location.randomLatitudeRange),
+      longitude: AppConstants.Location.defaultLongitude + Double.random(in: AppConstants.Location.randomLongitudeRange),
       tradeStatus: .available,
       owner: owner
     )
@@ -535,8 +535,8 @@ struct AddTeaView: View {
       remainingGrams: remainingGrams,
       expiryDate: expiryDate,
       description: trimmedDescription,
-      latitude: 35.68,
-      longitude: 139.76,
+      latitude: AppConstants.Location.defaultLatitude,
+      longitude: AppConstants.Location.defaultLongitude,
       tradeStatus: .available,
       owner: draftOwner
     )
