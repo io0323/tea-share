@@ -3,6 +3,7 @@ import PhotosUI
 import SwiftData
 import Vision
 import UIKit
+import os.log
 
 /*
  茶葉の新規出品フォームを提供する画面です。
@@ -12,6 +13,8 @@ struct AddTeaView: View {
   @Environment(\.modelContext) private var modelContext
 
   @AppStorage("addtea_draft") private var draftData: Data = Data()
+  
+  private static let logger = Logger(subsystem: "com.teashare.app", category: "AddTeaView")
 
   @State private var pickedPhotoItem: PhotosPickerItem?
   @State private var selectedImage: UIImage?
@@ -514,7 +517,7 @@ struct AddTeaView: View {
       location = draftTeaLeaf?.owner?.location ?? "未設定"
       username = draftTeaLeaf?.owner?.username ?? "new_user"
     } catch {
-      print("Failed to load draft: \(error)")
+      Self.logger.error("Failed to load draft: \(error.localizedDescription)")
       clearDraft()
     }
   }
@@ -544,7 +547,7 @@ struct AddTeaView: View {
     do {
       draftData = try JSONEncoder().encode(draftTeaLeaf)
     } catch {
-      print("Failed to save draft: \(error)")
+      Self.logger.error("Failed to save draft: \(error.localizedDescription)")
     }
   }
 
