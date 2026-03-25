@@ -18,8 +18,6 @@ struct TeaLeafDetailView: View {
   @State private var tradeRequestMessage = ""
   @Query private var users: [User]
 
-  private let descriptionLimit = 300
-
   private let dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateStyle = .medium
@@ -73,8 +71,8 @@ struct TeaLeafDetailView: View {
       Text(tradeRequestMessage)
     }
     .onChange(of: editableDescription) { _, newValue in
-      if newValue.count > descriptionLimit {
-        editableDescription = String(newValue.prefix(descriptionLimit))
+      if newValue.count > AppConstants.TextLimits.descriptionMaxLength {
+        editableDescription = String(newValue.prefix(AppConstants.TextLimits.descriptionMaxLength))
       }
     }
   }
@@ -165,10 +163,10 @@ struct TeaLeafDetailView: View {
           .font(.headline)
         Spacer()
         if isEditingDetail {
-          Text("\(editableDescription.count)/\(descriptionLimit)")
+          Text("\(editableDescription.count)/\(AppConstants.TextLimits.descriptionMaxLength)")
             .font(.footnote)
             .foregroundStyle(
-              editableDescription.count >= descriptionLimit
+              editableDescription.count >= AppConstants.TextLimits.descriptionMaxLength
                 ? .orange
                 : .secondary
             )

@@ -23,4 +23,11 @@ struct AppConstants {
     static let defaultLatitudeDelta: Double = 0.15
     static let defaultLongitudeDelta: Double = 0.15
   }
+  
+  /*
+   テキスト入力の制限値を定義します。
+   */
+  struct TextLimits {
+    static let descriptionMaxLength: Int = 300
+  }
 }
