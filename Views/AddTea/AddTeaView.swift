@@ -35,7 +35,6 @@ struct AddTeaView: View {
   @State private var remainingGrams = 50
   @State private var location = "未設定"
   @State private var username = "new_user"
-  private let descriptionLimit = 300
 
   /*
    必須項目の入力状態を判定します。
@@ -107,7 +106,7 @@ struct AddTeaView: View {
    説明文の文字数カウンター表示文言を返します。
    */
   private var descriptionCountText: String {
-    "\(descriptionText.count)/\(descriptionLimit)"
+    "\(descriptionText.count)/\(AppConstants.TextLimits.descriptionMaxLength)"
   }
 
   /*
@@ -220,7 +219,7 @@ struct AddTeaView: View {
             Text(descriptionCountText)
               .font(.footnote)
               .foregroundStyle(
-                descriptionText.count >= descriptionLimit ? .orange : .secondary
+                descriptionText.count >= AppConstants.TextLimits.descriptionMaxLength ? .orange : .secondary
               )
           }
         }
@@ -284,8 +283,8 @@ struct AddTeaView: View {
         suggestTeaInfo(image: newImage)
       }
       .onChange(of: descriptionText) { _, newValue in
-        if newValue.count > descriptionLimit {
-          descriptionText = String(newValue.prefix(descriptionLimit))
+        if newValue.count > AppConstants.TextLimits.descriptionMaxLength {
+          descriptionText = String(newValue.prefix(AppConstants.TextLimits.descriptionMaxLength))
         }
         persistDraft()
       }
