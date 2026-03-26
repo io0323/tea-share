@@ -30,4 +30,18 @@ struct AppConstants {
   struct TextLimits {
     static let descriptionMaxLength: Int = 300
   }
+  
+  /*
+   入力検証の制限値を定義します。
+   */
+  struct ValidationLimits {
+    static let minRemainingGrams: Int = 1
+    static let maxRemainingGrams: Int = 1000
+    static let minUsernameLength: Int = 1
+    static let maxUsernameLength: Int = 50
+    static let minLocationLength: Int = 1
+    static let maxLocationLength: Int = 100
+    static let minTeaNameLength: Int = 1
+    static let maxTeaNameLength: Int = 100
+  }
 }

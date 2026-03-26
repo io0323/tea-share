@@ -123,8 +123,32 @@ struct ProfileView: View {
     let trimmedUsername = editedUsername.trimmingCharacters(in: .whitespacesAndNewlines)
     let trimmedLocation = editedLocation.trimmingCharacters(in: .whitespacesAndNewlines)
     
-    guard !trimmedUsername.isEmpty else {
+    if trimmedUsername.isEmpty {
       saveErrorMessage = "ユーザー名は必須です。"
+      isShowingSaveError = true
+      return
+    }
+    
+    if trimmedUsername.count < AppConstants.ValidationLimits.minUsernameLength {
+      saveErrorMessage = "ユーザー名は\(AppConstants.ValidationLimits.minUsernameLength)文字以上で入力してください。"
+      isShowingSaveError = true
+      return
+    }
+    
+    if trimmedUsername.count > AppConstants.ValidationLimits.maxUsernameLength {
+      saveErrorMessage = "ユーザー名は\(AppConstants.ValidationLimits.maxUsernameLength)文字以下で入力してください。"
+      isShowingSaveError = true
+      return
+    }
+    
+    if !trimmedLocation.isEmpty && trimmedLocation.count < AppConstants.ValidationLimits.minLocationLength {
+      saveErrorMessage = "エリアは\(AppConstants.ValidationLimits.minLocationLength)文字以上で入力してください。"
+      isShowingSaveError = true
+      return
+    }
+    
+    if !trimmedLocation.isEmpty && trimmedLocation.count > AppConstants.ValidationLimits.maxLocationLength {
+      saveErrorMessage = "エリアは\(AppConstants.ValidationLimits.maxLocationLength)文字以下で入力してください。"
       isShowingSaveError = true
       return
     }
