@@ -55,15 +55,41 @@ struct AddTeaView: View {
    */
   private var validationMessages: [String] {
     var messages: [String] = []
+    
     if trimmedName.isEmpty {
       messages.append("茶葉名は必須です。")
+    } else if trimmedName.count < AppConstants.ValidationLimits.minTeaNameLength {
+      messages.append("茶葉名は\(AppConstants.ValidationLimits.minTeaNameLength)文字以上で入力してください。")
+    } else if trimmedName.count > AppConstants.ValidationLimits.maxTeaNameLength {
+      messages.append("茶葉名は\(AppConstants.ValidationLimits.maxTeaNameLength)文字以下で入力してください。")
     }
+    
     if trimmedLocation.isEmpty {
       messages.append("エリアは必須です。")
+    } else if trimmedLocation.count < AppConstants.ValidationLimits.minLocationLength {
+      messages.append("エリアは\(AppConstants.ValidationLimits.minLocationLength)文字以上で入力してください。")
+    } else if trimmedLocation.count > AppConstants.ValidationLimits.maxLocationLength {
+      messages.append("エリアは\(AppConstants.ValidationLimits.maxLocationLength)文字以下で入力してください。")
     }
+    
+    if remainingGrams < AppConstants.ValidationLimits.minRemainingGrams {
+      messages.append("残量は\(AppConstants.ValidationLimits.minRemainingGrams)g以上で入力してください。")
+    } else if remainingGrams > AppConstants.ValidationLimits.maxRemainingGrams {
+      messages.append("残量は\(AppConstants.ValidationLimits.maxRemainingGrams)g以下で入力してください。")
+    }
+    
     if expiryDate < Calendar.current.startOfDay(for: Date()) {
       messages.append("賞味期限は本日以降を選択してください。")
     }
+    
+    if trimmedUsername.isEmpty {
+      messages.append("ユーザー名は必須です。")
+    } else if trimmedUsername.count < AppConstants.ValidationLimits.minUsernameLength {
+      messages.append("ユーザー名は\(AppConstants.ValidationLimits.minUsernameLength)文字以上で入力してください。")
+    } else if trimmedUsername.count > AppConstants.ValidationLimits.maxUsernameLength {
+      messages.append("ユーザー名は\(AppConstants.ValidationLimits.maxUsernameLength)文字以下で入力してください。")
+    }
+    
     return messages
   }
 

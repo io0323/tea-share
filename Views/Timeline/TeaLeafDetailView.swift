@@ -177,9 +177,10 @@ struct TeaLeafDetailView: View {
         Stepper(
           "残量: \(editableRemainingGrams)g",
           value: $editableRemainingGrams,
-          in: 1...500,
+          in: AppConstants.ValidationLimits.minRemainingGrams...AppConstants.ValidationLimits.maxRemainingGrams,
           step: 5
         )
+        .disabled(true)
         DatePicker(
           "賞味期限",
           selection: $editableExpiryDate,
