@@ -240,7 +240,7 @@ struct TeaLeafDetailView: View {
           .overlay {
             VStack(spacing: 8) {
               Image(systemName: "photo")
-                .font(.system(size: 40))
+                .font(.system(size: AppConstants.UI.FontSizes.errorImageIcon))
                 .foregroundStyle(.secondary)
               Text("画像を読み込めません")
                 .font(.caption)
