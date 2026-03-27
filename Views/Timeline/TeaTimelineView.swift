@@ -164,9 +164,9 @@ struct TeaTimelineView: View {
           .foregroundStyle(.white)
           .padding(.horizontal, 16)
           .padding(.vertical, 14)
-          .background(Color.green.opacity(0.85))
+          .background(Color.green.opacity(AppConstants.UI.Opacity.greenButton))
           .clipShape(Capsule())
-          .shadow(color: .black.opacity(0.12), radius: 8, x: 0, y: 3)
+          .shadow(color: .black.opacity(AppConstants.UI.Opacity.shadow), radius: 8, x: 0, y: 3)
         }
         .padding(20)
       }
@@ -198,7 +198,7 @@ struct TeaTimelineView: View {
     }
     .padding(.horizontal, 12)
     .padding(.vertical, 10)
-    .background(Color.white.opacity(0.9))
+    .background(Color.white.opacity(AppConstants.UI.Opacity.backgroundWhite))
     .clipShape(RoundedRectangle(cornerRadius: 12))
   }
 
@@ -339,7 +339,7 @@ struct TeaTimelineView: View {
   private var emptyStateView: some View {
     VStack(spacing: 10) {
       Image(systemName: "tray")
-        .font(.system(size: 30))
+        .font(.system(size: AppConstants.UI.FontSizes.emptyStateIcon))
         .foregroundStyle(.secondary)
       Text("条件に一致する茶葉がありません")
         .font(.subheadline.weight(.semibold))
@@ -349,7 +349,7 @@ struct TeaTimelineView: View {
     }
     .frame(maxWidth: .infinity)
     .padding(.vertical, 26)
-    .background(Color.white.opacity(0.86))
+    .background(Color.white.opacity(AppConstants.UI.Opacity.cardBackground))
     .clipShape(RoundedRectangle(cornerRadius: 14))
   }
 
@@ -366,7 +366,7 @@ struct TeaTimelineView: View {
                 .font(.caption.weight(.semibold))
                 .padding(.horizontal, 10)
                 .padding(.vertical, 6)
-                .background(Color.white.opacity(0.9))
+                .background(Color.white.opacity(AppConstants.UI.Opacity.backgroundWhite))
                 .clipShape(Capsule())
             }
           }
@@ -462,11 +462,11 @@ private struct TeaLeafCardView: View {
           .clipShape(RoundedRectangle(cornerRadius: 12))
       } else {
         RoundedRectangle(cornerRadius: 12)
-          .fill(Color.green.opacity(0.10))
+          .fill(Color.green.opacity(AppConstants.UI.Colors.greenOpacity))
           .overlay {
             Image(systemName: "leaf.fill")
-              .font(.system(size: 26))
-              .foregroundStyle(Color.green.opacity(0.65))
+              .font(.system(size: AppConstants.UI.FontSizes.cardIcon))
+              .foregroundStyle(Color.green.opacity(AppConstants.UI.Colors.greenForegroundOpacity))
           }
           .frame(height: 86)
       }
@@ -480,7 +480,7 @@ private struct TeaLeafCardView: View {
           .font(.caption.weight(.semibold))
           .padding(.horizontal, 8)
           .padding(.vertical, 4)
-          .background(Color.green.opacity(0.12))
+          .background(Color.green.opacity(AppConstants.UI.Colors.greenBadgeOpacity))
           .clipShape(Capsule())
         statusBadge
       }
@@ -497,9 +497,9 @@ private struct TeaLeafCardView: View {
     }
     .padding(12)
     .frame(maxWidth: .infinity, alignment: .leading)
-    .background(Color.white.opacity(0.92))
+    .background(Color.white.opacity(AppConstants.UI.Opacity.cardWhite))
     .clipShape(RoundedRectangle(cornerRadius: 16))
-    .shadow(color: .black.opacity(0.07), radius: 7, x: 0, y: 2)
+    .shadow(color: .black.opacity(AppConstants.UI.Opacity.cardShadow), radius: 7, x: 0, y: 2)
   }
 
   /*
@@ -610,13 +610,13 @@ private struct CategoryChip: View {
     Button(action: action) {
       Text(title)
         .font(.subheadline.weight(.medium))
-        .foregroundStyle(isSelected ? .white : Color.green.opacity(0.9))
+        .foregroundStyle(isSelected ? .white : Color.green.opacity(AppConstants.UI.Colors.greenTextOpacity))
         .padding(.horizontal, 12)
         .padding(.vertical, 8)
         .background(
           isSelected
-            ? Color.green.opacity(0.80)
-            : Color.white.opacity(0.85)
+            ? Color.green.opacity(AppConstants.UI.Colors.greenSelectedOpacity)
+            : Color.white.opacity(AppConstants.UI.Opacity.chipBackground)
         )
         .clipShape(Capsule())
     }

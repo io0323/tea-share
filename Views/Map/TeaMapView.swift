@@ -71,7 +71,7 @@ struct TeaMapView: View {
               } label: {
                 VStack(spacing: 4) {
                   Image(systemName: "leaf.circle.fill")
-                    .font(.system(size: 28))
+                    .font(.system(size: AppConstants.UI.FontSizes.mapMarkerIcon))
                     .foregroundStyle(markerColor(for: teaLeaf.tradeStatus))
                   Text(teaLeaf.category.rawValue)
                     .font(.caption2)
