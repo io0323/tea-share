@@ -75,8 +75,8 @@ struct TeaMapView: View {
                     .foregroundStyle(markerColor(for: teaLeaf.tradeStatus))
                   Text(teaLeaf.category.rawValue)
                     .font(.caption2)
-                    .padding(.horizontal, 6)
-                    .padding(.vertical, 3)
+                    .padding(.horizontal, AppConstants.UI.Padding.buttonHorizontal)
+                    .padding(.vertical, AppConstants.UI.Padding.buttonVertical)
                     .background(Color.white.opacity(0.9))
                     .clipShape(Capsule())
                 }
@@ -249,12 +249,12 @@ private struct TeaMapDetailSheet: View {
   @State private var saveErrorMessage = ""
 
   var body: some View {
-    VStack(alignment: .leading, spacing: 12) {
+    VStack(alignment: .leading, spacing: AppConstants.UI.Spacing.default) {
       Capsule()
         .fill(Color.secondary.opacity(0.3))
-        .frame(width: 44, height: 5)
+        .frame(height: AppConstants.UI.Frame.errorImageHeight)
         .frame(maxWidth: .infinity, alignment: .center)
-        .padding(.top, 6)
+        .padding(.top, AppConstants.UI.Padding.default)
 
       Text(teaLeaf.name)
         .font(.title3.weight(.semibold))

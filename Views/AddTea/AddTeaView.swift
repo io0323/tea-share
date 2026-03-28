@@ -340,7 +340,7 @@ struct AddTeaView: View {
             Color.black.opacity(0.15)
               .ignoresSafeArea()
             ProgressView("保存中...")
-              .padding(14)
+              .padding(AppConstants.UI.Padding.large)
               .background(.regularMaterial)
               .clipShape(RoundedRectangle(cornerRadius: 10))
           }
