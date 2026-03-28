@@ -166,9 +166,9 @@ struct TeaTimelineView: View {
           .padding(.vertical, 14)
           .background(Color.green.opacity(AppConstants.UI.Opacity.greenButton))
           .clipShape(Capsule())
-          .shadow(color: .black.opacity(AppConstants.UI.Opacity.shadow), radius: 8, x: 0, y: 3)
+          .shadow(color: .black.opacity(AppConstants.UI.Opacity.shadow), radius: AppConstants.UI.Shadow.largeRadius, x: 0, y: AppConstants.UI.Shadow.buttonOffset)
         }
-        .padding(20)
+          .padding(AppConstants.UI.Padding.huge)
       }
       .navigationTitle("TeaShare")
       .sheet(isPresented: $isPresentingAddTea) {
@@ -196,10 +196,10 @@ struct TeaTimelineView: View {
         }
       }
     }
-    .padding(.horizontal, 12)
-    .padding(.vertical, 10)
+    .padding(.horizontal, AppConstants.UI.Padding.cardHorizontal)
+    .padding(.vertical, AppConstants.UI.Padding.cardVertical)
     .background(Color.white.opacity(AppConstants.UI.Opacity.backgroundWhite))
-    .clipShape(RoundedRectangle(cornerRadius: 12))
+    .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.large))
   }
 
   /*
@@ -348,7 +348,7 @@ struct TeaTimelineView: View {
         .foregroundStyle(.secondary)
     }
     .frame(maxWidth: .infinity)
-    .padding(.vertical, 26)
+    .padding(.vertical, AppConstants.UI.Layout.Spacing.large)
     .background(Color.white.opacity(AppConstants.UI.Opacity.cardBackground))
     .clipShape(RoundedRectangle(cornerRadius: 14))
   }
@@ -364,8 +364,8 @@ struct TeaTimelineView: View {
             ForEach(activeFilterLabels, id: \.self) { label in
               Text(label)
                 .font(.caption.weight(.semibold))
-                .padding(.horizontal, 10)
-                .padding(.vertical, 6)
+                .padding(.horizontal, AppConstants.UI.Padding.filterHorizontal)
+                .padding(.vertical, AppConstants.UI.Padding.filterVertical)
                 .background(Color.white.opacity(AppConstants.UI.Opacity.backgroundWhite))
                 .clipShape(Capsule())
             }
@@ -458,8 +458,8 @@ private struct TeaLeafCardView: View {
         Image(uiImage: uiImage)
           .resizable()
           .scaledToFill()
-          .frame(height: 86)
-          .clipShape(RoundedRectangle(cornerRadius: 12))
+          .frame(height: AppConstants.UI.Frame.cardHeight)
+          .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.large))
       } else {
         RoundedRectangle(cornerRadius: 12)
           .fill(Color.green.opacity(AppConstants.UI.Colors.greenOpacity))
@@ -468,7 +468,7 @@ private struct TeaLeafCardView: View {
               .font(.system(size: AppConstants.UI.FontSizes.cardIcon))
               .foregroundStyle(Color.green.opacity(AppConstants.UI.Colors.greenForegroundOpacity))
           }
-          .frame(height: 86)
+          .frame(height: AppConstants.UI.Frame.cardHeight)
       }
 
       Text(tea.name)
@@ -495,11 +495,11 @@ private struct TeaLeafCardView: View {
           .foregroundStyle(.secondary)
       }
     }
-    .padding(12)
+    .padding(AppConstants.UI.Padding.cardHorizontal)
     .frame(maxWidth: .infinity, alignment: .leading)
     .background(Color.white.opacity(AppConstants.UI.Opacity.cardWhite))
-    .clipShape(RoundedRectangle(cornerRadius: 16))
-    .shadow(color: .black.opacity(AppConstants.UI.Opacity.cardShadow), radius: 7, x: 0, y: 2)
+    .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.card))
+    .shadow(color: .black.opacity(AppConstants.UI.Opacity.cardShadow), radius: AppConstants.UI.Shadow.cardRadius, x: 0, y: AppConstants.UI.Shadow.cardOffset)
   }
 
   /*
@@ -611,8 +611,8 @@ private struct CategoryChip: View {
       Text(title)
         .font(.subheadline.weight(.medium))
         .foregroundStyle(isSelected ? .white : Color.green.opacity(AppConstants.UI.Colors.greenTextOpacity))
-        .padding(.horizontal, 12)
-        .padding(.vertical, 8)
+        .padding(.horizontal, AppConstants.UI.Padding.buttonHorizontal)
+        .padding(.vertical, AppConstants.UI.Padding.buttonVertical)
         .background(
           isSelected
             ? Color.green.opacity(AppConstants.UI.Colors.greenSelectedOpacity)

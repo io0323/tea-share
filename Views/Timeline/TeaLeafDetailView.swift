@@ -118,10 +118,10 @@ struct TeaLeafDetailView: View {
         saveContext()
       }
     }
-    .padding(14)
+    .padding(AppConstants.UI.Padding.large)
     .frame(maxWidth: .infinity, alignment: .leading)
     .background(Color.white.opacity(0.92))
-    .clipShape(RoundedRectangle(cornerRadius: 14))
+    .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge))
   }
 
   /*
@@ -147,10 +147,10 @@ struct TeaLeafDetailView: View {
       .buttonStyle(.borderedProminent)
       .disabled(nextStatus == nil)
     }
-    .padding(14)
+    .padding(AppConstants.UI.Padding.large)
     .frame(maxWidth: .infinity, alignment: .leading)
     .background(Color.white.opacity(0.92))
-    .clipShape(RoundedRectangle(cornerRadius: 14))
+    .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge))
   }
 
   /*
@@ -217,10 +217,10 @@ struct TeaLeafDetailView: View {
         }
       }
     }
-    .padding(14)
+    .padding(AppConstants.UI.Padding.large)
     .frame(maxWidth: .infinity, alignment: .leading)
     .background(Color.white.opacity(0.92))
-    .clipShape(RoundedRectangle(cornerRadius: 14))
+    .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge))
   }
 
   /*
@@ -232,10 +232,10 @@ struct TeaLeafDetailView: View {
         Image(uiImage: uiImage)
           .resizable()
           .scaledToFit()
-          .clipShape(RoundedRectangle(cornerRadius: 14))
+          .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge))
           .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 3)
       } else {
-        RoundedRectangle(cornerRadius: 14)
+        RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge)
           .fill(Color.gray.opacity(0.2))
           .overlay {
             VStack(spacing: 8) {
@@ -284,10 +284,10 @@ struct TeaLeafDetailView: View {
         .padding(.vertical, 8)
       }
     }
-    .padding(14)
+    .padding(AppConstants.UI.Padding.large)
     .frame(maxWidth: .infinity, alignment: .leading)
     .background(Color.white.opacity(0.92))
-    .clipShape(RoundedRectangle(cornerRadius: 14))
+    .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge))
   }
 
   /*

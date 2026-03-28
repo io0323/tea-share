@@ -79,5 +79,57 @@ struct AppConstants {
       static let shadow: Double = 0.12
       static let cardShadow: Double = 0.07
     }
+    
+    struct Layout {
+      struct Padding {
+        static let small: CGFloat = 8
+        static let medium: CGFloat = 12
+        static let large: CGFloat = 14
+        static let extraLarge: CGFloat = 16
+        static let huge: CGFloat = 20
+        static let cardHorizontal: CGFloat = 12
+        static let cardVertical: CGFloat = 10
+        static let buttonHorizontal: CGFloat = 12
+        static let buttonVertical: CGFloat = 8
+        static let filterHorizontal: CGFloat = 10
+        static let filterVertical: CGFloat = 6
+      }
+      
+      struct Frame {
+        static let cardHeight: CGFloat = 86
+        static let errorImageHeight: CGFloat = 200
+        static let progressRadius: CGFloat = 10
+      }
+      
+      struct Spacing {
+        static let tiny: CGFloat = 2
+        static let small: CGFloat = 4
+        static let medium: CGFloat = 6
+        static let large: CGFloat = 8
+        static let extraLarge: CGFloat = 10
+        static let huge: CGFloat = 12
+        static let card: CGFloat = 8
+        static let section: CGFloat = 10
+        static let button: CGFloat = 8
+        static let overlay: CGFloat = 8
+      }
+      
+      struct CornerRadius {
+        static let small: CGFloat = 8
+        static let medium: CGFloat = 10
+        static let large: CGFloat = 12
+        static let extraLarge: CGFloat = 14
+        static let card: CGFloat = 16
+      }
+      
+      struct Shadow {
+        static let smallRadius: CGFloat = 3
+        static let mediumRadius: CGFloat = 7
+        static let largeRadius: CGFloat = 8
+        static let cardRadius: CGFloat = 7
+        static let cardOffset: CGFloat = 2
+        static let buttonOffset: CGFloat = 3
+      }
+    }
   }
 }
