@@ -160,7 +160,7 @@ struct TeaTimelineView: View {
             Image(systemName: "plus")
             Text("出品する")
           }
-          .font(.headline)
+          .font(AppConstants.UI.Typography.FontScale.buttonTitle)
           .foregroundStyle(.white)
           .padding(.horizontal, 16)
           .padding(.vertical, 14)
@@ -232,7 +232,7 @@ struct TeaTimelineView: View {
   private var expiryToggle: some View {
     Toggle(isOn: $showExpiringOnly) {
       Text("期限切れ/期限間近のみ")
-        .font(.subheadline.weight(.medium))
+        .font(AppConstants.UI.Typography.FontScale.sectionSubtitle)
     }
     .toggleStyle(.switch)
   }
@@ -324,7 +324,7 @@ struct TeaTimelineView: View {
           .font(.caption)
           .foregroundStyle(.secondary)
         Text("\(count)件")
-          .font(.subheadline.weight(.semibold))
+          .font(AppConstants.UI.Typography.FontScale.sectionTitle)
       }
     }
     .padding(.horizontal, 12)
@@ -342,9 +342,9 @@ struct TeaTimelineView: View {
         .font(.system(size: AppConstants.UI.FontSizes.emptyStateIcon))
         .foregroundStyle(.secondary)
       Text("条件に一致する茶葉がありません")
-        .font(.subheadline.weight(.semibold))
+        .font(AppConstants.UI.Typography.FontScale.sectionTitle)
       Text("検索条件やカテゴリを変更してください")
-        .font(.footnote)
+        .font(AppConstants.UI.Typography.Font.footnote)
         .foregroundStyle(.secondary)
     }
     .frame(maxWidth: .infinity)
@@ -472,12 +472,12 @@ private struct TeaLeafCardView: View {
       }
 
       Text(tea.name)
-        .font(.headline)
+        .font(AppConstants.UI.Typography.FontScale.cardTitle)
         .lineLimit(2)
 
       HStack(spacing: 6) {
         Text(tea.category.rawValue)
-          .font(.caption.weight(.semibold))
+          .font(AppConstants.UI.Typography.FontScale.cardSubtitle)
           .padding(.horizontal, 8)
           .padding(.vertical, 4)
           .background(Color.green.opacity(AppConstants.UI.Colors.greenBadgeOpacity))
