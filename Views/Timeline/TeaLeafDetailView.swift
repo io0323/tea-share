@@ -83,9 +83,9 @@ struct TeaLeafDetailView: View {
   private var headerCard: some View {
     VStack(alignment: .leading, spacing: 10) {
       Text(teaLeaf.name)
-        .font(.title3.weight(.semibold))
+        .font(AppConstants.UI.Typography.FontScale.detailTitle)
       Text(teaLeaf.brand)
-        .font(.subheadline)
+        .font(AppConstants.UI.Typography.FontScale.detailSubtitle)
         .foregroundStyle(.secondary)
 
       HStack(spacing: 8) {
@@ -106,7 +106,7 @@ struct TeaLeafDetailView: View {
   private var statusSection: some View {
     VStack(alignment: .leading, spacing: 10) {
       Text("取引ステータス")
-        .font(.headline)
+        .font(AppConstants.UI.Typography.FontScale.sectionTitle)
 
       Picker("取引ステータス", selection: $teaLeaf.tradeStatus) {
         ForEach(TradeStatus.allCases) { status in
@@ -130,7 +130,7 @@ struct TeaLeafDetailView: View {
   private var quickStatusSection: some View {
     VStack(alignment: .leading, spacing: 10) {
       Text("クイック操作")
-        .font(.headline)
+        .font(AppConstants.UI.Typography.FontScale.sectionTitle)
 
       Button {
         guard let nextStatus else { return }
@@ -160,7 +160,7 @@ struct TeaLeafDetailView: View {
     VStack(alignment: .leading, spacing: 12) {
       HStack {
         Text("詳細情報")
-          .font(.headline)
+          .font(AppConstants.UI.Typography.FontScale.sectionTitle)
         Spacer()
         if isEditingDetail {
           Text("\(editableDescription.count)/\(AppConstants.TextLimits.descriptionMaxLength)")
@@ -210,9 +210,9 @@ struct TeaLeafDetailView: View {
 
         VStack(alignment: .leading, spacing: 6) {
           Text("説明")
-            .font(.subheadline.weight(.semibold))
+            .font(AppConstants.UI.Typography.FontScale.sectionSubtitle)
           Text(teaLeaf.description.isEmpty ? "説明は未入力です。" : teaLeaf.description)
-            .font(.body)
+            .font(AppConstants.UI.Typography.FontScale.detailBody)
             .foregroundStyle(.secondary)
         }
       }
@@ -258,7 +258,7 @@ struct TeaLeafDetailView: View {
   private var tradeRequestSection: some View {
     VStack(alignment: .leading, spacing: 10) {
       Text("取引リクエスト")
-        .font(.headline)
+        .font(AppConstants.UI.Typography.FontScale.sectionTitle)
 
       if teaLeaf.tradeStatus == .available {
         Button {
@@ -277,7 +277,7 @@ struct TeaLeafDetailView: View {
         HStack {
           Image(systemName: "info.circle.fill")
           Text(teaLeaf.tradeStatus == .pending ? "交渉中のため新規リクエストはできません" : "この取引は完了済みです")
-            .font(.subheadline)
+            .font(AppConstants.UI.Typography.FontScale.statusBody)
         }
         .foregroundStyle(.secondary)
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -361,10 +361,10 @@ struct TeaLeafDetailView: View {
   private func detailRow(_ title: String, value: String) -> some View {
     HStack {
       Text(title)
-        .font(.subheadline.weight(.semibold))
+        .font(AppConstants.UI.Typography.FontScale.statusTitle)
       Spacer()
       Text(value)
-        .font(.subheadline)
+        .font(AppConstants.UI.Typography.FontScale.statusBody)
         .foregroundStyle(.secondary)
     }
   }

@@ -32,14 +32,14 @@ struct ProfileView: View {
             } else {
               HStack {
                 Text("ユーザー名:")
-                  .font(.headline)
+                  .font(AppConstants.UI.Typography.FontScale.sectionTitle)
                 Text(user.username)
                   .font(.body)
               }
 
               HStack {
                 Text("ID:")
-                  .font(.headline)
+                  .font(AppConstants.UI.Typography.FontScale.sectionTitle)
                 Text(user.id.uuidString)
                   .font(.body)
                   .foregroundColor(.secondary)
@@ -47,7 +47,7 @@ struct ProfileView: View {
 
               HStack {
                 Text("場所:")
-                  .font(.headline)
+                  .font(AppConstants.UI.Typography.FontScale.sectionTitle)
                 Text(user.location)
                   .font(.body)
               }

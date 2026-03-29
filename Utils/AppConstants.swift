@@ -130,6 +130,48 @@ struct AppConstants {
         static let cardOffset: CGFloat = 2
         static let buttonOffset: CGFloat = 3
       }
+      
+      struct Typography {
+        struct Font {
+          static let largeTitle: Font = .largeTitle
+          static let title: Font = .title
+          static let title2: Font = .title2
+          static let title3: Font = .title3
+          static let headline: Font = .headline
+          static let subheadline: Font = .subheadline
+          static let body: Font = .body
+          static let callout: Font = .callout
+          static let footnote: Font = .footnote
+          static let caption: Font = .caption
+          static let caption2: Font = .caption2
+        }
+        
+        struct FontWeight {
+          static let bold: Font.Weight = .bold
+          static let heavy: Font.Weight = .heavy
+          static let medium: Font.Weight = .medium
+          static let regular: Font.Weight = .regular
+          static let semibold: Font.Weight = .semibold
+          static let thin: Font.Weight = .thin
+          static let light: Font.Weight = .light
+        }
+        
+        struct FontScale {
+          static let cardTitle: Font = .headline
+          static let cardSubtitle: Font = .caption.weight(.semibold)
+          static let cardBody: Font = .caption
+          static let sectionTitle: Font = .headline
+          static let sectionSubtitle: Font = .subheadline.weight(.semibold)
+          static let sectionBody: Font = .body
+          static let buttonTitle: Font = .headline
+          static let chipTitle: Font = .subheadline.weight(.medium)
+          static let detailTitle: Font = .title3.weight(.semibold)
+          static let detailSubtitle: Font = .subheadline
+          static let detailBody: Font = .body
+          static let statusTitle: Font = .subheadline.weight(.semibold)
+          static let statusBody: Font = .subheadline
+        }
+      }
     }
   }
 }

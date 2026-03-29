@@ -271,7 +271,7 @@ private struct TeaMapDetailSheet: View {
 
       VStack(alignment: .leading, spacing: 8) {
         Text("取引ステータスを更新")
-          .font(.subheadline.weight(.semibold))
+          .font(AppConstants.UI.Typography.FontScale.sectionSubtitle)
         Picker("取引ステータス", selection: $teaLeaf.tradeStatus) {
           ForEach(TradeStatus.allCases) { status in
             Text(status.rawValue).tag(status)
