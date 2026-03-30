@@ -321,18 +321,18 @@ struct AddTeaView: View {
       .onChange(of: remainingGrams) { _, _ in persistDraft() }
       .onChange(of: location) { _, _ in persistDraft() }
       .onChange(of: username) { _, _ in persistDraft() }
-      .alert("保存できませんでした", isPresented: $isShowingErrorAlert) {
-        Button("OK", role: .cancel) {}
+      .alert(AppConstants.UI.Alerts.Titles.saveFailed, isPresented: $isShowingErrorAlert) {
+        Button(AppConstants.UI.Alerts.Buttons.ok, role: .cancel) {}
       } message: {
         Text(errorMessage)
       }
-      .alert("入力内容をリセットしますか？", isPresented: $isShowingResetAlert) {
-        Button("キャンセル", role: .cancel) {}
-        Button("リセット", role: .destructive) {
+      .alert(AppConstants.UI.Alerts.Titles.resetInput, isPresented: $isShowingResetAlert) {
+        Button(AppConstants.UI.Alerts.Buttons.cancel, role: .cancel) {}
+        Button(AppConstants.UI.Alerts.Buttons.reset, role: .destructive) {
           resetForm()
         }
       } message: {
-        Text("現在の入力内容と下書きが削除されます。")
+        Text(AppConstants.UI.Alerts.Messages.resetConfirmation)
       }
       .overlay {
         if isSaving {
