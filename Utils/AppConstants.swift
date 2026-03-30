@@ -172,6 +172,36 @@ struct AppConstants {
           static let statusBody: Font = .subheadline
         }
       }
+      
+      struct Alerts {
+        struct Titles {
+          static let saveError: String = "保存に失敗しました"
+          static let saveFailed: String = "保存できませんでした"
+          static let tradeRequest: String = "取引リクエスト"
+          static let resetInput: String = "入力内容をリセットしますか？"
+        }
+        
+        struct Buttons {
+          static let ok: String = "OK"
+          static let cancel: String = "キャンセル"
+          static let reset: String = "リセット"
+        }
+        
+        struct Messages {
+          static let tradeRequestUnavailable: String = "交渉中のため新規リクエストはできません"
+          static let tradeCompleted: String = "この取引は完了済みです"
+          static let userDataNotFound: String = "ユーザーデータが見つかりません。プロファイルを設定してください。"
+          static let ownerDataNotFound: String = "出品者情報が見つかりません。"
+          static let resetConfirmation: String = "現在の入力内容と下書きが削除されます。"
+        }
+      }
+      
+      struct Sheets {
+        struct Detents {
+          static let mapDetailFraction: Double = 0.35
+          static let mapDetailMedium: PresentationDetent = .medium
+        }
+      }
     }
   }
 }

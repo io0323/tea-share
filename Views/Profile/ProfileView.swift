@@ -85,8 +85,8 @@ struct ProfileView: View {
         }
       }
     }
-    .alert("保存に失敗しました", isPresented: $isShowingSaveError) {
-      Button("OK", role: .cancel) {}
+    .alert(AppConstants.UI.Alerts.Titles.saveError, isPresented: $isShowingSaveError) {
+      Button(AppConstants.UI.Alerts.Buttons.ok, role: .cancel) {}
     } message: {
       Text(saveErrorMessage)
     }

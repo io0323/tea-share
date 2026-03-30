@@ -60,13 +60,13 @@ struct TeaLeafDetailView: View {
         }
       }
     }
-    .alert("保存に失敗しました", isPresented: $isShowingSaveError) {
-      Button("OK", role: .cancel) {}
+    .alert(AppConstants.UI.Alerts.Titles.saveError, isPresented: $isShowingSaveError) {
+      Button(AppConstants.UI.Alerts.Buttons.ok, role: .cancel) {}
     } message: {
       Text(saveErrorMessage)
     }
-    .alert("取引リクエスト", isPresented: $isShowingTradeRequestAlert) {
-      Button("OK", role: .cancel) {}
+    .alert(AppConstants.UI.Alerts.Titles.tradeRequest, isPresented: $isShowingTradeRequestAlert) {
+      Button(AppConstants.UI.Alerts.Buttons.ok, role: .cancel) {}
     } message: {
       Text(tradeRequestMessage)
     }
@@ -276,7 +276,7 @@ struct TeaLeafDetailView: View {
       } else {
         HStack {
           Image(systemName: "info.circle.fill")
-          Text(teaLeaf.tradeStatus == .pending ? "交渉中のため新規リクエストはできません" : "この取引は完了済みです")
+          Text(teaLeaf.tradeStatus == .pending ? AppConstants.UI.Alerts.Messages.tradeRequestUnavailable : AppConstants.UI.Alerts.Messages.tradeCompleted)
             .font(AppConstants.UI.Typography.FontScale.statusBody)
         }
         .foregroundStyle(.secondary)
@@ -419,13 +419,13 @@ struct TeaLeafDetailView: View {
    */
   private func submitTradeRequest() {
     guard let currentUser = users.first else {
-      tradeRequestMessage = "ユーザーデータが見つかりません。プロファイルを設定してください。"
+      tradeRequestMessage = AppConstants.UI.Alerts.Messages.userDataNotFound
       isShowingTradeRequestAlert = true
       return
     }
     
     guard let owner = teaLeaf.owner else {
-      tradeRequestMessage = "出品者情報が見つかりません。"
+      tradeRequestMessage = AppConstants.UI.Alerts.Messages.ownerDataNotFound
       isShowingTradeRequestAlert = true
       return
     }

@@ -98,7 +98,7 @@ struct TeaMapView: View {
         }
         .sheet(item: $selectedTeaLeaf) { teaLeaf in
           TeaMapDetailSheet(teaLeaf: teaLeaf)
-            .presentationDetents([.fraction(0.35), .medium])
+            .presentationDetents([.fraction(AppConstants.UI.Sheets.Detents.mapDetailFraction), AppConstants.UI.Sheets.Detents.mapDetailMedium])
         }
 
         VStack(alignment: .leading, spacing: 10) {
@@ -300,8 +300,8 @@ private struct TeaMapDetailSheet: View {
     }
     .padding(.horizontal, 20)
     .padding(.bottom, 20)
-    .alert("保存に失敗しました", isPresented: $isShowingSaveError) {
-      Button("OK", role: .cancel) {}
+    .alert(AppConstants.UI.Alerts.Titles.saveError, isPresented: $isShowingSaveError) {
+      Button(AppConstants.UI.Alerts.Buttons.ok, role: .cancel) {}
     } message: {
       Text(saveErrorMessage)
     }
