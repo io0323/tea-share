@@ -170,7 +170,7 @@ struct TeaTimelineView: View {
         }
           .padding(AppConstants.UI.Padding.huge)
       }
-      .navigationTitle("TeaShare")
+      .navigationTitle(AppConstants.UI.Navigation.Titles.main)
       .sheet(isPresented: $isPresentingAddTea) {
         AddTeaView()
       }

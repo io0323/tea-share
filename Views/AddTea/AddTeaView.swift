@@ -275,10 +275,10 @@ struct AddTeaView: View {
           }
         }
       }
-      .navigationTitle("新規出品")
+      .navigationTitle(AppConstants.UI.Navigation.Titles.addTea)
       .toolbar {
         ToolbarItem(placement: .topBarLeading) {
-          Button("キャンセル") { dismiss() }
+          Button(AppConstants.UI.Navigation.Toolbar.Buttons.cancel) { dismiss() }
             .disabled(isSaving)
         }
         ToolbarItem(placement: .topBarTrailing) {

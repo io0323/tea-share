@@ -40,11 +40,11 @@ struct TeaLeafDetailView: View {
       }
       .padding(16)
     }
-    .navigationTitle("茶葉の詳細")
+    .navigationTitle(AppConstants.UI.Navigation.Titles.teaDetail)
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
       ToolbarItem(placement: .topBarTrailing) {
-        Button(isEditingDetail ? "完了" : "編集") {
+        Button(isEditingDetail ? AppConstants.UI.Navigation.Toolbar.Buttons.done : AppConstants.UI.Navigation.Toolbar.Buttons.edit) {
           if isEditingDetail {
             commitDetailEdits()
           } else {
@@ -54,7 +54,7 @@ struct TeaLeafDetailView: View {
       }
       if isEditingDetail {
         ToolbarItem(placement: .topBarLeading) {
-          Button("キャンセル", role: .cancel) {
+          Button(AppConstants.UI.Navigation.Toolbar.Buttons.cancel, role: .cancel) {
             cancelEditingDetail()
           }
         }
