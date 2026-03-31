@@ -202,6 +202,25 @@ struct AppConstants {
           static let mapDetailMedium: PresentationDetent = .medium
         }
       }
+      
+      struct Navigation {
+        struct Titles {
+          static let main: String = "TeaShare"
+          static let profile: String = "プロファイル"
+          static let map: String = "交換スポット"
+          static let addTea: String = "新規出品"
+          static let teaDetail: String = "茶葉の詳細"
+        }
+        
+        struct Toolbar {
+          struct Buttons {
+            static let edit: String = "編集"
+            static let done: String = "完了"
+            static let cancel: String = "キャンセル"
+            static let save: String = "保存"
+          }
+        }
+      }
     }
   }
 }

@@ -85,7 +85,7 @@ struct TeaMapView: View {
             }
           }
         }
-        .navigationTitle("交換スポット")
+        .navigationTitle(AppConstants.UI.Navigation.Titles.map)
         .toolbar {
           ToolbarItem(placement: .topBarTrailing) {
             Button {

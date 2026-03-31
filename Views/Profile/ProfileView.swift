@@ -66,10 +66,10 @@ struct ProfileView: View {
           .foregroundColor(.gray)
       }
     }
-    .navigationTitle("プロファイル")
+    .navigationTitle(AppConstants.UI.Navigation.Titles.profile)
     .toolbar {
       ToolbarItem(placement: .topBarTrailing) {
-        Button(isEditing ? "完了" : "編集") {
+        Button(isEditing ? AppConstants.UI.Navigation.Toolbar.Buttons.done : AppConstants.UI.Navigation.Toolbar.Buttons.edit) {
           if isEditing {
             saveProfileChanges()
           } else {
@@ -79,7 +79,7 @@ struct ProfileView: View {
       }
       if isEditing {
         ToolbarItem(placement: .topBarLeading) {
-          Button("キャンセル", role: .cancel) {
+          Button(AppConstants.UI.Navigation.Toolbar.Buttons.cancel, role: .cancel) {
             cancelEditing()
           }
         }
