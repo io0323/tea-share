@@ -91,9 +91,9 @@ struct TeaMapView: View {
             Button {
               focusOnDefaultRegion()
             } label: {
-              Image(systemName: "location")
+              Image(systemName: AppConstants.UI.UIStrings.Content.location)
             }
-            .accessibilityLabel("中心エリアへ戻る")
+            .accessibilityLabel(AppConstants.UI.UIStrings.Actions.focusOnDefaultArea)
           }
         }
         .sheet(item: $selectedTeaLeaf) { teaLeaf in

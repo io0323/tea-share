@@ -138,7 +138,7 @@ struct TeaLeafDetailView: View {
         saveContext()
       } label: {
         HStack {
-          Image(systemName: "arrow.right.circle.fill")
+          Image(systemName: AppConstants.UI.UIStrings.Content.arrowRightCircleFill)
           Text(quickActionTitle)
             .fontWeight(.semibold)
         }
@@ -200,8 +200,8 @@ struct TeaLeafDetailView: View {
           openInMaps()
         } label: {
           HStack {
-            Image(systemName: "map.fill")
-            Text("マップで開く")
+            Image(systemName: AppConstants.UI.UIStrings.Content.mapFill)
+            Text(AppConstants.UI.UIStrings.Actions.openInMap)
               .fontWeight(.semibold)
           }
           .frame(maxWidth: .infinity)
@@ -209,9 +209,9 @@ struct TeaLeafDetailView: View {
         .buttonStyle(.borderedProminent)
 
         VStack(alignment: .leading, spacing: 6) {
-          Text("説明")
+          Text(AppConstants.UI.UIStrings.Labels.description)
             .font(AppConstants.UI.Typography.FontScale.sectionSubtitle)
-          Text(teaLeaf.description.isEmpty ? "説明は未入力です。" : teaLeaf.description)
+          Text(teaLeaf.description.isEmpty ? AppConstants.UI.UIStrings.Placeholders.descriptionEmpty : teaLeaf.description)
             .font(AppConstants.UI.Typography.FontScale.detailBody)
             .foregroundStyle(.secondary)
         }
@@ -239,10 +239,10 @@ struct TeaLeafDetailView: View {
           .fill(Color.gray.opacity(0.2))
           .overlay {
             VStack(spacing: 8) {
-              Image(systemName: "photo")
+              Image(systemName: AppConstants.UI.UIStrings.Content.photo)
                 .font(.system(size: AppConstants.UI.FontSizes.errorImageIcon))
                 .foregroundStyle(.secondary)
-              Text("画像を読み込めません")
+              Text(AppConstants.UI.UIStrings.Placeholders.imageLoadError)
                 .font(.caption)
                 .foregroundStyle(.secondary)
             }
@@ -266,7 +266,7 @@ struct TeaLeafDetailView: View {
         } label: {
           HStack {
             Image(systemName: "envelope.fill")
-            Text("取引を申し込む")
+            Text(AppConstants.UI.UIStrings.Actions.submitTradeRequest)
               .fontWeight(.semibold)
           }
           .frame(maxWidth: .infinity)
@@ -275,7 +275,7 @@ struct TeaLeafDetailView: View {
         .tint(.blue)
       } else {
         HStack {
-          Image(systemName: "info.circle.fill")
+          Image(systemName: AppConstants.UI.UIStrings.Content.infoCircleFill)
           Text(teaLeaf.tradeStatus == .pending ? AppConstants.UI.Alerts.Messages.tradeRequestUnavailable : AppConstants.UI.Alerts.Messages.tradeCompleted)
             .font(AppConstants.UI.Typography.FontScale.statusBody)
         }

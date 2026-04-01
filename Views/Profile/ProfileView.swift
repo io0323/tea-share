@@ -31,14 +31,14 @@ struct ProfileView: View {
               }
             } else {
               HStack {
-                Text("ユーザー名:")
+                Text(AppConstants.UI.UIStrings.Labels.username)
                   .font(AppConstants.UI.Typography.FontScale.sectionTitle)
                 Text(user.username)
                   .font(.body)
               }
 
               HStack {
-                Text("ID:")
+                Text(AppConstants.UI.UIStrings.Labels.id)
                   .font(AppConstants.UI.Typography.FontScale.sectionTitle)
                 Text(user.id.uuidString)
                   .font(.body)
@@ -46,7 +46,7 @@ struct ProfileView: View {
               }
 
               HStack {
-                Text("場所:")
+                Text(AppConstants.UI.UIStrings.Labels.location)
                   .font(AppConstants.UI.Typography.FontScale.sectionTitle)
                 Text(user.location)
                   .font(.body)
@@ -61,7 +61,7 @@ struct ProfileView: View {
         }
         .padding()
       } else {
-        Text("ユーザーデータが見つかりません")
+        Text(AppConstants.UI.UIStrings.Labels.userDataNotFound)
           .font(.title)
           .foregroundColor(.gray)
       }
