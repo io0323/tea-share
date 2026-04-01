@@ -282,13 +282,13 @@ struct AddTeaView: View {
             .disabled(isSaving)
         }
         ToolbarItem(placement: .topBarTrailing) {
-          Button("リセット", role: .destructive) {
+          Button(AppConstants.UI.UIStrings.Actions.reset, role: .destructive) {
             isShowingResetAlert = true
           }
           .disabled(isSaving)
         }
         ToolbarItem(placement: .topBarTrailing) {
-          Button("保存") {
+          Button(AppConstants.UI.Navigation.Toolbar.Buttons.save) {
             saveTeaLeaf()
           }
           .disabled(!canSave)
@@ -339,7 +339,7 @@ struct AddTeaView: View {
           ZStack {
             Color.black.opacity(0.15)
               .ignoresSafeArea()
-            ProgressView("保存中...")
+            ProgressView(AppConstants.UI.UIStrings.Actions.saving)
               .padding(AppConstants.UI.Padding.large)
               .background(.regularMaterial)
               .clipShape(RoundedRectangle(cornerRadius: 10))

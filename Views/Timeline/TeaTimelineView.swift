@@ -158,7 +158,7 @@ struct TeaTimelineView: View {
         Button(action: { isPresentingAddTea = true }) {
           HStack(spacing: 8) {
             Image(systemName: "plus")
-            Text("出品する")
+            Text(AppConstants.UI.UIStrings.Content.plus)
           }
           .font(AppConstants.UI.Typography.FontScale.buttonTitle)
           .foregroundStyle(.white)
@@ -338,7 +338,7 @@ struct TeaTimelineView: View {
    */
   private var emptyStateView: some View {
     VStack(spacing: 10) {
-      Image(systemName: "tray")
+      Image(systemName: AppConstants.UI.UIStrings.Content.tray)
         .font(.system(size: AppConstants.UI.FontSizes.emptyStateIcon))
         .foregroundStyle(.secondary)
       Text("条件に一致する茶葉がありません")
@@ -464,7 +464,7 @@ private struct TeaLeafCardView: View {
         RoundedRectangle(cornerRadius: 12)
           .fill(Color.green.opacity(AppConstants.UI.Colors.greenOpacity))
           .overlay {
-            Image(systemName: "leaf.fill")
+            Image(systemName: AppConstants.UI.UIStrings.Content.leafFill)
               .font(.system(size: AppConstants.UI.FontSizes.cardIcon))
               .foregroundStyle(Color.green.opacity(AppConstants.UI.Colors.greenForegroundOpacity))
           }

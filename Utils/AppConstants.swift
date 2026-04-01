@@ -221,6 +221,53 @@ struct AppConstants {
           }
         }
       }
+      
+      struct UIStrings {
+        struct Actions {
+          static let save: String = "保存"
+          static let reset: String = "リセット"
+          static let saving: String = "保存中..."
+          static let submitTradeRequest: String = "取引を申し込む"
+          static let openInMap: String = "マップで開く"
+          static let focusOnDefaultArea: String = "中心エリアへ戻る"
+        }
+        
+        struct Labels {
+          static let username: String = "ユーザー名:"
+          static let id: String = "ID:"
+          static let location: String = "場所:"
+          static let brand: String = "ブランド"
+          static let category: String = "カテゴリ"
+          static let expiryDate: String = "賞味期限"
+          static let remaining: String = "残量"
+          static let description: String = "説明"
+          static let area: String = "エリア"
+          static let status: String = "ステータス"
+          static let owner: String = "出品者"
+          static let userDataNotFound: String = "ユーザーデータが見つかりません"
+        }
+        
+        struct Placeholders {
+          static let username: String = "ユーザー名"
+          static let location: String = "場所"
+          static let notSet: String = "未設定"
+          static let descriptionEmpty: String = "説明は未入力です。"
+          static let imageLoadError: String = "画像を読み込めません"
+        }
+        
+        struct Content {
+          static let plus: String = "出品する"
+          static let leafFill: String = "leaf.fill"
+          static let tray: String = "tray"
+          static let photo: String = "photo"
+          static let infoCircleFill: String = "info.circle.fill"
+          static let arrowRightCircleFill: String = "arrow.right.circle.fill"
+          static let envelopeFill: String = "envelope.fill"
+          static let mapFill: String = "map.fill"
+          static let location: String = "location"
+          static let xmarkCircleFill: String = "xmark.circle.fill"
+        }
+      }
     }
   }
 }
