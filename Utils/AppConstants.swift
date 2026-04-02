@@ -78,6 +78,12 @@ struct AppConstants {
       static let chipBackground: Double = 0.85
       static let shadow: Double = 0.12
       static let cardShadow: Double = 0.07
+      static let whiteHigh: Double = 0.9
+      static let whiteCard: Double = 0.92
+      static let grayLight: Double = 0.1
+      static let grayMedium: Double = 0.2
+      static let blackOverlay: Double = 0.15
+      static let blackLight: Double = 0.08
     }
     
     struct Layout {

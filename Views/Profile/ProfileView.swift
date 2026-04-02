@@ -54,7 +54,7 @@ struct ProfileView: View {
             }
           }
           .padding()
-          .background(Color.gray.opacity(0.1))
+          .background(Color.gray.opacity(AppConstants.UI.Opacity.grayLight))
           .cornerRadius(10)
 
           Spacer()

@@ -95,9 +95,9 @@ struct TeaLeafDetailView: View {
     }
     .padding(14)
     .frame(maxWidth: .infinity, alignment: .leading)
-    .background(Color.white.opacity(0.92))
+    .background(Color.white.opacity(AppConstants.UI.Opacity.whiteCard))
     .clipShape(RoundedRectangle(cornerRadius: 14))
-    .shadow(color: .black.opacity(0.08), radius: 8, x: 0, y: 3)
+    .shadow(color: .black.opacity(AppConstants.UI.Opacity.blackLight), radius: 8, x: 0, y: 3)
   }
 
   /*
@@ -120,7 +120,7 @@ struct TeaLeafDetailView: View {
     }
     .padding(AppConstants.UI.Padding.large)
     .frame(maxWidth: .infinity, alignment: .leading)
-    .background(Color.white.opacity(0.92))
+    .background(Color.white.opacity(AppConstants.UI.Opacity.whiteCard))
     .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge))
   }
 
@@ -149,7 +149,7 @@ struct TeaLeafDetailView: View {
     }
     .padding(AppConstants.UI.Padding.large)
     .frame(maxWidth: .infinity, alignment: .leading)
-    .background(Color.white.opacity(0.92))
+    .background(Color.white.opacity(AppConstants.UI.Opacity.whiteCard))
     .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge))
   }
 
@@ -219,7 +219,7 @@ struct TeaLeafDetailView: View {
     }
     .padding(AppConstants.UI.Padding.large)
     .frame(maxWidth: .infinity, alignment: .leading)
-    .background(Color.white.opacity(0.92))
+    .background(Color.white.opacity(AppConstants.UI.Opacity.whiteCard))
     .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge))
   }
 
@@ -236,7 +236,7 @@ struct TeaLeafDetailView: View {
           .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 3)
       } else {
         RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge)
-          .fill(Color.gray.opacity(0.2))
+          .fill(Color.gray.opacity(AppConstants.UI.Opacity.grayMedium))
           .overlay {
             VStack(spacing: 8) {
               Image(systemName: AppConstants.UI.UIStrings.Content.photo)
@@ -286,7 +286,7 @@ struct TeaLeafDetailView: View {
     }
     .padding(AppConstants.UI.Padding.large)
     .frame(maxWidth: .infinity, alignment: .leading)
-    .background(Color.white.opacity(0.92))
+    .background(Color.white.opacity(AppConstants.UI.Opacity.whiteCard))
     .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge))
   }
 
