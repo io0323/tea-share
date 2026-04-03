@@ -55,7 +55,7 @@ struct ProfileView: View {
           }
           .padding()
           .background(Color.gray.opacity(AppConstants.UI.Opacity.grayLight))
-          .cornerRadius(10)
+          .cornerRadius(AppConstants.UI.CornerRadius.card)
 
           Spacer()
         }

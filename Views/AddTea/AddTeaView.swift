@@ -186,7 +186,7 @@ struct AddTeaView: View {
               .resizable()
               .scaledToFit()
               .frame(maxHeight: 180)
-              .clipShape(RoundedRectangle(cornerRadius: 12))
+              .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.sheet))
 
             HStack(spacing: 10) {
               Button {
@@ -342,7 +342,7 @@ struct AddTeaView: View {
             ProgressView(AppConstants.UI.UIStrings.Actions.saving)
               .padding(AppConstants.UI.Padding.large)
               .background(.regularMaterial)
-              .clipShape(RoundedRectangle(cornerRadius: 10))
+              .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.progress))
           }
         }
       }

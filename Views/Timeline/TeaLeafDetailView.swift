@@ -96,7 +96,7 @@ struct TeaLeafDetailView: View {
     .padding(14)
     .frame(maxWidth: .infinity, alignment: .leading)
     .background(Color.white.opacity(AppConstants.UI.Opacity.whiteCard))
-    .clipShape(RoundedRectangle(cornerRadius: 14))
+    .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge))
     .shadow(color: .black.opacity(AppConstants.UI.Opacity.blackLight), radius: 8, x: 0, y: 3)
   }
 
