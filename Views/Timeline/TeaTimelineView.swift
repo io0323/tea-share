@@ -330,7 +330,7 @@ struct TeaTimelineView: View {
     .padding(.horizontal, 12)
     .padding(.vertical, 10)
     .background(Color.white.opacity(AppConstants.UI.Opacity.whiteHigh))
-    .clipShape(RoundedRectangle(cornerRadius: 12))
+    .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.sheet))
   }
 
   /*
@@ -350,7 +350,7 @@ struct TeaTimelineView: View {
     .frame(maxWidth: .infinity)
     .padding(.vertical, AppConstants.UI.Layout.Spacing.large)
     .background(Color.white.opacity(AppConstants.UI.Opacity.cardBackground))
-    .clipShape(RoundedRectangle(cornerRadius: 14))
+    .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge))
   }
 
   /*
