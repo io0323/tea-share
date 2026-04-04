@@ -138,6 +138,9 @@ struct AppConstants {
         static let cardRadius: CGFloat = 7
         static let cardOffset: CGFloat = 2
         static let buttonOffset: CGFloat = 3
+        static let imageRadius: CGFloat = 8
+        static let imageOffset: CGFloat = 3
+        static let imageOpacity: Double = 0.1
       }
       
       struct Typography {
