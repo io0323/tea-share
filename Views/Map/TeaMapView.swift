@@ -245,8 +245,8 @@ struct TeaMapView: View {
 private struct TeaMapDetailSheet: View {
   @Environment(\.modelContext) private var modelContext
   @Bindable var teaLeaf: TeaLeaf
-  @State private var isShowingSaveError = false
-  @State private var saveErrorMessage = ""
+  @State private var isShowingSaveError = AppConstants.AppConstants.Defaults.UI.isShowingSaveError
+  @State private var saveErrorMessage = AppConstants.AppConstants.Defaults.State.saveErrorMessage
 
   var body: some View {
     VStack(alignment: .leading, spacing: AppConstants.UI.Spacing.default) {
