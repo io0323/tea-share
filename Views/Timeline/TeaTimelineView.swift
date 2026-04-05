@@ -7,11 +7,11 @@ import SwiftData
 struct TeaTimelineView: View {
   @Query(sort: \TeaLeaf.expiryDate) private var teaLeaves: [TeaLeaf]
   @State private var selectedCategory: TeaCategory?
-  @State private var searchText = ""
-  @State private var sortOption: TeaTimelineSortOption = .expirySoon
-  @State private var statusScope: TeaTimelineStatusScope = .active
-  @State private var showExpiringOnly = false
-  @State private var isPresentingAddTea = false
+  @State private var searchText = AppConstants.AppConstants.Defaults.State.searchText
+  @State private var sortOption: TeaTimelineSortOption = AppConstants.AppConstants.Defaults.Selection.sortOption
+  @State private var statusScope: TeaTimelineStatusScope = AppConstants.AppConstants.Defaults.Selection.statusScope
+  @State private var showExpiringOnly = AppConstants.AppConstants.Defaults.UI.showExpiringOnly
+  @State private var isPresentingAddTea = AppConstants.AppConstants.Defaults.UI.isPresentingAddTea
 
   private let columns = [
     GridItem(.flexible(), spacing: 12),

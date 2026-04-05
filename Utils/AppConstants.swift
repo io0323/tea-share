@@ -281,5 +281,45 @@ struct AppConstants {
         }
       }
     }
+  struct Defaults {
+      struct State {
+        static let searchText: String = ""
+        static let errorMessage: String = ""
+        static let saveErrorMessage: String = ""
+        static let tradeRequestMessage: String = ""
+        static let editableDescription: String = ""
+        static let editedUsername: String = ""
+        static let editedLocation: String = ""
+        static let name: String = ""
+        static let brand: String = ""
+        static let descriptionText: String = ""
+        static let location: String = "未設定"
+        static let username: String = "new_user"
+        static let editableRemainingGrams: Int = 0
+        static let remainingGrams: Int = 50
+      }
+      
+      struct UI {
+        static let showExpiringOnly: Bool = false
+        static let isPresentingAddTea: Bool = false
+        static let isEditingDetail: Bool = false
+        static let isShowingSaveError: Bool = false
+        static let isShowingTradeRequestAlert: Bool = false
+        static let isShowingCamera: Bool = false
+        static let isAnalyzingImage: Bool = false
+        static let isSaving: Bool = false
+        static let isShowingErrorAlert: Bool = false
+        static let isShowingResetAlert: Bool = false
+        static let hasLoadedDraft: Bool = false
+        static let isEditing: Bool = false
+      }
+      
+      struct Selection {
+        static let sortOption: TeaTimelineSortOption = .expirySoon
+        static let statusScope: TeaTimelineStatusScope = .active
+        static let category: TeaCategory = .greenTea
+        static let selectedCategory: TeaCategory? = nil
+      }
+    }
   }
 }
