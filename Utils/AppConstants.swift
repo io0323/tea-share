@@ -102,8 +102,10 @@ struct AppConstants {
       }
       
       struct Frame {
-        static let cardHeight: CGFloat = 86
-        static let errorImageHeight: CGFloat = 200
+        static let cardHeight: CGFloat = 44
+        static let errorImageHeight: CGFloat = 4
+        static let imageMaxHeight: CGFloat = 180
+        static let imageErrorHeight: CGFloat = 200
         static let progressRadius: CGFloat = 10
       }
       

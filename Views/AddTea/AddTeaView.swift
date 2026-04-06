@@ -185,7 +185,7 @@ struct AddTeaView: View {
             Image(uiImage: selectedImage)
               .resizable()
               .scaledToFit()
-              .frame(maxHeight: 180)
+              .frame(maxHeight: AppConstants.UI.Frame.imageMaxHeight)
               .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.sheet))
 
             HStack(spacing: 10) {
