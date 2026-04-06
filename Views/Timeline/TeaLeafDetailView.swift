@@ -247,7 +247,7 @@ struct TeaLeafDetailView: View {
                 .foregroundStyle(.secondary)
             }
           }
-          .frame(height: 200)
+          .frame(height: AppConstants.UI.Frame.imageErrorHeight)
       }
     }
   }
