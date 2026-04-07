@@ -158,6 +158,14 @@ struct AppConstants {
           static let footnote: Font = .footnote
           static let caption: Font = .caption
           static let caption2: Font = .caption2
+          static let system: Font = .system
+          static let systemBold: Font = .systemBold
+          static let systemItalic: Font = .systemItalic
+          static let systemBoldItalic: Font = .systemBoldItalic
+          static let systemMedium: Font = .systemMedium
+          static let systemSemibold: Font = .systemSemibold
+          static let systemLight: Font = .systemLight
+          static let systemThin: Font = .systemThin
         }
         
         struct FontWeight {

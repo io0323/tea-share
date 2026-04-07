@@ -164,7 +164,7 @@ struct TeaLeafDetailView: View {
         Spacer()
         if isEditingDetail {
           Text("\(editableDescription.count)/\(AppConstants.TextLimits.descriptionMaxLength)")
-            .font(.footnote)
+            .font(AppConstants.UI.Typography.Font.footnote)
             .foregroundStyle(
               editableDescription.count >= AppConstants.TextLimits.descriptionMaxLength
                 ? .orange
@@ -243,7 +243,7 @@ struct TeaLeafDetailView: View {
                 .font(.system(size: AppConstants.UI.FontSizes.errorImageIcon))
                 .foregroundStyle(.secondary)
               Text(AppConstants.UI.UIStrings.Placeholders.imageLoadError)
-                .font(.caption)
+                .font(AppConstants.UI.Typography.Font.caption)
                 .foregroundStyle(.secondary)
             }
           }

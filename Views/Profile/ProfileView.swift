@@ -18,7 +18,7 @@ struct ProfileView: View {
       if let user = users.first {
         VStack(alignment: .leading, spacing: 20) {
           Text("プロファイル")
-            .font(.largeTitle)
+            .font(AppConstants.UI.Typography.Font.largeTitle)
             .fontWeight(.bold)
 
           VStack(alignment: .leading, spacing: 16) {
@@ -34,14 +34,14 @@ struct ProfileView: View {
                 Text(AppConstants.UI.UIStrings.Labels.username)
                   .font(AppConstants.UI.Typography.FontScale.sectionTitle)
                 Text(user.username)
-                  .font(.body)
+                  .font(AppConstants.UI.Typography.Font.body)
               }
 
               HStack {
                 Text(AppConstants.UI.UIStrings.Labels.id)
                   .font(AppConstants.UI.Typography.FontScale.sectionTitle)
                 Text(user.id.uuidString)
-                  .font(.body)
+                  .font(AppConstants.UI.Typography.Font.body)
                   .foregroundColor(.secondary)
               }
 
@@ -49,7 +49,7 @@ struct ProfileView: View {
                 Text(AppConstants.UI.UIStrings.Labels.location)
                   .font(AppConstants.UI.Typography.FontScale.sectionTitle)
                 Text(user.location)
-                  .font(.body)
+                  .font(AppConstants.UI.Typography.Font.body)
               }
             }
           }
@@ -62,7 +62,7 @@ struct ProfileView: View {
         .padding()
       } else {
         Text(AppConstants.UI.UIStrings.Labels.userDataNotFound)
-          .font(.title)
+          .font(AppConstants.UI.Typography.Font.title)
           .foregroundColor(.gray)
       }
     }

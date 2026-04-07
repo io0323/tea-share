@@ -321,7 +321,7 @@ struct TeaTimelineView: View {
         .foregroundStyle(tint)
       VStack(alignment: .leading, spacing: 2) {
         Text(title)
-          .font(.caption)
+          .font(AppConstants.UI.Typography.Font.caption)
           .foregroundStyle(.secondary)
         Text("\(count)件")
           .font(AppConstants.UI.Typography.FontScale.sectionTitle)
@@ -378,7 +378,7 @@ struct TeaTimelineView: View {
         .font(.footnote.weight(.semibold))
       } else {
         Text("フィルタ条件は未設定です")
-          .font(.footnote)
+          .font(AppConstants.UI.Typography.Font.footnote)
           .foregroundStyle(.secondary)
       }
     }
@@ -489,9 +489,9 @@ private struct TeaLeafCardView: View {
 
       VStack(alignment: .leading, spacing: 2) {
         Text("残量: \(tea.remainingGrams)g")
-          .font(.caption)
+          .font(AppConstants.UI.Typography.Font.caption)
         Text("エリア: \(tea.owner?.location ?? "未設定")")
-          .font(.caption)
+          .font(AppConstants.UI.Typography.Font.caption)
           .foregroundStyle(.secondary)
       }
     }
