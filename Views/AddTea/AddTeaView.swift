@@ -213,7 +213,7 @@ struct AddTeaView: View {
             HStack(spacing: 8) {
               ProgressView()
               Text("画像から情報を抽出中...")
-                .font(.footnote)
+                .font(AppConstants.UI.Typography.Font.footnote)
                 .foregroundStyle(.secondary)
             }
           }
@@ -242,8 +242,8 @@ struct AddTeaView: View {
             .lineLimit(3...6)
           HStack {
             Spacer()
-            Text(descriptionCountText)
-              .font(.footnote)
+              Text(descriptionCountText)
+              .font(AppConstants.UI.Typography.Font.footnote)
               .foregroundStyle(
                 descriptionText.count >= AppConstants.TextLimits.descriptionMaxLength ? .orange : .secondary
               )
@@ -256,8 +256,8 @@ struct AddTeaView: View {
         }
 
         Section("下書き") {
-          Text("入力内容は自動で下書き保存されます。")
-            .font(.footnote)
+            Text("入力内容は自動で下書き保存されます。")
+            .font(AppConstants.UI.Typography.Font.footnote)
             .foregroundStyle(.secondary)
           Button("入力内容をリセット", role: .destructive) {
             isShowingResetAlert = true
@@ -269,7 +269,7 @@ struct AddTeaView: View {
           Section("入力チェック") {
             ForEach(validationMessages, id: \.self) { message in
               Text(message)
-                .font(.footnote)
+                .font(AppConstants.UI.Typography.Font.footnote)
                 .foregroundStyle(.red)
             }
           }
@@ -355,7 +355,7 @@ struct AddTeaView: View {
   private var quickRemainingButtons: some View {
     HStack(spacing: 8) {
       Text("クイック")
-        .font(.caption)
+        .font(AppConstants.UI.Typography.Font.caption)
         .foregroundStyle(.secondary)
       quickAmountButton(25)
       quickAmountButton(50)
@@ -370,7 +370,7 @@ struct AddTeaView: View {
   private var expiryPresetButtons: some View {
     HStack(spacing: 8) {
       Text("期限プリセット")
-        .font(.caption)
+        .font(AppConstants.UI.Typography.Font.caption)
         .foregroundStyle(.secondary)
       ForEach(ExpiryPreset.allCases) { preset in
         Button(preset.rawValue) {

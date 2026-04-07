@@ -260,13 +260,13 @@ private struct TeaMapDetailSheet: View {
         .font(.title3.weight(.semibold))
 
       Text("出品者: \(teaLeaf.owner?.username ?? "不明")")
-        .font(.body)
+        .font(AppConstants.UI.Typography.Font.body)
       Text("エリア: \(teaLeaf.owner?.location ?? "未設定")")
-        .font(.body)
+        .font(AppConstants.UI.Typography.Font.body)
       Text("残量: \(teaLeaf.remainingGrams)g")
-        .font(.body)
+        .font(AppConstants.UI.Typography.Font.body)
       Text("ステータス: \(teaLeaf.tradeStatus.rawValue)")
-        .font(.body)
+        .font(AppConstants.UI.Typography.Font.body)
         .foregroundStyle(.secondary)
 
       VStack(alignment: .leading, spacing: 8) {
