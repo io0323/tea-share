@@ -38,7 +38,7 @@ struct TeaLeafDetailView: View {
         tradeRequestSection
         detailSection
       }
-      .padding(16)
+      .padding(AppConstants.UI.Layout.Padding.extraLarge)
     }
     .navigationTitle(AppConstants.UI.Navigation.Titles.teaDetail)
     .navigationBarTitleDisplayMode(.inline)
@@ -93,7 +93,7 @@ struct TeaLeafDetailView: View {
         tagLabel(teaLeaf.tradeStatus.rawValue, tint: statusColor)
       }
     }
-    .padding(14)
+    .padding(AppConstants.UI.Layout.Padding.cardHeader)
     .frame(maxWidth: .infinity, alignment: .leading)
     .background(Color.white.opacity(AppConstants.UI.Opacity.whiteCard))
     .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge))
