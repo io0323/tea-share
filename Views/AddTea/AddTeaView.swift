@@ -164,7 +164,7 @@ struct AddTeaView: View {
     NavigationStack {
       Form {
         Section("画像") {
-          HStack(spacing: 12) {
+          HStack(spacing: AppConstants.UI.Layout.Spacing.button) {
             PhotosPicker(
               selection: $pickedPhotoItem,
               matching: .images,
@@ -188,7 +188,7 @@ struct AddTeaView: View {
               .frame(maxHeight: AppConstants.UI.Frame.imageMaxHeight)
               .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.sheet))
 
-            HStack(spacing: 10) {
+            HStack(spacing: AppConstants.UI.Layout.Spacing.button) {
               Button {
                 rerunImageSuggestion()
               } label: {
@@ -210,7 +210,7 @@ struct AddTeaView: View {
           }
 
           if isAnalyzingImage {
-            HStack(spacing: 8) {
+            HStack(spacing: AppConstants.UI.Layout.Spacing.tag) {
               ProgressView()
               Text("画像から情報を抽出中...")
                 .font(AppConstants.UI.Typography.Font.footnote)
@@ -353,7 +353,7 @@ struct AddTeaView: View {
    残量のクイック入力ボタン群を返します。
    */
   private var quickRemainingButtons: some View {
-    HStack(spacing: 8) {
+    HStack(spacing: AppConstants.UI.Layout.Spacing.tag) {
       Text("クイック")
         .font(AppConstants.UI.Typography.Font.caption)
         .foregroundStyle(.secondary)
@@ -368,7 +368,7 @@ struct AddTeaView: View {
    賞味期限のクイック入力ボタン群を返します。
    */
   private var expiryPresetButtons: some View {
-    HStack(spacing: 8) {
+    HStack(spacing: AppConstants.UI.Layout.Spacing.tag) {
       Text("期限プリセット")
         .font(AppConstants.UI.Typography.Font.caption)
         .foregroundStyle(.secondary)

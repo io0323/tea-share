@@ -69,7 +69,7 @@ struct TeaMapView: View {
               Button {
                 selectedTeaLeaf = teaLeaf
               } label: {
-                VStack(spacing: 4) {
+                VStack(spacing: AppConstants.UI.Layout.Spacing.small) {
                   Image(systemName: "leaf.circle.fill")
                     .font(.system(size: AppConstants.UI.FontSizes.mapMarkerIcon))
                     .foregroundStyle(markerColor(for: teaLeaf.tradeStatus))
@@ -101,9 +101,9 @@ struct TeaMapView: View {
             .presentationDetents([.fraction(AppConstants.UI.Sheets.Detents.mapDetailFraction), AppConstants.UI.Sheets.Detents.mapDetailMedium])
         }
 
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.section) {
           ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 8) {
+            HStack(spacing: AppConstants.UI.Layout.Spacing.chip) {
               ForEach(TeaMapFilter.allCases) { filter in
                 filterChip(filter)
               }
@@ -111,7 +111,7 @@ struct TeaMapView: View {
           }
 
           ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 8) {
+            HStack(spacing: AppConstants.UI.Layout.Spacing.chip) {
               categoryChip(title: "すべて", category: nil)
               ForEach(TeaCategory.allCases) { category in
                 categoryChip(title: category.rawValue, category: category)
@@ -122,12 +122,13 @@ struct TeaMapView: View {
           Button {
             resetFilters()
           } label: {
-            HStack(spacing: 6) {
+            HStack(spacing: AppConstants.UI.Layout.Spacing.chip) {
               Image(systemName: "arrow.counterclockwise")
               Text("フィルタ解除")
             }
             .font(.caption.weight(.semibold))
-            .padding(.horizontal, 10)
+            .padding(.horizontal, AppConstants.UI.Padding.buttonHorizontal)
+            .padding(.vertical, AppConstants.UI.Padding.buttonVertical)
             .padding(.vertical, 7)
             .background(Color.white.opacity(AppConstants.UI.Opacity.whiteHigh))
             .clipShape(Capsule())

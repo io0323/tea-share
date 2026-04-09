@@ -118,9 +118,13 @@ struct AppConstants {
         static let large: CGFloat = 8
         static let extraLarge: CGFloat = 10
         static let huge: CGFloat = 12
-        static let card: CGFloat = 8
         static let section: CGFloat = 10
+        static let form: CGFloat = 12
         static let button: CGFloat = 8
+        static let grid: CGFloat = 12
+        static let card: CGFloat = 16
+        static let tag: CGFloat = 8
+        static let chip: CGFloat = 6
         static let overlay: CGFloat = 8
       }
       
