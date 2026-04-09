@@ -14,8 +14,8 @@ struct TeaTimelineView: View {
   @State private var isPresentingAddTea = AppConstants.AppConstants.Defaults.UI.isPresentingAddTea
 
   private let columns = [
-    GridItem(.flexible(), spacing: 12),
-    GridItem(.flexible(), spacing: 12)
+    GridItem(.flexible(), spacing: AppConstants.UI.Layout.Spacing.grid),
+    GridItem(.flexible(), spacing: AppConstants.UI.Layout.Spacing.grid)
   ]
 
   /*
@@ -126,7 +126,7 @@ struct TeaTimelineView: View {
         .opacity(0.25)
 
         ScrollView {
-          VStack(alignment: .leading, spacing: 16) {
+          VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.card) {
             searchField
             sortSelector
             statusScopeSelector
@@ -139,7 +139,7 @@ struct TeaTimelineView: View {
             if filteredTeaLeaves.isEmpty {
               emptyStateView
             } else {
-              LazyVGrid(columns: columns, spacing: 12) {
+              LazyVGrid(columns: columns, spacing: AppConstants.UI.Layout.Spacing.grid) {
                 ForEach(filteredTeaLeaves) { tea in
                   NavigationLink {
                     TeaLeafDetailView(teaLeaf: tea)
@@ -156,7 +156,7 @@ struct TeaTimelineView: View {
         }
 
         Button(action: { isPresentingAddTea = true }) {
-          HStack(spacing: 8) {
+          HStack(spacing: AppConstants.UI.Layout.Spacing.tag) {
             Image(systemName: "plus")
             Text(AppConstants.UI.UIStrings.Content.plus)
           }
@@ -357,10 +357,10 @@ struct TeaTimelineView: View {
    アクティブなフィルタ状態と解除操作を返します。
    */
   private var activeFilterSummary: some View {
-    VStack(alignment: .leading, spacing: 8) {
+    VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.medium) {
       if hasActiveFilters {
         ScrollView(.horizontal, showsIndicators: false) {
-          HStack(spacing: 8) {
+          HStack(spacing: AppConstants.UI.Layout.Spacing.tag) {
             ForEach(activeFilterLabels, id: \.self) { label in
               Text(label)
                 .font(.caption.weight(.semibold))

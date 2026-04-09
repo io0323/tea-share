@@ -16,14 +16,14 @@ struct ProfileView: View {
   var body: some View {
     NavigationStack {
       if let user = users.first {
-        VStack(alignment: .leading, spacing: 20) {
+        VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.card) {
           Text("プロファイル")
             .font(AppConstants.UI.Typography.Font.largeTitle)
             .fontWeight(.bold)
 
-          VStack(alignment: .leading, spacing: 16) {
+          VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.card) {
             if isEditing {
-              VStack(alignment: .leading, spacing: 12) {
+              VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.form) {
                 TextField("ユーザー名", text: $editedUsername)
                   .textFieldStyle(RoundedBorderTextFieldStyle())
                 TextField("場所", text: $editedLocation)
