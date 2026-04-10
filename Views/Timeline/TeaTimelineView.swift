@@ -123,7 +123,7 @@ struct TeaTimelineView: View {
           endPoint: .bottomTrailing
         )
         .ignoresSafeArea()
-        .opacity(0.25)
+        .opacity(AppConstants.UI.Opacity.backgroundGradient)
 
         ScrollView {
           VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.card) {
@@ -514,7 +514,7 @@ private struct TeaLeafCardView: View {
     .foregroundStyle(expiryColor)
     .padding(.horizontal, 8)
     .padding(.vertical, 4)
-    .background(expiryColor.opacity(0.12))
+    .background(expiryColor.opacity(AppConstants.UI.Opacity.badgeBackground))
     .clipShape(Capsule())
   }
 
@@ -569,7 +569,7 @@ private struct TeaLeafCardView: View {
       .foregroundStyle(statusColor)
       .padding(.horizontal, 8)
       .padding(.vertical, 4)
-      .background(statusColor.opacity(0.12))
+      .background(statusColor.opacity(AppConstants.UI.Opacity.badgeBackground))
       .clipShape(Capsule())
   }
 

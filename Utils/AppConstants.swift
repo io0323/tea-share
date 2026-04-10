@@ -84,6 +84,12 @@ struct AppConstants {
       static let grayMedium: Double = 0.2
       static let blackOverlay: Double = 0.15
       static let blackLight: Double = 0.08
+      static let backgroundGradient: Double = 0.25
+      static let badgeBackground: Double = 0.12
+      static let filterSelected: Double = 0.9
+      static let filterUnselected: Double = 0.9
+      static let categorySelected: Double = 0.85
+      static let secondaryCapsule: Double = 0.3
     }
     
     struct Layout {
