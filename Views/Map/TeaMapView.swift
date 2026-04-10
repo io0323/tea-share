@@ -172,14 +172,14 @@ struct TeaMapView: View {
       Text(filter.rawValue)
         .font(.caption.weight(.semibold))
         .foregroundStyle(
-          selectedFilter == filter ? Color.white : Color.green.opacity(0.9)
+          selectedFilter == filter ? Color.white : Color.green.opacity(AppConstants.UI.Opacity.filterUnselected)
         )
         .padding(.horizontal, 10)
         .padding(.vertical, 7)
         .background(
           selectedFilter == filter
-            ? Color.green.opacity(0.9)
-            : Color.white.opacity(0.9)
+            ? Color.green.opacity(AppConstants.UI.Opacity.filterSelected)
+            : Color.white.opacity(AppConstants.UI.Opacity.filterUnselected)
         )
         .clipShape(Capsule())
     }
@@ -200,14 +200,14 @@ struct TeaMapView: View {
       Text(title)
         .font(.caption.weight(.semibold))
         .foregroundStyle(
-          isSelected ? Color.white : Color.blue.opacity(0.9)
+          isSelected ? Color.white : Color.blue.opacity(AppConstants.UI.Opacity.filterUnselected)
         )
         .padding(.horizontal, 10)
         .padding(.vertical, 7)
         .background(
           isSelected
-            ? Color.blue.opacity(0.85)
-            : Color.white.opacity(0.9)
+            ? Color.blue.opacity(AppConstants.UI.Opacity.categorySelected)
+            : Color.white.opacity(AppConstants.UI.Opacity.filterUnselected)
         )
         .clipShape(Capsule())
     }
@@ -252,7 +252,7 @@ private struct TeaMapDetailSheet: View {
   var body: some View {
     VStack(alignment: .leading, spacing: AppConstants.UI.Spacing.default) {
       Capsule()
-        .fill(Color.secondary.opacity(0.3))
+        .fill(Color.secondary.opacity(AppConstants.UI.Opacity.secondaryCapsule))
         .frame(height: AppConstants.UI.Frame.errorImageHeight)
         .frame(maxWidth: .infinity, alignment: .center)
         .padding(.top, AppConstants.UI.Padding.default)
