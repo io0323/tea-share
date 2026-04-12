@@ -144,7 +144,7 @@ struct TeaLeafDetailView: View {
         }
         .frame(maxWidth: .infinity)
       }
-      .buttonStyle(.borderedProminent)
+      .buttonStyle(AppConstants.UI.ButtonStyle.borderedProminent)
       .disabled(nextStatus == nil)
     }
     .padding(AppConstants.UI.Padding.large)
@@ -206,7 +206,7 @@ struct TeaLeafDetailView: View {
           }
           .frame(maxWidth: .infinity)
         }
-        .buttonStyle(.borderedProminent)
+        .buttonStyle(AppConstants.UI.ButtonStyle.borderedProminent)
 
         VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.medium) {
           Text(AppConstants.UI.UIStrings.Labels.description)
@@ -271,7 +271,7 @@ struct TeaLeafDetailView: View {
           }
           .frame(maxWidth: .infinity)
         }
-        .buttonStyle(.borderedProminent)
+        .buttonStyle(AppConstants.UI.ButtonStyle.borderedProminent)
         .tint(.blue)
       } else {
         HStack {

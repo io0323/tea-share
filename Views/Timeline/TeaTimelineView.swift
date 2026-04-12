@@ -146,7 +146,7 @@ struct TeaTimelineView: View {
                   } label: {
                     TeaLeafCardView(tea: tea)
                   }
-                  .buttonStyle(.plain)
+                  .buttonStyle(AppConstants.UI.ButtonStyle.plain)
                 }
               }
             }
