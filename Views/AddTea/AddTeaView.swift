@@ -194,7 +194,7 @@ struct AddTeaView: View {
               } label: {
                 Label("再抽出", systemImage: "sparkles")
               }
-              .buttonStyle(.bordered)
+              .buttonStyle(AppConstants.UI.ButtonStyle.bordered)
               .disabled(isAnalyzingImage)
 
               Button(role: .destructive) {
@@ -202,7 +202,7 @@ struct AddTeaView: View {
               } label: {
                 Label("画像を削除", systemImage: "trash")
               }
-              .buttonStyle(.bordered)
+              .buttonStyle(AppConstants.UI.ButtonStyle.bordered)
               .disabled(isAnalyzingImage)
 
               Spacer()
@@ -377,7 +377,7 @@ struct AddTeaView: View {
           applyExpiryPreset(preset)
         }
         .font(.caption.weight(.semibold))
-        .buttonStyle(.bordered)
+        .buttonStyle(AppConstants.UI.ButtonStyle.bordered)
       }
       Spacer()
     }

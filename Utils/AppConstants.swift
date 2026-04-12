@@ -70,6 +70,12 @@ struct AppConstants {
       static let errorImageIcon: Double = 40
     }
     
+    struct ButtonStyle {
+      static let plain: PrimitiveButtonStyle = .plain
+      static let bordered: PrimitiveButtonStyle = .bordered
+      static let borderedProminent: PrimitiveButtonStyle = .borderedProminent
+    }
+    
     struct Opacity {
       static let greenButton: Double = 0.85
       static let backgroundWhite: Double = 0.9

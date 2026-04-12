@@ -81,7 +81,7 @@ struct TeaMapView: View {
                     .clipShape(Capsule())
                 }
               }
-              .buttonStyle(.plain)
+              .buttonStyle(AppConstants.UI.ButtonStyle.plain)
             }
           }
         }
@@ -133,7 +133,7 @@ struct TeaMapView: View {
             .background(Color.white.opacity(AppConstants.UI.Opacity.whiteHigh))
             .clipShape(Capsule())
           }
-          .buttonStyle(.plain)
+          .buttonStyle(AppConstants.UI.ButtonStyle.plain)
 
           Text("表示中: \(mapTeaLeaves.count)件")
             .font(.footnote.weight(.medium))
@@ -294,7 +294,7 @@ private struct TeaMapDetailSheet: View {
         }
         .frame(maxWidth: .infinity)
       }
-      .buttonStyle(.borderedProminent)
+      .buttonStyle(AppConstants.UI.ButtonStyle.borderedProminent)
       .disabled(nextStatus == nil)
 
       Spacer()
