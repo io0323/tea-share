@@ -63,17 +63,13 @@ struct AppConstants {
       static let blackCardShadowOpacity: Double = 0.07
     }
     
-    struct FontSizes {
-      static let emptyStateIcon: Double = 30
-      static let cardIcon: Double = 26
-      static let mapMarkerIcon: Double = 28
-      static let errorImageIcon: Double = 40
-    }
-    
-    struct ButtonStyle {
-      static let plain: PrimitiveButtonStyle = .plain
-      static let bordered: PrimitiveButtonStyle = .bordered
-      static let borderedProminent: PrimitiveButtonStyle = .borderedProminent
+    struct ClipShape {
+      static let capsule: Capsule = Capsule()
+      static let roundedRectangleLarge: RoundedRectangle = RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.large)
+      static let roundedRectangleExtraLarge: RoundedRectangle = RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge)
+      static let roundedRectangleSheet: RoundedRectangle = RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.sheet)
+      static let roundedRectangleCard: RoundedRectangle = RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.card)
+      static let roundedRectangleProgress: RoundedRectangle = RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.progress)
     }
     
     struct Opacity {

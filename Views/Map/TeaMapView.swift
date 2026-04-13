@@ -78,7 +78,7 @@ struct TeaMapView: View {
                     .padding(.horizontal, AppConstants.UI.Padding.buttonHorizontal)
                     .padding(.vertical, AppConstants.UI.Padding.buttonVertical)
                     .background(Color.white.opacity(AppConstants.UI.Opacity.whiteHigh))
-                    .clipShape(Capsule())
+                    .clipShape(AppConstants.UI.ClipShape.capsule)
                 }
               }
               .buttonStyle(AppConstants.UI.ButtonStyle.plain)
@@ -131,7 +131,7 @@ struct TeaMapView: View {
             .padding(.vertical, AppConstants.UI.Padding.buttonVertical)
             .padding(.vertical, 7)
             .background(Color.white.opacity(AppConstants.UI.Opacity.whiteHigh))
-            .clipShape(Capsule())
+            .clipShape(AppConstants.UI.ClipShape.capsule)
           }
           .buttonStyle(AppConstants.UI.ButtonStyle.plain)
 
@@ -140,7 +140,7 @@ struct TeaMapView: View {
             .padding(.horizontal, 10)
             .padding(.vertical, 6)
             .background(Color.white.opacity(AppConstants.UI.Opacity.whiteHigh))
-            .clipShape(Capsule())
+            .clipShape(AppConstants.UI.ClipShape.capsule)
         }
         .padding(.horizontal, 16)
         .padding(.top, 8)
@@ -181,7 +181,7 @@ struct TeaMapView: View {
             ? Color.green.opacity(AppConstants.UI.Opacity.filterSelected)
             : Color.white.opacity(AppConstants.UI.Opacity.filterUnselected)
         )
-        .clipShape(Capsule())
+        .clipShape(AppConstants.UI.ClipShape.capsule)
     }
     .buttonStyle(.plain)
   }
@@ -209,7 +209,7 @@ struct TeaMapView: View {
             ? Color.blue.opacity(AppConstants.UI.Opacity.categorySelected)
             : Color.white.opacity(AppConstants.UI.Opacity.filterUnselected)
         )
-        .clipShape(Capsule())
+        .clipShape(AppConstants.UI.ClipShape.capsule)
     }
     .buttonStyle(.plain)
   }
