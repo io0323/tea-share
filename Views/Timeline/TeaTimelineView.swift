@@ -165,7 +165,7 @@ struct TeaTimelineView: View {
           .padding(.horizontal, 16)
           .padding(.vertical, 14)
           .background(Color.green.opacity(AppConstants.UI.Opacity.greenButton))
-          .clipShape(Capsule())
+          .clipShape(AppConstants.UI.ClipShape.capsule)
           .shadow(color: .black.opacity(AppConstants.UI.Opacity.shadow), radius: AppConstants.UI.Shadow.largeRadius, x: 0, y: AppConstants.UI.Shadow.buttonOffset)
         }
           .padding(AppConstants.UI.Padding.huge)
@@ -199,7 +199,7 @@ struct TeaTimelineView: View {
     .padding(.horizontal, AppConstants.UI.Padding.cardHorizontal)
     .padding(.vertical, AppConstants.UI.Padding.cardVertical)
     .background(Color.white.opacity(AppConstants.UI.Opacity.backgroundWhite))
-    .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.large))
+    .clipShape(AppConstants.UI.ClipShape.roundedRectangleLarge)
   }
 
   /*
@@ -330,7 +330,7 @@ struct TeaTimelineView: View {
     .padding(.horizontal, 12)
     .padding(.vertical, 10)
     .background(Color.white.opacity(AppConstants.UI.Opacity.whiteHigh))
-    .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.sheet))
+    .clipShape(AppConstants.UI.ClipShape.roundedRectangleSheet)
   }
 
   /*
@@ -350,7 +350,7 @@ struct TeaTimelineView: View {
     .frame(maxWidth: .infinity)
     .padding(.vertical, AppConstants.UI.Layout.Spacing.large)
     .background(Color.white.opacity(AppConstants.UI.Opacity.cardBackground))
-    .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge))
+    .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
   }
 
   /*
@@ -367,7 +367,7 @@ struct TeaTimelineView: View {
                 .padding(.horizontal, AppConstants.UI.Padding.filterHorizontal)
                 .padding(.vertical, AppConstants.UI.Padding.filterVertical)
                 .background(Color.white.opacity(AppConstants.UI.Opacity.backgroundWhite))
-                .clipShape(Capsule())
+                .clipShape(AppConstants.UI.ClipShape.capsule)
             }
           }
         }
@@ -459,7 +459,7 @@ private struct TeaLeafCardView: View {
           .resizable()
           .scaledToFill()
           .frame(height: AppConstants.UI.Frame.cardHeight)
-          .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.large))
+          .clipShape(AppConstants.UI.ClipShape.roundedRectangleLarge)
       } else {
         RoundedRectangle(cornerRadius: 12)
           .fill(Color.green.opacity(AppConstants.UI.Colors.greenOpacity))
@@ -469,6 +469,7 @@ private struct TeaLeafCardView: View {
               .foregroundStyle(Color.green.opacity(AppConstants.UI.Colors.greenForegroundOpacity))
           }
           .frame(height: AppConstants.UI.Frame.cardHeight)
+          .clipShape(AppConstants.UI.ClipShape.roundedRectangleSheet)
       }
 
       Text(tea.name)
@@ -481,7 +482,7 @@ private struct TeaLeafCardView: View {
           .padding(.horizontal, 8)
           .padding(.vertical, 4)
           .background(Color.green.opacity(AppConstants.UI.Colors.greenBadgeOpacity))
-          .clipShape(Capsule())
+          .clipShape(AppConstants.UI.ClipShape.capsule)
         statusBadge
       }
 
@@ -498,7 +499,7 @@ private struct TeaLeafCardView: View {
     .padding(AppConstants.UI.Padding.cardHorizontal)
     .frame(maxWidth: .infinity, alignment: .leading)
     .background(Color.white.opacity(AppConstants.UI.Opacity.cardWhite))
-    .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.card))
+    .clipShape(AppConstants.UI.ClipShape.roundedRectangleCard)
     .shadow(color: .black.opacity(AppConstants.UI.Opacity.cardShadow), radius: AppConstants.UI.Shadow.cardRadius, x: 0, y: AppConstants.UI.Shadow.cardOffset)
   }
 
@@ -515,7 +516,7 @@ private struct TeaLeafCardView: View {
     .padding(.horizontal, 8)
     .padding(.vertical, 4)
     .background(expiryColor.opacity(AppConstants.UI.Opacity.badgeBackground))
-    .clipShape(Capsule())
+    .clipShape(AppConstants.UI.ClipShape.capsule)
   }
 
   /*
@@ -570,7 +571,7 @@ private struct TeaLeafCardView: View {
       .padding(.horizontal, 8)
       .padding(.vertical, 4)
       .background(statusColor.opacity(AppConstants.UI.Opacity.badgeBackground))
-      .clipShape(Capsule())
+      .clipShape(AppConstants.UI.ClipShape.capsule)
   }
 
   /*
@@ -618,7 +619,7 @@ private struct CategoryChip: View {
             ? Color.green.opacity(AppConstants.UI.Colors.greenSelectedOpacity)
             : Color.white.opacity(AppConstants.UI.Opacity.chipBackground)
         )
-        .clipShape(Capsule())
+        .clipShape(AppConstants.UI.ClipShape.capsule)
     }
   }
 }
