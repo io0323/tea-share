@@ -206,7 +206,7 @@ struct TeaTimelineView: View {
    並び替えを切り替えるセレクターを返します。
    */
   private var sortSelector: some View {
-    Picker("並び替え", selection: $sortOption) {
+    Picker(AppConstants.UI.UIStrings.Labels.sortBy, selection: $sortOption) {
       ForEach(TeaTimelineSortOption.allCases) { option in
         Text(option.rawValue).tag(option)
       }
@@ -218,7 +218,7 @@ struct TeaTimelineView: View {
    募集状態の表示範囲を切り替えるセレクターを返します。
    */
   private var statusScopeSelector: some View {
-    Picker("表示範囲", selection: $statusScope) {
+    Picker(AppConstants.UI.UIStrings.Labels.displayScope, selection: $statusScope) {
       ForEach(TeaTimelineStatusScope.allCases) { scope in
         Text(scope.rawValue).tag(scope)
       }
@@ -231,7 +231,7 @@ struct TeaTimelineView: View {
    */
   private var expiryToggle: some View {
     Toggle(isOn: $showExpiringOnly) {
-      Text("期限切れ/期限間近のみ")
+      Text(AppConstants.UI.UIStrings.Labels.expiringOnly)
         .font(AppConstants.UI.Typography.FontScale.sectionSubtitle)
     }
     .toggleStyle(.switch)
@@ -268,11 +268,11 @@ struct TeaTimelineView: View {
    */
   private var timelineSummary: some View {
     HStack {
-      Text("対象: \(scopedTeaLeaves.count)件")
+      Text(AppConstants.UI.UIStrings.Labels.targetCount.replacingOccurrences(of: "{count}", with: "\(scopedTeaLeaves.count)"))
       Spacer()
-      Text("結果: \(filteredCount)件")
+      Text(AppConstants.UI.UIStrings.Labels.resultCount.replacingOccurrences(of: "{count}", with: "\(filteredCount)"))
       Spacer()
-      Text("期限注意: \(expiringCount)件")
+      Text(AppConstants.UI.UIStrings.Labels.expiringCount.replacingOccurrences(of: "{count}", with: "\(expiringCount)"))
     }
     .font(.footnote.weight(.medium))
     .foregroundStyle(.secondary)
@@ -341,9 +341,9 @@ struct TeaTimelineView: View {
       Image(systemName: AppConstants.UI.UIStrings.Content.tray)
         .font(.system(size: AppConstants.UI.FontSizes.emptyStateIcon))
         .foregroundStyle(.secondary)
-      Text("条件に一致する茶葉がありません")
+      Text(AppConstants.UI.UIStrings.Labels.noMatchingTea)
         .font(AppConstants.UI.Typography.FontScale.sectionTitle)
-      Text("検索条件やカテゴリを変更してください")
+      Text(AppConstants.UI.UIStrings.Labels.changeSearchConditions)
         .font(AppConstants.UI.Typography.Font.footnote)
         .foregroundStyle(.secondary)
     }
@@ -372,12 +372,12 @@ struct TeaTimelineView: View {
           }
         }
 
-        Button("条件をすべて解除") {
+        Button(AppConstants.UI.UIStrings.Labels.clearAllConditions) {
           resetAllFilters()
         }
         .font(.footnote.weight(.semibold))
       } else {
-        Text("フィルタ条件は未設定です")
+        Text(AppConstants.UI.UIStrings.Labels.noFilterConditions)
           .font(AppConstants.UI.Typography.Font.footnote)
           .foregroundStyle(.secondary)
       }
