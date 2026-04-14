@@ -124,7 +124,7 @@ struct TeaMapView: View {
           } label: {
             HStack(spacing: AppConstants.UI.Layout.Spacing.chip) {
               Image(systemName: "arrow.counterclockwise")
-              Text("フィルタ解除")
+              Text(AppConstants.UI.UIStrings.Labels.clearFilter)
             }
             .font(.caption.weight(.semibold))
             .padding(.horizontal, AppConstants.UI.Padding.buttonHorizontal)
@@ -135,7 +135,7 @@ struct TeaMapView: View {
           }
           .buttonStyle(AppConstants.UI.ButtonStyle.plain)
 
-          Text("表示中: \(mapTeaLeaves.count)件")
+          Text(AppConstants.UI.UIStrings.Labels.displayCount.replacingOccurrences(of: "{count}", with: "\(mapTeaLeaves.count)"))
             .font(.footnote.weight(.medium))
             .padding(.horizontal, 10)
             .padding(.vertical, 6)
@@ -260,18 +260,18 @@ private struct TeaMapDetailSheet: View {
       Text(teaLeaf.name)
         .font(.title3.weight(.semibold))
 
-      Text("出品者: \(teaLeaf.owner?.username ?? "不明")")
+      Text(AppConstants.UI.UIStrings.Labels.seller.replacingOccurrences(of: "{username}", with: teaLeaf.owner?.username ?? AppConstants.UI.UIStrings.Placeholders.unknown))
         .font(AppConstants.UI.Typography.Font.body)
-      Text("エリア: \(teaLeaf.owner?.location ?? "未設定")")
+      Text(AppConstants.UI.UIStrings.Labels.area.replacingOccurrences(of: "{location}", with: teaLeaf.owner?.location ?? AppConstants.UI.UIStrings.Placeholders.notSet))
         .font(AppConstants.UI.Typography.Font.body)
-      Text("残量: \(teaLeaf.remainingGrams)g")
+      Text(AppConstants.UI.UIStrings.Labels.remaining.replacingOccurrences(of: "{grams}", with: "\(teaLeaf.remainingGrams)"))
         .font(AppConstants.UI.Typography.Font.body)
-      Text("ステータス: \(teaLeaf.tradeStatus.rawValue)")
+      Text(AppConstants.UI.UIStrings.Labels.status.replacingOccurrences(of: "{status}", with: teaLeaf.tradeStatus.rawValue))
         .font(AppConstants.UI.Typography.Font.body)
         .foregroundStyle(.secondary)
 
       VStack(alignment: .leading, spacing: 8) {
-        Text("取引ステータスを更新")
+        Text(AppConstants.UI.UIStrings.Labels.updateTradeStatus)
           .font(AppConstants.UI.Typography.FontScale.sectionSubtitle)
         Picker("取引ステータス", selection: $teaLeaf.tradeStatus) {
           ForEach(TradeStatus.allCases) { status in

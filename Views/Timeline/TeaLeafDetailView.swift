@@ -180,7 +180,7 @@ struct TeaLeafDetailView: View {
           in: AppConstants.ValidationLimits.minRemainingGrams...AppConstants.ValidationLimits.maxRemainingGrams,
           step: 5
         )
-        .disabled(true)
+        .disabled(AppConstants.AppConstants.Defaults.UI.ButtonState.disabled)
         DatePicker(
           "賞味期限",
           selection: $editableExpiryDate,

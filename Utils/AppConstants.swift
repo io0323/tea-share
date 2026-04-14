@@ -260,40 +260,49 @@ struct AppConstants {
       
       struct UIStrings {
         struct Actions {
-          static let save: String = "保存"
-          static let reset: String = "リセット"
           static let saving: String = "保存中..."
-          static let submitTradeRequest: String = "取引を申し込む"
-          static let openInMap: String = "マップで開く"
-          static let focusOnDefaultArea: String = "中心エリアへ戻る"
+          static let reset: String = "リセット"
+          static let openInMap: String = "地図で開く"
+          static let submitTradeRequest: String = "取引リクエストを送信"
+          static let focusOnDefaultArea: String = "デフォルトエリアにフォーカス"
+          static let plus: String = "茶葉を追加"
         }
         
         struct Labels {
-          static let username: String = "ユーザー名:"
-          static let id: String = "ID:"
-          static let location: String = "場所:"
-          static let brand: String = "ブランド"
-          static let category: String = "カテゴリ"
-          static let expiryDate: String = "賞味期限"
-          static let remaining: String = "残量"
+          static let username: String = "ユーザー名"
+          static let id: String = "ID"
+          static let location: String = "場所"
           static let description: String = "説明"
-          static let area: String = "エリア"
-          static let status: String = "ステータス"
-          static let owner: String = "出品者"
           static let userDataNotFound: String = "ユーザーデータが見つかりません"
+          static let profile: String = "プロファイル"
+          static let clearFilter: String = "フィルタ解除"
+          static let displayCount: String = "表示中: {count}件"
+          static let seller: String = "出品者: {username}"
+          static let area: String = "エリア: {location}"
+          static let remaining: String = "残量: {grams}g"
+          static let status: String = "ステータス: {status}"
+          static let updateTradeStatus: String = "取引ステータスを更新"
+          static let sortBy: String = "並び替え"
+          static let displayScope: String = "表示範囲"
+          static let expiringOnly: String = "期限切れ/期限間近のみ"
+          static let targetCount: String = "対象: {count}件"
+          static let resultCount: String = "結果: {count}件"
+          static let expiringCount: String = "期限注意: {count}件"
+          static let noMatchingTea: String = "条件に一致する茶葉がありません"
+          static let changeSearchConditions: String = "検索条件やカテゴリを変更してください"
+          static let clearAllConditions: String = "条件をすべて解除"
+          static let noFilterConditions: String = "フィルタ条件は未設定です"
         }
         
         struct Placeholders {
-          static let username: String = "ユーザー名"
-          static let location: String = "場所"
+          static let descriptionEmpty: String = "説明はありません"
+          static let imageLoadError: String = "画像の読み込みに失敗しました"
+          static let unknown: String = "不明"
           static let notSet: String = "未設定"
-          static let descriptionEmpty: String = "説明は未入力です。"
-          static let imageLoadError: String = "画像を読み込めません"
         }
         
         struct Content {
-          static let plus: String = "出品する"
-          static let leafFill: String = "leaf.fill"
+          static let location: String = "location"
           static let tray: String = "tray"
           static let photo: String = "photo"
           static let infoCircleFill: String = "info.circle.fill"
@@ -336,6 +345,11 @@ struct AppConstants {
         static let isShowingResetAlert: Bool = false
         static let hasLoadedDraft: Bool = false
         static let isEditing: Bool = false
+      }
+      
+      struct ButtonState {
+        static let disabled: Bool = true
+        static let enabled: Bool = false
       }
       
       struct Selection {
