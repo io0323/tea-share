@@ -254,7 +254,7 @@ private struct TeaMapDetailSheet: View {
       Capsule()
         .fill(Color.secondary.opacity(AppConstants.UI.Opacity.secondaryCapsule))
         .frame(height: AppConstants.UI.Frame.errorImageHeight)
-        .frame(maxWidth: .infinity, alignment: .center)
+        .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.center)
         .padding(.top, AppConstants.UI.Padding.default)
 
       Text(teaLeaf.name)
@@ -292,7 +292,7 @@ private struct TeaMapDetailSheet: View {
           Text(nextActionTitle)
             .fontWeight(AppConstants.UI.Typography.FontWeight.semibold)
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity)
       }
       .buttonStyle(AppConstants.UI.ButtonStyle.borderedProminent)
       .disabled(nextStatus == nil)

@@ -94,7 +94,7 @@ struct TeaLeafDetailView: View {
       }
     }
     .padding(AppConstants.UI.Layout.Padding.cardHeader)
-    .frame(maxWidth: .infinity, alignment: .leading)
+    .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
     .background(Color.white.opacity(AppConstants.UI.Opacity.whiteCard))
     .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
     .shadow(color: .black.opacity(AppConstants.UI.Opacity.blackLight), radius: AppConstants.UI.Shadow.largeRadius, x: 0, y: AppConstants.UI.Shadow.buttonOffset)
@@ -119,7 +119,7 @@ struct TeaLeafDetailView: View {
       }
     }
     .padding(AppConstants.UI.Padding.large)
-    .frame(maxWidth: .infinity, alignment: .leading)
+    .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
     .background(Color.white.opacity(AppConstants.UI.Opacity.whiteCard))
     .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
   }
@@ -142,13 +142,13 @@ struct TeaLeafDetailView: View {
           Text(quickActionTitle)
             .fontWeight(AppConstants.UI.Typography.FontWeight.semibold)
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity)
       }
       .buttonStyle(AppConstants.UI.ButtonStyle.borderedProminent)
       .disabled(nextStatus == nil)
     }
     .padding(AppConstants.UI.Padding.large)
-    .frame(maxWidth: .infinity, alignment: .leading)
+    .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
     .background(Color.white.opacity(AppConstants.UI.Opacity.whiteCard))
     .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
   }
@@ -204,7 +204,7 @@ struct TeaLeafDetailView: View {
             Text(AppConstants.UI.UIStrings.Actions.openInMap)
               .fontWeight(AppConstants.UI.Typography.FontWeight.semibold)
           }
-          .frame(maxWidth: .infinity)
+          .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity)
         }
         .buttonStyle(AppConstants.UI.ButtonStyle.borderedProminent)
 
@@ -218,7 +218,7 @@ struct TeaLeafDetailView: View {
       }
     }
     .padding(AppConstants.UI.Padding.large)
-    .frame(maxWidth: .infinity, alignment: .leading)
+    .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
     .background(Color.white.opacity(AppConstants.UI.Opacity.whiteCard))
     .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
   }
@@ -269,7 +269,7 @@ struct TeaLeafDetailView: View {
             Text(AppConstants.UI.UIStrings.Actions.submitTradeRequest)
               .fontWeight(AppConstants.UI.Typography.FontWeight.semibold)
           }
-          .frame(maxWidth: .infinity)
+          .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity)
         }
         .buttonStyle(AppConstants.UI.ButtonStyle.borderedProminent)
         .tint(.blue)
@@ -280,12 +280,12 @@ struct TeaLeafDetailView: View {
             .font(AppConstants.UI.Typography.FontScale.statusBody)
         }
         .foregroundStyle(.secondary)
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
         .padding(.vertical, 8)
       }
     }
     .padding(AppConstants.UI.Padding.large)
-    .frame(maxWidth: .infinity, alignment: .leading)
+    .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
     .background(Color.white.opacity(AppConstants.UI.Opacity.whiteCard))
     .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
   }
