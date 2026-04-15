@@ -119,6 +119,12 @@ struct AppConstants {
         static let progressRadius: CGFloat = 10
       }
       
+      struct FrameAlignment {
+        static let maxWidthInfinity: CGFloat = .infinity
+        static let leading: Alignment = .leading
+        static let center: Alignment = .center
+      }
+      
       struct Spacing {
         static let tiny: CGFloat = 2
         static let small: CGFloat = 4

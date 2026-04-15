@@ -347,7 +347,7 @@ struct TeaTimelineView: View {
         .font(AppConstants.UI.Typography.Font.footnote)
         .foregroundStyle(.secondary)
     }
-    .frame(maxWidth: .infinity)
+    .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity)
     .padding(.vertical, AppConstants.UI.Layout.Spacing.large)
     .background(Color.white.opacity(AppConstants.UI.Opacity.cardBackground))
     .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
@@ -497,7 +497,7 @@ private struct TeaLeafCardView: View {
       }
     }
     .padding(AppConstants.UI.Padding.cardHorizontal)
-    .frame(maxWidth: .infinity, alignment: .leading)
+    .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
     .background(Color.white.opacity(AppConstants.UI.Opacity.cardWhite))
     .clipShape(AppConstants.UI.ClipShape.roundedRectangleCard)
     .shadow(color: .black.opacity(AppConstants.UI.Opacity.cardShadow), radius: AppConstants.UI.Shadow.cardRadius, x: 0, y: AppConstants.UI.Shadow.cardOffset)
