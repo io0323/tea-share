@@ -173,8 +173,6 @@ struct AppConstants {
           static let title3: Font = .title3
           static let headline: Font = .headline
           static let subheadline: Font = .subheadline
-          static let body: Font = .body
-          static let callout: Font = .callout
           static let footnote: Font = .footnote
           static let caption: Font = .caption
           static let caption2: Font = .caption2
@@ -213,6 +211,11 @@ struct AppConstants {
           static let statusTitle: Font = .subheadline.weight(.semibold)
           static let statusBody: Font = .subheadline
         }
+      }
+      
+      struct ImageScaling {
+        static let scaledToFill: ContentMode = .scaledToFill
+        static let scaledToFit: ContentMode = .scaledToFit
       }
       
       struct Alerts {

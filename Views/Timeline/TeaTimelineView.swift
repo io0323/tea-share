@@ -457,7 +457,7 @@ private struct TeaLeafCardView: View {
       if !tea.imagePath.isEmpty, let uiImage = loadImage(from: tea.imagePath) {
         Image(uiImage: uiImage)
           .resizable()
-          .scaledToFill()
+          .scaledToFill(AppConstants.UI.ImageScaling.scaledToFill)
           .frame(height: AppConstants.UI.Frame.cardHeight)
           .clipShape(AppConstants.UI.ClipShape.roundedRectangleLarge)
       } else {

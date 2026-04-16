@@ -184,7 +184,7 @@ struct AddTeaView: View {
           if let selectedImage {
             Image(uiImage: selectedImage)
               .resizable()
-              .scaledToFit()
+              .scaledToFit(AppConstants.UI.ImageScaling.scaledToFit)
               .frame(maxHeight: AppConstants.UI.Frame.imageMaxHeight)
               .clipShape(AppConstants.UI.ClipShape.roundedRectangleSheet)
 
