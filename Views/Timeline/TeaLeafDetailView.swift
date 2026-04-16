@@ -231,7 +231,7 @@ struct TeaLeafDetailView: View {
       if let uiImage = loadImage(from: teaLeaf.imagePath) {
         Image(uiImage: uiImage)
           .resizable()
-          .scaledToFit()
+          .scaledToFit(AppConstants.UI.ImageScaling.scaledToFit)
           .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
           .shadow(color: .black.opacity(AppConstants.UI.Shadow.imageOpacity), radius: AppConstants.UI.Shadow.imageRadius, x: 0, y: AppConstants.UI.Shadow.imageOffset)
       } else {
