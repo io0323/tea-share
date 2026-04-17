@@ -183,7 +183,7 @@ struct TeaTimelineView: View {
   private var searchField: some View {
     HStack(spacing: 8) {
       Image(systemName: "magnifyingglass")
-        .foregroundStyle(.secondary)
+        .foregroundStyle(AppConstants.UI.ColorStyle.secondary)
       TextField("茶葉名・ブランド・エリアで検索", text: $searchText)
         .textInputAutocapitalization(.never)
         .autocorrectionDisabled()
@@ -192,7 +192,7 @@ struct TeaTimelineView: View {
           searchText = ""
         } label: {
           Image(systemName: "xmark.circle.fill")
-            .foregroundStyle(.secondary)
+            .foregroundStyle(AppConstants.UI.ColorStyle.secondary)
         }
       }
     }
@@ -322,7 +322,7 @@ struct TeaTimelineView: View {
       VStack(alignment: .leading, spacing: 2) {
         Text(title)
           .font(AppConstants.UI.Typography.Font.caption)
-          .foregroundStyle(.secondary)
+          .foregroundStyle(AppConstants.UI.ColorStyle.secondary)
         Text("\(count)件")
           .font(AppConstants.UI.Typography.FontScale.sectionTitle)
       }
@@ -340,12 +340,12 @@ struct TeaTimelineView: View {
     VStack(spacing: 10) {
       Image(systemName: AppConstants.UI.UIStrings.Content.tray)
         .font(.system(size: AppConstants.UI.FontSizes.emptyStateIcon))
-        .foregroundStyle(.secondary)
+        .foregroundStyle(AppConstants.UI.ColorStyle.secondary)
       Text(AppConstants.UI.UIStrings.Labels.noMatchingTea)
         .font(AppConstants.UI.Typography.FontScale.sectionTitle)
       Text(AppConstants.UI.UIStrings.Labels.changeSearchConditions)
         .font(AppConstants.UI.Typography.Font.footnote)
-        .foregroundStyle(.secondary)
+        .foregroundStyle(AppConstants.UI.ColorStyle.secondary)
     }
     .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity)
     .padding(.vertical, AppConstants.UI.Layout.Spacing.large)
@@ -379,7 +379,7 @@ struct TeaTimelineView: View {
       } else {
         Text(AppConstants.UI.UIStrings.Labels.noFilterConditions)
           .font(AppConstants.UI.Typography.Font.footnote)
-          .foregroundStyle(.secondary)
+          .foregroundStyle(AppConstants.UI.ColorStyle.secondary)
       }
     }
   }
@@ -493,7 +493,7 @@ private struct TeaLeafCardView: View {
           .font(AppConstants.UI.Typography.Font.caption)
         Text("エリア: \(tea.owner?.location ?? "未設定")")
           .font(AppConstants.UI.Typography.Font.caption)
-          .foregroundStyle(.secondary)
+          .foregroundStyle(AppConstants.UI.ColorStyle.secondary)
       }
     }
     .padding(AppConstants.UI.Padding.cardHorizontal)

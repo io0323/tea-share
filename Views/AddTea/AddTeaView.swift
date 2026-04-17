@@ -214,7 +214,7 @@ struct AddTeaView: View {
               ProgressView()
               Text("画像から情報を抽出中...")
                 .font(AppConstants.UI.Typography.Font.footnote)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(AppConstants.UI.ColorStyle.secondary)
             }
           }
         }

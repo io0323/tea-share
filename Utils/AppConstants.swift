@@ -218,6 +218,10 @@ struct AppConstants {
         static let scaledToFit: ContentMode = .scaledToFit
       }
       
+      struct ColorStyle {
+        static let secondary: Color = .secondary
+      }
+      
       struct Alerts {
         struct Titles {
           static let saveError: String = "保存に失敗しました"

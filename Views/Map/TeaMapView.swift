@@ -268,7 +268,7 @@ private struct TeaMapDetailSheet: View {
         .font(AppConstants.UI.Typography.Font.body)
       Text(AppConstants.UI.UIStrings.Labels.status.replacingOccurrences(of: "{status}", with: teaLeaf.tradeStatus.rawValue))
         .font(AppConstants.UI.Typography.Font.body)
-        .foregroundStyle(.secondary)
+        .foregroundStyle(AppConstants.UI.ColorStyle.secondary)
 
       VStack(alignment: .leading, spacing: 8) {
         Text(AppConstants.UI.UIStrings.Labels.updateTradeStatus)
