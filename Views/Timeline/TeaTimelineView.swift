@@ -198,7 +198,7 @@ struct TeaTimelineView: View {
     }
     .padding(.horizontal, AppConstants.UI.Padding.cardHorizontal)
     .padding(.vertical, AppConstants.UI.Padding.cardVertical)
-    .background(Color.white.opacity(AppConstants.UI.Opacity.backgroundWhite))
+    .background(AppConstants.UI.BackgroundColor.whiteHigh)
     .clipShape(AppConstants.UI.ClipShape.roundedRectangleLarge)
   }
 
@@ -329,7 +329,7 @@ struct TeaTimelineView: View {
     }
     .padding(.horizontal, 12)
     .padding(.vertical, 10)
-    .background(Color.white.opacity(AppConstants.UI.Opacity.whiteHigh))
+    .background(AppConstants.UI.BackgroundColor.whiteHigh)
     .clipShape(AppConstants.UI.ClipShape.roundedRectangleSheet)
   }
 
@@ -349,7 +349,7 @@ struct TeaTimelineView: View {
     }
     .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity)
     .padding(.vertical, AppConstants.UI.Layout.Spacing.large)
-    .background(Color.white.opacity(AppConstants.UI.Opacity.cardBackground))
+    .background(AppConstants.UI.BackgroundColor.cardBackground)
     .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
   }
 
@@ -366,7 +366,7 @@ struct TeaTimelineView: View {
                 .font(.caption.weight(.semibold))
                 .padding(.horizontal, AppConstants.UI.Padding.filterHorizontal)
                 .padding(.vertical, AppConstants.UI.Padding.filterVertical)
-                .background(Color.white.opacity(AppConstants.UI.Opacity.backgroundWhite))
+                .background(AppConstants.UI.BackgroundColor.whiteHigh)
                 .clipShape(AppConstants.UI.ClipShape.capsule)
             }
           }
@@ -498,7 +498,7 @@ private struct TeaLeafCardView: View {
     }
     .padding(AppConstants.UI.Padding.cardHorizontal)
     .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
-    .background(Color.white.opacity(AppConstants.UI.Opacity.cardWhite))
+    .background(AppConstants.UI.BackgroundColor.cardWhite)
     .clipShape(AppConstants.UI.ClipShape.roundedRectangleCard)
     .shadow(color: .black.opacity(AppConstants.UI.Opacity.cardShadow), radius: AppConstants.UI.Shadow.cardRadius, x: 0, y: AppConstants.UI.Shadow.cardOffset)
   }

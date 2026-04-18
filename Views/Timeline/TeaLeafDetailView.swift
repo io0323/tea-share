@@ -95,7 +95,7 @@ struct TeaLeafDetailView: View {
     }
     .padding(AppConstants.UI.Layout.Padding.cardHeader)
     .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
-    .background(Color.white.opacity(AppConstants.UI.Opacity.whiteCard))
+    .background(AppConstants.UI.BackgroundColor.whiteCard)
     .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
     .shadow(color: .black.opacity(AppConstants.UI.Opacity.blackLight), radius: AppConstants.UI.Shadow.largeRadius, x: 0, y: AppConstants.UI.Shadow.buttonOffset)
   }
@@ -120,7 +120,7 @@ struct TeaLeafDetailView: View {
     }
     .padding(AppConstants.UI.Padding.large)
     .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
-    .background(Color.white.opacity(AppConstants.UI.Opacity.whiteCard))
+    .background(AppConstants.UI.BackgroundColor.whiteCard)
     .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
   }
 
@@ -149,7 +149,7 @@ struct TeaLeafDetailView: View {
     }
     .padding(AppConstants.UI.Padding.large)
     .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
-    .background(Color.white.opacity(AppConstants.UI.Opacity.whiteCard))
+    .background(AppConstants.UI.BackgroundColor.whiteCard)
     .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
   }
 
@@ -219,7 +219,7 @@ struct TeaLeafDetailView: View {
     }
     .padding(AppConstants.UI.Padding.large)
     .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
-    .background(Color.white.opacity(AppConstants.UI.Opacity.whiteCard))
+    .background(AppConstants.UI.BackgroundColor.whiteCard)
     .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
   }
 
@@ -286,7 +286,7 @@ struct TeaLeafDetailView: View {
     }
     .padding(AppConstants.UI.Padding.large)
     .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
-    .background(Color.white.opacity(AppConstants.UI.Opacity.whiteCard))
+    .background(AppConstants.UI.BackgroundColor.whiteCard)
     .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
   }
 
