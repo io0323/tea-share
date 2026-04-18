@@ -218,6 +218,14 @@ struct AppConstants {
         static let scaledToFit: ContentMode = .scaledToFit
       }
       
+      struct BackgroundColor {
+        static let whiteCard: Color = Color.white.opacity(AppConstants.UI.Opacity.whiteCard)
+        static let backgroundWhite: Color = Color.white.opacity(AppConstants.UI.Opacity.backgroundWhite)
+        static let whiteHigh: Color = Color.white.opacity(AppConstants.UI.Opacity.whiteHigh)
+        static let cardBackground: Color = Color.white.opacity(AppConstants.UI.Opacity.cardBackground)
+        static let cardWhite: Color = Color.white.opacity(AppConstants.UI.Opacity.cardWhite)
+      }
+      
       struct Alerts {
         struct Titles {
           static let saveError: String = "保存に失敗しました"

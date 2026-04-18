@@ -77,7 +77,7 @@ struct TeaMapView: View {
                     .font(.caption2)
                     .padding(.horizontal, AppConstants.UI.Padding.buttonHorizontal)
                     .padding(.vertical, AppConstants.UI.Padding.buttonVertical)
-                    .background(Color.white.opacity(AppConstants.UI.Opacity.whiteHigh))
+                    .background(AppConstants.UI.BackgroundColor.whiteHigh)
                     .clipShape(AppConstants.UI.ClipShape.capsule)
                 }
               }
