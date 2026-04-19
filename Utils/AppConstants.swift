@@ -226,6 +226,13 @@ struct AppConstants {
         static let cardWhite: Color = Color.white.opacity(AppConstants.UI.Opacity.cardWhite)
       }
       
+      struct ShadowStyle {
+        static let blackLight: Color = .black.opacity(AppConstants.UI.Opacity.blackLight)
+        static let shadow: Color = .black.opacity(AppConstants.UI.Opacity.shadow)
+        static let cardShadow: Color = .black.opacity(AppConstants.UI.Opacity.cardShadow)
+        static let imageOpacity: Color = .black.opacity(AppConstants.UI.Shadow.imageOpacity)
+      }
+      
       struct Alerts {
         struct Titles {
           static let saveError: String = "保存に失敗しました"
