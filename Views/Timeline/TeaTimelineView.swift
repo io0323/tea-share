@@ -166,7 +166,7 @@ struct TeaTimelineView: View {
           .padding(.vertical, 14)
           .background(Color.green.opacity(AppConstants.UI.Opacity.greenButton))
           .clipShape(AppConstants.UI.ClipShape.capsule)
-          .shadow(color: .black.opacity(AppConstants.UI.Opacity.shadow), radius: AppConstants.UI.Shadow.largeRadius, x: 0, y: AppConstants.UI.Shadow.buttonOffset)
+          .shadow(color: AppConstants.UI.ShadowStyle.shadow, radius: AppConstants.UI.Shadow.largeRadius, x: 0, y: AppConstants.UI.Shadow.buttonOffset)
         }
           .padding(AppConstants.UI.Padding.huge)
       }
@@ -500,7 +500,7 @@ private struct TeaLeafCardView: View {
     .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
     .background(AppConstants.UI.BackgroundColor.cardWhite)
     .clipShape(AppConstants.UI.ClipShape.roundedRectangleCard)
-    .shadow(color: .black.opacity(AppConstants.UI.Opacity.cardShadow), radius: AppConstants.UI.Shadow.cardRadius, x: 0, y: AppConstants.UI.Shadow.cardOffset)
+    .shadow(color: AppConstants.UI.ShadowStyle.cardShadow, radius: AppConstants.UI.Shadow.cardRadius, x: 0, y: AppConstants.UI.Shadow.cardOffset)
   }
 
   /*

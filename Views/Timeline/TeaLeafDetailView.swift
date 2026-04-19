@@ -97,7 +97,7 @@ struct TeaLeafDetailView: View {
     .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
     .background(AppConstants.UI.BackgroundColor.whiteCard)
     .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
-    .shadow(color: .black.opacity(AppConstants.UI.Opacity.blackLight), radius: AppConstants.UI.Shadow.largeRadius, x: 0, y: AppConstants.UI.Shadow.buttonOffset)
+    .shadow(color: AppConstants.UI.ShadowStyle.blackLight, radius: AppConstants.UI.Shadow.largeRadius, x: 0, y: AppConstants.UI.Shadow.buttonOffset)
   }
 
   /*
@@ -233,7 +233,7 @@ struct TeaLeafDetailView: View {
           .resizable()
           .scaledToFit(AppConstants.UI.ImageScaling.scaledToFit)
           .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
-          .shadow(color: .black.opacity(AppConstants.UI.Shadow.imageOpacity), radius: AppConstants.UI.Shadow.imageRadius, x: 0, y: AppConstants.UI.Shadow.imageOffset)
+          .shadow(color: AppConstants.UI.ShadowStyle.imageOpacity, radius: AppConstants.UI.Shadow.imageRadius, x: 0, y: AppConstants.UI.Shadow.imageOffset)
       } else {
         RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge)
           .fill(Color.gray.opacity(AppConstants.UI.Opacity.grayMedium))
