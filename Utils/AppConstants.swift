@@ -233,6 +233,10 @@ struct AppConstants {
         static let imageOpacity: Color = .black.opacity(AppConstants.UI.Shadow.imageOpacity)
       }
       
+      struct TintColor {
+        static let blue: Color = .blue
+      }
+      
       struct Alerts {
         struct Titles {
           static let saveError: String = "保存に失敗しました"
