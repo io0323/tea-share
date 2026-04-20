@@ -272,7 +272,7 @@ struct TeaLeafDetailView: View {
           .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity)
         }
         .buttonStyle(AppConstants.UI.ButtonStyle.borderedProminent)
-        .tint(.blue)
+        .tint(AppConstants.UI.TintColor.blue)
       } else {
         HStack {
           Image(systemName: AppConstants.UI.UIStrings.Content.infoCircleFill)
