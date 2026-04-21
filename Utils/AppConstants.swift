@@ -237,6 +237,12 @@ struct AppConstants {
         static let blue: Color = .blue
       }
       
+      struct FillColor {
+        static let green: Color = Color.green.opacity(AppConstants.UI.Colors.greenOpacity)
+        static let gray: Color = Color.gray.opacity(AppConstants.UI.Opacity.grayMedium)
+        static let secondary: Color = Color.secondary.opacity(AppConstants.UI.Opacity.secondaryCapsule)
+      }
+      
       struct Alerts {
         struct Titles {
           static let saveError: String = "保存に失敗しました"
