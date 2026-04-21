@@ -236,7 +236,7 @@ struct TeaLeafDetailView: View {
           .shadow(color: AppConstants.UI.ShadowStyle.imageOpacity, radius: AppConstants.UI.Shadow.imageRadius, x: 0, y: AppConstants.UI.Shadow.imageOffset)
       } else {
         RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge)
-          .fill(Color.gray.opacity(AppConstants.UI.Opacity.grayMedium))
+          .fill(AppConstants.UI.FillColor.gray)
           .overlay {
             VStack(spacing: 8) {
               Image(systemName: AppConstants.UI.UIStrings.Content.photo)

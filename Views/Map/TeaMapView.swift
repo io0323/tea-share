@@ -252,7 +252,7 @@ private struct TeaMapDetailSheet: View {
   var body: some View {
     VStack(alignment: .leading, spacing: AppConstants.UI.Spacing.default) {
       Capsule()
-        .fill(Color.secondary.opacity(AppConstants.UI.Opacity.secondaryCapsule))
+        .fill(AppConstants.UI.FillColor.secondary)
         .frame(height: AppConstants.UI.Frame.errorImageHeight)
         .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.center)
         .padding(.top, AppConstants.UI.Padding.default)
