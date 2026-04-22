@@ -161,7 +161,7 @@ struct TeaTimelineView: View {
             Text(AppConstants.UI.UIStrings.Content.plus)
           }
           .font(AppConstants.UI.Typography.FontScale.buttonTitle)
-          .foregroundStyle(.white)
+          .foregroundStyle(AppConstants.UI.BasicColor.white)
           .padding(.horizontal, 16)
           .padding(.vertical, 14)
           .background(Color.green.opacity(AppConstants.UI.Opacity.greenButton))
