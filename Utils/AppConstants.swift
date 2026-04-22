@@ -94,6 +94,15 @@ struct AppConstants {
       static let secondaryCapsule: Double = 0.3
     }
     
+    struct BasicColor {
+      static let white: Color = .white
+      static let black: Color = .black
+      static let green: Color = .green
+      static let blue: Color = .blue
+      static let gray: Color = .gray
+      static let secondary: Color = .secondary
+    }
+    
     struct Layout {
       struct Padding {
         static let default: CGFloat = 16
