@@ -74,7 +74,7 @@ struct TeaMapView: View {
                     .font(.system(size: AppConstants.UI.FontSizes.mapMarkerIcon))
                     .foregroundStyle(markerColor(for: teaLeaf.tradeStatus))
                   Text(teaLeaf.category.rawValue)
-                    .font(.caption2)
+                    .font(AppConstants.UI.Typography.Font.caption2)
                     .padding(.horizontal, AppConstants.UI.Padding.buttonHorizontal)
                     .padding(.vertical, AppConstants.UI.Padding.buttonVertical)
                     .background(Color.white.opacity(AppConstants.UI.Opacity.whiteHigh))
