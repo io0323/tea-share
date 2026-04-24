@@ -391,7 +391,7 @@ struct AddTeaView: View {
       remainingGrams = grams
     }
     .font(.caption.weight(.semibold))
-    .buttonStyle(.bordered)
+    .buttonStyle(AppConstants.UI.ButtonStyle.bordered)
   }
 
   /*
