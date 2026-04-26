@@ -149,10 +149,12 @@ struct TeaTimelineView: View {
                   .buttonStyle(AppConstants.UI.ButtonStyle.plain)
                 }
               }
+              .padding(.horizontal, AppConstants.UI.Padding.large)
+              .padding(.vertical, AppConstants.UI.Padding.large)
             }
           }
-          .padding(.horizontal, 16)
-          .padding(.vertical, 12)
+          .padding(.horizontal, AppConstants.UI.Padding.large)
+          .padding(.vertical, AppConstants.UI.Padding.large)
         }
 
         Button(action: { isPresentingAddTea = true }) {
@@ -259,7 +261,7 @@ struct TeaTimelineView: View {
           }
         }
       }
-      .padding(.vertical, 2)
+      .padding(.vertical, AppConstants.UI.Padding.verticalSmall)
     }
   }
 
@@ -303,7 +305,7 @@ struct TeaTimelineView: View {
           tint: .gray
         )
       }
-      .padding(.vertical, 2)
+      .padding(.vertical, AppConstants.UI.Padding.verticalSmall)
     }
   }
 
@@ -479,8 +481,8 @@ private struct TeaLeafCardView: View {
       HStack(spacing: 6) {
         Text(tea.category.rawValue)
           .font(AppConstants.UI.Typography.FontScale.cardSubtitle)
-          .padding(.horizontal, 8)
-          .padding(.vertical, 4)
+          .padding(.horizontal, AppConstants.UI.Padding.badgeHorizontal)
+          .padding(.vertical, AppConstants.UI.Padding.badgeVertical)
           .background(Color.green.opacity(AppConstants.UI.Colors.greenBadgeOpacity))
           .clipShape(AppConstants.UI.ClipShape.capsule)
         statusBadge

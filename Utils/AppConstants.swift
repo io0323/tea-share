@@ -118,6 +118,13 @@ struct AppConstants {
         static let filterHorizontal: CGFloat = 10
         static let filterVertical: CGFloat = 6
         static let cardHeader: CGFloat = 14
+        static let chipHorizontal: CGFloat = 10
+        static let chipVertical: CGFloat = 6
+        static let badgeHorizontal: CGFloat = 8
+        static let badgeVertical: CGFloat = 4
+        static let top: CGFloat = 8
+        static let bottom: CGFloat = 20
+        static let verticalSmall: CGFloat = 2
       }
       
       struct Frame {

@@ -137,13 +137,13 @@ struct TeaMapView: View {
 
           Text(AppConstants.UI.UIStrings.Labels.displayCount.replacingOccurrences(of: "{count}", with: "\(mapTeaLeaves.count)"))
             .font(.footnote.weight(.medium))
-            .padding(.horizontal, 10)
-            .padding(.vertical, 6)
+            .padding(.horizontal, AppConstants.UI.Padding.chipHorizontal)
+            .padding(.vertical, AppConstants.UI.Padding.chipVertical)
             .background(Color.white.opacity(AppConstants.UI.Opacity.whiteHigh))
             .clipShape(AppConstants.UI.ClipShape.capsule)
         }
-        .padding(.horizontal, 16)
-        .padding(.top, 8)
+        .padding(.horizontal, AppConstants.UI.Padding.default)
+        .padding(.top, AppConstants.UI.Padding.top)
       }
     }
   }
@@ -299,8 +299,8 @@ private struct TeaMapDetailSheet: View {
 
       Spacer()
     }
-    .padding(.horizontal, 20)
-    .padding(.bottom, 20)
+    .padding(.horizontal, AppConstants.UI.Padding.huge)
+    .padding(.bottom, AppConstants.UI.Padding.bottom)
     .alert(AppConstants.UI.Alerts.Titles.saveError, isPresented: $isShowingSaveError) {
       Button(AppConstants.UI.Alerts.Buttons.ok, role: .cancel) {}
     } message: {
