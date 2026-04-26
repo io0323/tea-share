@@ -183,7 +183,7 @@ struct TeaMapView: View {
         )
         .clipShape(AppConstants.UI.ClipShape.capsule)
     }
-    .buttonStyle(.plain)
+    .buttonStyle(AppConstants.UI.ButtonStyle.plain)
   }
 
   /*
@@ -211,7 +211,7 @@ struct TeaMapView: View {
         )
         .clipShape(AppConstants.UI.ClipShape.capsule)
     }
-    .buttonStyle(.plain)
+    .buttonStyle(AppConstants.UI.ButtonStyle.plain)
   }
 
   /*
