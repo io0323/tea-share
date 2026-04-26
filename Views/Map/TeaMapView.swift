@@ -127,8 +127,8 @@ struct TeaMapView: View {
               Text("フィルタ解除")
             }
             .font(.caption.weight(.semibold))
-            .padding(.horizontal, 10)
-            .padding(.vertical, 7)
+            .padding(.horizontal, AppConstants.UI.Padding.chipHorizontal)
+            .padding(.vertical, AppConstants.UI.Padding.chipVertical)
             .background(Color.white.opacity(AppConstants.UI.Opacity.whiteHigh))
             .clipShape(Capsule())
           }
@@ -136,13 +136,13 @@ struct TeaMapView: View {
 
           Text("表示中: \(mapTeaLeaves.count)件")
             .font(.footnote.weight(.medium))
-            .padding(.horizontal, 10)
-            .padding(.vertical, 6)
+            .padding(.horizontal, AppConstants.UI.Padding.chipHorizontal)
+            .padding(.vertical, AppConstants.UI.Padding.chipVertical)
             .background(Color.white.opacity(AppConstants.UI.Opacity.whiteHigh))
             .clipShape(Capsule())
         }
-        .padding(.horizontal, 16)
-        .padding(.top, 8)
+        .padding(.horizontal, AppConstants.UI.Padding.default)
+        .padding(.top, AppConstants.UI.Padding.top)
       }
     }
   }
@@ -298,8 +298,8 @@ private struct TeaMapDetailSheet: View {
 
       Spacer()
     }
-    .padding(.horizontal, 20)
-    .padding(.bottom, 20)
+    .padding(.horizontal, AppConstants.UI.Padding.huge)
+    .padding(.bottom, AppConstants.UI.Padding.bottom)
     .alert(AppConstants.UI.Alerts.Titles.saveError, isPresented: $isShowingSaveError) {
       Button(AppConstants.UI.Alerts.Buttons.ok, role: .cancel) {}
     } message: {
