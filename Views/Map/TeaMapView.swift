@@ -126,7 +126,7 @@ struct TeaMapView: View {
               Image(systemName: "arrow.counterclockwise")
               Text(AppConstants.UI.UIStrings.Labels.clearFilter)
             }
-            .font(.caption.weight(.semibold))
+            .font(.caption.weight(AppConstants.UI.Typography.FontWeight.semibold))
             .padding(.horizontal, AppConstants.UI.Padding.buttonHorizontal)
             .padding(.vertical, AppConstants.UI.Padding.buttonVertical)
             .padding(.vertical, 7)
@@ -258,7 +258,7 @@ private struct TeaMapDetailSheet: View {
         .padding(.top, AppConstants.UI.Padding.default)
 
       Text(teaLeaf.name)
-        .font(.title3.weight(.semibold))
+        .font(.title3.weight(AppConstants.UI.Typography.FontWeight.semibold))
 
       Text(AppConstants.UI.UIStrings.Labels.seller.replacingOccurrences(of: "{username}", with: teaLeaf.owner?.username ?? AppConstants.UI.UIStrings.Placeholders.unknown))
         .font(AppConstants.UI.Typography.Font.body)

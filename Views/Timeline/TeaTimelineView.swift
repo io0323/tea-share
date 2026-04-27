@@ -365,7 +365,7 @@ struct TeaTimelineView: View {
           HStack(spacing: AppConstants.UI.Layout.Spacing.tag) {
             ForEach(activeFilterLabels, id: \.self) { label in
               Text(label)
-                .font(.caption.weight(.semibold))
+                .font(.caption.weight(AppConstants.UI.Typography.FontWeight.semibold))
                 .padding(.horizontal, AppConstants.UI.Padding.filterHorizontal)
                 .padding(.vertical, AppConstants.UI.Padding.filterVertical)
                 .background(AppConstants.UI.BackgroundColor.whiteHigh)
@@ -513,7 +513,7 @@ private struct TeaLeafCardView: View {
       Image(systemName: expiryIcon)
       Text(expiryText)
     }
-    .font(.caption2.weight(.semibold))
+    .font(.caption2.weight(AppConstants.UI.Typography.FontWeight.semibold))
     .foregroundStyle(expiryColor)
     .padding(.horizontal, 8)
     .padding(.vertical, 4)
@@ -568,7 +568,7 @@ private struct TeaLeafCardView: View {
    */
   private var statusBadge: some View {
     Text(tea.tradeStatus.rawValue)
-      .font(.caption2.weight(.semibold))
+      .font(.caption2.weight(AppConstants.UI.Typography.FontWeight.semibold))
       .foregroundStyle(statusColor)
       .padding(.horizontal, 8)
       .padding(.vertical, 4)
@@ -612,7 +612,7 @@ private struct CategoryChip: View {
   var body: some View {
     Button(action: action) {
       Text(title)
-        .font(.subheadline.weight(.medium))
+        .font(.subheadline.weight(AppConstants.UI.Typography.FontWeight.medium))
         .foregroundStyle(isSelected ? .white : Color.green.opacity(AppConstants.UI.Colors.greenTextOpacity))
         .padding(.horizontal, AppConstants.UI.Padding.buttonHorizontal)
         .padding(.vertical, AppConstants.UI.Padding.buttonVertical)

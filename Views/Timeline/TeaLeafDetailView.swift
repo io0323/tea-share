@@ -337,7 +337,7 @@ struct TeaLeafDetailView: View {
    */
   private func tagLabel(_ text: String, tint: Color) -> some View {
     Text(text)
-      .font(.caption.weight(.semibold))
+      .font(.caption.weight(AppConstants.UI.Typography.FontWeight.semibold))
       .foregroundStyle(tint)
       .padding(.horizontal, 8)
       .padding(.vertical, 4)
