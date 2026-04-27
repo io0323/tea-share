@@ -17,7 +17,7 @@ struct ProfileView: View {
     NavigationStack {
       if let user = users.first {
         VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.card) {
-          Text("プロファイル")
+          Text(AppConstants.UI.UIStrings.Labels.profile)
             .font(AppConstants.UI.Typography.Font.largeTitle)
             .fontWeight(AppConstants.UI.Typography.FontWeight.bold)
 

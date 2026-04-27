@@ -94,10 +94,10 @@ struct TeaLeafDetailView: View {
       }
     }
     .padding(AppConstants.UI.Layout.Padding.cardHeader)
-    .frame(maxWidth: .infinity, alignment: .leading)
-    .background(Color.white.opacity(AppConstants.UI.Opacity.whiteCard))
-    .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge))
-    .shadow(color: .black.opacity(AppConstants.UI.Opacity.blackLight), radius: AppConstants.UI.Shadow.largeRadius, x: 0, y: AppConstants.UI.Shadow.buttonOffset)
+    .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
+    .background(AppConstants.UI.BackgroundColor.whiteCard)
+    .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
+    .shadow(color: AppConstants.UI.ShadowStyle.blackLight, radius: AppConstants.UI.Shadow.largeRadius, x: 0, y: AppConstants.UI.Shadow.buttonOffset)
   }
 
   /*
@@ -119,9 +119,9 @@ struct TeaLeafDetailView: View {
       }
     }
     .padding(AppConstants.UI.Padding.large)
-    .frame(maxWidth: .infinity, alignment: .leading)
-    .background(Color.white.opacity(AppConstants.UI.Opacity.whiteCard))
-    .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge))
+    .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
+    .background(AppConstants.UI.BackgroundColor.whiteCard)
+    .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
   }
 
   /*
@@ -142,15 +142,15 @@ struct TeaLeafDetailView: View {
           Text(quickActionTitle)
             .fontWeight(AppConstants.UI.Typography.FontWeight.semibold)
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity)
       }
-      .buttonStyle(.borderedProminent)
+      .buttonStyle(AppConstants.UI.ButtonStyle.borderedProminent)
       .disabled(nextStatus == nil)
     }
     .padding(AppConstants.UI.Padding.large)
-    .frame(maxWidth: .infinity, alignment: .leading)
-    .background(Color.white.opacity(AppConstants.UI.Opacity.whiteCard))
-    .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge))
+    .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
+    .background(AppConstants.UI.BackgroundColor.whiteCard)
+    .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
   }
 
   /*
@@ -180,7 +180,7 @@ struct TeaLeafDetailView: View {
           in: AppConstants.ValidationLimits.minRemainingGrams...AppConstants.ValidationLimits.maxRemainingGrams,
           step: 5
         )
-        .disabled(true)
+        .disabled(AppConstants.AppConstants.Defaults.UI.ButtonState.disabled)
         DatePicker(
           "賞味期限",
           selection: $editableExpiryDate,
@@ -204,9 +204,9 @@ struct TeaLeafDetailView: View {
             Text(AppConstants.UI.UIStrings.Actions.openInMap)
               .fontWeight(AppConstants.UI.Typography.FontWeight.semibold)
           }
-          .frame(maxWidth: .infinity)
+          .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity)
         }
-        .buttonStyle(.borderedProminent)
+        .buttonStyle(AppConstants.UI.ButtonStyle.borderedProminent)
 
         VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.medium) {
           Text(AppConstants.UI.UIStrings.Labels.description)
@@ -218,9 +218,9 @@ struct TeaLeafDetailView: View {
       }
     }
     .padding(AppConstants.UI.Padding.large)
-    .frame(maxWidth: .infinity, alignment: .leading)
-    .background(Color.white.opacity(AppConstants.UI.Opacity.whiteCard))
-    .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge))
+    .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
+    .background(AppConstants.UI.BackgroundColor.whiteCard)
+    .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
   }
 
   /*
@@ -231,12 +231,12 @@ struct TeaLeafDetailView: View {
       if let uiImage = loadImage(from: teaLeaf.imagePath) {
         Image(uiImage: uiImage)
           .resizable()
-          .scaledToFit()
-          .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge))
-          .shadow(color: .black.opacity(AppConstants.UI.Shadow.imageOpacity), radius: AppConstants.UI.Shadow.imageRadius, x: 0, y: AppConstants.UI.Shadow.imageOffset)
+          .scaledToFit(AppConstants.UI.ImageScaling.scaledToFit)
+          .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
+          .shadow(color: AppConstants.UI.ShadowStyle.imageOpacity, radius: AppConstants.UI.Shadow.imageRadius, x: 0, y: AppConstants.UI.Shadow.imageOffset)
       } else {
         RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge)
-          .fill(Color.gray.opacity(AppConstants.UI.Opacity.grayMedium))
+          .fill(AppConstants.UI.FillColor.gray)
           .overlay {
             VStack(spacing: 8) {
               Image(systemName: AppConstants.UI.UIStrings.Content.photo)
@@ -269,10 +269,10 @@ struct TeaLeafDetailView: View {
             Text(AppConstants.UI.UIStrings.Actions.submitTradeRequest)
               .fontWeight(AppConstants.UI.Typography.FontWeight.semibold)
           }
-          .frame(maxWidth: .infinity)
+          .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity)
         }
-        .buttonStyle(.borderedProminent)
-        .tint(.blue)
+        .buttonStyle(AppConstants.UI.ButtonStyle.borderedProminent)
+        .tint(AppConstants.UI.TintColor.blue)
       } else {
         HStack {
           Image(systemName: AppConstants.UI.UIStrings.Content.infoCircleFill)
@@ -280,14 +280,14 @@ struct TeaLeafDetailView: View {
             .font(AppConstants.UI.Typography.FontScale.statusBody)
         }
         .foregroundStyle(.secondary)
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
         .padding(.vertical, 8)
       }
     }
     .padding(AppConstants.UI.Padding.large)
-    .frame(maxWidth: .infinity, alignment: .leading)
-    .background(Color.white.opacity(AppConstants.UI.Opacity.whiteCard))
-    .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge))
+    .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
+    .background(AppConstants.UI.BackgroundColor.whiteCard)
+    .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
   }
 
   /*
@@ -342,7 +342,7 @@ struct TeaLeafDetailView: View {
       .padding(.horizontal, 8)
       .padding(.vertical, 4)
       .background(tint.opacity(AppConstants.UI.Opacity.badgeBackground))
-      .clipShape(Capsule())
+      .clipShape(AppConstants.UI.ClipShape.capsule)
   }
 
   /*
