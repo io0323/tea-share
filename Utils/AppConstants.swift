@@ -125,6 +125,8 @@ struct AppConstants {
         static let top: CGFloat = 8
         static let bottom: CGFloat = 20
         static let verticalSmall: CGFloat = 2
+        static let verticalMedium: CGFloat = 8
+        static let filterButtonVertical: CGFloat = 7
       }
       
       struct Frame {

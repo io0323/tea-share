@@ -281,7 +281,7 @@ struct TeaLeafDetailView: View {
         }
         .foregroundStyle(.secondary)
         .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
-        .padding(.vertical, 8)
+        .padding(.vertical, AppConstants.UI.Padding.verticalMedium)
       }
     }
     .padding(AppConstants.UI.Padding.large)
@@ -339,8 +339,8 @@ struct TeaLeafDetailView: View {
     Text(text)
       .font(.caption.weight(AppConstants.UI.Typography.FontWeight.semibold))
       .foregroundStyle(tint)
-      .padding(.horizontal, 8)
-      .padding(.vertical, 4)
+      .padding(.horizontal, AppConstants.UI.Padding.badgeHorizontal)
+      .padding(.vertical, AppConstants.UI.Padding.badgeVertical)
       .background(tint.opacity(AppConstants.UI.Opacity.badgeBackground))
       .clipShape(AppConstants.UI.ClipShape.capsule)
   }
