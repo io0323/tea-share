@@ -126,7 +126,7 @@ struct TeaMapView: View {
               Image(systemName: "arrow.counterclockwise")
               Text("フィルタ解除")
             }
-            .font(.caption.weight(.semibold))
+            .font(AppConstants.UI.Typography.FontScale.cardSubtitle)
             .padding(.horizontal, 10)
             .padding(.vertical, 7)
             .background(Color.white.opacity(AppConstants.UI.Opacity.whiteHigh))
@@ -135,7 +135,7 @@ struct TeaMapView: View {
           .buttonStyle(.plain)
 
           Text("表示中: \(mapTeaLeaves.count)件")
-            .font(.footnote.weight(.medium))
+            .font(AppConstants.UI.Typography.FontScale.chipTitle)
             .padding(.horizontal, 10)
             .padding(.vertical, 6)
             .background(Color.white.opacity(AppConstants.UI.Opacity.whiteHigh))

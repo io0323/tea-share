@@ -376,7 +376,7 @@ struct AddTeaView: View {
         Button(preset.rawValue) {
           applyExpiryPreset(preset)
         }
-        .font(.caption.weight(.semibold))
+        .font(AppConstants.UI.Typography.FontScale.cardSubtitle)
         .buttonStyle(.bordered)
       }
       Spacer()

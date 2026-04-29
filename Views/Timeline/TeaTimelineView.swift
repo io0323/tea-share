@@ -274,7 +274,7 @@ struct TeaTimelineView: View {
       Spacer()
       Text("期限注意: \(expiringCount)件")
     }
-    .font(.footnote.weight(.medium))
+    .font(AppConstants.UI.Typography.FontScale.chipTitle)
     .foregroundStyle(.secondary)
   }
 
@@ -363,7 +363,7 @@ struct TeaTimelineView: View {
           HStack(spacing: 8) {
             ForEach(activeFilterLabels, id: \.self) { label in
               Text(label)
-                .font(.caption.weight(.semibold))
+                .font(AppConstants.UI.Typography.FontScale.cardSubtitle)
                 .padding(.horizontal, AppConstants.UI.Padding.filterHorizontal)
                 .padding(.vertical, AppConstants.UI.Padding.filterVertical)
                 .background(Color.white.opacity(AppConstants.UI.Opacity.backgroundWhite))
@@ -375,7 +375,7 @@ struct TeaTimelineView: View {
         Button("条件をすべて解除") {
           resetAllFilters()
         }
-        .font(.footnote.weight(.semibold))
+        .font(AppConstants.UI.Typography.FontScale.chipTitle)
       } else {
         Text("フィルタ条件は未設定です")
           .font(AppConstants.UI.Typography.Font.footnote)
@@ -510,7 +510,7 @@ private struct TeaLeafCardView: View {
       Image(systemName: expiryIcon)
       Text(expiryText)
     }
-    .font(.caption2.weight(.semibold))
+    .font(AppConstants.UI.Typography.FontScale.cardSubtitle)
     .foregroundStyle(expiryColor)
     .padding(.horizontal, 8)
     .padding(.vertical, 4)
@@ -565,7 +565,7 @@ private struct TeaLeafCardView: View {
    */
   private var statusBadge: some View {
     Text(tea.tradeStatus.rawValue)
-      .font(.caption2.weight(.semibold))
+      .font(AppConstants.UI.Typography.FontScale.cardSubtitle)
       .foregroundStyle(statusColor)
       .padding(.horizontal, 8)
       .padding(.vertical, 4)
