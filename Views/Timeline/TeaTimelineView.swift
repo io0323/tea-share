@@ -276,7 +276,7 @@ struct TeaTimelineView: View {
       Spacer()
       Text(AppConstants.UI.UIStrings.Labels.expiringCount.replacingOccurrences(of: "{count}", with: "\(expiringCount)"))
     }
-    .font(.footnote.weight(.medium))
+    .font(AppConstants.UI.Typography.FontScale.chipTitle)
     .foregroundStyle(.secondary)
   }
 
@@ -377,7 +377,7 @@ struct TeaTimelineView: View {
         Button(AppConstants.UI.UIStrings.Labels.clearAllConditions) {
           resetAllFilters()
         }
-        .font(.footnote.weight(.semibold))
+        .font(AppConstants.UI.Typography.FontScale.chipTitle)
       } else {
         Text(AppConstants.UI.UIStrings.Labels.noFilterConditions)
           .font(AppConstants.UI.Typography.Font.footnote)
