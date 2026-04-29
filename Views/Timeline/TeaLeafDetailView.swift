@@ -28,7 +28,7 @@ struct TeaLeafDetailView: View {
 
   var body: some View {
     ScrollView {
-      VStack(alignment: .leading, spacing: 16) {
+      VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.card) {
         if !teaLeaf.imagePath.isEmpty {
           imageSection
         }
@@ -38,7 +38,7 @@ struct TeaLeafDetailView: View {
         tradeRequestSection
         detailSection
       }
-      .padding(16)
+      .padding(AppConstants.UI.Layout.Padding.extraLarge)
     }
     .navigationTitle(AppConstants.UI.Navigation.Titles.teaDetail)
     .navigationBarTitleDisplayMode(.inline)
@@ -81,30 +81,30 @@ struct TeaLeafDetailView: View {
    主要情報をまとめたヘッダーカードを返します。
    */
   private var headerCard: some View {
-    VStack(alignment: .leading, spacing: 10) {
+    VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.section) {
       Text(teaLeaf.name)
         .font(AppConstants.UI.Typography.FontScale.detailTitle)
       Text(teaLeaf.brand)
         .font(AppConstants.UI.Typography.FontScale.detailSubtitle)
         .foregroundStyle(.secondary)
 
-      HStack(spacing: 8) {
+      HStack(spacing: AppConstants.UI.Layout.Spacing.tag) {
         tagLabel(teaLeaf.category.rawValue, tint: .green)
         tagLabel(teaLeaf.tradeStatus.rawValue, tint: statusColor)
       }
     }
-    .padding(14)
-    .frame(maxWidth: .infinity, alignment: .leading)
-    .background(Color.white.opacity(AppConstants.UI.Opacity.whiteCard))
-    .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge))
-    .shadow(color: .black.opacity(AppConstants.UI.Opacity.blackLight), radius: AppConstants.UI.Shadow.largeRadius, x: 0, y: AppConstants.UI.Shadow.buttonOffset)
+    .padding(AppConstants.UI.Layout.Padding.cardHeader)
+    .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
+    .background(AppConstants.UI.BackgroundColor.whiteCard)
+    .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
+    .shadow(color: AppConstants.UI.ShadowStyle.blackLight, radius: AppConstants.UI.Shadow.largeRadius, x: 0, y: AppConstants.UI.Shadow.buttonOffset)
   }
 
   /*
    取引状態を変更するセクションを返します。
    */
   private var statusSection: some View {
-    VStack(alignment: .leading, spacing: 10) {
+    VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.section) {
       Text("取引ステータス")
         .font(AppConstants.UI.Typography.FontScale.sectionTitle)
 
@@ -119,16 +119,16 @@ struct TeaLeafDetailView: View {
       }
     }
     .padding(AppConstants.UI.Padding.large)
-    .frame(maxWidth: .infinity, alignment: .leading)
-    .background(Color.white.opacity(AppConstants.UI.Opacity.whiteCard))
-    .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge))
+    .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
+    .background(AppConstants.UI.BackgroundColor.whiteCard)
+    .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
   }
 
   /*
    ワンタップで次ステータスへ進めるセクションを返します。
    */
   private var quickStatusSection: some View {
-    VStack(alignment: .leading, spacing: 10) {
+    VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.section) {
       Text("クイック操作")
         .font(AppConstants.UI.Typography.FontScale.sectionTitle)
 
@@ -140,17 +140,17 @@ struct TeaLeafDetailView: View {
         HStack {
           Image(systemName: AppConstants.UI.UIStrings.Content.arrowRightCircleFill)
           Text(quickActionTitle)
-            .fontWeight(.semibold)
+            .fontWeight(AppConstants.UI.Typography.FontWeight.semibold)
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity)
       }
-      .buttonStyle(.borderedProminent)
+      .buttonStyle(AppConstants.UI.ButtonStyle.borderedProminent)
       .disabled(nextStatus == nil)
     }
     .padding(AppConstants.UI.Padding.large)
-    .frame(maxWidth: .infinity, alignment: .leading)
-    .background(Color.white.opacity(AppConstants.UI.Opacity.whiteCard))
-    .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge))
+    .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
+    .background(AppConstants.UI.BackgroundColor.whiteCard)
+    .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
   }
 
   /*
@@ -180,7 +180,7 @@ struct TeaLeafDetailView: View {
           in: AppConstants.ValidationLimits.minRemainingGrams...AppConstants.ValidationLimits.maxRemainingGrams,
           step: 5
         )
-        .disabled(true)
+        .disabled(AppConstants.AppConstants.Defaults.UI.ButtonState.disabled)
         DatePicker(
           "賞味期限",
           selection: $editableExpiryDate,
@@ -202,13 +202,13 @@ struct TeaLeafDetailView: View {
           HStack {
             Image(systemName: AppConstants.UI.UIStrings.Content.mapFill)
             Text(AppConstants.UI.UIStrings.Actions.openInMap)
-              .fontWeight(.semibold)
+              .fontWeight(AppConstants.UI.Typography.FontWeight.semibold)
           }
-          .frame(maxWidth: .infinity)
+          .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity)
         }
-        .buttonStyle(.borderedProminent)
+        .buttonStyle(AppConstants.UI.ButtonStyle.borderedProminent)
 
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.medium) {
           Text(AppConstants.UI.UIStrings.Labels.description)
             .font(AppConstants.UI.Typography.FontScale.sectionSubtitle)
           Text(teaLeaf.description.isEmpty ? AppConstants.UI.UIStrings.Placeholders.descriptionEmpty : teaLeaf.description)
@@ -218,9 +218,9 @@ struct TeaLeafDetailView: View {
       }
     }
     .padding(AppConstants.UI.Padding.large)
-    .frame(maxWidth: .infinity, alignment: .leading)
-    .background(Color.white.opacity(AppConstants.UI.Opacity.whiteCard))
-    .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge))
+    .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
+    .background(AppConstants.UI.BackgroundColor.whiteCard)
+    .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
   }
 
   /*
@@ -231,12 +231,12 @@ struct TeaLeafDetailView: View {
       if let uiImage = loadImage(from: teaLeaf.imagePath) {
         Image(uiImage: uiImage)
           .resizable()
-          .scaledToFit()
-          .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge))
-          .shadow(color: .black.opacity(AppConstants.UI.Shadow.imageOpacity), radius: AppConstants.UI.Shadow.imageRadius, x: 0, y: AppConstants.UI.Shadow.imageOffset)
+          .scaledToFit(AppConstants.UI.ImageScaling.scaledToFit)
+          .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
+          .shadow(color: AppConstants.UI.ShadowStyle.imageOpacity, radius: AppConstants.UI.Shadow.imageRadius, x: 0, y: AppConstants.UI.Shadow.imageOffset)
       } else {
         RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge)
-          .fill(Color.gray.opacity(AppConstants.UI.Opacity.grayMedium))
+          .fill(AppConstants.UI.FillColor.gray)
           .overlay {
             VStack(spacing: 8) {
               Image(systemName: AppConstants.UI.UIStrings.Content.photo)
@@ -256,7 +256,7 @@ struct TeaLeafDetailView: View {
    取引リクエストセクションを返します。
    */
   private var tradeRequestSection: some View {
-    VStack(alignment: .leading, spacing: 10) {
+    VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.section) {
       Text("取引リクエスト")
         .font(AppConstants.UI.Typography.FontScale.sectionTitle)
 
@@ -267,12 +267,12 @@ struct TeaLeafDetailView: View {
           HStack {
             Image(systemName: "envelope.fill")
             Text(AppConstants.UI.UIStrings.Actions.submitTradeRequest)
-              .fontWeight(.semibold)
+              .fontWeight(AppConstants.UI.Typography.FontWeight.semibold)
           }
-          .frame(maxWidth: .infinity)
+          .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity)
         }
-        .buttonStyle(.borderedProminent)
-        .tint(.blue)
+        .buttonStyle(AppConstants.UI.ButtonStyle.borderedProminent)
+        .tint(AppConstants.UI.TintColor.blue)
       } else {
         HStack {
           Image(systemName: AppConstants.UI.UIStrings.Content.infoCircleFill)
@@ -280,14 +280,14 @@ struct TeaLeafDetailView: View {
             .font(AppConstants.UI.Typography.FontScale.statusBody)
         }
         .foregroundStyle(.secondary)
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
         .padding(.vertical, 8)
       }
     }
     .padding(AppConstants.UI.Padding.large)
-    .frame(maxWidth: .infinity, alignment: .leading)
-    .background(Color.white.opacity(AppConstants.UI.Opacity.whiteCard))
-    .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge))
+    .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
+    .background(AppConstants.UI.BackgroundColor.whiteCard)
+    .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
   }
 
   /*
@@ -337,12 +337,12 @@ struct TeaLeafDetailView: View {
    */
   private func tagLabel(_ text: String, tint: Color) -> some View {
     Text(text)
-      .font(AppConstants.UI.Typography.FontScale.cardSubtitle)
+      .font(.caption.weight(AppConstants.UI.Typography.FontWeight.semibold))
       .foregroundStyle(tint)
       .padding(.horizontal, 8)
       .padding(.vertical, 4)
-      .background(tint.opacity(0.12))
-      .clipShape(Capsule())
+      .background(tint.opacity(AppConstants.UI.Opacity.badgeBackground))
+      .clipShape(AppConstants.UI.ClipShape.capsule)
   }
 
   /*

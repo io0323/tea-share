@@ -14,8 +14,8 @@ struct TeaTimelineView: View {
   @State private var isPresentingAddTea = AppConstants.AppConstants.Defaults.UI.isPresentingAddTea
 
   private let columns = [
-    GridItem(.flexible(), spacing: 12),
-    GridItem(.flexible(), spacing: 12)
+    GridItem(.flexible(), spacing: AppConstants.UI.Layout.Spacing.grid),
+    GridItem(.flexible(), spacing: AppConstants.UI.Layout.Spacing.grid)
   ]
 
   /*
@@ -123,10 +123,10 @@ struct TeaTimelineView: View {
           endPoint: .bottomTrailing
         )
         .ignoresSafeArea()
-        .opacity(0.25)
+        .opacity(AppConstants.UI.Opacity.backgroundGradient)
 
         ScrollView {
-          VStack(alignment: .leading, spacing: 16) {
+          VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.card) {
             searchField
             sortSelector
             statusScopeSelector
@@ -139,34 +139,36 @@ struct TeaTimelineView: View {
             if filteredTeaLeaves.isEmpty {
               emptyStateView
             } else {
-              LazyVGrid(columns: columns, spacing: 12) {
+              LazyVGrid(columns: columns, spacing: AppConstants.UI.Layout.Spacing.grid) {
                 ForEach(filteredTeaLeaves) { tea in
                   NavigationLink {
                     TeaLeafDetailView(teaLeaf: tea)
                   } label: {
                     TeaLeafCardView(tea: tea)
                   }
-                  .buttonStyle(.plain)
+                  .buttonStyle(AppConstants.UI.ButtonStyle.plain)
                 }
               }
+              .padding(.horizontal, AppConstants.UI.Padding.large)
+              .padding(.vertical, AppConstants.UI.Padding.large)
             }
           }
-          .padding(.horizontal, 16)
-          .padding(.vertical, 12)
+          .padding(.horizontal, AppConstants.UI.Padding.large)
+          .padding(.vertical, AppConstants.UI.Padding.large)
         }
 
         Button(action: { isPresentingAddTea = true }) {
-          HStack(spacing: 8) {
+          HStack(spacing: AppConstants.UI.Layout.Spacing.tag) {
             Image(systemName: "plus")
             Text(AppConstants.UI.UIStrings.Content.plus)
           }
           .font(AppConstants.UI.Typography.FontScale.buttonTitle)
-          .foregroundStyle(.white)
+          .foregroundStyle(AppConstants.UI.BasicColor.white)
           .padding(.horizontal, 16)
           .padding(.vertical, 14)
           .background(Color.green.opacity(AppConstants.UI.Opacity.greenButton))
-          .clipShape(Capsule())
-          .shadow(color: .black.opacity(AppConstants.UI.Opacity.shadow), radius: AppConstants.UI.Shadow.largeRadius, x: 0, y: AppConstants.UI.Shadow.buttonOffset)
+          .clipShape(AppConstants.UI.ClipShape.capsule)
+          .shadow(color: AppConstants.UI.ShadowStyle.shadow, radius: AppConstants.UI.Shadow.largeRadius, x: 0, y: AppConstants.UI.Shadow.buttonOffset)
         }
           .padding(AppConstants.UI.Padding.huge)
       }
@@ -198,15 +200,15 @@ struct TeaTimelineView: View {
     }
     .padding(.horizontal, AppConstants.UI.Padding.cardHorizontal)
     .padding(.vertical, AppConstants.UI.Padding.cardVertical)
-    .background(Color.white.opacity(AppConstants.UI.Opacity.backgroundWhite))
-    .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.large))
+    .background(AppConstants.UI.BackgroundColor.whiteHigh)
+    .clipShape(AppConstants.UI.ClipShape.roundedRectangleLarge)
   }
 
   /*
    並び替えを切り替えるセレクターを返します。
    */
   private var sortSelector: some View {
-    Picker("並び替え", selection: $sortOption) {
+    Picker(AppConstants.UI.UIStrings.Labels.sortBy, selection: $sortOption) {
       ForEach(TeaTimelineSortOption.allCases) { option in
         Text(option.rawValue).tag(option)
       }
@@ -218,7 +220,7 @@ struct TeaTimelineView: View {
    募集状態の表示範囲を切り替えるセレクターを返します。
    */
   private var statusScopeSelector: some View {
-    Picker("表示範囲", selection: $statusScope) {
+    Picker(AppConstants.UI.UIStrings.Labels.displayScope, selection: $statusScope) {
       ForEach(TeaTimelineStatusScope.allCases) { scope in
         Text(scope.rawValue).tag(scope)
       }
@@ -231,7 +233,7 @@ struct TeaTimelineView: View {
    */
   private var expiryToggle: some View {
     Toggle(isOn: $showExpiringOnly) {
-      Text("期限切れ/期限間近のみ")
+      Text(AppConstants.UI.UIStrings.Labels.expiringOnly)
         .font(AppConstants.UI.Typography.FontScale.sectionSubtitle)
     }
     .toggleStyle(.switch)
@@ -259,7 +261,7 @@ struct TeaTimelineView: View {
           }
         }
       }
-      .padding(.vertical, 2)
+      .padding(.vertical, AppConstants.UI.Padding.verticalSmall)
     }
   }
 
@@ -268,11 +270,11 @@ struct TeaTimelineView: View {
    */
   private var timelineSummary: some View {
     HStack {
-      Text("対象: \(scopedTeaLeaves.count)件")
+      Text(AppConstants.UI.UIStrings.Labels.targetCount.replacingOccurrences(of: "{count}", with: "\(scopedTeaLeaves.count)"))
       Spacer()
-      Text("結果: \(filteredCount)件")
+      Text(AppConstants.UI.UIStrings.Labels.resultCount.replacingOccurrences(of: "{count}", with: "\(filteredCount)"))
       Spacer()
-      Text("期限注意: \(expiringCount)件")
+      Text(AppConstants.UI.UIStrings.Labels.expiringCount.replacingOccurrences(of: "{count}", with: "\(expiringCount)"))
     }
     .font(AppConstants.UI.Typography.FontScale.chipTitle)
     .foregroundStyle(.secondary)
@@ -303,7 +305,7 @@ struct TeaTimelineView: View {
           tint: .gray
         )
       }
-      .padding(.vertical, 2)
+      .padding(.vertical, AppConstants.UI.Padding.verticalSmall)
     }
   }
 
@@ -329,8 +331,8 @@ struct TeaTimelineView: View {
     }
     .padding(.horizontal, 12)
     .padding(.vertical, 10)
-    .background(Color.white.opacity(AppConstants.UI.Opacity.whiteHigh))
-    .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.sheet))
+    .background(AppConstants.UI.BackgroundColor.whiteHigh)
+    .clipShape(AppConstants.UI.ClipShape.roundedRectangleSheet)
   }
 
   /*
@@ -341,43 +343,43 @@ struct TeaTimelineView: View {
       Image(systemName: AppConstants.UI.UIStrings.Content.tray)
         .font(.system(size: AppConstants.UI.FontSizes.emptyStateIcon))
         .foregroundStyle(.secondary)
-      Text("条件に一致する茶葉がありません")
+      Text(AppConstants.UI.UIStrings.Labels.noMatchingTea)
         .font(AppConstants.UI.Typography.FontScale.sectionTitle)
-      Text("検索条件やカテゴリを変更してください")
+      Text(AppConstants.UI.UIStrings.Labels.changeSearchConditions)
         .font(AppConstants.UI.Typography.Font.footnote)
         .foregroundStyle(.secondary)
     }
-    .frame(maxWidth: .infinity)
+    .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity)
     .padding(.vertical, AppConstants.UI.Layout.Spacing.large)
-    .background(Color.white.opacity(AppConstants.UI.Opacity.cardBackground))
-    .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge))
+    .background(AppConstants.UI.BackgroundColor.cardBackground)
+    .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
   }
 
   /*
    アクティブなフィルタ状態と解除操作を返します。
    */
   private var activeFilterSummary: some View {
-    VStack(alignment: .leading, spacing: 8) {
+    VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.medium) {
       if hasActiveFilters {
         ScrollView(.horizontal, showsIndicators: false) {
-          HStack(spacing: 8) {
+          HStack(spacing: AppConstants.UI.Layout.Spacing.tag) {
             ForEach(activeFilterLabels, id: \.self) { label in
               Text(label)
-                .font(AppConstants.UI.Typography.FontScale.cardSubtitle)
+                .font(.caption.weight(AppConstants.UI.Typography.FontWeight.semibold))
                 .padding(.horizontal, AppConstants.UI.Padding.filterHorizontal)
                 .padding(.vertical, AppConstants.UI.Padding.filterVertical)
-                .background(Color.white.opacity(AppConstants.UI.Opacity.backgroundWhite))
-                .clipShape(Capsule())
+                .background(AppConstants.UI.BackgroundColor.whiteHigh)
+                .clipShape(AppConstants.UI.ClipShape.capsule)
             }
           }
         }
 
-        Button("条件をすべて解除") {
+        Button(AppConstants.UI.UIStrings.Labels.clearAllConditions) {
           resetAllFilters()
         }
         .font(AppConstants.UI.Typography.FontScale.chipTitle)
       } else {
-        Text("フィルタ条件は未設定です")
+        Text(AppConstants.UI.UIStrings.Labels.noFilterConditions)
           .font(AppConstants.UI.Typography.Font.footnote)
           .foregroundStyle(.secondary)
       }
@@ -457,18 +459,19 @@ private struct TeaLeafCardView: View {
       if !tea.imagePath.isEmpty, let uiImage = loadImage(from: tea.imagePath) {
         Image(uiImage: uiImage)
           .resizable()
-          .scaledToFill()
+          .scaledToFill(AppConstants.UI.ImageScaling.scaledToFill)
           .frame(height: AppConstants.UI.Frame.cardHeight)
-          .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.large))
+          .clipShape(AppConstants.UI.ClipShape.roundedRectangleLarge)
       } else {
         RoundedRectangle(cornerRadius: 12)
-          .fill(Color.green.opacity(AppConstants.UI.Colors.greenOpacity))
+          .fill(AppConstants.UI.FillColor.green)
           .overlay {
             Image(systemName: AppConstants.UI.UIStrings.Content.leafFill)
               .font(.system(size: AppConstants.UI.FontSizes.cardIcon))
               .foregroundStyle(Color.green.opacity(AppConstants.UI.Colors.greenForegroundOpacity))
           }
           .frame(height: AppConstants.UI.Frame.cardHeight)
+          .clipShape(AppConstants.UI.ClipShape.roundedRectangleSheet)
       }
 
       Text(tea.name)
@@ -478,10 +481,10 @@ private struct TeaLeafCardView: View {
       HStack(spacing: 6) {
         Text(tea.category.rawValue)
           .font(AppConstants.UI.Typography.FontScale.cardSubtitle)
-          .padding(.horizontal, 8)
-          .padding(.vertical, 4)
+          .padding(.horizontal, AppConstants.UI.Padding.badgeHorizontal)
+          .padding(.vertical, AppConstants.UI.Padding.badgeVertical)
           .background(Color.green.opacity(AppConstants.UI.Colors.greenBadgeOpacity))
-          .clipShape(Capsule())
+          .clipShape(AppConstants.UI.ClipShape.capsule)
         statusBadge
       }
 
@@ -496,10 +499,10 @@ private struct TeaLeafCardView: View {
       }
     }
     .padding(AppConstants.UI.Padding.cardHorizontal)
-    .frame(maxWidth: .infinity, alignment: .leading)
-    .background(Color.white.opacity(AppConstants.UI.Opacity.cardWhite))
-    .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.card))
-    .shadow(color: .black.opacity(AppConstants.UI.Opacity.cardShadow), radius: AppConstants.UI.Shadow.cardRadius, x: 0, y: AppConstants.UI.Shadow.cardOffset)
+    .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
+    .background(AppConstants.UI.BackgroundColor.cardWhite)
+    .clipShape(AppConstants.UI.ClipShape.roundedRectangleCard)
+    .shadow(color: AppConstants.UI.ShadowStyle.cardShadow, radius: AppConstants.UI.Shadow.cardRadius, x: 0, y: AppConstants.UI.Shadow.cardOffset)
   }
 
   /*
@@ -510,12 +513,12 @@ private struct TeaLeafCardView: View {
       Image(systemName: expiryIcon)
       Text(expiryText)
     }
-    .font(AppConstants.UI.Typography.FontScale.cardSubtitle)
+    .font(.caption2.weight(AppConstants.UI.Typography.FontWeight.semibold))
     .foregroundStyle(expiryColor)
     .padding(.horizontal, 8)
     .padding(.vertical, 4)
-    .background(expiryColor.opacity(0.12))
-    .clipShape(Capsule())
+    .background(expiryColor.opacity(AppConstants.UI.Opacity.badgeBackground))
+    .clipShape(AppConstants.UI.ClipShape.capsule)
   }
 
   /*
@@ -565,12 +568,12 @@ private struct TeaLeafCardView: View {
    */
   private var statusBadge: some View {
     Text(tea.tradeStatus.rawValue)
-      .font(AppConstants.UI.Typography.FontScale.cardSubtitle)
+      .font(.caption2.weight(AppConstants.UI.Typography.FontWeight.semibold))
       .foregroundStyle(statusColor)
       .padding(.horizontal, 8)
       .padding(.vertical, 4)
-      .background(statusColor.opacity(0.12))
-      .clipShape(Capsule())
+      .background(statusColor.opacity(AppConstants.UI.Opacity.badgeBackground))
+      .clipShape(AppConstants.UI.ClipShape.capsule)
   }
 
   /*
@@ -609,7 +612,7 @@ private struct CategoryChip: View {
   var body: some View {
     Button(action: action) {
       Text(title)
-        .font(.subheadline.weight(.medium))
+        .font(.subheadline.weight(AppConstants.UI.Typography.FontWeight.medium))
         .foregroundStyle(isSelected ? .white : Color.green.opacity(AppConstants.UI.Colors.greenTextOpacity))
         .padding(.horizontal, AppConstants.UI.Padding.buttonHorizontal)
         .padding(.vertical, AppConstants.UI.Padding.buttonVertical)
@@ -618,7 +621,7 @@ private struct CategoryChip: View {
             ? Color.green.opacity(AppConstants.UI.Colors.greenSelectedOpacity)
             : Color.white.opacity(AppConstants.UI.Opacity.chipBackground)
         )
-        .clipShape(Capsule())
+        .clipShape(AppConstants.UI.ClipShape.capsule)
     }
   }
 }

@@ -164,7 +164,7 @@ struct AddTeaView: View {
     NavigationStack {
       Form {
         Section("画像") {
-          HStack(spacing: 12) {
+          HStack(spacing: AppConstants.UI.Layout.Spacing.button) {
             PhotosPicker(
               selection: $pickedPhotoItem,
               matching: .images,
@@ -184,17 +184,17 @@ struct AddTeaView: View {
           if let selectedImage {
             Image(uiImage: selectedImage)
               .resizable()
-              .scaledToFit()
+              .scaledToFit(AppConstants.UI.ImageScaling.scaledToFit)
               .frame(maxHeight: AppConstants.UI.Frame.imageMaxHeight)
-              .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.sheet))
+              .clipShape(AppConstants.UI.ClipShape.roundedRectangleSheet)
 
-            HStack(spacing: 10) {
+            HStack(spacing: AppConstants.UI.Layout.Spacing.button) {
               Button {
                 rerunImageSuggestion()
               } label: {
                 Label("再抽出", systemImage: "sparkles")
               }
-              .buttonStyle(.bordered)
+              .buttonStyle(AppConstants.UI.ButtonStyle.bordered)
               .disabled(isAnalyzingImage)
 
               Button(role: .destructive) {
@@ -202,7 +202,7 @@ struct AddTeaView: View {
               } label: {
                 Label("画像を削除", systemImage: "trash")
               }
-              .buttonStyle(.bordered)
+              .buttonStyle(AppConstants.UI.ButtonStyle.bordered)
               .disabled(isAnalyzingImage)
 
               Spacer()
@@ -210,7 +210,7 @@ struct AddTeaView: View {
           }
 
           if isAnalyzingImage {
-            HStack(spacing: 8) {
+            HStack(spacing: AppConstants.UI.Layout.Spacing.tag) {
               ProgressView()
               Text("画像から情報を抽出中...")
                 .font(AppConstants.UI.Typography.Font.footnote)
@@ -342,7 +342,7 @@ struct AddTeaView: View {
             ProgressView(AppConstants.UI.UIStrings.Actions.saving)
               .padding(AppConstants.UI.Padding.large)
               .background(.regularMaterial)
-              .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.progress))
+              .clipShape(AppConstants.UI.ClipShape.roundedRectangleProgress)
           }
         }
       }
@@ -353,7 +353,7 @@ struct AddTeaView: View {
    残量のクイック入力ボタン群を返します。
    */
   private var quickRemainingButtons: some View {
-    HStack(spacing: 8) {
+    HStack(spacing: AppConstants.UI.Layout.Spacing.tag) {
       Text("クイック")
         .font(AppConstants.UI.Typography.Font.caption)
         .foregroundStyle(.secondary)
@@ -368,7 +368,7 @@ struct AddTeaView: View {
    賞味期限のクイック入力ボタン群を返します。
    */
   private var expiryPresetButtons: some View {
-    HStack(spacing: 8) {
+    HStack(spacing: AppConstants.UI.Layout.Spacing.tag) {
       Text("期限プリセット")
         .font(AppConstants.UI.Typography.Font.caption)
         .foregroundStyle(.secondary)
@@ -376,8 +376,8 @@ struct AddTeaView: View {
         Button(preset.rawValue) {
           applyExpiryPreset(preset)
         }
-        .font(AppConstants.UI.Typography.FontScale.cardSubtitle)
-        .buttonStyle(.bordered)
+        .font(.caption.weight(.semibold))
+        .buttonStyle(AppConstants.UI.ButtonStyle.bordered)
       }
       Spacer()
     }
@@ -391,7 +391,7 @@ struct AddTeaView: View {
       remainingGrams = grams
     }
     .font(.caption.weight(.semibold))
-    .buttonStyle(.bordered)
+    .buttonStyle(AppConstants.UI.ButtonStyle.bordered)
   }
 
   /*

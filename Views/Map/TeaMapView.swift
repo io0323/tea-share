@@ -69,7 +69,7 @@ struct TeaMapView: View {
               Button {
                 selectedTeaLeaf = teaLeaf
               } label: {
-                VStack(spacing: 4) {
+                VStack(spacing: AppConstants.UI.Layout.Spacing.small) {
                   Image(systemName: "leaf.circle.fill")
                     .font(.system(size: AppConstants.UI.FontSizes.mapMarkerIcon))
                     .foregroundStyle(markerColor(for: teaLeaf.tradeStatus))
@@ -77,11 +77,11 @@ struct TeaMapView: View {
                     .font(AppConstants.UI.Typography.Font.caption2)
                     .padding(.horizontal, AppConstants.UI.Padding.buttonHorizontal)
                     .padding(.vertical, AppConstants.UI.Padding.buttonVertical)
-                    .background(Color.white.opacity(AppConstants.UI.Opacity.whiteHigh))
-                    .clipShape(Capsule())
+                    .background(AppConstants.UI.BackgroundColor.whiteHigh)
+                    .clipShape(AppConstants.UI.ClipShape.capsule)
                 }
               }
-              .buttonStyle(.plain)
+              .buttonStyle(AppConstants.UI.ButtonStyle.plain)
             }
           }
         }
@@ -101,9 +101,9 @@ struct TeaMapView: View {
             .presentationDetents([.fraction(AppConstants.UI.Sheets.Detents.mapDetailFraction), AppConstants.UI.Sheets.Detents.mapDetailMedium])
         }
 
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.section) {
           ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 8) {
+            HStack(spacing: AppConstants.UI.Layout.Spacing.chip) {
               ForEach(TeaMapFilter.allCases) { filter in
                 filterChip(filter)
               }
@@ -111,7 +111,7 @@ struct TeaMapView: View {
           }
 
           ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 8) {
+            HStack(spacing: AppConstants.UI.Layout.Spacing.chip) {
               categoryChip(title: "すべて", category: nil)
               ForEach(TeaCategory.allCases) { category in
                 categoryChip(title: category.rawValue, category: category)
@@ -122,27 +122,28 @@ struct TeaMapView: View {
           Button {
             resetFilters()
           } label: {
-            HStack(spacing: 6) {
+            HStack(spacing: AppConstants.UI.Layout.Spacing.chip) {
               Image(systemName: "arrow.counterclockwise")
-              Text("フィルタ解除")
+              Text(AppConstants.UI.UIStrings.Labels.clearFilter)
             }
-            .font(AppConstants.UI.Typography.FontScale.cardSubtitle)
-            .padding(.horizontal, 10)
+            .font(.caption.weight(AppConstants.UI.Typography.FontWeight.semibold))
+            .padding(.horizontal, AppConstants.UI.Padding.buttonHorizontal)
+            .padding(.vertical, AppConstants.UI.Padding.buttonVertical)
             .padding(.vertical, 7)
             .background(Color.white.opacity(AppConstants.UI.Opacity.whiteHigh))
-            .clipShape(Capsule())
+            .clipShape(AppConstants.UI.ClipShape.capsule)
           }
-          .buttonStyle(.plain)
+          .buttonStyle(AppConstants.UI.ButtonStyle.plain)
 
-          Text("表示中: \(mapTeaLeaves.count)件")
-            .font(AppConstants.UI.Typography.FontScale.chipTitle)
-            .padding(.horizontal, 10)
-            .padding(.vertical, 6)
+          Text(AppConstants.UI.UIStrings.Labels.displayCount.replacingOccurrences(of: "{count}", with: "\(mapTeaLeaves.count)"))
+            .font(.footnote.weight(.medium))
+            .padding(.horizontal, AppConstants.UI.Padding.chipHorizontal)
+            .padding(.vertical, AppConstants.UI.Padding.chipVertical)
             .background(Color.white.opacity(AppConstants.UI.Opacity.whiteHigh))
-            .clipShape(Capsule())
+            .clipShape(AppConstants.UI.ClipShape.capsule)
         }
-        .padding(.horizontal, 16)
-        .padding(.top, 8)
+        .padding(.horizontal, AppConstants.UI.Padding.default)
+        .padding(.top, AppConstants.UI.Padding.top)
       }
     }
   }
@@ -171,18 +172,18 @@ struct TeaMapView: View {
       Text(filter.rawValue)
         .font(.caption.weight(.semibold))
         .foregroundStyle(
-          selectedFilter == filter ? Color.white : Color.green.opacity(0.9)
+          selectedFilter == filter ? Color.white : Color.green.opacity(AppConstants.UI.Opacity.filterUnselected)
         )
         .padding(.horizontal, 10)
         .padding(.vertical, 7)
         .background(
           selectedFilter == filter
-            ? Color.green.opacity(0.9)
-            : Color.white.opacity(0.9)
+            ? Color.green.opacity(AppConstants.UI.Opacity.filterSelected)
+            : Color.white.opacity(AppConstants.UI.Opacity.filterUnselected)
         )
-        .clipShape(Capsule())
+        .clipShape(AppConstants.UI.ClipShape.capsule)
     }
-    .buttonStyle(.plain)
+    .buttonStyle(AppConstants.UI.ButtonStyle.plain)
   }
 
   /*
@@ -199,18 +200,18 @@ struct TeaMapView: View {
       Text(title)
         .font(.caption.weight(.semibold))
         .foregroundStyle(
-          isSelected ? Color.white : Color.blue.opacity(0.9)
+          isSelected ? Color.white : Color.blue.opacity(AppConstants.UI.Opacity.filterUnselected)
         )
         .padding(.horizontal, 10)
         .padding(.vertical, 7)
         .background(
           isSelected
-            ? Color.blue.opacity(0.85)
-            : Color.white.opacity(0.9)
+            ? Color.blue.opacity(AppConstants.UI.Opacity.categorySelected)
+            : Color.white.opacity(AppConstants.UI.Opacity.filterUnselected)
         )
-        .clipShape(Capsule())
+        .clipShape(AppConstants.UI.ClipShape.capsule)
     }
-    .buttonStyle(.plain)
+    .buttonStyle(AppConstants.UI.ButtonStyle.plain)
   }
 
   /*
@@ -251,26 +252,26 @@ private struct TeaMapDetailSheet: View {
   var body: some View {
     VStack(alignment: .leading, spacing: AppConstants.UI.Spacing.default) {
       Capsule()
-        .fill(Color.secondary.opacity(0.3))
+        .fill(AppConstants.UI.FillColor.secondary)
         .frame(height: AppConstants.UI.Frame.errorImageHeight)
-        .frame(maxWidth: .infinity, alignment: .center)
+        .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.center)
         .padding(.top, AppConstants.UI.Padding.default)
 
       Text(teaLeaf.name)
-        .font(.title3.weight(.semibold))
+        .font(.title3.weight(AppConstants.UI.Typography.FontWeight.semibold))
 
-      Text("出品者: \(teaLeaf.owner?.username ?? "不明")")
+      Text(AppConstants.UI.UIStrings.Labels.seller.replacingOccurrences(of: "{username}", with: teaLeaf.owner?.username ?? AppConstants.UI.UIStrings.Placeholders.unknown))
         .font(AppConstants.UI.Typography.Font.body)
-      Text("エリア: \(teaLeaf.owner?.location ?? "未設定")")
+      Text(AppConstants.UI.UIStrings.Labels.area.replacingOccurrences(of: "{location}", with: teaLeaf.owner?.location ?? AppConstants.UI.UIStrings.Placeholders.notSet))
         .font(AppConstants.UI.Typography.Font.body)
-      Text("残量: \(teaLeaf.remainingGrams)g")
+      Text(AppConstants.UI.UIStrings.Labels.remaining.replacingOccurrences(of: "{grams}", with: "\(teaLeaf.remainingGrams)"))
         .font(AppConstants.UI.Typography.Font.body)
-      Text("ステータス: \(teaLeaf.tradeStatus.rawValue)")
+      Text(AppConstants.UI.UIStrings.Labels.status.replacingOccurrences(of: "{status}", with: teaLeaf.tradeStatus.rawValue))
         .font(AppConstants.UI.Typography.Font.body)
         .foregroundStyle(.secondary)
 
       VStack(alignment: .leading, spacing: 8) {
-        Text("取引ステータスを更新")
+        Text(AppConstants.UI.UIStrings.Labels.updateTradeStatus)
           .font(AppConstants.UI.Typography.FontScale.sectionSubtitle)
         Picker("取引ステータス", selection: $teaLeaf.tradeStatus) {
           ForEach(TradeStatus.allCases) { status in
@@ -289,17 +290,17 @@ private struct TeaMapDetailSheet: View {
         HStack {
           Image(systemName: "arrow.right.circle.fill")
           Text(nextActionTitle)
-            .fontWeight(.semibold)
+            .fontWeight(AppConstants.UI.Typography.FontWeight.semibold)
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity)
       }
-      .buttonStyle(.borderedProminent)
+      .buttonStyle(AppConstants.UI.ButtonStyle.borderedProminent)
       .disabled(nextStatus == nil)
 
       Spacer()
     }
-    .padding(.horizontal, 20)
-    .padding(.bottom, 20)
+    .padding(.horizontal, AppConstants.UI.Padding.huge)
+    .padding(.bottom, AppConstants.UI.Padding.bottom)
     .alert(AppConstants.UI.Alerts.Titles.saveError, isPresented: $isShowingSaveError) {
       Button(AppConstants.UI.Alerts.Buttons.ok, role: .cancel) {}
     } message: {
