@@ -162,8 +162,8 @@ struct TeaTimelineView: View {
           }
           .font(AppConstants.UI.Typography.FontScale.buttonTitle)
           .foregroundStyle(.white)
-          .padding(.horizontal, 16)
-          .padding(.vertical, 14)
+          .padding(.horizontal, AppConstants.UI.Padding.default)
+          .padding(.vertical, AppConstants.UI.Padding.large)
           .background(Color.green.opacity(AppConstants.UI.Opacity.greenButton))
           .clipShape(Capsule())
           .shadow(color: .black.opacity(AppConstants.UI.Opacity.shadow), radius: AppConstants.UI.Shadow.largeRadius, x: 0, y: AppConstants.UI.Shadow.buttonOffset)
@@ -327,8 +327,8 @@ struct TeaTimelineView: View {
           .font(AppConstants.UI.Typography.FontScale.sectionTitle)
       }
     }
-    .padding(.horizontal, 12)
-    .padding(.vertical, 10)
+    .padding(.horizontal, AppConstants.UI.Padding.medium)
+    .padding(.vertical, AppConstants.UI.Padding.extraLarge)
     .background(Color.white.opacity(AppConstants.UI.Opacity.whiteHigh))
     .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.sheet))
   }
@@ -475,7 +475,7 @@ private struct TeaLeafCardView: View {
         .font(AppConstants.UI.Typography.FontScale.cardTitle)
         .lineLimit(2)
 
-      HStack(spacing: 6) {
+      HStack(spacing: AppConstants.UI.Layout.Spacing.hStack) {
         Text(tea.category.rawValue)
           .font(AppConstants.UI.Typography.FontScale.cardSubtitle)
           .padding(.horizontal, 8)
@@ -567,8 +567,8 @@ private struct TeaLeafCardView: View {
     Text(tea.tradeStatus.rawValue)
       .font(.caption2.weight(.semibold))
       .foregroundStyle(statusColor)
-      .padding(.horizontal, 8)
-      .padding(.vertical, 4)
+      .padding(.horizontal, AppConstants.UI.Padding.badgeHorizontal)
+      .padding(.vertical, AppConstants.UI.Padding.badgeVertical)
       .background(statusColor.opacity(0.12))
       .clipShape(Capsule())
   }

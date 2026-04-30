@@ -339,8 +339,8 @@ struct TeaLeafDetailView: View {
     Text(text)
       .font(.caption.weight(.semibold))
       .foregroundStyle(tint)
-      .padding(.horizontal, 8)
-      .padding(.vertical, 4)
+      .padding(.horizontal, AppConstants.UI.Padding.badgeHorizontal)
+      .padding(.vertical, AppConstants.UI.Padding.badgeVertical)
       .background(tint.opacity(0.12))
       .clipShape(Capsule())
   }
