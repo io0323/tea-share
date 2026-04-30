@@ -156,6 +156,8 @@ struct AppConstants {
         static let tag: CGFloat = 8
         static let chip: CGFloat = 6
         static let overlay: CGFloat = 8
+        static let hStack: CGFloat = 6
+        static let vStack: CGFloat = 8
       }
       
       struct CornerRadius {

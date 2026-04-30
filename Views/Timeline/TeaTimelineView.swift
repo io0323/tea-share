@@ -478,7 +478,7 @@ private struct TeaLeafCardView: View {
         .font(AppConstants.UI.Typography.FontScale.cardTitle)
         .lineLimit(2)
 
-      HStack(spacing: 6) {
+      HStack(spacing: AppConstants.UI.Layout.Spacing.hStack) {
         Text(tea.category.rawValue)
           .font(AppConstants.UI.Typography.FontScale.cardSubtitle)
           .padding(.horizontal, AppConstants.UI.Padding.badgeHorizontal)

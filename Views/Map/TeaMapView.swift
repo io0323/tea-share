@@ -174,8 +174,8 @@ struct TeaMapView: View {
         .foregroundStyle(
           selectedFilter == filter ? Color.white : Color.green.opacity(AppConstants.UI.Opacity.filterUnselected)
         )
-        .padding(.horizontal, 10)
-        .padding(.vertical, 7)
+        .padding(.horizontal, AppConstants.UI.Padding.chipHorizontal)
+        .padding(.vertical, AppConstants.UI.Padding.filterButtonVertical)
         .background(
           selectedFilter == filter
             ? Color.green.opacity(AppConstants.UI.Opacity.filterSelected)
@@ -202,8 +202,8 @@ struct TeaMapView: View {
         .foregroundStyle(
           isSelected ? Color.white : Color.blue.opacity(AppConstants.UI.Opacity.filterUnselected)
         )
-        .padding(.horizontal, 10)
-        .padding(.vertical, 7)
+        .padding(.horizontal, AppConstants.UI.Padding.chipHorizontal)
+        .padding(.vertical, AppConstants.UI.Padding.filterButtonVertical)
         .background(
           isSelected
             ? Color.blue.opacity(AppConstants.UI.Opacity.categorySelected)
