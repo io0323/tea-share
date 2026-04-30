@@ -63,11 +63,13 @@ struct AppConstants {
       static let blackCardShadowOpacity: Double = 0.07
     }
     
-    struct FontSizes {
-      static let emptyStateIcon: Double = 30
-      static let cardIcon: Double = 26
-      static let mapMarkerIcon: Double = 28
-      static let errorImageIcon: Double = 40
+    struct ClipShape {
+      static let capsule: Capsule = Capsule()
+      static let roundedRectangleLarge: RoundedRectangle = RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.large)
+      static let roundedRectangleExtraLarge: RoundedRectangle = RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge)
+      static let roundedRectangleSheet: RoundedRectangle = RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.sheet)
+      static let roundedRectangleCard: RoundedRectangle = RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.card)
+      static let roundedRectangleProgress: RoundedRectangle = RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.progress)
     }
     
     struct Opacity {
@@ -84,6 +86,21 @@ struct AppConstants {
       static let grayMedium: Double = 0.2
       static let blackOverlay: Double = 0.15
       static let blackLight: Double = 0.08
+      static let backgroundGradient: Double = 0.25
+      static let badgeBackground: Double = 0.12
+      static let filterSelected: Double = 0.9
+      static let filterUnselected: Double = 0.9
+      static let categorySelected: Double = 0.85
+      static let secondaryCapsule: Double = 0.3
+    }
+    
+    struct BasicColor {
+      static let white: Color = .white
+      static let black: Color = .black
+      static let green: Color = .green
+      static let blue: Color = .blue
+      static let gray: Color = .gray
+      static let secondary: Color = .secondary
     }
     
     struct Layout {
@@ -101,6 +118,13 @@ struct AppConstants {
         static let filterHorizontal: CGFloat = 10
         static let filterVertical: CGFloat = 6
         static let cardHeader: CGFloat = 14
+        static let chipHorizontal: CGFloat = 10
+        static let chipVertical: CGFloat = 6
+        static let badgeHorizontal: CGFloat = 8
+        static let badgeVertical: CGFloat = 4
+        static let top: CGFloat = 8
+        static let bottom: CGFloat = 20
+        static let verticalSmall: CGFloat = 2
       }
       
       struct Frame {
@@ -109,6 +133,12 @@ struct AppConstants {
         static let imageMaxHeight: CGFloat = 180
         static let imageErrorHeight: CGFloat = 200
         static let progressRadius: CGFloat = 10
+      }
+      
+      struct FrameAlignment {
+        static let maxWidthInfinity: CGFloat = .infinity
+        static let leading: Alignment = .leading
+        static let center: Alignment = .center
       }
       
       struct Spacing {
@@ -161,8 +191,6 @@ struct AppConstants {
           static let title3: Font = .title3
           static let headline: Font = .headline
           static let subheadline: Font = .subheadline
-          static let body: Font = .body
-          static let callout: Font = .callout
           static let footnote: Font = .footnote
           static let caption: Font = .caption
           static let caption2: Font = .caption2
@@ -201,6 +229,36 @@ struct AppConstants {
           static let statusTitle: Font = .subheadline.weight(.semibold)
           static let statusBody: Font = .subheadline
         }
+      }
+      
+      struct ImageScaling {
+        static let scaledToFill: ContentMode = .scaledToFill
+        static let scaledToFit: ContentMode = .scaledToFit
+      }
+      
+      struct BackgroundColor {
+        static let whiteCard: Color = Color.white.opacity(AppConstants.UI.Opacity.whiteCard)
+        static let backgroundWhite: Color = Color.white.opacity(AppConstants.UI.Opacity.backgroundWhite)
+        static let whiteHigh: Color = Color.white.opacity(AppConstants.UI.Opacity.whiteHigh)
+        static let cardBackground: Color = Color.white.opacity(AppConstants.UI.Opacity.cardBackground)
+        static let cardWhite: Color = Color.white.opacity(AppConstants.UI.Opacity.cardWhite)
+      }
+      
+      struct ShadowStyle {
+        static let blackLight: Color = .black.opacity(AppConstants.UI.Opacity.blackLight)
+        static let shadow: Color = .black.opacity(AppConstants.UI.Opacity.shadow)
+        static let cardShadow: Color = .black.opacity(AppConstants.UI.Opacity.cardShadow)
+        static let imageOpacity: Color = .black.opacity(AppConstants.UI.Shadow.imageOpacity)
+      }
+      
+      struct TintColor {
+        static let blue: Color = .blue
+      }
+      
+      struct FillColor {
+        static let green: Color = Color.green.opacity(AppConstants.UI.Colors.greenOpacity)
+        static let gray: Color = Color.gray.opacity(AppConstants.UI.Opacity.grayMedium)
+        static let secondary: Color = Color.secondary.opacity(AppConstants.UI.Opacity.secondaryCapsule)
       }
       
       struct Alerts {
@@ -254,40 +312,49 @@ struct AppConstants {
       
       struct UIStrings {
         struct Actions {
-          static let save: String = "保存"
-          static let reset: String = "リセット"
           static let saving: String = "保存中..."
-          static let submitTradeRequest: String = "取引を申し込む"
-          static let openInMap: String = "マップで開く"
-          static let focusOnDefaultArea: String = "中心エリアへ戻る"
+          static let reset: String = "リセット"
+          static let openInMap: String = "地図で開く"
+          static let submitTradeRequest: String = "取引リクエストを送信"
+          static let focusOnDefaultArea: String = "デフォルトエリアにフォーカス"
+          static let plus: String = "茶葉を追加"
         }
         
         struct Labels {
-          static let username: String = "ユーザー名:"
-          static let id: String = "ID:"
-          static let location: String = "場所:"
-          static let brand: String = "ブランド"
-          static let category: String = "カテゴリ"
-          static let expiryDate: String = "賞味期限"
-          static let remaining: String = "残量"
+          static let username: String = "ユーザー名"
+          static let id: String = "ID"
+          static let location: String = "場所"
           static let description: String = "説明"
-          static let area: String = "エリア"
-          static let status: String = "ステータス"
-          static let owner: String = "出品者"
           static let userDataNotFound: String = "ユーザーデータが見つかりません"
+          static let profile: String = "プロファイル"
+          static let clearFilter: String = "フィルタ解除"
+          static let displayCount: String = "表示中: {count}件"
+          static let seller: String = "出品者: {username}"
+          static let area: String = "エリア: {location}"
+          static let remaining: String = "残量: {grams}g"
+          static let status: String = "ステータス: {status}"
+          static let updateTradeStatus: String = "取引ステータスを更新"
+          static let sortBy: String = "並び替え"
+          static let displayScope: String = "表示範囲"
+          static let expiringOnly: String = "期限切れ/期限間近のみ"
+          static let targetCount: String = "対象: {count}件"
+          static let resultCount: String = "結果: {count}件"
+          static let expiringCount: String = "期限注意: {count}件"
+          static let noMatchingTea: String = "条件に一致する茶葉がありません"
+          static let changeSearchConditions: String = "検索条件やカテゴリを変更してください"
+          static let clearAllConditions: String = "条件をすべて解除"
+          static let noFilterConditions: String = "フィルタ条件は未設定です"
         }
         
         struct Placeholders {
-          static let username: String = "ユーザー名"
-          static let location: String = "場所"
+          static let descriptionEmpty: String = "説明はありません"
+          static let imageLoadError: String = "画像の読み込みに失敗しました"
+          static let unknown: String = "不明"
           static let notSet: String = "未設定"
-          static let descriptionEmpty: String = "説明は未入力です。"
-          static let imageLoadError: String = "画像を読み込めません"
         }
         
         struct Content {
-          static let plus: String = "出品する"
-          static let leafFill: String = "leaf.fill"
+          static let location: String = "location"
           static let tray: String = "tray"
           static let photo: String = "photo"
           static let infoCircleFill: String = "info.circle.fill"
@@ -330,6 +397,11 @@ struct AppConstants {
         static let isShowingResetAlert: Bool = false
         static let hasLoadedDraft: Bool = false
         static let isEditing: Bool = false
+      }
+      
+      struct ButtonState {
+        static let disabled: Bool = true
+        static let enabled: Bool = false
       }
       
       struct Selection {

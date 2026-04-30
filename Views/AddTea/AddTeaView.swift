@@ -184,9 +184,9 @@ struct AddTeaView: View {
           if let selectedImage {
             Image(uiImage: selectedImage)
               .resizable()
-              .scaledToFit()
+              .scaledToFit(AppConstants.UI.ImageScaling.scaledToFit)
               .frame(maxHeight: AppConstants.UI.Frame.imageMaxHeight)
-              .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.sheet))
+              .clipShape(AppConstants.UI.ClipShape.roundedRectangleSheet)
 
             HStack(spacing: AppConstants.UI.Layout.Spacing.button) {
               Button {
@@ -194,7 +194,7 @@ struct AddTeaView: View {
               } label: {
                 Label("再抽出", systemImage: "sparkles")
               }
-              .buttonStyle(.bordered)
+              .buttonStyle(AppConstants.UI.ButtonStyle.bordered)
               .disabled(isAnalyzingImage)
 
               Button(role: .destructive) {
@@ -202,7 +202,7 @@ struct AddTeaView: View {
               } label: {
                 Label("画像を削除", systemImage: "trash")
               }
-              .buttonStyle(.bordered)
+              .buttonStyle(AppConstants.UI.ButtonStyle.bordered)
               .disabled(isAnalyzingImage)
 
               Spacer()
@@ -342,7 +342,7 @@ struct AddTeaView: View {
             ProgressView(AppConstants.UI.UIStrings.Actions.saving)
               .padding(AppConstants.UI.Padding.large)
               .background(.regularMaterial)
-              .clipShape(RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.progress))
+              .clipShape(AppConstants.UI.ClipShape.roundedRectangleProgress)
           }
         }
       }
@@ -377,7 +377,7 @@ struct AddTeaView: View {
           applyExpiryPreset(preset)
         }
         .font(.caption.weight(.semibold))
-        .buttonStyle(.bordered)
+        .buttonStyle(AppConstants.UI.ButtonStyle.bordered)
       }
       Spacer()
     }
@@ -391,7 +391,7 @@ struct AddTeaView: View {
       remainingGrams = grams
     }
     .font(.caption.weight(.semibold))
-    .buttonStyle(.bordered)
+    .buttonStyle(AppConstants.UI.ButtonStyle.bordered)
   }
 
   /*
