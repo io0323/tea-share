@@ -515,8 +515,8 @@ private struct TeaLeafCardView: View {
     }
     .font(.caption2.weight(AppConstants.UI.Typography.FontWeight.semibold))
     .foregroundStyle(expiryColor)
-    .padding(.horizontal, 8)
-    .padding(.vertical, 4)
+    .padding(.horizontal, AppConstants.UI.Padding.badgeHorizontal)
+    .padding(.vertical, AppConstants.UI.Padding.badgeVertical)
     .background(expiryColor.opacity(AppConstants.UI.Opacity.badgeBackground))
     .clipShape(AppConstants.UI.ClipShape.capsule)
   }
