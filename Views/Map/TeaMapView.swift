@@ -270,7 +270,7 @@ private struct TeaMapDetailSheet: View {
         .font(AppConstants.UI.Typography.Font.body)
         .foregroundStyle(.secondary)
 
-      VStack(alignment: .leading, spacing: 8) {
+      VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.vStack) {
         Text(AppConstants.UI.UIStrings.Labels.updateTradeStatus)
           .font(AppConstants.UI.Typography.FontScale.sectionSubtitle)
         Picker("取引ステータス", selection: $teaLeaf.tradeStatus) {

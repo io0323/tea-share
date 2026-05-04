@@ -157,7 +157,7 @@ struct TeaLeafDetailView: View {
    残量や期限などの詳細情報を返します。
    */
   private var detailSection: some View {
-    VStack(alignment: .leading, spacing: 12) {
+    VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.detailSection) {
       HStack {
         Text("詳細情報")
           .font(AppConstants.UI.Typography.FontScale.sectionTitle)
@@ -238,7 +238,7 @@ struct TeaLeafDetailView: View {
         RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge)
           .fill(AppConstants.UI.FillColor.gray)
           .overlay {
-            VStack(spacing: 8) {
+            VStack(spacing: AppConstants.UI.Layout.Spacing.vStack) {
               Image(systemName: AppConstants.UI.UIStrings.Content.photo)
                 .font(.system(size: AppConstants.UI.FontSizes.errorImageIcon))
                 .foregroundStyle(.secondary)

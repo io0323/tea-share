@@ -183,7 +183,7 @@ struct TeaTimelineView: View {
    検索キーワード入力欄を返します。
    */
   private var searchField: some View {
-    HStack(spacing: 8) {
+    HStack(spacing: AppConstants.UI.Layout.Spacing.hStack) {
       Image(systemName: "magnifyingglass")
         .foregroundStyle(.secondary)
       TextField("茶葉名・ブランド・エリアで検索", text: $searchText)
@@ -244,7 +244,7 @@ struct TeaTimelineView: View {
    */
   private var categorySelector: some View {
     ScrollView(.horizontal, showsIndicators: false) {
-      HStack(spacing: 8) {
+      HStack(spacing: AppConstants.UI.Layout.Spacing.hStack) {
         CategoryChip(
           title: "すべて",
           isSelected: selectedCategory == nil
@@ -285,7 +285,7 @@ struct TeaTimelineView: View {
    */
   private var tradeStatusSummaryCards: some View {
     ScrollView(.horizontal, showsIndicators: false) {
-      HStack(spacing: 10) {
+      HStack(spacing: AppConstants.UI.Layout.Spacing.section) {
         statusSummaryCard(
           title: TradeStatus.available.rawValue,
           count: tradeStatusCounts[.available] ?? 0,
@@ -318,7 +318,7 @@ struct TeaTimelineView: View {
     icon: String,
     tint: Color
   ) -> some View {
-    HStack(spacing: 8) {
+    HStack(spacing: AppConstants.UI.Layout.Spacing.hStack) {
       Image(systemName: icon)
         .foregroundStyle(tint)
       VStack(alignment: .leading, spacing: 2) {
@@ -339,7 +339,7 @@ struct TeaTimelineView: View {
    結果が0件のときの空状態ビューを返します。
    */
   private var emptyStateView: some View {
-    VStack(spacing: 10) {
+    VStack(spacing: AppConstants.UI.Layout.Spacing.emptyState) {
       Image(systemName: AppConstants.UI.UIStrings.Content.tray)
         .font(.system(size: AppConstants.UI.FontSizes.emptyStateIcon))
         .foregroundStyle(.secondary)
@@ -454,7 +454,7 @@ private struct TeaLeafCardView: View {
   let tea: TeaLeaf
 
   var body: some View {
-    VStack(alignment: .leading, spacing: 8) {
+    VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.vStack) {
       // 画像表示エリア
       if !tea.imagePath.isEmpty, let uiImage = loadImage(from: tea.imagePath) {
         Image(uiImage: uiImage)
@@ -509,7 +509,7 @@ private struct TeaLeafCardView: View {
    期限情報のバッジ表示を返します。
    */
   private var expiryBadge: some View {
-    HStack(spacing: 6) {
+    HStack(spacing: AppConstants.UI.Layout.Spacing.medium) {
       Image(systemName: expiryIcon)
       Text(expiryText)
     }
