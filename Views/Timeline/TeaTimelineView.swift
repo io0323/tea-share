@@ -463,7 +463,7 @@ private struct TeaLeafCardView: View {
           .frame(height: AppConstants.UI.Frame.cardHeight)
           .clipShape(AppConstants.UI.ClipShape.roundedRectangleLarge)
       } else {
-        RoundedRectangle(cornerRadius: 12)
+        RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.large)
           .fill(AppConstants.UI.FillColor.green)
           .overlay {
             Image(systemName: AppConstants.UI.UIStrings.Content.leafFill)
