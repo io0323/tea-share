@@ -513,7 +513,7 @@ private struct TeaLeafCardView: View {
       Image(systemName: expiryIcon)
       Text(expiryText)
     }
-    .font(.caption2.weight(AppConstants.UI.Typography.FontWeight.semibold))
+    .font(AppConstants.UI.Typography.Font.caption2.weight(AppConstants.UI.Typography.FontWeight.semibold))
     .foregroundStyle(expiryColor)
     .padding(.horizontal, AppConstants.UI.Padding.badgeHorizontal)
     .padding(.vertical, AppConstants.UI.Padding.badgeVertical)
@@ -568,7 +568,7 @@ private struct TeaLeafCardView: View {
    */
   private var statusBadge: some View {
     Text(tea.tradeStatus.rawValue)
-      .font(.caption2.weight(AppConstants.UI.Typography.FontWeight.semibold))
+      .font(AppConstants.UI.Typography.Font.caption2.weight(AppConstants.UI.Typography.FontWeight.semibold))
       .foregroundStyle(statusColor)
       .padding(.horizontal, AppConstants.UI.Padding.badgeHorizontal)
       .padding(.vertical, AppConstants.UI.Padding.badgeVertical)
