@@ -136,7 +136,7 @@ struct TeaMapView: View {
           .buttonStyle(AppConstants.UI.ButtonStyle.plain)
 
           Text(AppConstants.UI.UIStrings.Labels.displayCount.replacingOccurrences(of: "{count}", with: "\(mapTeaLeaves.count)"))
-            .font(.footnote.weight(.medium))
+            .font(AppConstants.UI.Typography.Font.footnote.weight(AppConstants.UI.Typography.FontWeight.medium))
             .padding(.horizontal, AppConstants.UI.Padding.chipHorizontal)
             .padding(.vertical, AppConstants.UI.Padding.chipVertical)
             .background(Color.white.opacity(AppConstants.UI.Opacity.whiteHigh))
@@ -170,7 +170,7 @@ struct TeaMapView: View {
       selectedFilter = filter
     } label: {
       Text(filter.rawValue)
-        .font(.caption.weight(.semibold))
+        .font(AppConstants.UI.Typography.Font.caption.weight(AppConstants.UI.Typography.FontWeight.semibold))
         .foregroundStyle(
           selectedFilter == filter ? Color.white : Color.green.opacity(AppConstants.UI.Opacity.filterUnselected)
         )
@@ -198,7 +198,7 @@ struct TeaMapView: View {
       selectedCategory = category
     } label: {
       Text(title)
-        .font(.caption.weight(.semibold))
+        .font(AppConstants.UI.Typography.Font.caption.weight(AppConstants.UI.Typography.FontWeight.semibold))
         .foregroundStyle(
           isSelected ? Color.white : Color.blue.opacity(AppConstants.UI.Opacity.filterUnselected)
         )
