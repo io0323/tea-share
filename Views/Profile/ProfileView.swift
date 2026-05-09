@@ -53,13 +53,13 @@ struct ProfileView: View {
               }
             }
           }
-          .padding()
+          .padding(AppConstants.UI.Padding.default)
           .background(Color.gray.opacity(AppConstants.UI.Opacity.grayLight))
           .cornerRadius(AppConstants.UI.CornerRadius.card)
 
           Spacer()
         }
-        .padding()
+        .padding(AppConstants.UI.Padding.default)
       } else {
         Text(AppConstants.UI.UIStrings.Labels.userDataNotFound)
           .font(AppConstants.UI.Typography.Font.title)
