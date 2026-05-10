@@ -376,7 +376,7 @@ struct AddTeaView: View {
         Button(preset.rawValue) {
           applyExpiryPreset(preset)
         }
-        .font(.caption.weight(.semibold))
+        .font(AppConstants.UI.Typography.Font.caption.weight(AppConstants.UI.Typography.FontWeight.semibold))
         .buttonStyle(AppConstants.UI.ButtonStyle.bordered)
       }
       Spacer()
@@ -390,7 +390,7 @@ struct AddTeaView: View {
     Button("\(grams)g") {
       remainingGrams = grams
     }
-    .font(.caption.weight(.semibold))
+    .font(AppConstants.UI.Typography.Font.caption.weight(AppConstants.UI.Typography.FontWeight.semibold))
     .buttonStyle(AppConstants.UI.ButtonStyle.bordered)
   }
 
