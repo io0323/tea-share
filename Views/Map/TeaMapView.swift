@@ -126,7 +126,7 @@ struct TeaMapView: View {
               Image(systemName: "arrow.counterclockwise")
               Text(AppConstants.UI.UIStrings.Labels.clearFilter)
             }
-            .font(.caption.weight(AppConstants.UI.Typography.FontWeight.semibold))
+            .font(AppConstants.UI.Typography.Font.caption.weight(AppConstants.UI.Typography.FontWeight.semibold))
             .padding(.horizontal, AppConstants.UI.Padding.buttonHorizontal)
             .padding(.vertical, AppConstants.UI.Padding.buttonVertical)
             .padding(.vertical, AppConstants.UI.Padding.filterButtonVertical)
