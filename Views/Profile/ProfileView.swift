@@ -7,11 +7,11 @@ import SwiftData
 struct ProfileView: View {
   @Environment(\.modelContext) private var modelContext
   @Query private var users: [User]
-  @State private var isEditing = AppConstants.AppConstants.Defaults.UI.isEditing
-  @State private var editedUsername = AppConstants.AppConstants.Defaults.State.editedUsername
-  @State private var editedLocation = AppConstants.AppConstants.Defaults.State.editedLocation
-  @State private var isShowingSaveError = AppConstants.AppConstants.Defaults.UI.isShowingSaveError
-  @State private var saveErrorMessage = AppConstants.AppConstants.Defaults.State.saveErrorMessage
+  @State private var isEditing = AppConstants.Defaults.UI.isEditing
+  @State private var editedUsername = AppConstants.Defaults.State.editedUsername
+  @State private var editedLocation = AppConstants.Defaults.State.editedLocation
+  @State private var isShowingSaveError = AppConstants.Defaults.UI.isShowingSaveError
+  @State private var saveErrorMessage = AppConstants.Defaults.State.saveErrorMessage
 
   var body: some View {
     NavigationStack {

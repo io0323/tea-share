@@ -9,17 +9,26 @@ struct ContentView: View {
     TabView {
       TeaTimelineView()
         .tabItem {
-          Label("タイムライン", systemImage: "square.grid.2x2.fill")
+          Label(
+            AppConstants.UI.Navigation.Tab.Labels.timeline,
+            systemImage: AppConstants.UI.Navigation.Tab.Symbols.timeline
+          )
         }
 
       TeaMapView()
         .tabItem {
-          Label("マップ", systemImage: "map.fill")
+          Label(
+            AppConstants.UI.Navigation.Tab.Labels.map,
+            systemImage: AppConstants.UI.Navigation.Tab.Symbols.map
+          )
         }
 
       ProfileView()
         .tabItem {
-          Label("プロファイル", systemImage: "person.fill")
+          Label(
+            AppConstants.UI.Navigation.Tab.Labels.profile,
+            systemImage: AppConstants.UI.Navigation.Tab.Symbols.profile
+          )
         }
     }
   }

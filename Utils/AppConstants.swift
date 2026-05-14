@@ -1,5 +1,6 @@
 import Foundation
 import CoreLocation
+import SwiftUI
 
 /*
  アプリケーション全体で使用する定数を定義します。
@@ -65,11 +66,21 @@ struct AppConstants {
     
     struct ClipShape {
       static let capsule: Capsule = Capsule()
-      static let roundedRectangleLarge: RoundedRectangle = RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.large)
-      static let roundedRectangleExtraLarge: RoundedRectangle = RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge)
-      static let roundedRectangleSheet: RoundedRectangle = RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.sheet)
-      static let roundedRectangleCard: RoundedRectangle = RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.card)
-      static let roundedRectangleProgress: RoundedRectangle = RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.progress)
+      static let roundedRectangleLarge: RoundedRectangle = RoundedRectangle(
+        cornerRadius: Layout.CornerRadius.large
+      )
+      static let roundedRectangleExtraLarge: RoundedRectangle = RoundedRectangle(
+        cornerRadius: Layout.CornerRadius.extraLarge
+      )
+      static let roundedRectangleSheet: RoundedRectangle = RoundedRectangle(
+        cornerRadius: Layout.CornerRadius.sheet
+      )
+      static let roundedRectangleCard: RoundedRectangle = RoundedRectangle(
+        cornerRadius: Layout.CornerRadius.card
+      )
+      static let roundedRectangleProgress: RoundedRectangle = RoundedRectangle(
+        cornerRadius: Layout.CornerRadius.progress
+      )
     }
     
     struct Opacity {
@@ -186,190 +197,240 @@ struct AppConstants {
         static let imageOffset: CGFloat = 3
         static let imageOpacity: Double = 0.1
       }
-      
-      struct Typography {
-        struct Font {
-          static let largeTitle: Font = .largeTitle
-          static let title: Font = .title
-          static let title2: Font = .title2
-          static let title3: Font = .title3
-          static let headline: Font = .headline
-          static let subheadline: Font = .subheadline
-          static let footnote: Font = .footnote
-          static let caption: Font = .caption
-          static let caption2: Font = .caption2
-          static let system: Font = .system
-          static let systemBold: Font = .systemBold
-          static let systemItalic: Font = .systemItalic
-          static let systemBoldItalic: Font = .systemBoldItalic
-          static let systemMedium: Font = .systemMedium
-          static let systemSemibold: Font = .systemSemibold
-          static let systemLight: Font = .systemLight
-          static let systemThin: Font = .systemThin
-        }
-        
-        struct FontWeight {
-          static let bold: Font.Weight = .bold
-          static let heavy: Font.Weight = .heavy
-          static let medium: Font.Weight = .medium
-          static let regular: Font.Weight = .regular
-          static let semibold: Font.Weight = .semibold
-          static let thin: Font.Weight = .thin
-          static let light: Font.Weight = .light
-        }
-        
-        struct FontScale {
-          static let cardTitle: Font = .headline
-          static let cardSubtitle: Font = .caption.weight(.semibold)
-          static let cardBody: Font = .caption
-          static let sectionTitle: Font = .headline
-          static let sectionSubtitle: Font = .subheadline.weight(.semibold)
-          static let sectionBody: Font = .body
-          static let buttonTitle: Font = .headline
-          static let chipTitle: Font = .subheadline.weight(.medium)
-          static let detailTitle: Font = .title3.weight(.semibold)
-          static let detailSubtitle: Font = .subheadline
-          static let detailBody: Font = .body
-          static let statusTitle: Font = .subheadline.weight(.semibold)
-          static let statusBody: Font = .subheadline
-        }
+    }
+    
+    /*
+     Layout 内グループへの短縮参照です。
+     */
+    typealias Padding = Layout.Padding
+    typealias Frame = Layout.Frame
+    typealias CornerRadius = Layout.CornerRadius
+    typealias Shadow = Layout.Shadow
+    
+    /*
+     よく使うボタンスタイルのプリセットです。
+     */
+    struct ButtonStyle {
+      static let plain: PlainButtonStyle = PlainButtonStyle()
+      static let bordered: BorderedButtonStyle = BorderedButtonStyle()
+      static let borderedProminent: BorderedProminentButtonStyle =
+        BorderedProminentButtonStyle()
+    }
+    
+    /*
+     SF Symbols などアイコン用の基準サイズです。
+     */
+    struct FontSizes {
+      static let emptyStateIcon: CGFloat = 36
+      static let cardIcon: CGFloat = 28
+      static let errorImageIcon: CGFloat = 48
+      static let mapMarkerIcon: CGFloat = 14
+    }
+    
+    struct Typography {
+      struct Font {
+        static let largeTitle: Font = .largeTitle
+        static let title: Font = .title
+        static let title2: Font = .title2
+        static let title3: Font = .title3
+        static let headline: Font = .headline
+        static let subheadline: Font = .subheadline
+        static let footnote: Font = .footnote
+        static let caption: Font = .caption
+        static let caption2: Font = .caption2
+        static let body: Font = .body
+        static let system: Font = .system
+        static let systemBold: Font = .systemBold
+        static let systemItalic: Font = .systemItalic
+        static let systemBoldItalic: Font = .systemBoldItalic
+        static let systemMedium: Font = .systemMedium
+        static let systemSemibold: Font = .systemSemibold
+        static let systemLight: Font = .systemLight
+        static let systemThin: Font = .systemThin
       }
       
-      struct ImageScaling {
-        static let scaledToFill: ContentMode = .scaledToFill
-        static let scaledToFit: ContentMode = .scaledToFit
+      struct FontWeight {
+        static let bold: Font.Weight = .bold
+        static let heavy: Font.Weight = .heavy
+        static let medium: Font.Weight = .medium
+        static let regular: Font.Weight = .regular
+        static let semibold: Font.Weight = .semibold
+        static let thin: Font.Weight = .thin
+        static let light: Font.Weight = .light
       }
       
-      struct BackgroundColor {
-        static let whiteCard: Color = Color.white.opacity(AppConstants.UI.Opacity.whiteCard)
-        static let backgroundWhite: Color = Color.white.opacity(AppConstants.UI.Opacity.backgroundWhite)
-        static let whiteHigh: Color = Color.white.opacity(AppConstants.UI.Opacity.whiteHigh)
-        static let cardBackground: Color = Color.white.opacity(AppConstants.UI.Opacity.cardBackground)
-        static let cardWhite: Color = Color.white.opacity(AppConstants.UI.Opacity.cardWhite)
+      struct FontScale {
+        static let cardTitle: Font = .headline
+        static let cardSubtitle: Font = .caption.weight(.semibold)
+        static let cardBody: Font = .caption
+        static let sectionTitle: Font = .headline
+        static let sectionSubtitle: Font = .subheadline.weight(.semibold)
+        static let sectionBody: Font = .body
+        static let buttonTitle: Font = .headline
+        static let chipTitle: Font = .subheadline.weight(.medium)
+        static let detailTitle: Font = .title3.weight(.semibold)
+        static let detailSubtitle: Font = .subheadline
+        static let detailBody: Font = .body
+        static let statusTitle: Font = .subheadline.weight(.semibold)
+        static let statusBody: Font = .subheadline
+      }
+    }
+    
+    struct ImageScaling {
+      static let scaledToFill: ContentMode = .scaledToFill
+      static let scaledToFit: ContentMode = .scaledToFit
+    }
+    
+    struct BackgroundColor {
+      static let whiteCard: Color = Color.white.opacity(AppConstants.UI.Opacity.whiteCard)
+      static let backgroundWhite: Color = Color.white.opacity(AppConstants.UI.Opacity.backgroundWhite)
+      static let whiteHigh: Color = Color.white.opacity(AppConstants.UI.Opacity.whiteHigh)
+      static let cardBackground: Color = Color.white.opacity(AppConstants.UI.Opacity.cardBackground)
+      static let cardWhite: Color = Color.white.opacity(AppConstants.UI.Opacity.cardWhite)
+    }
+    
+    struct ShadowStyle {
+      static let blackLight: Color = .black.opacity(AppConstants.UI.Opacity.blackLight)
+      static let shadow: Color = .black.opacity(AppConstants.UI.Opacity.shadow)
+      static let cardShadow: Color = .black.opacity(AppConstants.UI.Opacity.cardShadow)
+      static let imageOpacity: Color = .black.opacity(
+        Layout.Shadow.imageOpacity
+      )
+    }
+    
+    struct TintColor {
+      static let blue: Color = .blue
+    }
+    
+    struct FillColor {
+      static let green: Color = Color.green.opacity(AppConstants.UI.Colors.greenOpacity)
+      static let gray: Color = Color.gray.opacity(AppConstants.UI.Opacity.grayMedium)
+      static let secondary: Color = Color.secondary.opacity(AppConstants.UI.Opacity.secondaryCapsule)
+    }
+    
+    struct Alerts {
+      struct Titles {
+        static let saveError: String = "保存に失敗しました"
+        static let saveFailed: String = "保存できませんでした"
+        static let tradeRequest: String = "取引リクエスト"
+        static let resetInput: String = "入力内容をリセットしますか？"
       }
       
-      struct ShadowStyle {
-        static let blackLight: Color = .black.opacity(AppConstants.UI.Opacity.blackLight)
-        static let shadow: Color = .black.opacity(AppConstants.UI.Opacity.shadow)
-        static let cardShadow: Color = .black.opacity(AppConstants.UI.Opacity.cardShadow)
-        static let imageOpacity: Color = .black.opacity(AppConstants.UI.Shadow.imageOpacity)
+      struct Buttons {
+        static let ok: String = "OK"
+        static let cancel: String = "キャンセル"
+        static let reset: String = "リセット"
       }
       
-      struct TintColor {
-        static let blue: Color = .blue
+      struct Messages {
+        static let tradeRequestUnavailable: String = "交渉中のため新規リクエストはできません"
+        static let tradeCompleted: String = "この取引は完了済みです"
+        static let userDataNotFound: String =
+          "ユーザーデータが見つかりません。プロフィールを設定してください。"
+        static let ownerDataNotFound: String = "出品者情報が見つかりません。"
+        static let resetConfirmation: String = "現在の入力内容と下書きが削除されます。"
+      }
+    }
+    
+    struct Sheets {
+      struct Detents {
+        static let mapDetailFraction: Double = 0.35
+        static let mapDetailMedium: PresentationDetent = .medium
+      }
+    }
+    
+    struct Navigation {
+      struct Titles {
+        static let main: String = "TeaShare"
+        static let profile: String = "プロフィール"
+        static let map: String = "交換スポット"
+        static let addTea: String = "新規出品"
+        static let teaDetail: String = "茶葉の詳細"
       }
       
-      struct FillColor {
-        static let green: Color = Color.green.opacity(AppConstants.UI.Colors.greenOpacity)
-        static let gray: Color = Color.gray.opacity(AppConstants.UI.Opacity.grayMedium)
-        static let secondary: Color = Color.secondary.opacity(AppConstants.UI.Opacity.secondaryCapsule)
-      }
-      
-      struct Alerts {
-        struct Titles {
-          static let saveError: String = "保存に失敗しました"
-          static let saveFailed: String = "保存できませんでした"
-          static let tradeRequest: String = "取引リクエスト"
-          static let resetInput: String = "入力内容をリセットしますか？"
-        }
-        
+      struct Toolbar {
         struct Buttons {
-          static let ok: String = "OK"
+          static let edit: String = "編集"
+          static let done: String = "完了"
           static let cancel: String = "キャンセル"
-          static let reset: String = "リセット"
-        }
-        
-        struct Messages {
-          static let tradeRequestUnavailable: String = "交渉中のため新規リクエストはできません"
-          static let tradeCompleted: String = "この取引は完了済みです"
-          static let userDataNotFound: String = "ユーザーデータが見つかりません。プロファイルを設定してください。"
-          static let ownerDataNotFound: String = "出品者情報が見つかりません。"
-          static let resetConfirmation: String = "現在の入力内容と下書きが削除されます。"
+          static let save: String = "保存"
         }
       }
       
-      struct Sheets {
-        struct Detents {
-          static let mapDetailFraction: Double = 0.35
-          static let mapDetailMedium: PresentationDetent = .medium
-        }
-      }
-      
-      struct Navigation {
-        struct Titles {
-          static let main: String = "TeaShare"
-          static let profile: String = "プロファイル"
-          static let map: String = "交換スポット"
-          static let addTea: String = "新規出品"
-          static let teaDetail: String = "茶葉の詳細"
-        }
-        
-        struct Toolbar {
-          struct Buttons {
-            static let edit: String = "編集"
-            static let done: String = "完了"
-            static let cancel: String = "キャンセル"
-            static let save: String = "保存"
-          }
-        }
-      }
-      
-      struct UIStrings {
-        struct Actions {
-          static let saving: String = "保存中..."
-          static let reset: String = "リセット"
-          static let openInMap: String = "地図で開く"
-          static let submitTradeRequest: String = "取引リクエストを送信"
-          static let focusOnDefaultArea: String = "デフォルトエリアにフォーカス"
-          static let plus: String = "茶葉を追加"
-        }
-        
+      /*
+       ルートタブのラベルと SF Symbols 名です。
+       */
+      struct Tab {
         struct Labels {
-          static let username: String = "ユーザー名"
-          static let id: String = "ID"
-          static let location: String = "場所"
-          static let description: String = "説明"
-          static let userDataNotFound: String = "ユーザーデータが見つかりません"
-          static let profile: String = "プロファイル"
-          static let clearFilter: String = "フィルタ解除"
-          static let displayCount: String = "表示中: {count}件"
-          static let seller: String = "出品者: {username}"
-          static let area: String = "エリア: {location}"
-          static let remaining: String = "残量: {grams}g"
-          static let status: String = "ステータス: {status}"
-          static let updateTradeStatus: String = "取引ステータスを更新"
-          static let sortBy: String = "並び替え"
-          static let displayScope: String = "表示範囲"
-          static let expiringOnly: String = "期限切れ/期限間近のみ"
-          static let targetCount: String = "対象: {count}件"
-          static let resultCount: String = "結果: {count}件"
-          static let expiringCount: String = "期限注意: {count}件"
-          static let noMatchingTea: String = "条件に一致する茶葉がありません"
-          static let changeSearchConditions: String = "検索条件やカテゴリを変更してください"
-          static let clearAllConditions: String = "条件をすべて解除"
-          static let noFilterConditions: String = "フィルタ条件は未設定です"
+          static let timeline: String = "タイムライン"
+          static let map: String = "マップ"
+          static let profile: String = "プロフィール"
         }
         
-        struct Placeholders {
-          static let descriptionEmpty: String = "説明はありません"
-          static let imageLoadError: String = "画像の読み込みに失敗しました"
-          static let unknown: String = "不明"
-          static let notSet: String = "未設定"
-        }
-        
-        struct Content {
-          static let location: String = "location"
-          static let tray: String = "tray"
-          static let photo: String = "photo"
-          static let infoCircleFill: String = "info.circle.fill"
-          static let arrowRightCircleFill: String = "arrow.right.circle.fill"
-          static let envelopeFill: String = "envelope.fill"
-          static let mapFill: String = "map.fill"
-          static let location: String = "location"
-          static let xmarkCircleFill: String = "xmark.circle.fill"
+        struct Symbols {
+          static let timeline: String = "square.grid.2x2.fill"
+          static let map: String = "map.fill"
+          static let profile: String = "person.fill"
         }
       }
     }
+    
+    struct UIStrings {
+      struct Actions {
+        static let saving: String = "保存中..."
+        static let reset: String = "リセット"
+        static let openInMap: String = "地図で開く"
+        static let submitTradeRequest: String = "取引リクエストを送信"
+        static let focusOnDefaultArea: String = "デフォルトエリアにフォーカス"
+        static let plus: String = "茶葉を追加"
+      }
+      
+      struct Labels {
+        static let username: String = "ユーザー名"
+        static let id: String = "ID"
+        static let location: String = "場所"
+        static let description: String = "説明"
+        static let userDataNotFound: String = "ユーザーデータが見つかりません"
+        static let profile: String = "プロフィール"
+        static let clearFilter: String = "フィルタ解除"
+        static let displayCount: String = "表示中: {count}件"
+        static let seller: String = "出品者: {username}"
+        static let area: String = "エリア: {location}"
+        static let remaining: String = "残量: {grams}g"
+        static let status: String = "ステータス: {status}"
+        static let updateTradeStatus: String = "取引ステータスを更新"
+        static let sortBy: String = "並び替え"
+        static let displayScope: String = "表示範囲"
+        static let expiringOnly: String = "期限切れ/期限間近のみ"
+        static let targetCount: String = "対象: {count}件"
+        static let resultCount: String = "結果: {count}件"
+        static let expiringCount: String = "期限注意: {count}件"
+        static let noMatchingTea: String = "条件に一致する茶葉がありません"
+        static let changeSearchConditions: String = "検索条件やカテゴリを変更してください"
+        static let clearAllConditions: String = "条件をすべて解除"
+        static let noFilterConditions: String = "フィルタ条件は未設定です"
+      }
+      
+      struct Placeholders {
+        static let descriptionEmpty: String = "説明はありません"
+        static let imageLoadError: String = "画像の読み込みに失敗しました"
+        static let unknown: String = "不明"
+        static let notSet: String = "未設定"
+      }
+      
+      struct Content {
+        static let location: String = "location"
+        static let leafFill: String = "leaf.fill"
+        static let tray: String = "tray"
+        static let photo: String = "photo"
+        static let infoCircleFill: String = "info.circle.fill"
+        static let arrowRightCircleFill: String = "arrow.right.circle.fill"
+        static let envelopeFill: String = "envelope.fill"
+        static let mapFill: String = "map.fill"
+        static let xmarkCircleFill: String = "xmark.circle.fill"
+      }
+    }
+  }
   struct Defaults {
       struct State {
         static let searchText: String = ""
@@ -415,5 +476,4 @@ struct AppConstants {
         static let selectedCategory: TeaCategory? = nil
       }
     }
-  }
 }

@@ -7,11 +7,11 @@ import SwiftData
 struct TeaTimelineView: View {
   @Query(sort: \TeaLeaf.expiryDate) private var teaLeaves: [TeaLeaf]
   @State private var selectedCategory: TeaCategory?
-  @State private var searchText = AppConstants.AppConstants.Defaults.State.searchText
-  @State private var sortOption: TeaTimelineSortOption = AppConstants.AppConstants.Defaults.Selection.sortOption
-  @State private var statusScope: TeaTimelineStatusScope = AppConstants.AppConstants.Defaults.Selection.statusScope
-  @State private var showExpiringOnly = AppConstants.AppConstants.Defaults.UI.showExpiringOnly
-  @State private var isPresentingAddTea = AppConstants.AppConstants.Defaults.UI.isPresentingAddTea
+  @State private var searchText = AppConstants.Defaults.State.searchText
+  @State private var sortOption: TeaTimelineSortOption = AppConstants.Defaults.Selection.sortOption
+  @State private var statusScope: TeaTimelineStatusScope = AppConstants.Defaults.Selection.statusScope
+  @State private var showExpiringOnly = AppConstants.Defaults.UI.showExpiringOnly
+  @State private var isPresentingAddTea = AppConstants.Defaults.UI.isPresentingAddTea
 
   private let columns = [
     GridItem(.flexible(), spacing: AppConstants.UI.Layout.Spacing.grid),
@@ -459,7 +459,9 @@ private struct TeaLeafCardView: View {
       if !tea.imagePath.isEmpty, let uiImage = loadImage(from: tea.imagePath) {
         Image(uiImage: uiImage)
           .resizable()
-          .scaledToFill(AppConstants.UI.ImageScaling.scaledToFill)
+          .aspectRatio(
+            contentMode: AppConstants.UI.ImageScaling.scaledToFill
+          )
           .frame(height: AppConstants.UI.Frame.cardHeight)
           .clipShape(AppConstants.UI.ClipShape.roundedRectangleLarge)
       } else {
