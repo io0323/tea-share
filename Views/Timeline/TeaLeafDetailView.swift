@@ -8,14 +8,14 @@ import MapKit
 struct TeaLeafDetailView: View {
   @Environment(\.modelContext) private var modelContext
   @Bindable var teaLeaf: TeaLeaf
-  @State private var isEditingDetail = AppConstants.AppConstants.Defaults.UI.isEditingDetail
-  @State private var editableRemainingGrams = AppConstants.AppConstants.Defaults.State.editableRemainingGrams
+  @State private var isEditingDetail = AppConstants.Defaults.UI.isEditingDetail
+  @State private var editableRemainingGrams = AppConstants.Defaults.State.editableRemainingGrams
   @State private var editableExpiryDate = Date()
-  @State private var editableDescription = AppConstants.AppConstants.Defaults.State.editableDescription
-  @State private var isShowingSaveError = AppConstants.AppConstants.Defaults.UI.isShowingSaveError
-  @State private var saveErrorMessage = AppConstants.AppConstants.Defaults.State.saveErrorMessage
-  @State private var isShowingTradeRequestAlert = AppConstants.AppConstants.Defaults.UI.isShowingTradeRequestAlert
-  @State private var tradeRequestMessage = AppConstants.AppConstants.Defaults.State.tradeRequestMessage
+  @State private var editableDescription = AppConstants.Defaults.State.editableDescription
+  @State private var isShowingSaveError = AppConstants.Defaults.UI.isShowingSaveError
+  @State private var saveErrorMessage = AppConstants.Defaults.State.saveErrorMessage
+  @State private var isShowingTradeRequestAlert = AppConstants.Defaults.UI.isShowingTradeRequestAlert
+  @State private var tradeRequestMessage = AppConstants.Defaults.State.tradeRequestMessage
   @Query private var users: [User]
 
   private let dateFormatter: DateFormatter = {
@@ -180,7 +180,7 @@ struct TeaLeafDetailView: View {
           in: AppConstants.ValidationLimits.minRemainingGrams...AppConstants.ValidationLimits.maxRemainingGrams,
           step: 5
         )
-        .disabled(AppConstants.AppConstants.Defaults.UI.ButtonState.disabled)
+        .disabled(AppConstants.Defaults.UI.ButtonState.disabled)
         DatePicker(
           "賞味期限",
           selection: $editableExpiryDate,
@@ -231,7 +231,9 @@ struct TeaLeafDetailView: View {
       if let uiImage = loadImage(from: teaLeaf.imagePath) {
         Image(uiImage: uiImage)
           .resizable()
-          .scaledToFit(AppConstants.UI.ImageScaling.scaledToFit)
+          .aspectRatio(
+            contentMode: AppConstants.UI.ImageScaling.scaledToFit
+          )
           .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
           .shadow(color: AppConstants.UI.ShadowStyle.imageOpacity, radius: AppConstants.UI.Shadow.imageRadius, x: 0, y: AppConstants.UI.Shadow.imageOffset)
       } else {

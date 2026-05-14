@@ -18,23 +18,23 @@ struct AddTeaView: View {
 
   @State private var pickedPhotoItem: PhotosPickerItem?
   @State private var selectedImage: UIImage?
-  @State private var isShowingCamera = AppConstants.AppConstants.Defaults.UI.isShowingCamera
-  @State private var isAnalyzingImage = AppConstants.AppConstants.Defaults.UI.isAnalyzingImage
-  @State private var isSaving = AppConstants.AppConstants.Defaults.UI.isSaving
-  @State private var isShowingErrorAlert = AppConstants.AppConstants.Defaults.UI.isShowingErrorAlert
-  @State private var isShowingResetAlert = AppConstants.AppConstants.Defaults.UI.isShowingResetAlert
-  @State private var errorMessage = AppConstants.AppConstants.Defaults.State.errorMessage
-  @State private var hasLoadedDraft = AppConstants.AppConstants.Defaults.UI.hasLoadedDraft
+  @State private var isShowingCamera = AppConstants.Defaults.UI.isShowingCamera
+  @State private var isAnalyzingImage = AppConstants.Defaults.UI.isAnalyzingImage
+  @State private var isSaving = AppConstants.Defaults.UI.isSaving
+  @State private var isShowingErrorAlert = AppConstants.Defaults.UI.isShowingErrorAlert
+  @State private var isShowingResetAlert = AppConstants.Defaults.UI.isShowingResetAlert
+  @State private var errorMessage = AppConstants.Defaults.State.errorMessage
+  @State private var hasLoadedDraft = AppConstants.Defaults.UI.hasLoadedDraft
 
   @State private var draftTeaLeaf: TeaLeaf?
-  @State private var name = AppConstants.AppConstants.Defaults.State.name
-  @State private var brand = AppConstants.AppConstants.Defaults.State.brand
-  @State private var category: TeaCategory = AppConstants.AppConstants.Defaults.Selection.category
+  @State private var name = AppConstants.Defaults.State.name
+  @State private var brand = AppConstants.Defaults.State.brand
+  @State private var category: TeaCategory = AppConstants.Defaults.Selection.category
   @State private var expiryDate = Date()
-  @State private var descriptionText = AppConstants.AppConstants.Defaults.State.descriptionText
-  @State private var remainingGrams = AppConstants.AppConstants.Defaults.State.remainingGrams
-  @State private var location = AppConstants.AppConstants.Defaults.State.location
-  @State private var username = AppConstants.AppConstants.Defaults.State.username
+  @State private var descriptionText = AppConstants.Defaults.State.descriptionText
+  @State private var remainingGrams = AppConstants.Defaults.State.remainingGrams
+  @State private var location = AppConstants.Defaults.State.location
+  @State private var username = AppConstants.Defaults.State.username
 
   /*
    必須項目の入力状態を判定します。
@@ -184,7 +184,9 @@ struct AddTeaView: View {
           if let selectedImage {
             Image(uiImage: selectedImage)
               .resizable()
-              .scaledToFit(AppConstants.UI.ImageScaling.scaledToFit)
+              .aspectRatio(
+                contentMode: AppConstants.UI.ImageScaling.scaledToFit
+              )
               .frame(maxHeight: AppConstants.UI.Frame.imageMaxHeight)
               .clipShape(AppConstants.UI.ClipShape.roundedRectangleSheet)
 
