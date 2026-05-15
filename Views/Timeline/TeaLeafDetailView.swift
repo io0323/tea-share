@@ -105,10 +105,13 @@ struct TeaLeafDetailView: View {
    */
   private var statusSection: some View {
     VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.section) {
-      Text("取引ステータス")
+      Text(AppConstants.UI.UIStrings.Detail.Sections.tradeStatus)
         .font(AppConstants.UI.Typography.FontScale.sectionTitle)
 
-      Picker("取引ステータス", selection: $teaLeaf.tradeStatus) {
+      Picker(
+        AppConstants.UI.UIStrings.Labels.tradeStatus,
+        selection: $teaLeaf.tradeStatus
+      ) {
         ForEach(TradeStatus.allCases) { status in
           Text(status.rawValue).tag(status)
         }
@@ -129,7 +132,7 @@ struct TeaLeafDetailView: View {
    */
   private var quickStatusSection: some View {
     VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.section) {
-      Text("クイック操作")
+      Text(AppConstants.UI.UIStrings.Detail.Sections.quickActions)
         .font(AppConstants.UI.Typography.FontScale.sectionTitle)
 
       Button {
@@ -159,11 +162,21 @@ struct TeaLeafDetailView: View {
   private var detailSection: some View {
     VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.detailSection) {
       HStack {
-        Text("詳細情報")
+        Text(AppConstants.UI.UIStrings.Detail.Sections.details)
           .font(AppConstants.UI.Typography.FontScale.sectionTitle)
         Spacer()
         if isEditingDetail {
-          Text("\(editableDescription.count)/\(AppConstants.TextLimits.descriptionMaxLength)")
+          Text(
+            AppConstants.UI.UIStrings.Labels.characterCount
+              .replacingOccurrences(
+                of: "{count}",
+                with: "\(editableDescription.count)"
+              )
+              .replacingOccurrences(
+                of: "{max}",
+                with: "\(AppConstants.TextLimits.descriptionMaxLength)"
+              )
+          )
             .font(AppConstants.UI.Typography.Font.footnote)
             .foregroundStyle(
               editableDescription.count >= AppConstants.TextLimits.descriptionMaxLength
@@ -175,26 +188,54 @@ struct TeaLeafDetailView: View {
 
       if isEditingDetail {
         Stepper(
-          "残量: \(editableRemainingGrams)g",
+          AppConstants.UI.UIStrings.Detail.Fields.remainingWithGrams
+            .replacingOccurrences(
+              of: "{grams}",
+              with: "\(editableRemainingGrams)"
+            ),
           value: $editableRemainingGrams,
           in: AppConstants.ValidationLimits.minRemainingGrams...AppConstants.ValidationLimits.maxRemainingGrams,
           step: 5
         )
         .disabled(AppConstants.Defaults.UI.ButtonState.disabled)
         DatePicker(
-          "賞味期限",
+          AppConstants.UI.UIStrings.Detail.Fields.expiry,
           selection: $editableExpiryDate,
           displayedComponents: .date
         )
-        TextField("説明", text: $editableDescription, axis: .vertical)
+        TextField(
+          AppConstants.UI.UIStrings.Labels.description,
+          text: $editableDescription,
+          axis: .vertical
+        )
           .lineLimit(3...8)
       } else {
-        detailRow("残量", value: "\(teaLeaf.remainingGrams)g")
-        detailRow("賞味期限", value: dateFormatter.string(from: teaLeaf.expiryDate))
-        detailRow("出品者", value: teaLeaf.owner?.username ?? "未設定")
-        detailRow("エリア", value: teaLeaf.owner?.location ?? "未設定")
-        detailRow("緯度", value: String(format: "%.5f", teaLeaf.latitude))
-        detailRow("経度", value: String(format: "%.5f", teaLeaf.longitude))
+        detailRow(
+          AppConstants.UI.UIStrings.Detail.Fields.remaining,
+          value: "\(teaLeaf.remainingGrams)g"
+        )
+        detailRow(
+          AppConstants.UI.UIStrings.Detail.Fields.expiry,
+          value: dateFormatter.string(from: teaLeaf.expiryDate)
+        )
+        detailRow(
+          AppConstants.UI.UIStrings.Detail.Fields.seller,
+          value: teaLeaf.owner?.username
+            ?? AppConstants.UI.UIStrings.Placeholders.notSet
+        )
+        detailRow(
+          AppConstants.UI.UIStrings.Detail.Fields.area,
+          value: teaLeaf.owner?.location
+            ?? AppConstants.UI.UIStrings.Placeholders.notSet
+        )
+        detailRow(
+          AppConstants.UI.UIStrings.Detail.Fields.latitude,
+          value: String(format: "%.5f", teaLeaf.latitude)
+        )
+        detailRow(
+          AppConstants.UI.UIStrings.Detail.Fields.longitude,
+          value: String(format: "%.5f", teaLeaf.longitude)
+        )
 
         Button {
           openInMaps()
@@ -259,7 +300,7 @@ struct TeaLeafDetailView: View {
    */
   private var tradeRequestSection: some View {
     VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.section) {
-      Text("取引リクエスト")
+      Text(AppConstants.UI.UIStrings.Detail.Sections.tradeRequest)
         .font(AppConstants.UI.Typography.FontScale.sectionTitle)
 
       if teaLeaf.tradeStatus == .available {
@@ -267,7 +308,7 @@ struct TeaLeafDetailView: View {
           submitTradeRequest()
         } label: {
           HStack {
-            Image(systemName: "envelope.fill")
+            Image(systemName: AppConstants.UI.UIStrings.Content.envelopeFill)
             Text(AppConstants.UI.UIStrings.Actions.submitTradeRequest)
               .fontWeight(AppConstants.UI.Typography.FontWeight.semibold)
           }
@@ -326,11 +367,11 @@ struct TeaLeafDetailView: View {
   private var quickActionTitle: String {
     switch teaLeaf.tradeStatus {
     case .available:
-      return "交渉中へ進める"
+      return AppConstants.UI.UIStrings.Detail.QuickActions.moveToPending
     case .pending:
-      return "交換完了へ進める"
+      return AppConstants.UI.UIStrings.Detail.QuickActions.moveToCompleted
     case .completed:
-      return "この取引は完了済みです"
+      return AppConstants.UI.UIStrings.Detail.QuickActions.alreadyCompleted
     }
   }
 
@@ -378,7 +419,8 @@ struct TeaLeafDetailView: View {
     do {
       try modelContext.save()
     } catch {
-      saveErrorMessage = "変更内容を保存できませんでした。時間をおいて再度お試しください。"
+      saveErrorMessage =
+        AppConstants.UI.UIStrings.Detail.SaveErrors.detailSaveFailed
       isShowingSaveError = true
     }
   }
@@ -411,7 +453,8 @@ struct TeaLeafDetailView: View {
       try modelContext.save()
       isEditingDetail = false
     } catch {
-      saveErrorMessage = "変更内容を保存できませんでした。時間をおいて再度お試しください。"
+      saveErrorMessage =
+        AppConstants.UI.UIStrings.Detail.SaveErrors.detailSaveFailed
       isShowingSaveError = true
     }
   }
@@ -434,7 +477,8 @@ struct TeaLeafDetailView: View {
     
     // 自分自身の茶葉にはリクエストできない
     if currentUser.id == owner.id {
-      tradeRequestMessage = "自分が出品した茶葉には取引リクエストを送信できません。"
+      tradeRequestMessage =
+        AppConstants.UI.UIStrings.Detail.TradeMessages.ownListing
       isShowingTradeRequestAlert = true
       return
     }
@@ -452,10 +496,11 @@ struct TeaLeafDetailView: View {
       try modelContext.save()
       teaLeaf.tradeStatus = .pending
       try modelContext.save()
-      tradeRequestMessage = "取引リクエストを送信しました。出品者の承認をお待ちください。"
+      tradeRequestMessage = AppConstants.UI.UIStrings.Detail.TradeMessages.sent
       isShowingTradeRequestAlert = true
     } catch {
-      tradeRequestMessage = "取引リクエストの送信に失敗しました。時間をおいて再度お試しください。"
+      tradeRequestMessage =
+        AppConstants.UI.UIStrings.Detail.TradeMessages.sendFailed
       isShowingTradeRequestAlert = true
     }
   }
