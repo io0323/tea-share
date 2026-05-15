@@ -409,6 +409,154 @@ struct AppConstants {
         static let changeSearchConditions: String = "検索条件やカテゴリを変更してください"
         static let clearAllConditions: String = "条件をすべて解除"
         static let noFilterConditions: String = "フィルタ条件は未設定です"
+        static let tradeStatus: String = "取引ステータス"
+        static let allCategories: String = "すべて"
+        static let countSuffix: String = "{count}件"
+        static let characterCount: String = "{count}/{max}"
+      }
+      
+      /*
+       新規出品画面の文言です。
+       */
+      struct AddTea {
+        struct Sections {
+          static let image: String = "画像"
+          static let teaInfo: String = "茶葉情報"
+          static let seller: String = "出品者情報"
+          static let draft: String = "下書き"
+          static let validation: String = "入力チェック"
+        }
+        
+        struct FormFields {
+          static let teaName: String = "茶葉名"
+          static let brand: String = "ブランド名"
+          static let category: String = "カテゴリー"
+          static let remaining: String = "残量: {grams}g"
+          static let expiry: String = "賞味期限"
+          static let description: String = "説明文"
+          static let username: String = "ユーザー名"
+          static let area: String = "エリア"
+        }
+        
+        struct Actions {
+          static let pickFromLibrary: String = "ライブラリから選択"
+          static let takePhoto: String = "カメラで撮影"
+          static let reanalyze: String = "再抽出"
+          static let removeImage: String = "画像を削除"
+          static let resetForm: String = "入力内容をリセット"
+          static let quickRemaining: String = "クイック"
+          static let expiryPreset: String = "期限プリセット"
+          static let quickGrams: String = "{grams}g"
+        }
+        
+        struct Hints {
+          static let analyzingImage: String = "画像から情報を抽出中..."
+          static let autoDraft: String = "入力内容は自動で下書き保存されます。"
+        }
+        
+        struct Validation {
+          static let teaNameRequired: String = "茶葉名は必須です。"
+          static let teaNameMinLength: String =
+            "茶葉名は{min}文字以上で入力してください。"
+          static let teaNameMaxLength: String =
+            "茶葉名は{max}文字以下で入力してください。"
+          static let areaRequired: String = "エリアは必須です。"
+          static let areaMinLength: String =
+            "エリアは{min}文字以上で入力してください。"
+          static let areaMaxLength: String =
+            "エリアは{max}文字以下で入力してください。"
+          static let remainingMin: String =
+            "残量は{min}g以上で入力してください。"
+          static let remainingMax: String =
+            "残量は{max}g以下で入力してください。"
+          static let expiryNotPast: String =
+            "賞味期限は本日以降を選択してください。"
+          static let usernameRequired: String = "ユーザー名は必須です。"
+          static let usernameMinLength: String =
+            "ユーザー名は{min}文字以上で入力してください。"
+          static let usernameMaxLength: String =
+            "ユーザー名は{max}文字以下で入力してください。"
+        }
+        
+        struct Errors {
+          static let imageLoadFailed: String =
+            "画像の読み込みに失敗しました。別の画像を選択してください。"
+          static let saveFailed: String =
+            "保存処理に失敗しました。時間をおいて再度お試しください。"
+        }
+        
+        struct Suggestions {
+          static let unknownBrand: String = "ブランド不明"
+          static let mockTeaName: String = "抽出候補: お茶"
+          static let mockBrand: String = "抽出候補: TeaBrand"
+        }
+      }
+      
+      /*
+       茶葉詳細画面の文言です。
+       */
+      struct Detail {
+        struct Sections {
+          static let tradeStatus: String = "取引ステータス"
+          static let quickActions: String = "クイック操作"
+          static let details: String = "詳細情報"
+          static let tradeRequest: String = "取引リクエスト"
+        }
+        
+        struct Fields {
+          static let remaining: String = "残量"
+          static let expiry: String = "賞味期限"
+          static let seller: String = "出品者"
+          static let area: String = "エリア"
+          static let latitude: String = "緯度"
+          static let longitude: String = "経度"
+          static let remainingWithGrams: String = "残量: {grams}g"
+        }
+        
+        struct QuickActions {
+          static let moveToPending: String = "交渉中へ進める"
+          static let moveToCompleted: String = "交換完了へ進める"
+          static let alreadyCompleted: String = "この取引は完了済みです"
+        }
+        
+        struct TradeMessages {
+          static let ownListing: String =
+            "自分が出品した茶葉には取引リクエストを送信できません。"
+          static let sent: String =
+            "取引リクエストを送信しました。出品者の承認をお待ちください。"
+          static let sendFailed: String =
+            "取引リクエストの送信に失敗しました。時間をおいて再度お試しください。"
+        }
+        
+        struct SaveErrors {
+          static let detailSaveFailed: String =
+            "変更内容を保存できませんでした。時間をおいて再度お試しください。"
+          static let statusUpdateFailed: String =
+            "ステータス更新を保存できませんでした。時間をおいて再度お試しください。"
+        }
+      }
+      
+      /*
+       タイムライン画面の文言です。
+       */
+      struct Timeline {
+        struct Search {
+          static let placeholder: String = "茶葉名・ブランド・エリアで検索"
+        }
+        
+        struct FilterLabels {
+          static let search: String = "検索: {keyword}"
+          static let category: String = "カテゴリ: {category}"
+          static let scope: String = "範囲: {scope}"
+          static let expiringOnly: String = "期限注意のみ"
+          static let sort: String = "並び: {sort}"
+        }
+        
+        struct Expiry {
+          static let expired: String = "期限切れ"
+          static let daysRemaining: String = "残り{days}日"
+          static let fresh: String = "余裕あり"
+        }
       }
       
       struct Placeholders {
@@ -428,6 +576,19 @@ struct AppConstants {
         static let envelopeFill: String = "envelope.fill"
         static let mapFill: String = "map.fill"
         static let xmarkCircleFill: String = "xmark.circle.fill"
+        static let magnifyingglass: String = "magnifyingglass"
+        static let plusIcon: String = "plus"
+        static let camera: String = "camera"
+        static let sparkles: String = "sparkles"
+        static let trash: String = "trash"
+        static let leafCircleFill: String = "leaf.circle.fill"
+        static let arrowCounterclockwise: String = "arrow.counterclockwise"
+        static let bubbleLeftAndBubbleRightFill: String =
+          "bubble.left.and.bubble.right.fill"
+        static let checkmarkSealFill: String = "checkmark.seal.fill"
+        static let exclamationmarkTriangleFill: String =
+          "exclamationmark.triangle.fill"
+        static let clockFill: String = "clock.fill"
       }
     }
   }

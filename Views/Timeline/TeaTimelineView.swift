@@ -66,19 +66,33 @@ struct TeaTimelineView: View {
     var labels: [String] = []
     let keyword = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
     if !keyword.isEmpty {
-      labels.append("検索: \(keyword)")
+      labels.append(
+        AppConstants.UI.UIStrings.Timeline.FilterLabels.search
+          .replacingOccurrences(of: "{keyword}", with: keyword)
+      )
     }
     if let selectedCategory {
-      labels.append("カテゴリ: \(selectedCategory.rawValue)")
+      labels.append(
+        AppConstants.UI.UIStrings.Timeline.FilterLabels.category
+          .replacingOccurrences(of: "{category}", with: selectedCategory.rawValue)
+      )
     }
     if statusScope != .active {
-      labels.append("範囲: \(statusScope.rawValue)")
+      labels.append(
+        AppConstants.UI.UIStrings.Timeline.FilterLabels.scope
+          .replacingOccurrences(of: "{scope}", with: statusScope.rawValue)
+      )
     }
     if showExpiringOnly {
-      labels.append("期限注意のみ")
+      labels.append(
+        AppConstants.UI.UIStrings.Timeline.FilterLabels.expiringOnly
+      )
     }
     if sortOption != .expirySoon {
-      labels.append("並び: \(sortOption.rawValue)")
+      labels.append(
+        AppConstants.UI.UIStrings.Timeline.FilterLabels.sort
+          .replacingOccurrences(of: "{sort}", with: sortOption.rawValue)
+      )
     }
     return labels
   }
@@ -159,7 +173,7 @@ struct TeaTimelineView: View {
 
         Button(action: { isPresentingAddTea = true }) {
           HStack(spacing: AppConstants.UI.Layout.Spacing.tag) {
-            Image(systemName: "plus")
+            Image(systemName: AppConstants.UI.UIStrings.Content.plusIcon)
             Text(AppConstants.UI.UIStrings.Content.plus)
           }
           .font(AppConstants.UI.Typography.FontScale.buttonTitle)
@@ -184,16 +198,19 @@ struct TeaTimelineView: View {
    */
   private var searchField: some View {
     HStack(spacing: AppConstants.UI.Layout.Spacing.hStack) {
-      Image(systemName: "magnifyingglass")
+      Image(systemName: AppConstants.UI.UIStrings.Content.magnifyingglass)
         .foregroundStyle(.secondary)
-      TextField("茶葉名・ブランド・エリアで検索", text: $searchText)
+      TextField(
+        AppConstants.UI.UIStrings.Timeline.Search.placeholder,
+        text: $searchText
+      )
         .textInputAutocapitalization(.never)
         .autocorrectionDisabled()
       if !searchText.isEmpty {
         Button {
           searchText = ""
         } label: {
-          Image(systemName: "xmark.circle.fill")
+          Image(systemName: AppConstants.UI.UIStrings.Content.xmarkCircleFill)
             .foregroundStyle(.secondary)
         }
       }
@@ -246,7 +263,7 @@ struct TeaTimelineView: View {
     ScrollView(.horizontal, showsIndicators: false) {
       HStack(spacing: AppConstants.UI.Layout.Spacing.hStack) {
         CategoryChip(
-          title: "すべて",
+          title: AppConstants.UI.UIStrings.Labels.allCategories,
           isSelected: selectedCategory == nil
         ) {
           selectedCategory = nil
@@ -289,19 +306,19 @@ struct TeaTimelineView: View {
         statusSummaryCard(
           title: TradeStatus.available.rawValue,
           count: tradeStatusCounts[.available] ?? 0,
-          icon: "leaf.fill",
+          icon: AppConstants.UI.UIStrings.Content.leafFill,
           tint: .green
         )
         statusSummaryCard(
           title: TradeStatus.pending.rawValue,
           count: tradeStatusCounts[.pending] ?? 0,
-          icon: "bubble.left.and.bubble.right.fill",
+          icon: AppConstants.UI.UIStrings.Content.bubbleLeftAndBubbleRightFill,
           tint: .orange
         )
         statusSummaryCard(
           title: TradeStatus.completed.rawValue,
           count: tradeStatusCounts[.completed] ?? 0,
-          icon: "checkmark.seal.fill",
+          icon: AppConstants.UI.UIStrings.Content.checkmarkSealFill,
           tint: .gray
         )
       }
@@ -325,7 +342,10 @@ struct TeaTimelineView: View {
         Text(title)
           .font(AppConstants.UI.Typography.Font.caption)
           .foregroundStyle(.secondary)
-        Text("\(count)件")
+        Text(
+          AppConstants.UI.UIStrings.Labels.countSuffix
+            .replacingOccurrences(of: "{count}", with: "\(count)")
+        )
           .font(AppConstants.UI.Typography.FontScale.sectionTitle)
       }
     }
@@ -493,9 +513,19 @@ private struct TeaLeafCardView: View {
       expiryBadge
 
       VStack(alignment: .leading, spacing: 2) {
-        Text("残量: \(tea.remainingGrams)g")
+        Text(
+          AppConstants.UI.UIStrings.Labels.remaining
+            .replacingOccurrences(of: "{grams}", with: "\(tea.remainingGrams)")
+        )
           .font(AppConstants.UI.Typography.Font.caption)
-        Text("エリア: \(tea.owner?.location ?? "未設定")")
+        Text(
+          AppConstants.UI.UIStrings.Labels.area
+            .replacingOccurrences(
+              of: "{location}",
+              with: tea.owner?.location
+                ?? AppConstants.UI.UIStrings.Placeholders.notSet
+            )
+        )
           .font(AppConstants.UI.Typography.Font.caption)
           .foregroundStyle(.secondary)
       }
@@ -529,11 +559,12 @@ private struct TeaLeafCardView: View {
   private var expiryText: String {
     switch tea.expiryStatus {
     case .expired:
-      return "期限切れ"
+      return AppConstants.UI.UIStrings.Timeline.Expiry.expired
     case .expiringSoon:
-      return "残り\(tea.daysUntilExpiry)日"
+      return AppConstants.UI.UIStrings.Timeline.Expiry.daysRemaining
+        .replacingOccurrences(of: "{days}", with: "\(tea.daysUntilExpiry)")
     case .fresh:
-      return "余裕あり"
+      return AppConstants.UI.UIStrings.Timeline.Expiry.fresh
     }
   }
 
@@ -557,11 +588,11 @@ private struct TeaLeafCardView: View {
   private var expiryIcon: String {
     switch tea.expiryStatus {
     case .expired:
-      return "exclamationmark.triangle.fill"
+      return AppConstants.UI.UIStrings.Content.exclamationmarkTriangleFill
     case .expiringSoon:
-      return "clock.fill"
+      return AppConstants.UI.UIStrings.Content.clockFill
     case .fresh:
-      return "checkmark.seal.fill"
+      return AppConstants.UI.UIStrings.Content.checkmarkSealFill
     }
   }
 

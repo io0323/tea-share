@@ -57,37 +57,85 @@ struct AddTeaView: View {
     var messages: [String] = []
     
     if trimmedName.isEmpty {
-      messages.append("茶葉名は必須です。")
+      messages.append(AppConstants.UI.UIStrings.AddTea.Validation.teaNameRequired)
     } else if trimmedName.count < AppConstants.ValidationLimits.minTeaNameLength {
-      messages.append("茶葉名は\(AppConstants.ValidationLimits.minTeaNameLength)文字以上で入力してください。")
+      messages.append(
+        AppConstants.UI.UIStrings.AddTea.Validation.teaNameMinLength
+          .replacingOccurrences(
+            of: "{min}",
+            with: "\(AppConstants.ValidationLimits.minTeaNameLength)"
+          )
+      )
     } else if trimmedName.count > AppConstants.ValidationLimits.maxTeaNameLength {
-      messages.append("茶葉名は\(AppConstants.ValidationLimits.maxTeaNameLength)文字以下で入力してください。")
+      messages.append(
+        AppConstants.UI.UIStrings.AddTea.Validation.teaNameMaxLength
+          .replacingOccurrences(
+            of: "{max}",
+            with: "\(AppConstants.ValidationLimits.maxTeaNameLength)"
+          )
+      )
     }
     
     if trimmedLocation.isEmpty {
-      messages.append("エリアは必須です。")
+      messages.append(AppConstants.UI.UIStrings.AddTea.Validation.areaRequired)
     } else if trimmedLocation.count < AppConstants.ValidationLimits.minLocationLength {
-      messages.append("エリアは\(AppConstants.ValidationLimits.minLocationLength)文字以上で入力してください。")
+      messages.append(
+        AppConstants.UI.UIStrings.AddTea.Validation.areaMinLength
+          .replacingOccurrences(
+            of: "{min}",
+            with: "\(AppConstants.ValidationLimits.minLocationLength)"
+          )
+      )
     } else if trimmedLocation.count > AppConstants.ValidationLimits.maxLocationLength {
-      messages.append("エリアは\(AppConstants.ValidationLimits.maxLocationLength)文字以下で入力してください。")
+      messages.append(
+        AppConstants.UI.UIStrings.AddTea.Validation.areaMaxLength
+          .replacingOccurrences(
+            of: "{max}",
+            with: "\(AppConstants.ValidationLimits.maxLocationLength)"
+          )
+      )
     }
     
     if remainingGrams < AppConstants.ValidationLimits.minRemainingGrams {
-      messages.append("残量は\(AppConstants.ValidationLimits.minRemainingGrams)g以上で入力してください。")
+      messages.append(
+        AppConstants.UI.UIStrings.AddTea.Validation.remainingMin
+          .replacingOccurrences(
+            of: "{min}",
+            with: "\(AppConstants.ValidationLimits.minRemainingGrams)"
+          )
+      )
     } else if remainingGrams > AppConstants.ValidationLimits.maxRemainingGrams {
-      messages.append("残量は\(AppConstants.ValidationLimits.maxRemainingGrams)g以下で入力してください。")
+      messages.append(
+        AppConstants.UI.UIStrings.AddTea.Validation.remainingMax
+          .replacingOccurrences(
+            of: "{max}",
+            with: "\(AppConstants.ValidationLimits.maxRemainingGrams)"
+          )
+      )
     }
     
     if expiryDate < Calendar.current.startOfDay(for: Date()) {
-      messages.append("賞味期限は本日以降を選択してください。")
+      messages.append(AppConstants.UI.UIStrings.AddTea.Validation.expiryNotPast)
     }
     
     if trimmedUsername.isEmpty {
-      messages.append("ユーザー名は必須です。")
+      messages.append(AppConstants.UI.UIStrings.AddTea.Validation.usernameRequired)
     } else if trimmedUsername.count < AppConstants.ValidationLimits.minUsernameLength {
-      messages.append("ユーザー名は\(AppConstants.ValidationLimits.minUsernameLength)文字以上で入力してください。")
+      messages.append(
+        AppConstants.UI.UIStrings.AddTea.Validation.usernameMinLength
+          .replacingOccurrences(
+            of: "{min}",
+            with: "\(AppConstants.ValidationLimits.minUsernameLength)"
+          )
+      )
     } else if trimmedUsername.count > AppConstants.ValidationLimits.maxUsernameLength {
-      messages.append("ユーザー名は\(AppConstants.ValidationLimits.maxUsernameLength)文字以下で入力してください。")
+      messages.append(
+        AppConstants.UI.UIStrings.AddTea.Validation.usernameMaxLength
+          .replacingOccurrences(
+            of: "{max}",
+            with: "\(AppConstants.ValidationLimits.maxUsernameLength)"
+          )
+      )
     }
     
     return messages
@@ -132,7 +180,12 @@ struct AddTeaView: View {
    説明文の文字数カウンター表示文言を返します。
    */
   private var descriptionCountText: String {
-    "\(descriptionText.count)/\(AppConstants.TextLimits.descriptionMaxLength)"
+    AppConstants.UI.UIStrings.Labels.characterCount
+      .replacingOccurrences(of: "{count}", with: "\(descriptionText.count)")
+      .replacingOccurrences(
+        of: "{max}",
+        with: "\(AppConstants.TextLimits.descriptionMaxLength)"
+      )
   }
 
   /*
@@ -163,20 +216,26 @@ struct AddTeaView: View {
   var body: some View {
     NavigationStack {
       Form {
-        Section("画像") {
+        Section(AppConstants.UI.UIStrings.AddTea.Sections.image) {
           HStack(spacing: AppConstants.UI.Layout.Spacing.button) {
             PhotosPicker(
               selection: $pickedPhotoItem,
               matching: .images,
               photoLibrary: .shared()
             ) {
-              Label("ライブラリから選択", systemImage: "photo")
+              Label(
+                AppConstants.UI.UIStrings.AddTea.Actions.pickFromLibrary,
+                systemImage: AppConstants.UI.UIStrings.Content.photo
+              )
             }
 
             Button {
               isShowingCamera = true
             } label: {
-              Label("カメラで撮影", systemImage: "camera")
+              Label(
+                AppConstants.UI.UIStrings.AddTea.Actions.takePhoto,
+                systemImage: AppConstants.UI.UIStrings.Content.camera
+              )
             }
             .disabled(!canUseCamera)
           }
@@ -194,7 +253,10 @@ struct AddTeaView: View {
               Button {
                 rerunImageSuggestion()
               } label: {
-                Label("再抽出", systemImage: "sparkles")
+                Label(
+                  AppConstants.UI.UIStrings.AddTea.Actions.reanalyze,
+                  systemImage: AppConstants.UI.UIStrings.Content.sparkles
+                )
               }
               .buttonStyle(AppConstants.UI.ButtonStyle.bordered)
               .disabled(isAnalyzingImage)
@@ -202,7 +264,10 @@ struct AddTeaView: View {
               Button(role: .destructive) {
                 clearSelectedImage()
               } label: {
-                Label("画像を削除", systemImage: "trash")
+                Label(
+                  AppConstants.UI.UIStrings.AddTea.Actions.removeImage,
+                  systemImage: AppConstants.UI.UIStrings.Content.trash
+                )
               }
               .buttonStyle(AppConstants.UI.ButtonStyle.bordered)
               .disabled(isAnalyzingImage)
@@ -214,33 +279,51 @@ struct AddTeaView: View {
           if isAnalyzingImage {
             HStack(spacing: AppConstants.UI.Layout.Spacing.tag) {
               ProgressView()
-              Text("画像から情報を抽出中...")
+              Text(AppConstants.UI.UIStrings.AddTea.Hints.analyzingImage)
                 .font(AppConstants.UI.Typography.Font.footnote)
                 .foregroundStyle(.secondary)
             }
           }
         }
 
-        Section("茶葉情報") {
-          TextField("茶葉名", text: $name)
-          TextField("ブランド名", text: $brand)
-          Picker("カテゴリー", selection: $category) {
+        Section(AppConstants.UI.UIStrings.AddTea.Sections.teaInfo) {
+          TextField(
+            AppConstants.UI.UIStrings.AddTea.FormFields.teaName,
+            text: $name
+          )
+          TextField(
+            AppConstants.UI.UIStrings.AddTea.FormFields.brand,
+            text: $brand
+          )
+          Picker(
+            AppConstants.UI.UIStrings.AddTea.FormFields.category,
+            selection: $category
+          ) {
             ForEach(TeaCategory.allCases) { category in
               Text(category.rawValue).tag(category)
             }
           }
           Stepper(
-            "残量: \(remainingGrams)g",
+            AppConstants.UI.UIStrings.AddTea.FormFields.remaining
+              .replacingOccurrences(of: "{grams}", with: "\(remainingGrams)"),
             value: $remainingGrams,
             in: 5...500,
             step: 5
           )
           quickRemainingButtons
 
-          DatePicker("賞味期限", selection: $expiryDate, displayedComponents: .date)
+          DatePicker(
+            AppConstants.UI.UIStrings.AddTea.FormFields.expiry,
+            selection: $expiryDate,
+            displayedComponents: .date
+          )
           expiryPresetButtons
 
-          TextField("説明文", text: $descriptionText, axis: .vertical)
+          TextField(
+            AppConstants.UI.UIStrings.AddTea.FormFields.description,
+            text: $descriptionText,
+            axis: .vertical
+          )
             .lineLimit(3...6)
           HStack {
             Spacer()
@@ -252,23 +335,32 @@ struct AddTeaView: View {
           }
         }
 
-        Section("出品者情報") {
-          TextField("ユーザー名", text: $username)
-          TextField("エリア", text: $location)
+        Section(AppConstants.UI.UIStrings.AddTea.Sections.seller) {
+          TextField(
+            AppConstants.UI.UIStrings.AddTea.FormFields.username,
+            text: $username
+          )
+          TextField(
+            AppConstants.UI.UIStrings.AddTea.FormFields.area,
+            text: $location
+          )
         }
 
-        Section("下書き") {
-            Text("入力内容は自動で下書き保存されます。")
+        Section(AppConstants.UI.UIStrings.AddTea.Sections.draft) {
+            Text(AppConstants.UI.UIStrings.AddTea.Hints.autoDraft)
             .font(AppConstants.UI.Typography.Font.footnote)
             .foregroundStyle(.secondary)
-          Button("入力内容をリセット", role: .destructive) {
+          Button(
+            AppConstants.UI.UIStrings.AddTea.Actions.resetForm,
+            role: .destructive
+          ) {
             isShowingResetAlert = true
           }
           .disabled(isSaving)
         }
 
         if !validationMessages.isEmpty {
-          Section("入力チェック") {
+          Section(AppConstants.UI.UIStrings.AddTea.Sections.validation) {
             ForEach(validationMessages, id: \.self) { message in
               Text(message)
                 .font(AppConstants.UI.Typography.Font.footnote)
@@ -356,7 +448,7 @@ struct AddTeaView: View {
    */
   private var quickRemainingButtons: some View {
     HStack(spacing: AppConstants.UI.Layout.Spacing.tag) {
-      Text("クイック")
+      Text(AppConstants.UI.UIStrings.AddTea.Actions.quickRemaining)
         .font(AppConstants.UI.Typography.Font.caption)
         .foregroundStyle(.secondary)
       quickAmountButton(25)
@@ -371,7 +463,7 @@ struct AddTeaView: View {
    */
   private var expiryPresetButtons: some View {
     HStack(spacing: AppConstants.UI.Layout.Spacing.tag) {
-      Text("期限プリセット")
+      Text(AppConstants.UI.UIStrings.AddTea.Actions.expiryPreset)
         .font(AppConstants.UI.Typography.Font.caption)
         .foregroundStyle(.secondary)
       ForEach(ExpiryPreset.allCases) { preset in
@@ -389,7 +481,10 @@ struct AddTeaView: View {
    指定gに残量を更新するボタンを返します。
    */
   private func quickAmountButton(_ grams: Int) -> some View {
-    Button("\(grams)g") {
+    Button(
+      AppConstants.UI.UIStrings.AddTea.Actions.quickGrams
+        .replacingOccurrences(of: "{grams}", with: "\(grams)")
+    ) {
       remainingGrams = grams
     }
     .font(AppConstants.UI.Typography.Font.caption.weight(AppConstants.UI.Typography.FontWeight.semibold))
@@ -404,7 +499,7 @@ struct AddTeaView: View {
       guard let data = try? await item.loadTransferable(type: Data.self),
             let image = UIImage(data: data) else {
         await MainActor.run {
-          presentError("画像の読み込みに失敗しました。別の画像を選択してください。")
+          presentError(AppConstants.UI.UIStrings.AddTea.Errors.imageLoadFailed)
         }
         return
       }
@@ -467,7 +562,7 @@ struct AddTeaView: View {
     if brand.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
       brand = tokens.dropFirst(2).prefix(2).joined(separator: " ")
       if brand.isEmpty {
-        brand = "ブランド不明"
+        brand = AppConstants.UI.UIStrings.AddTea.Suggestions.unknownBrand
       }
     }
   }
@@ -477,10 +572,10 @@ struct AddTeaView: View {
    */
   private func applyMockSuggestion() {
     if name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-      name = "抽出候補: お茶"
+      name = AppConstants.UI.UIStrings.AddTea.Suggestions.mockTeaName
     }
     if brand.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-      brand = "抽出候補: TeaBrand"
+      brand = AppConstants.UI.UIStrings.AddTea.Suggestions.mockBrand
     }
   }
 
@@ -501,7 +596,9 @@ struct AddTeaView: View {
 
     let teaLeaf = TeaLeaf(
       name: trimmedName,
-      brand: trimmedBrand.isEmpty ? "不明" : trimmedBrand,
+      brand: trimmedBrand.isEmpty
+        ? AppConstants.UI.UIStrings.Placeholders.unknown
+        : trimmedBrand,
       category: category,
       remainingGrams: remainingGrams,
       expiryDate: expiryDate,
@@ -520,7 +617,7 @@ struct AddTeaView: View {
       dismiss()
     } catch {
       isSaving = false
-      presentError("保存処理に失敗しました。時間をおいて再度お試しください。")
+      presentError(AppConstants.UI.UIStrings.AddTea.Errors.saveFailed)
     }
   }
 
@@ -541,7 +638,8 @@ struct AddTeaView: View {
       expiryDate = draftTeaLeaf?.expiryDate ?? Date()
       descriptionText = draftTeaLeaf?.description ?? ""
       remainingGrams = draftTeaLeaf?.remainingGrams ?? 50
-      location = draftTeaLeaf?.owner?.location ?? "未設定"
+      location = draftTeaLeaf?.owner?.location
+        ?? AppConstants.UI.UIStrings.Placeholders.notSet
       username = draftTeaLeaf?.owner?.username ?? "new_user"
     } catch {
       Self.logger.error("Failed to load draft: \(error.localizedDescription)")
@@ -560,7 +658,9 @@ struct AddTeaView: View {
     
     draftTeaLeaf = TeaLeaf(
       name: trimmedName,
-      brand: trimmedBrand.isEmpty ? "不明" : trimmedBrand,
+      brand: trimmedBrand.isEmpty
+        ? AppConstants.UI.UIStrings.Placeholders.unknown
+        : trimmedBrand,
       category: category,
       remainingGrams: remainingGrams,
       expiryDate: expiryDate,
@@ -596,7 +696,7 @@ struct AddTeaView: View {
     expiryDate = Date()
     descriptionText = ""
     remainingGrams = 50
-    location = "未設定"
+    location = AppConstants.UI.UIStrings.Placeholders.notSet
     username = "new_user"
     selectedImage = nil
     pickedPhotoItem = nil

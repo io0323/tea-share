@@ -70,7 +70,7 @@ struct TeaMapView: View {
                 selectedTeaLeaf = teaLeaf
               } label: {
                 VStack(spacing: AppConstants.UI.Layout.Spacing.small) {
-                  Image(systemName: "leaf.circle.fill")
+                  Image(systemName: AppConstants.UI.UIStrings.Content.leafCircleFill)
                     .font(.system(size: AppConstants.UI.FontSizes.mapMarkerIcon))
                     .foregroundStyle(markerColor(for: teaLeaf.tradeStatus))
                   Text(teaLeaf.category.rawValue)
@@ -112,7 +112,10 @@ struct TeaMapView: View {
 
           ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: AppConstants.UI.Layout.Spacing.chip) {
-              categoryChip(title: "すべて", category: nil)
+              categoryChip(
+                title: AppConstants.UI.UIStrings.Labels.allCategories,
+                category: nil
+              )
               ForEach(TeaCategory.allCases) { category in
                 categoryChip(title: category.rawValue, category: category)
               }
@@ -123,7 +126,9 @@ struct TeaMapView: View {
             resetFilters()
           } label: {
             HStack(spacing: AppConstants.UI.Layout.Spacing.chip) {
-              Image(systemName: "arrow.counterclockwise")
+              Image(
+                systemName: AppConstants.UI.UIStrings.Content.arrowCounterclockwise
+              )
               Text(AppConstants.UI.UIStrings.Labels.clearFilter)
             }
             .font(AppConstants.UI.Typography.Font.caption.weight(AppConstants.UI.Typography.FontWeight.semibold))
@@ -273,7 +278,10 @@ private struct TeaMapDetailSheet: View {
       VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.vStack) {
         Text(AppConstants.UI.UIStrings.Labels.updateTradeStatus)
           .font(AppConstants.UI.Typography.FontScale.sectionSubtitle)
-        Picker("取引ステータス", selection: $teaLeaf.tradeStatus) {
+        Picker(
+          AppConstants.UI.UIStrings.Labels.tradeStatus,
+          selection: $teaLeaf.tradeStatus
+        ) {
           ForEach(TradeStatus.allCases) { status in
             Text(status.rawValue).tag(status)
           }
@@ -288,7 +296,7 @@ private struct TeaMapDetailSheet: View {
         moveToNextStatus()
       } label: {
         HStack {
-          Image(systemName: "arrow.right.circle.fill")
+          Image(systemName: AppConstants.UI.UIStrings.Content.arrowRightCircleFill)
           Text(nextActionTitle)
             .fontWeight(AppConstants.UI.Typography.FontWeight.semibold)
         }
@@ -328,11 +336,11 @@ private struct TeaMapDetailSheet: View {
   private var nextActionTitle: String {
     switch teaLeaf.tradeStatus {
     case .available:
-      return "交渉中へ進める"
+      return AppConstants.UI.UIStrings.Detail.QuickActions.moveToPending
     case .pending:
-      return "交換完了へ進める"
+      return AppConstants.UI.UIStrings.Detail.QuickActions.moveToCompleted
     case .completed:
-      return "この取引は完了済みです"
+      return AppConstants.UI.UIStrings.Detail.QuickActions.alreadyCompleted
     }
   }
 
@@ -352,7 +360,8 @@ private struct TeaMapDetailSheet: View {
     do {
       try modelContext.save()
     } catch {
-      saveErrorMessage = "ステータス更新を保存できませんでした。時間をおいて再度お試しください。"
+      saveErrorMessage =
+        AppConstants.UI.UIStrings.Detail.SaveErrors.statusUpdateFailed
       isShowingSaveError = true
     }
   }
