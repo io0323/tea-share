@@ -5,12 +5,26 @@ import SwiftData
 /*
  マップ表示用のステータスフィルタを管理する列挙型です。
  */
-private enum TeaMapFilter: String, CaseIterable, Identifiable {
-  case allActive = "募集中+交渉中"
-  case availableOnly = "募集中のみ"
-  case pendingOnly = "交渉中のみ"
+private enum TeaMapFilter: CaseIterable, Identifiable {
+  case allActive
+  case availableOnly
+  case pendingOnly
 
-  var id: String { rawValue }
+  var id: String { String(describing: self) }
+
+  /*
+   フィルタチップに表示するラベルを返します。
+   */
+  var displayLabel: String {
+    switch self {
+    case .allActive:
+      return AppConstants.UI.UIStrings.Map.Filters.allActive
+    case .availableOnly:
+      return AppConstants.UI.UIStrings.Map.Filters.availableOnly
+    case .pendingOnly:
+      return AppConstants.UI.UIStrings.Map.Filters.pendingOnly
+    }
+  }
 
   /*
    フィルタ条件に合うか判定します。
@@ -174,7 +188,7 @@ struct TeaMapView: View {
     Button {
       selectedFilter = filter
     } label: {
-      Text(filter.rawValue)
+      Text(filter.displayLabel)
         .font(AppConstants.UI.Typography.Font.caption.weight(AppConstants.UI.Typography.FontWeight.semibold))
         .foregroundStyle(
           selectedFilter == filter ? Color.white : Color.green.opacity(AppConstants.UI.Opacity.filterUnselected)

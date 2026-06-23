@@ -80,7 +80,7 @@ struct TeaTimelineView: View {
     if statusScope != .active {
       labels.append(
         AppConstants.UI.UIStrings.Timeline.FilterLabels.scope
-          .replacingOccurrences(of: "{scope}", with: statusScope.rawValue)
+          .replacingOccurrences(of: "{scope}", with: statusScope.displayLabel)
       )
     }
     if showExpiringOnly {
@@ -91,7 +91,7 @@ struct TeaTimelineView: View {
     if sortOption != .expirySoon {
       labels.append(
         AppConstants.UI.UIStrings.Timeline.FilterLabels.sort
-          .replacingOccurrences(of: "{sort}", with: sortOption.rawValue)
+          .replacingOccurrences(of: "{sort}", with: sortOption.displayLabel)
       )
     }
     return labels
@@ -227,7 +227,7 @@ struct TeaTimelineView: View {
   private var sortSelector: some View {
     Picker(AppConstants.UI.UIStrings.Labels.sortBy, selection: $sortOption) {
       ForEach(TeaTimelineSortOption.allCases) { option in
-        Text(option.rawValue).tag(option)
+        Text(option.displayLabel).tag(option)
       }
     }
     .pickerStyle(.segmented)
@@ -239,7 +239,7 @@ struct TeaTimelineView: View {
   private var statusScopeSelector: some View {
     Picker(AppConstants.UI.UIStrings.Labels.displayScope, selection: $statusScope) {
       ForEach(TeaTimelineStatusScope.allCases) { scope in
-        Text(scope.rawValue).tag(scope)
+        Text(scope.displayLabel).tag(scope)
       }
     }
     .pickerStyle(.segmented)
@@ -421,12 +421,26 @@ struct TeaTimelineView: View {
 /*
  タイムラインの並び順を管理する列挙型です。
  */
-private enum TeaTimelineSortOption: String, CaseIterable, Identifiable {
-  case expirySoon = "期限順"
-  case remainingHigh = "残量順"
-  case name = "名前順"
+private enum TeaTimelineSortOption: CaseIterable, Identifiable {
+  case expirySoon
+  case remainingHigh
+  case name
 
-  var id: String { rawValue }
+  var id: String { String(describing: self) }
+
+  /*
+   並び替えラベルを返します。
+   */
+  var displayLabel: String {
+    switch self {
+    case .expirySoon:
+      return AppConstants.UI.UIStrings.Timeline.Sort.expirySoon
+    case .remainingHigh:
+      return AppConstants.UI.UIStrings.Timeline.Sort.remainingHigh
+    case .name:
+      return AppConstants.UI.UIStrings.Timeline.Sort.name
+    }
+  }
 
   /*
    選択された並び順で配列をソートします。
@@ -448,11 +462,23 @@ private enum TeaTimelineSortOption: String, CaseIterable, Identifiable {
 /*
  タイムラインで表示する取引状態の範囲を管理する列挙型です。
  */
-private enum TeaTimelineStatusScope: String, CaseIterable, Identifiable {
-  case active = "募集中+交渉中"
-  case availableOnly = "募集中のみ"
+private enum TeaTimelineStatusScope: CaseIterable, Identifiable {
+  case active
+  case availableOnly
 
-  var id: String { rawValue }
+  var id: String { String(describing: self) }
+
+  /*
+   表示範囲ラベルを返します。
+   */
+  var displayLabel: String {
+    switch self {
+    case .active:
+      return AppConstants.UI.UIStrings.Timeline.StatusScope.active
+    case .availableOnly:
+      return AppConstants.UI.UIStrings.Timeline.StatusScope.availableOnly
+    }
+  }
 
   /*
    ステータスが表示対象か判定します。
