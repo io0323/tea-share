@@ -590,7 +590,9 @@ struct AddTeaView: View {
     isSaving = true
 
     let owner = User(
-      username: trimmedUsername.isEmpty ? "new_user" : trimmedUsername,
+      username: trimmedUsername.isEmpty
+        ? AppConstants.Defaults.State.username
+        : trimmedUsername,
       location: trimmedLocation
     )
 
@@ -640,7 +642,8 @@ struct AddTeaView: View {
       remainingGrams = draftTeaLeaf?.remainingGrams ?? 50
       location = draftTeaLeaf?.owner?.location
         ?? AppConstants.UI.UIStrings.Placeholders.notSet
-      username = draftTeaLeaf?.owner?.username ?? "new_user"
+      username = draftTeaLeaf?.owner?.username
+        ?? AppConstants.Defaults.State.username
     } catch {
       Self.logger.error("Failed to load draft: \(error.localizedDescription)")
       clearDraft()
@@ -652,7 +655,9 @@ struct AddTeaView: View {
    */
   private func persistDraft() {
     let draftOwner = User(
-      username: trimmedUsername.isEmpty ? "new_user" : trimmedUsername,
+      username: trimmedUsername.isEmpty
+        ? AppConstants.Defaults.State.username
+        : trimmedUsername,
       location: trimmedLocation
     )
     
@@ -697,7 +702,7 @@ struct AddTeaView: View {
     descriptionText = ""
     remainingGrams = 50
     location = AppConstants.UI.UIStrings.Placeholders.notSet
-    username = "new_user"
+    username = AppConstants.Defaults.State.username
     selectedImage = nil
     pickedPhotoItem = nil
     clearDraft()

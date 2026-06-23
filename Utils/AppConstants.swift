@@ -557,6 +557,39 @@ struct AppConstants {
           static let daysRemaining: String = "残り{days}日"
           static let fresh: String = "余裕あり"
         }
+        
+        struct Sort {
+          static let expirySoon: String = "期限順"
+          static let remainingHigh: String = "残量順"
+          static let name: String = "名前順"
+        }
+        
+        struct StatusScope {
+          static let active: String = "募集中+交渉中"
+          static let availableOnly: String = "募集中のみ"
+        }
+      }
+      
+      /*
+       マップ画面のフィルタラベルです。
+       */
+      struct Map {
+        struct Filters {
+          static let allActive: String = "募集中+交渉中"
+          static let availableOnly: String = "募集中のみ"
+          static let pendingOnly: String = "交渉中のみ"
+        }
+      }
+      
+      /*
+       プロフィール画面の文言です。
+       */
+      struct Profile {
+        struct SaveErrors {
+          static let userNotFound: String = "ユーザーデータが見つかりません。"
+          static let saveFailed: String =
+            "プロフィールの変更を保存できませんでした。時間をおいて再度お試しください。"
+        }
       }
       
       struct Placeholders {

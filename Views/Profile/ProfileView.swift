@@ -24,9 +24,15 @@ struct ProfileView: View {
           VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.card) {
             if isEditing {
               VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.form) {
-                TextField("ユーザー名", text: $editedUsername)
+                TextField(
+                  AppConstants.UI.UIStrings.Labels.username,
+                  text: $editedUsername
+                )
                   .textFieldStyle(RoundedBorderTextFieldStyle())
-                TextField("場所", text: $editedLocation)
+                TextField(
+                  AppConstants.UI.UIStrings.Labels.location,
+                  text: $editedLocation
+                )
                   .textFieldStyle(RoundedBorderTextFieldStyle())
               }
             } else {
@@ -115,7 +121,8 @@ struct ProfileView: View {
    */
   private func saveProfileChanges() {
     guard let user = users.first else {
-      saveErrorMessage = "ユーザーデータが見つかりません。"
+      saveErrorMessage =
+        AppConstants.UI.UIStrings.Profile.SaveErrors.userNotFound
       isShowingSaveError = true
       return
     }
@@ -124,43 +131,69 @@ struct ProfileView: View {
     let trimmedLocation = editedLocation.trimmingCharacters(in: .whitespacesAndNewlines)
     
     if trimmedUsername.isEmpty {
-      saveErrorMessage = "ユーザー名は必須です。"
+      saveErrorMessage =
+        AppConstants.UI.UIStrings.AddTea.Validation.usernameRequired
       isShowingSaveError = true
       return
     }
     
     if trimmedUsername.count < AppConstants.ValidationLimits.minUsernameLength {
-      saveErrorMessage = "ユーザー名は\(AppConstants.ValidationLimits.minUsernameLength)文字以上で入力してください。"
+      saveErrorMessage =
+        AppConstants.UI.UIStrings.AddTea.Validation.usernameMinLength
+          .replacingOccurrences(
+            of: "{min}",
+            with: "\(AppConstants.ValidationLimits.minUsernameLength)"
+          )
       isShowingSaveError = true
       return
     }
     
     if trimmedUsername.count > AppConstants.ValidationLimits.maxUsernameLength {
-      saveErrorMessage = "ユーザー名は\(AppConstants.ValidationLimits.maxUsernameLength)文字以下で入力してください。"
+      saveErrorMessage =
+        AppConstants.UI.UIStrings.AddTea.Validation.usernameMaxLength
+          .replacingOccurrences(
+            of: "{max}",
+            with: "\(AppConstants.ValidationLimits.maxUsernameLength)"
+          )
       isShowingSaveError = true
       return
     }
     
-    if !trimmedLocation.isEmpty && trimmedLocation.count < AppConstants.ValidationLimits.minLocationLength {
-      saveErrorMessage = "エリアは\(AppConstants.ValidationLimits.minLocationLength)文字以上で入力してください。"
+    if !trimmedLocation.isEmpty
+      && trimmedLocation.count < AppConstants.ValidationLimits.minLocationLength {
+      saveErrorMessage =
+        AppConstants.UI.UIStrings.AddTea.Validation.areaMinLength
+          .replacingOccurrences(
+            of: "{min}",
+            with: "\(AppConstants.ValidationLimits.minLocationLength)"
+          )
       isShowingSaveError = true
       return
     }
     
-    if !trimmedLocation.isEmpty && trimmedLocation.count > AppConstants.ValidationLimits.maxLocationLength {
-      saveErrorMessage = "エリアは\(AppConstants.ValidationLimits.maxLocationLength)文字以下で入力してください。"
+    if !trimmedLocation.isEmpty
+      && trimmedLocation.count > AppConstants.ValidationLimits.maxLocationLength {
+      saveErrorMessage =
+        AppConstants.UI.UIStrings.AddTea.Validation.areaMaxLength
+          .replacingOccurrences(
+            of: "{max}",
+            with: "\(AppConstants.ValidationLimits.maxLocationLength)"
+          )
       isShowingSaveError = true
       return
     }
     
     user.username = trimmedUsername
-    user.location = trimmedLocation.isEmpty ? "未設定" : trimmedLocation
+    user.location = trimmedLocation.isEmpty
+      ? AppConstants.UI.UIStrings.Placeholders.notSet
+      : trimmedLocation
     
     do {
       try modelContext.save()
       isEditing = false
     } catch {
-      saveErrorMessage = "プロファイルの変更を保存できませんでした。時間をおいて再度お試しください。"
+      saveErrorMessage =
+        AppConstants.UI.UIStrings.Profile.SaveErrors.saveFailed
       isShowingSaveError = true
     }
   }
