@@ -17,6 +17,8 @@ struct TeaLeafDetailView: View {
   @State private var isShowingTradeRequestAlert = AppConstants.Defaults.UI.isShowingTradeRequestAlert
   @State private var tradeRequestMessage = AppConstants.Defaults.State.tradeRequestMessage
   @Query private var users: [User]
+  @AppStorage(AppConstants.Storage.currentUserIdKey)
+  private var currentUserId = ""
 
   private let dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
@@ -269,7 +271,7 @@ struct TeaLeafDetailView: View {
    */
   private var imageSection: some View {
     Group {
-      if let uiImage = loadImage(from: teaLeaf.imagePath) {
+      if let uiImage = TeaImageStorage.loadImage(from: teaLeaf.imagePath) {
         Image(uiImage: uiImage)
           .resizable()
           .aspectRatio(
@@ -389,16 +391,6 @@ struct TeaLeafDetailView: View {
   }
 
   /*
-   ファイルパスから画像を読み込みます。
-   */
-  private func loadImage(from path: String) -> UIImage? {
-    guard !path.isEmpty else { return nil }
-    let fileManager = FileManager.default
-    guard fileManager.fileExists(atPath: path) else { return nil }
-    return UIImage(contentsOfFile: path)
-  }
-
-  /*
    タイトルと値の行を返します。
    */
   private func detailRow(_ title: String, value: String) -> some View {
@@ -463,7 +455,11 @@ struct TeaLeafDetailView: View {
    取引リクエストを送信します。
    */
   private func submitTradeRequest() {
-    guard let currentUser = users.first else {
+    let currentUser = CurrentUserManager.fetchCurrentUser(
+      modelContext: modelContext,
+      storedUserId: currentUserId
+    ) ?? users.first
+    guard let currentUser else {
       tradeRequestMessage = AppConstants.UI.Alerts.Messages.userDataNotFound
       isShowingTradeRequestAlert = true
       return

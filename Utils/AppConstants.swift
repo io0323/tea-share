@@ -24,6 +24,21 @@ struct AppConstants {
     static let defaultLatitudeDelta: Double = 0.15
     static let defaultLongitudeDelta: Double = 0.15
   }
+
+  /*
+   永続化ストレージのキーを定義します。
+   */
+  struct Storage {
+    static let currentUserIdKey: String = "current_user_id"
+  }
+
+  /*
+   茶葉画像ファイルの保存設定を定義します。
+   */
+  struct ImageStorage {
+    static let subdirectory: String = "TeaImages"
+    static let jpegCompressionQuality: CGFloat = 0.85
+  }
   
   /*
    テキスト入力の制限値を定義します。
@@ -481,6 +496,8 @@ struct AppConstants {
         struct Errors {
           static let imageLoadFailed: String =
             "画像の読み込みに失敗しました。別の画像を選択してください。"
+          static let imageSaveFailed: String =
+            "画像の保存に失敗しました。再度お試しください。"
           static let saveFailed: String =
             "保存処理に失敗しました。時間をおいて再度お試しください。"
         }
@@ -585,6 +602,30 @@ struct AppConstants {
        プロフィール画面の文言です。
        */
       struct Profile {
+        struct Tabs {
+          static let profile: String = "プロフィール"
+          static let myListings: String = "出品一覧"
+          static let tradeRequests: String = "取引リクエスト"
+        }
+        
+        struct MyListings {
+          static let empty: String = "出品している茶葉はありません"
+          static let emptyHint: String = "茶葉を追加して交換を始めましょう"
+        }
+        
+        struct TradeRequests {
+          static let empty: String = "取引リクエストはありません"
+          static let emptyHint: String = "リクエストが届くとここに表示されます"
+          static let incoming: String = "受信リクエスト"
+          static let outgoing: String = "送信リクエスト"
+          static let status: String = "ステータス"
+          static let requester: String = "リクエスト者"
+          static let targetTea: String = "対象茶葉"
+          static let approve: String = "承認"
+          static let reject: String = "拒否"
+          static let createdAt: String = "送信日時"
+        }
+        
         struct SaveErrors {
           static let userNotFound: String = "ユーザーデータが見つかりません。"
           static let saveFailed: String =
