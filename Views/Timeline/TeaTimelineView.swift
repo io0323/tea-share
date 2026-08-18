@@ -502,7 +502,8 @@ private struct TeaLeafCardView: View {
   var body: some View {
     VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.vStack) {
       // 画像表示エリア
-      if !tea.imagePath.isEmpty, let uiImage = loadImage(from: tea.imagePath) {
+      if !tea.imagePath.isEmpty,
+         let uiImage = TeaImageStorage.loadImage(from: tea.imagePath) {
         Image(uiImage: uiImage)
           .resizable()
           .aspectRatio(
@@ -647,16 +648,6 @@ private struct TeaLeafCardView: View {
     case .completed:
       return .gray
     }
-  }
-
-  /*
-   ファイルパスから画像を読み込みます。
-   */
-  private func loadImage(from path: String) -> UIImage? {
-    guard !path.isEmpty else { return nil }
-    let fileManager = FileManager.default
-    guard fileManager.fileExists(atPath: path) else { return nil }
-    return UIImage(contentsOfFile: path)
   }
 }
 

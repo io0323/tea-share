@@ -13,6 +13,8 @@ struct AddTeaView: View {
   @Environment(\.modelContext) private var modelContext
 
   @AppStorage("addtea_draft") private var draftData: Data = Data()
+  @AppStorage(AppConstants.Storage.currentUserIdKey)
+  private var currentUserId = ""
   
   private static let logger = Logger(subsystem: "com.teashare.app", category: "AddTeaView")
 
@@ -589,14 +591,37 @@ struct AddTeaView: View {
     }
     isSaving = true
 
-    let owner = User(
+    var storedUserId = currentUserId
+    let resolvedOwner = CurrentUserManager.resolveOwner(
+      modelContext: modelContext,
+      storedUserId: &storedUserId,
       username: trimmedUsername.isEmpty
         ? AppConstants.Defaults.State.username
         : trimmedUsername,
       location: trimmedLocation
     )
+    currentUserId = storedUserId
+    let owner = resolvedOwner.user
+
+    let teaLeafId = UUID()
+    var imagePath = ""
+    if let selectedImage {
+      do {
+        imagePath = try TeaImageStorage.saveImage(
+          selectedImage,
+          teaLeafId: teaLeafId
+        )
+      } catch {
+        isSaving = false
+        presentError(
+          AppConstants.UI.UIStrings.AddTea.Errors.imageSaveFailed
+        )
+        return
+      }
+    }
 
     let teaLeaf = TeaLeaf(
+      id: teaLeafId,
       name: trimmedName,
       brand: trimmedBrand.isEmpty
         ? AppConstants.UI.UIStrings.Placeholders.unknown
@@ -604,6 +629,7 @@ struct AddTeaView: View {
       category: category,
       remainingGrams: remainingGrams,
       expiryDate: expiryDate,
+      imagePath: imagePath,
       description: trimmedDescription,
       latitude: AppConstants.Location.defaultLatitude + Double.random(in: AppConstants.Location.randomLatitudeRange),
       longitude: AppConstants.Location.defaultLongitude + Double.random(in: AppConstants.Location.randomLongitudeRange),
@@ -612,7 +638,9 @@ struct AddTeaView: View {
     )
 
     do {
-      modelContext.insert(owner)
+      if resolvedOwner.isNew {
+        modelContext.insert(owner)
+      }
       modelContext.insert(teaLeaf)
       try modelContext.save()
       clearDraft()
