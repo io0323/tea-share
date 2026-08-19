@@ -25,10 +25,14 @@ enum TeaImageStorage {
   private static func ensureDirectoryExists() throws {
     let url = directoryURL
     if !FileManager.default.fileExists(atPath: url.path) {
-      try FileManager.default.createDirectory(
-        at: url,
-        withIntermediateDirectories: true
-      )
+      do {
+        try FileManager.default.createDirectory(
+          at: url,
+          withIntermediateDirectories: true
+        )
+      } catch {
+        throw SaveError.directoryCreationFailed
+      }
     }
   }
 
@@ -47,7 +51,11 @@ enum TeaImageStorage {
     }
     let fileName = "\(teaLeafId.uuidString).jpg"
     let fileURL = directoryURL.appendingPathComponent(fileName)
-    try data.write(to: fileURL, options: .atomic)
+    do {
+      try data.write(to: fileURL, options: .atomic)
+    } catch {
+      throw SaveError.fileWriteFailed
+    }
     return fileURL.path
   }
 
@@ -64,7 +72,20 @@ enum TeaImageStorage {
   /*
    画像保存時のエラー種別です。
    */
-  enum SaveError: Error {
+  enum SaveError: LocalizedError {
     case encodingFailed
+    case directoryCreationFailed
+    case fileWriteFailed
+
+    var errorDescription: String? {
+      switch self {
+      case .encodingFailed:
+        return "画像のエンコードに失敗しました"
+      case .directoryCreationFailed:
+        return "保存ディレクトリの作成に失敗しました"
+      case .fileWriteFailed:
+        return "ファイルの書き込みに失敗しました"
+      }
+    }
   }
 }

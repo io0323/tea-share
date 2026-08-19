@@ -1,6 +1,7 @@
 import Foundation
 import CoreLocation
 import SwiftData
+import SwiftUI
 
 /*
  TeaLeafのカテゴリを管理する列挙型です。
@@ -13,6 +14,24 @@ enum TeaCategory: String, Codable, CaseIterable, Identifiable {
   case whiteTea = "白茶"
 
   var id: String { rawValue }
+  
+  /*
+   カテゴリに応じた説明を返します。
+   */
+  var description: String {
+    switch self {
+    case .greenTea:
+      return "不発酵茶"
+    case .blackTea:
+      return "完全発酵茶"
+    case .oolongTea:
+      return "半発酵茶"
+    case .herbalTea:
+      return "茶葉以外の植物から作られるお茶"
+    case .whiteTea:
+      return "微発酵茶"
+    }
+  }
 }
 
 /*
@@ -24,6 +43,20 @@ enum TradeStatus: String, Codable, CaseIterable, Identifiable {
   case completed = "交換完了"
 
   var id: String { rawValue }
+  
+  /*
+   ステータスが次のステータスに遷移可能か判定します。
+   */
+  var canTransitionTo: TradeStatus? {
+    switch self {
+    case .available:
+      return .pending
+    case .pending:
+      return .completed
+    case .completed:
+      return nil
+    }
+  }
 }
 
 /*
@@ -33,6 +66,20 @@ enum TeaExpiryStatus: String, Codable {
   case expired = "期限切れ"
   case expiringSoon = "期限間近"
   case fresh = "余裕あり"
+  
+  /*
+   状態に応じた色を返します。
+   */
+  var color: Color {
+    switch self {
+    case .expired:
+      return .red
+    case .expiringSoon:
+      return .orange
+    case .fresh:
+      return .green
+    }
+  }
 }
 
 /*

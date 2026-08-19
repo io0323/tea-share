@@ -8,6 +8,11 @@ enum CurrentUserManager {
 
   /*
    保存済み ID から現在ユーザーを取得します。
+   
+   - Parameters:
+     - modelContext: SwiftDataのモデルコンテキスト
+     - storedUserId: 保存されているユーザーID文字列
+   - Returns: 見つかったユーザー、見つからない場合はnil
    */
   static func fetchCurrentUser(
     modelContext: ModelContext,
@@ -29,6 +34,13 @@ enum CurrentUserManager {
 
   /*
    出品時に所有者ユーザーを解決し、プロフィール情報を更新します。
+   
+   - Parameters:
+     - modelContext: SwiftDataのモデルコンテキスト
+     - storedUserId: 保存されているユーザーID文字列（inoutで更新されます）
+     - username: ユーザー名
+     - location: 場所
+   - Returns: タプル（user: ユーザーオブジェクト, isNew: 新規作成かどうか）
    */
   static func resolveOwner(
     modelContext: ModelContext,
@@ -61,6 +73,11 @@ enum CurrentUserManager {
   /*
    プロフィール画面向けに現在ユーザーを返します。
    未作成の場合はデフォルトユーザーを bootstrap します。
+   
+   - Parameters:
+     - modelContext: SwiftDataのモデルコンテキスト
+     - storedUserId: 保存されているユーザーID文字列（inoutで更新されます）
+   - Returns: 現在のユーザー、または新規作成されたデフォルトユーザー
    */
   static func currentOrBootstrapUser(
     modelContext: ModelContext,
