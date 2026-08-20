@@ -62,57 +62,57 @@ struct AddTeaView: View {
       messages.append(AppConstants.UI.UIStrings.AddTea.Validation.teaNameRequired)
     } else if trimmedName.count < AppConstants.ValidationLimits.minTeaNameLength {
       messages.append(
-        AppConstants.UI.UIStrings.AddTea.Validation.teaNameMinLength
-          .replacingOccurrences(
-            of: "{min}",
-            with: "\(AppConstants.ValidationLimits.minTeaNameLength)"
-          )
+        StringFormatter.format(
+          AppConstants.UI.UIStrings.AddTea.Validation.teaNameMinLength,
+          key: "min",
+          value: AppConstants.ValidationLimits.minTeaNameLength
+        )
       )
     } else if trimmedName.count > AppConstants.ValidationLimits.maxTeaNameLength {
       messages.append(
-        AppConstants.UI.UIStrings.AddTea.Validation.teaNameMaxLength
-          .replacingOccurrences(
-            of: "{max}",
-            with: "\(AppConstants.ValidationLimits.maxTeaNameLength)"
-          )
+        StringFormatter.format(
+          AppConstants.UI.UIStrings.AddTea.Validation.teaNameMaxLength,
+          key: "max",
+          value: AppConstants.ValidationLimits.maxTeaNameLength
+        )
       )
     }
-    
+
     if trimmedLocation.isEmpty {
       messages.append(AppConstants.UI.UIStrings.AddTea.Validation.areaRequired)
     } else if trimmedLocation.count < AppConstants.ValidationLimits.minLocationLength {
       messages.append(
-        AppConstants.UI.UIStrings.AddTea.Validation.areaMinLength
-          .replacingOccurrences(
-            of: "{min}",
-            with: "\(AppConstants.ValidationLimits.minLocationLength)"
-          )
+        StringFormatter.format(
+          AppConstants.UI.UIStrings.AddTea.Validation.areaMinLength,
+          key: "min",
+          value: AppConstants.ValidationLimits.minLocationLength
+        )
       )
     } else if trimmedLocation.count > AppConstants.ValidationLimits.maxLocationLength {
       messages.append(
-        AppConstants.UI.UIStrings.AddTea.Validation.areaMaxLength
-          .replacingOccurrences(
-            of: "{max}",
-            with: "\(AppConstants.ValidationLimits.maxLocationLength)"
-          )
+        StringFormatter.format(
+          AppConstants.UI.UIStrings.AddTea.Validation.areaMaxLength,
+          key: "max",
+          value: AppConstants.ValidationLimits.maxLocationLength
+        )
       )
     }
-    
+
     if remainingGrams < AppConstants.ValidationLimits.minRemainingGrams {
       messages.append(
-        AppConstants.UI.UIStrings.AddTea.Validation.remainingMin
-          .replacingOccurrences(
-            of: "{min}",
-            with: "\(AppConstants.ValidationLimits.minRemainingGrams)"
-          )
+        StringFormatter.format(
+          AppConstants.UI.UIStrings.AddTea.Validation.remainingMin,
+          key: "min",
+          value: AppConstants.ValidationLimits.minRemainingGrams
+        )
       )
     } else if remainingGrams > AppConstants.ValidationLimits.maxRemainingGrams {
       messages.append(
-        AppConstants.UI.UIStrings.AddTea.Validation.remainingMax
-          .replacingOccurrences(
-            of: "{max}",
-            with: "\(AppConstants.ValidationLimits.maxRemainingGrams)"
-          )
+        StringFormatter.format(
+          AppConstants.UI.UIStrings.AddTea.Validation.remainingMax,
+          key: "max",
+          value: AppConstants.ValidationLimits.maxRemainingGrams
+        )
       )
     }
     
@@ -124,19 +124,19 @@ struct AddTeaView: View {
       messages.append(AppConstants.UI.UIStrings.AddTea.Validation.usernameRequired)
     } else if trimmedUsername.count < AppConstants.ValidationLimits.minUsernameLength {
       messages.append(
-        AppConstants.UI.UIStrings.AddTea.Validation.usernameMinLength
-          .replacingOccurrences(
-            of: "{min}",
-            with: "\(AppConstants.ValidationLimits.minUsernameLength)"
-          )
+        StringFormatter.format(
+          AppConstants.UI.UIStrings.AddTea.Validation.usernameMinLength,
+          key: "min",
+          value: AppConstants.ValidationLimits.minUsernameLength
+        )
       )
     } else if trimmedUsername.count > AppConstants.ValidationLimits.maxUsernameLength {
       messages.append(
-        AppConstants.UI.UIStrings.AddTea.Validation.usernameMaxLength
-          .replacingOccurrences(
-            of: "{max}",
-            with: "\(AppConstants.ValidationLimits.maxUsernameLength)"
-          )
+        StringFormatter.format(
+          AppConstants.UI.UIStrings.AddTea.Validation.usernameMaxLength,
+          key: "max",
+          value: AppConstants.ValidationLimits.maxUsernameLength
+        )
       )
     }
     
@@ -182,12 +182,15 @@ struct AddTeaView: View {
    説明文の文字数カウンター表示文言を返します。
    */
   private var descriptionCountText: String {
-    AppConstants.UI.UIStrings.Labels.characterCount
-      .replacingOccurrences(of: "{count}", with: "\(descriptionText.count)")
-      .replacingOccurrences(
-        of: "{max}",
-        with: "\(AppConstants.TextLimits.descriptionMaxLength)"
-      )
+    StringFormatter.format(
+      StringFormatter.format(
+        AppConstants.UI.UIStrings.Labels.characterCount,
+        key: "count",
+        value: descriptionText.count
+      ),
+      key: "max",
+      value: AppConstants.TextLimits.descriptionMaxLength
+    )
   }
 
   /*
@@ -306,8 +309,7 @@ struct AddTeaView: View {
             }
           }
           Stepper(
-            AppConstants.UI.UIStrings.AddTea.FormFields.remaining
-              .replacingOccurrences(of: "{grams}", with: "\(remainingGrams)"),
+            StringFormatter.format(AppConstants.UI.UIStrings.AddTea.FormFields.remaining, key: "grams", value: remainingGrams),
             value: $remainingGrams,
             in: 5...500,
             step: 5
@@ -484,8 +486,7 @@ struct AddTeaView: View {
    */
   private func quickAmountButton(_ grams: Int) -> some View {
     Button(
-      AppConstants.UI.UIStrings.AddTea.Actions.quickGrams
-        .replacingOccurrences(of: "{grams}", with: "\(grams)")
+      StringFormatter.format(AppConstants.UI.UIStrings.AddTea.Actions.quickGrams, key: "grams", value: grams)
     ) {
       remainingGrams = grams
     }

@@ -230,47 +230,43 @@ struct ProfileView: View {
     }
     
     if trimmedUsername.count < AppConstants.ValidationLimits.minUsernameLength {
-      saveErrorMessage =
-        AppConstants.UI.UIStrings.AddTea.Validation.usernameMinLength
-          .replacingOccurrences(
-            of: "{min}",
-            with: "\(AppConstants.ValidationLimits.minUsernameLength)"
-          )
+      saveErrorMessage = StringFormatter.format(
+        AppConstants.UI.UIStrings.AddTea.Validation.usernameMinLength,
+        key: "min",
+        value: AppConstants.ValidationLimits.minUsernameLength
+      )
       isShowingSaveError = true
       return
     }
-    
+
     if trimmedUsername.count > AppConstants.ValidationLimits.maxUsernameLength {
-      saveErrorMessage =
-        AppConstants.UI.UIStrings.AddTea.Validation.usernameMaxLength
-          .replacingOccurrences(
-            of: "{max}",
-            with: "\(AppConstants.ValidationLimits.maxUsernameLength)"
-          )
+      saveErrorMessage = StringFormatter.format(
+        AppConstants.UI.UIStrings.AddTea.Validation.usernameMaxLength,
+        key: "max",
+        value: AppConstants.ValidationLimits.maxUsernameLength
+      )
       isShowingSaveError = true
       return
     }
     
     if !trimmedLocation.isEmpty
       && trimmedLocation.count < AppConstants.ValidationLimits.minLocationLength {
-      saveErrorMessage =
-        AppConstants.UI.UIStrings.AddTea.Validation.areaMinLength
-          .replacingOccurrences(
-            of: "{min}",
-            with: "\(AppConstants.ValidationLimits.minLocationLength)"
-          )
+      saveErrorMessage = StringFormatter.format(
+        AppConstants.UI.UIStrings.AddTea.Validation.areaMinLength,
+        key: "min",
+        value: AppConstants.ValidationLimits.minLocationLength
+      )
       isShowingSaveError = true
       return
     }
-    
+
     if !trimmedLocation.isEmpty
       && trimmedLocation.count > AppConstants.ValidationLimits.maxLocationLength {
-      saveErrorMessage =
-        AppConstants.UI.UIStrings.AddTea.Validation.areaMaxLength
-          .replacingOccurrences(
-            of: "{max}",
-            with: "\(AppConstants.ValidationLimits.maxLocationLength)"
-          )
+      saveErrorMessage = StringFormatter.format(
+        AppConstants.UI.UIStrings.AddTea.Validation.areaMaxLength,
+        key: "max",
+        value: AppConstants.ValidationLimits.maxLocationLength
+      )
       isShowingSaveError = true
       return
     }

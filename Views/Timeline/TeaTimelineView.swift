@@ -67,20 +67,29 @@ struct TeaTimelineView: View {
     let keyword = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
     if !keyword.isEmpty {
       labels.append(
-        AppConstants.UI.UIStrings.Timeline.FilterLabels.search
-          .replacingOccurrences(of: "{keyword}", with: keyword)
+        StringFormatter.format(
+          AppConstants.UI.UIStrings.Timeline.FilterLabels.search,
+          key: "keyword",
+          value: keyword
+        )
       )
     }
     if let selectedCategory {
       labels.append(
-        AppConstants.UI.UIStrings.Timeline.FilterLabels.category
-          .replacingOccurrences(of: "{category}", with: selectedCategory.rawValue)
+        StringFormatter.format(
+          AppConstants.UI.UIStrings.Timeline.FilterLabels.category,
+          key: "category",
+          value: selectedCategory.rawValue
+        )
       )
     }
     if statusScope != .active {
       labels.append(
-        AppConstants.UI.UIStrings.Timeline.FilterLabels.scope
-          .replacingOccurrences(of: "{scope}", with: statusScope.displayLabel)
+        StringFormatter.format(
+          AppConstants.UI.UIStrings.Timeline.FilterLabels.scope,
+          key: "scope",
+          value: statusScope.displayLabel
+        )
       )
     }
     if showExpiringOnly {
@@ -90,8 +99,11 @@ struct TeaTimelineView: View {
     }
     if sortOption != .expirySoon {
       labels.append(
-        AppConstants.UI.UIStrings.Timeline.FilterLabels.sort
-          .replacingOccurrences(of: "{sort}", with: sortOption.displayLabel)
+        StringFormatter.format(
+          AppConstants.UI.UIStrings.Timeline.FilterLabels.sort,
+          key: "sort",
+          value: sortOption.displayLabel
+        )
       )
     }
     return labels
@@ -287,11 +299,11 @@ struct TeaTimelineView: View {
    */
   private var timelineSummary: some View {
     HStack {
-      Text(AppConstants.UI.UIStrings.Labels.targetCount.replacingOccurrences(of: "{count}", with: "\(scopedTeaLeaves.count)"))
+      Text(StringFormatter.format(AppConstants.UI.UIStrings.Labels.targetCount, key: "count", value: scopedTeaLeaves.count))
       Spacer()
-      Text(AppConstants.UI.UIStrings.Labels.resultCount.replacingOccurrences(of: "{count}", with: "\(filteredCount)"))
+      Text(StringFormatter.format(AppConstants.UI.UIStrings.Labels.resultCount, key: "count", value: filteredCount))
       Spacer()
-      Text(AppConstants.UI.UIStrings.Labels.expiringCount.replacingOccurrences(of: "{count}", with: "\(expiringCount)"))
+      Text(StringFormatter.format(AppConstants.UI.UIStrings.Labels.expiringCount, key: "count", value: expiringCount))
     }
     .font(AppConstants.UI.Typography.FontScale.chipTitle)
     .foregroundStyle(.secondary)
@@ -343,8 +355,7 @@ struct TeaTimelineView: View {
           .font(AppConstants.UI.Typography.Font.caption)
           .foregroundStyle(.secondary)
         Text(
-          AppConstants.UI.UIStrings.Labels.countSuffix
-            .replacingOccurrences(of: "{count}", with: "\(count)")
+          StringFormatter.format(AppConstants.UI.UIStrings.Labels.countSuffix, key: "count", value: count)
         )
           .font(AppConstants.UI.Typography.FontScale.sectionTitle)
       }
@@ -541,17 +552,15 @@ private struct TeaLeafCardView: View {
 
       VStack(alignment: .leading, spacing: 2) {
         Text(
-          AppConstants.UI.UIStrings.Labels.remaining
-            .replacingOccurrences(of: "{grams}", with: "\(tea.remainingGrams)")
+          StringFormatter.format(AppConstants.UI.UIStrings.Labels.remaining, key: "grams", value: tea.remainingGrams)
         )
           .font(AppConstants.UI.Typography.Font.caption)
         Text(
-          AppConstants.UI.UIStrings.Labels.area
-            .replacingOccurrences(
-              of: "{location}",
-              with: tea.owner?.location
-                ?? AppConstants.UI.UIStrings.Placeholders.notSet
-            )
+          StringFormatter.format(
+            AppConstants.UI.UIStrings.Labels.area,
+            key: "location",
+            value: tea.owner?.location ?? AppConstants.UI.UIStrings.Placeholders.notSet
+          )
         )
           .font(AppConstants.UI.Typography.Font.caption)
           .foregroundStyle(.secondary)
@@ -588,8 +597,11 @@ private struct TeaLeafCardView: View {
     case .expired:
       return AppConstants.UI.UIStrings.Timeline.Expiry.expired
     case .expiringSoon:
-      return AppConstants.UI.UIStrings.Timeline.Expiry.daysRemaining
-        .replacingOccurrences(of: "{days}", with: "\(tea.daysUntilExpiry)")
+      return StringFormatter.format(
+        AppConstants.UI.UIStrings.Timeline.Expiry.daysRemaining,
+        key: "days",
+        value: tea.daysUntilExpiry
+      )
     case .fresh:
       return AppConstants.UI.UIStrings.Timeline.Expiry.fresh
     }

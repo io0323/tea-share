@@ -169,15 +169,15 @@ struct TeaLeafDetailView: View {
         Spacer()
         if isEditingDetail {
           Text(
-            AppConstants.UI.UIStrings.Labels.characterCount
-              .replacingOccurrences(
-                of: "{count}",
-                with: "\(editableDescription.count)"
-              )
-              .replacingOccurrences(
-                of: "{max}",
-                with: "\(AppConstants.TextLimits.descriptionMaxLength)"
-              )
+            StringFormatter.format(
+              StringFormatter.format(
+                AppConstants.UI.UIStrings.Labels.characterCount,
+                key: "count",
+                value: editableDescription.count
+              ),
+              key: "max",
+              value: AppConstants.TextLimits.descriptionMaxLength
+            )
           )
             .font(AppConstants.UI.Typography.Font.footnote)
             .foregroundStyle(
@@ -190,11 +190,7 @@ struct TeaLeafDetailView: View {
 
       if isEditingDetail {
         Stepper(
-          AppConstants.UI.UIStrings.Detail.Fields.remainingWithGrams
-            .replacingOccurrences(
-              of: "{grams}",
-              with: "\(editableRemainingGrams)"
-            ),
+          StringFormatter.format(AppConstants.UI.UIStrings.Detail.Fields.remainingWithGrams, key: "grams", value: editableRemainingGrams),
           value: $editableRemainingGrams,
           in: AppConstants.ValidationLimits.minRemainingGrams...AppConstants.ValidationLimits.maxRemainingGrams,
           step: 5
