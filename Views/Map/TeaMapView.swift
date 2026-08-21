@@ -154,7 +154,7 @@ struct TeaMapView: View {
           }
           .buttonStyle(AppConstants.UI.ButtonStyle.plain)
 
-          Text(AppConstants.UI.UIStrings.Labels.displayCount.replacingOccurrences(of: "{count}", with: "\(mapTeaLeaves.count)"))
+          Text(StringFormatter.format(AppConstants.UI.UIStrings.Labels.displayCount, key: "count", value: mapTeaLeaves.count))
             .font(AppConstants.UI.Typography.Font.footnote.weight(AppConstants.UI.Typography.FontWeight.medium))
             .padding(.horizontal, AppConstants.UI.Padding.chipHorizontal)
             .padding(.vertical, AppConstants.UI.Padding.chipVertical)
@@ -279,13 +279,13 @@ private struct TeaMapDetailSheet: View {
       Text(teaLeaf.name)
         .font(AppConstants.UI.Typography.Font.title3.weight(AppConstants.UI.Typography.FontWeight.semibold))
 
-      Text(AppConstants.UI.UIStrings.Labels.seller.replacingOccurrences(of: "{username}", with: teaLeaf.owner?.username ?? AppConstants.UI.UIStrings.Placeholders.unknown))
+      Text(StringFormatter.format(AppConstants.UI.UIStrings.Labels.seller, key: "username", value: teaLeaf.owner?.username ?? AppConstants.UI.UIStrings.Placeholders.unknown))
         .font(AppConstants.UI.Typography.Font.body)
-      Text(AppConstants.UI.UIStrings.Labels.area.replacingOccurrences(of: "{location}", with: teaLeaf.owner?.location ?? AppConstants.UI.UIStrings.Placeholders.notSet))
+      Text(StringFormatter.format(AppConstants.UI.UIStrings.Labels.area, key: "location", value: teaLeaf.owner?.location ?? AppConstants.UI.UIStrings.Placeholders.notSet))
         .font(AppConstants.UI.Typography.Font.body)
-      Text(AppConstants.UI.UIStrings.Labels.remaining.replacingOccurrences(of: "{grams}", with: "\(teaLeaf.remainingGrams)"))
+      Text(StringFormatter.format(AppConstants.UI.UIStrings.Labels.remaining, key: "grams", value: teaLeaf.remainingGrams))
         .font(AppConstants.UI.Typography.Font.body)
-      Text(AppConstants.UI.UIStrings.Labels.status.replacingOccurrences(of: "{status}", with: teaLeaf.tradeStatus.rawValue))
+      Text(StringFormatter.format(AppConstants.UI.UIStrings.Labels.status, key: "status", value: teaLeaf.tradeStatus.rawValue))
         .font(AppConstants.UI.Typography.Font.body)
         .foregroundStyle(.secondary)
 

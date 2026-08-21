@@ -113,17 +113,15 @@ private struct TeaLeafCardView: View {
 
       VStack(alignment: .leading, spacing: 2) {
         Text(
-          AppConstants.UI.UIStrings.Labels.remaining
-            .replacingOccurrences(of: "{grams}", with: "\(tea.remainingGrams)")
+          StringFormatter.format(AppConstants.UI.UIStrings.Labels.remaining, key: "grams", value: tea.remainingGrams)
         )
           .font(AppConstants.UI.Typography.Font.caption)
         Text(
-          AppConstants.UI.UIStrings.Labels.area
-            .replacingOccurrences(
-              of: "{location}",
-              with: tea.owner?.location
-                ?? AppConstants.UI.UIStrings.Placeholders.notSet
-            )
+          StringFormatter.format(
+            AppConstants.UI.UIStrings.Labels.area,
+            key: "location",
+            value: tea.owner?.location ?? AppConstants.UI.UIStrings.Placeholders.notSet
+          )
         )
           .font(AppConstants.UI.Typography.Font.caption)
           .foregroundStyle(.secondary)
@@ -160,8 +158,11 @@ private struct TeaLeafCardView: View {
     case .expired:
       return AppConstants.UI.UIStrings.Timeline.Expiry.expired
     case .expiringSoon:
-      return AppConstants.UI.UIStrings.Timeline.Expiry.daysRemaining
-        .replacingOccurrences(of: "{days}", with: "\(tea.daysUntilExpiry)")
+      return StringFormatter.format(
+        AppConstants.UI.UIStrings.Timeline.Expiry.daysRemaining,
+        key: "days",
+        value: tea.daysUntilExpiry
+      )
     case .fresh:
       return AppConstants.UI.UIStrings.Timeline.Expiry.fresh
     }
