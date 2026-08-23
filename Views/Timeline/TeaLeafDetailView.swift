@@ -20,14 +20,6 @@ struct TeaLeafDetailView: View {
   @AppStorage(AppConstants.Storage.currentUserIdKey)
   private var currentUserId = ""
 
-  private let dateFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .medium
-    formatter.timeStyle = .none
-    formatter.locale = Locale(identifier: "ja_JP")
-    return formatter
-  }()
-
   var body: some View {
     ScrollView {
       VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.card) {
@@ -214,7 +206,7 @@ struct TeaLeafDetailView: View {
         )
         detailRow(
           AppConstants.UI.UIStrings.Detail.Fields.expiry,
-          value: dateFormatter.string(from: teaLeaf.expiryDate)
+          value: DateFormatterHelper.formatDate(teaLeaf.expiryDate)
         )
         detailRow(
           AppConstants.UI.UIStrings.Detail.Fields.seller,
