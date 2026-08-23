@@ -221,52 +221,25 @@ struct ProfileView: View {
     
     let trimmedUsername = editedUsername.trimmingCharacters(in: .whitespacesAndNewlines)
     let trimmedLocation = editedLocation.trimmingCharacters(in: .whitespacesAndNewlines)
-    
-    if trimmedUsername.isEmpty {
-      saveErrorMessage =
-        AppConstants.UI.UIStrings.AddTea.Validation.usernameRequired
-      isShowingSaveError = true
-      return
-    }
-    
-    if trimmedUsername.count < AppConstants.ValidationLimits.minUsernameLength {
-      saveErrorMessage = StringFormatter.format(
-        AppConstants.UI.UIStrings.AddTea.Validation.usernameMinLength,
-        key: "min",
-        value: AppConstants.ValidationLimits.minUsernameLength
-      )
+
+    let usernameValidation = ValidationHelper.validateLength(
+      trimmedUsername,
+      minLength: AppConstants.ValidationLimits.minUsernameLength,
+      maxLength: AppConstants.ValidationLimits.maxUsernameLength
+    )
+ if !usernameValidation.isValid {
+      saveErrorMessage = usernameValidation.message
       isShowingSaveError = true
       return
     }
 
-    if trimmedUsername.count > AppConstants.ValidationLimits.maxUsernameLength {
-      saveErrorMessage = StringFormatter.format(
-        AppConstants.UI.UIStrings.AddTea.Validation.usernameMaxLength,
-        key: "max",
-        value: AppConstants.ValidationLimits.maxUsernameLength
-      )
-      isShowingSaveError = true
-      return
-    }
-    
-    if !trimmedLocation.isEmpty
-      && trimmedLocation.count < AppConstants.ValidationLimits.minLocationLength {
-      saveErrorMessage = StringFormatter.format(
-        AppConstants.UI.UIStrings.AddTea.Validation.areaMinLength,
-        key: "min",
-        value: AppConstants.ValidationLimits.minLocationLength
-      )
-      isShowingSaveError = true
-      return
-    }
-
-    if !trimmedLocation.isEmpty
-      && trimmedLocation.count > AppConstants.ValidationLimits.maxLocationLength {
-      saveErrorMessage = StringFormatter.format(
-        AppConstants.UI.UIStrings.AddTea.Validation.areaMaxLength,
-        key: "max",
-        value: AppConstants.ValidationLimits.maxLocationLength
-      )
+    let locationValidation = ValidationHelper.validateLength(
+      trimmedLocation,
+      minLength: trimmedLocation.isEmpty ? nil : AppConstants.ValidationLimits.minLocationLength,
+      maxLength: trimmedLocation.isEmpty ? nil : AppConstants.ValidationLimits.maxLocationLength
+    )
+    if !locationValidation.isValid {
+      saveErrorMessage = locationValidation.message
       isShowingSaveError = true
       return
     }
