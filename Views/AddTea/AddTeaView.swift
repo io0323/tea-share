@@ -56,91 +56,41 @@ struct AddTeaView: View {
    保存前に表示する入力チェックメッセージを返します。
    */
   private var validationMessages: [String] {
-    var messages: [String] = []
+    var results: [(isValid: Bool, message: String?)] = []
     
-    if trimmedName.isEmpty {
-      messages.append(AppConstants.UI.UIStrings.AddTea.Validation.teaNameRequired)
-    } else if trimmedName.count < AppConstants.ValidationLimits.minTeaNameLength {
-      messages.append(
-        StringFormatter.format(
-          AppConstants.UI.UIStrings.AddTea.Validation.teaNameMinLength,
-          key: "min",
-          value: AppConstants.ValidationLimits.minTeaNameLength
-        )
-      )
-    } else if trimmedName.count > AppConstants.ValidationLimits.maxTeaNameLength {
-      messages.append(
-        StringFormatter.format(
-          AppConstants.UI.UIStrings.AddTea.Validation.teaNameMaxLength,
-          key: "max",
-          value: AppConstants.ValidationLimits.maxTeaNameLength
-        )
-      )
-    }
-
-    if trimmedLocation.isEmpty {
-      messages.append(AppConstants.UI.UIStrings.AddTea.Validation.areaRequired)
-    } else if trimmedLocation.count < AppConstants.ValidationLimits.minLocationLength {
-      messages.append(
-        StringFormatter.format(
-          AppConstants.UI.UIStrings.AddTea.Validation.areaMinLength,
-          key: "min",
-          value: AppConstants.ValidationLimits.minLocationLength
-        )
-      )
-    } else if trimmedLocation.count > AppConstants.ValidationLimits.maxLocationLength {
-      messages.append(
-        StringFormatter.format(
-          AppConstants.UI.UIStrings.AddTea.Validation.areaMaxLength,
-          key: "max",
-          value: AppConstants.ValidationLimits.maxLocationLength
-        )
-      )
-    }
-
-    if remainingGrams < AppConstants.ValidationLimits.minRemainingGrams {
-      messages.append(
-        StringFormatter.format(
-          AppConstants.UI.UIStrings.AddTea.Validation.remainingMin,
-          key: "min",
-          value: AppConstants.ValidationLimits.minRemainingGrams
-        )
-      )
-    } else if remainingGrams > AppConstants.ValidationLimits.maxRemainingGrams {
-      messages.append(
-        StringFormatter.format(
-          AppConstants.UI.UIStrings.AddTea.Validation.remainingMax,
-          key: "max",
-          value: AppConstants.ValidationLimits.maxRemainingGrams
-        )
-      )
-    }
+    let nameValidation = ValidationHelper.validateLength(
+      trimmedName,
+      minLength: AppConstants.ValidationLimits.minTeaNameLength,
+      maxLength: AppConstants.ValidationLimits.maxTeaNameLength
+    )
+    results.append(nameValidation)
     
-    if expiryDate < Calendar.current.startOfDay(for: Date()) {
-      messages.append(AppConstants.UI.UIStrings.AddTea.Validation.expiryNotPast)
-    }
+    let locationValidation = ValidationHelper.validateLength(
+      trimmedLocation,
+      minLength: AppConstants.ValidationLimits.minLocationLength,
+      maxLength: AppConstants.ValidationLimits.maxLocationLength
+    )
+    results.append(locationValidation)
     
-    if trimmedUsername.isEmpty {
-      messages.append(AppConstants.UI.UIStrings.AddTea.Validation.usernameRequired)
-    } else if trimmedUsername.count < AppConstants.ValidationLimits.minUsernameLength {
-      messages.append(
-        StringFormatter.format(
-          AppConstants.UI.UIStrings.AddTea.Validation.usernameMinLength,
-          key: "min",
-          value: AppConstants.ValidationLimits.minUsernameLength
-        )
-      )
-    } else if trimmedUsername.count > AppConstants.ValidationLimits.maxUsernameLength {
-      messages.append(
-        StringFormatter.format(
-          AppConstants.UI.UIStrings.AddTea.Validation.usernameMaxLength,
-          key: "max",
-          value: AppConstants.ValidationLimits.maxUsernameLength
-        )
-      )
-    }
+    let gramsValidation = ValidationHelper.validateRange(
+      remainingGrams,
+      minValue: AppConstants.ValidationLimits.minRemainingGrams,
+      maxValue: AppConstants.ValidationLimits.maxRemainingGrams
+    )
+    results.append(gramsValidation)
     
-    return messages
+    let dateValidation = ValidationHelper.validateNotPast(expiryDate)
+    results.append(dateValidation)
+    
+    let usernameValidation = ValidationHelper.validateLength(
+      trimmedUsername,
+      minLength: AppConstants.ValidationLimits.minUsernameLength,
+      maxLength: AppConstants.ValidationLimits.maxUsernameLength
+    )
+    results.append(usernameValidation)
+    
+    let combined = ValidationHelper.combineResults(results)
+    return combined.messages
   }
 
   /*
