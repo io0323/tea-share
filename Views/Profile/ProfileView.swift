@@ -126,11 +126,13 @@ struct ProfileView: View {
                     text: $editedUsername
                   )
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .accessibilityLabel("ユーザー名")
                   TextField(
                     AppConstants.UI.UIStrings.Labels.location,
                     text: $editedLocation
                   )
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .accessibilityLabel("場所")
                 }
               } else {
                 HStack {
