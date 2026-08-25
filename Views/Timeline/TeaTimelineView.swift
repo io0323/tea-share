@@ -196,6 +196,8 @@ struct TeaTimelineView: View {
           .clipShape(AppConstants.UI.ClipShape.capsule)
           .shadow(color: AppConstants.UI.ShadowStyle.shadow, radius: AppConstants.UI.Shadow.largeRadius, x: 0, y: AppConstants.UI.Shadow.buttonOffset)
         }
+          .accessibilityLabel("茶葉を出品")
+          .accessibilityHint("新しい茶葉を登録する画面を開きます")
           .padding(AppConstants.UI.Padding.huge)
       }
       .navigationTitle(AppConstants.UI.Navigation.Titles.main)
@@ -218,6 +220,8 @@ struct TeaTimelineView: View {
       )
         .textInputAutocapitalization(.never)
         .autocorrectionDisabled()
+        .accessibilityLabel("検索")
+        .accessibilityHint("茶葉名、ブランド、場所で検索します")
       if !searchText.isEmpty {
         Button {
           searchText = ""
@@ -225,6 +229,7 @@ struct TeaTimelineView: View {
           Image(systemName: AppConstants.UI.UIStrings.Content.xmarkCircleFill)
             .foregroundStyle(.secondary)
         }
+        .accessibilityLabel("検索をクリア")
       }
     }
     .padding(.horizontal, AppConstants.UI.Padding.cardHorizontal)
