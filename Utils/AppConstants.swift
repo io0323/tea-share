@@ -128,6 +128,15 @@ struct AppConstants {
       static let gray: Color = .gray
       static let secondary: Color = .secondary
     }
+
+    struct GradientColor {
+      static let top: Color = Color(red: 0.86, green: 0.94, blue: 0.86)
+      static let bottom: Color = Color(red: 0.95, green: 0.91, blue: 0.84)
+    }
+
+    struct Format {
+      static let coordinatePrecision: String = "%.5f"
+    }
     
     struct Layout {
       struct Padding {
