@@ -25,6 +25,7 @@ struct TeaTimelineView: View {
     let categoryFiltered = scopedTeaLeaves
       .filter { tea in
         guard let selectedCategory else { return true }
+        
         return tea.category == selectedCategory
       }
 
@@ -32,6 +33,7 @@ struct TeaTimelineView: View {
       let keyword = searchText
         .trimmingCharacters(in: .whitespacesAndNewlines)
       guard !keyword.isEmpty else { return true }
+      
       return tea.name.localizedCaseInsensitiveContains(keyword)
         || tea.brand.localizedCaseInsensitiveContains(keyword)
         || (tea.owner?.location ?? "").localizedCaseInsensitiveContains(keyword)
@@ -39,6 +41,7 @@ struct TeaTimelineView: View {
 
     let expiryFiltered = textFiltered.filter { tea in
       guard showExpiringOnly else { return true }
+      
       return tea.expiryStatus != .fresh
     }
 

@@ -139,6 +139,7 @@ struct TeaLeafDetailView: View {
 
       Button {
         guard let nextStatus else { return }
+        
         teaLeaf.tradeStatus = nextStatus
         saveContext()
       } label: {
@@ -455,6 +456,7 @@ struct TeaLeafDetailView: View {
       modelContext: modelContext,
       storedUserId: currentUserId
     ) ?? users.first
+    
     guard let currentUser else {
       tradeRequestMessage = AppConstants.UI.Alerts.Messages.userDataNotFound
       isShowingTradeRequestAlert = true

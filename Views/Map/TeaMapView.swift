@@ -70,6 +70,7 @@ struct TeaMapView: View {
       .filter { selectedFilter.matches($0) }
       .filter { teaLeaf in
         guard let selectedCategory else { return true }
+        
         return teaLeaf.category == selectedCategory
       }
   }
@@ -363,6 +364,7 @@ private struct TeaMapDetailSheet: View {
    */
   private func moveToNextStatus() {
     guard let nextStatus else { return }
+    
     teaLeaf.tradeStatus = nextStatus
     saveStatusChange()
   }

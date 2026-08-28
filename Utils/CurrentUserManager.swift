@@ -17,6 +17,7 @@ enum CurrentUserManager {
           let id = UUID(uuidString: storedUserId) else {
       return nil
     }
+    
     let targetId = id
     var descriptor = FetchDescriptor<User>(
       predicate: #Predicate<User> { user in
