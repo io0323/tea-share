@@ -184,6 +184,7 @@ struct ProfileView: View {
     ) == nil else {
       return
     }
+    
     if CurrentUserManager.currentOrBootstrapUser(
       modelContext: modelContext,
       storedUserId: &storedId

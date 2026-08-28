@@ -20,6 +20,7 @@ struct MyListingsView: View {
     ) else {
       return []
     }
+    
     return teaLeaves.filter { $0.owner?.id == currentUser.id }
   }
 

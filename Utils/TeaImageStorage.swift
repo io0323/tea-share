@@ -56,8 +56,10 @@ enum TeaImageStorage {
    */
   static func loadImage(from path: String) -> UIImage? {
     guard !path.isEmpty else { return nil }
+    
     let fileManager = FileManager.default
     guard fileManager.fileExists(atPath: path) else { return nil }
+    
     return UIImage(contentsOfFile: path)
   }
 

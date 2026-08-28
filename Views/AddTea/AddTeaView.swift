@@ -459,13 +459,20 @@ struct AddTeaView: View {
    */
   private func loadImageFromLibrary(item: PhotosPickerItem) {
     Task {
-      guard let data = try? await item.loadTransferable(type: Data.self),
-            let image = UIImage(data: data) else {
+      guard let data = try? await item.loadTransferable(type: Data.self) else {
         await MainActor.run {
           presentError(AppConstants.UI.UIStrings.AddTea.Errors.imageLoadFailed)
         }
         return
       }
+      
+      guard let image = UIImage(data: data) else {
+        await MainActor.run {
+          presentError(AppConstants.UI.UIStrings.AddTea.Errors.imageLoadFailed)
+        }
+        return
+      }
+      
       await MainActor.run {
         selectedImage = image
       }
@@ -476,11 +483,17 @@ struct AddTeaView: View {
    画像解析で茶葉名とブランド候補を補完します。
    */
   private func suggestTeaInfo(image: UIImage) {
-    guard let cgImage = image.cgImage else { return }
+    guard let cgImage = image.cgImage else {
+      Task { @MainActor in
+        applyMockSuggestion()
+        isAnalyzingImage = false
+      }
+      return
+    }
+    
     isAnalyzingImage = true
     let request = VNRecognizeTextRequest { request, _ in
-      guard let observations = request.results
-        as? [VNRecognizedTextObservation] else {
+      guard let observations = request.results as? [VNRecognizedTextObservation] else {
         Task { @MainActor in
           applyMockSuggestion()
           isAnalyzingImage = false
