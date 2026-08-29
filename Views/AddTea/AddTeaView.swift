@@ -3,7 +3,6 @@ import PhotosUI
 import SwiftData
 import Vision
 import UIKit
-import os.log
 
 /*
  茶葉の新規出品フォームを提供する画面です。
