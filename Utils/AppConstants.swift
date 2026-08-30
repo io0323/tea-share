@@ -130,7 +130,7 @@ struct AppConstants {
     
     struct Layout {
       struct Padding {
-        static let default: CGFloat = 16
+        static let tiny: CGFloat = 2
         static let small: CGFloat = 8
         static let medium: CGFloat = 12
         static let large: CGFloat = 14
@@ -187,6 +187,7 @@ struct AppConstants {
         static let vStack: CGFloat = 8
         static let detailSection: CGFloat = 12
         static let emptyState: CGFloat = 10
+        static let default: CGFloat = 8
       }
       
       struct CornerRadius {
