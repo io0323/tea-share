@@ -89,9 +89,10 @@ extension TeaLeaf {
    今日から賞味期限までの日数を返します。
    */
   var daysUntilExpiry: Int {
-    let start = Calendar.current.startOfDay(for: Date())
-    let target = Calendar.current.startOfDay(for: expiryDate)
-    return Calendar.current.dateComponents([.day], from: start, to: target).day
+    let calendar = Calendar.current
+    let start = calendar.startOfDay(for: Date())
+    let target = calendar.startOfDay(for: expiryDate)
+    return calendar.dateComponents([.day], from: start, to: target).day
       ?? 0
   }
 

@@ -222,8 +222,9 @@ struct ProfileView: View {
       return
     }
     
-    let trimmedUsername = editedUsername.trimmingCharacters(in: .whitespacesAndNewlines)
-    let trimmedLocation = editedLocation.trimmingCharacters(in: .whitespacesAndNewlines)
+    let whitespaceSet = CharacterSet.whitespacesAndNewlines
+    let trimmedUsername = editedUsername.trimmingCharacters(in: whitespaceSet)
+    let trimmedLocation = editedLocation.trimmingCharacters(in: whitespaceSet)
 
     let usernameValidation = ValidationHelper.validateLength(
       trimmedUsername,

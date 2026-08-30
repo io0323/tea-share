@@ -523,18 +523,19 @@ struct AddTeaView: View {
    抽出した文字列から茶葉名とブランド名を推定します。
    */
   private func applySuggestedText(_ text: String) {
+    let whitespaceSet = CharacterSet.whitespacesAndNewlines
     let tokens = text
-      .components(separatedBy: .whitespacesAndNewlines)
+      .components(separatedBy: whitespaceSet)
       .filter { !$0.isEmpty }
     guard !tokens.isEmpty else {
       applyMockSuggestion()
       return
     }
 
-    if name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+    if name.trimmingCharacters(in: whitespaceSet).isEmpty {
       name = tokens.prefix(2).joined(separator: " ")
     }
-    if brand.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+    if brand.trimmingCharacters(in: whitespaceSet).isEmpty {
       brand = tokens.dropFirst(2).prefix(2).joined(separator: " ")
       if brand.isEmpty {
         brand = AppConstants.UI.UIStrings.AddTea.Suggestions.unknownBrand
@@ -546,10 +547,11 @@ struct AddTeaView: View {
    Visionが使えないケース向けの簡易補完を適用します。
    */
   private func applyMockSuggestion() {
-    if name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+    let whitespaceSet = CharacterSet.whitespacesAndNewlines
+    if name.trimmingCharacters(in: whitespaceSet).isEmpty {
       name = AppConstants.UI.UIStrings.AddTea.Suggestions.mockTeaName
     }
-    if brand.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+    if brand.trimmingCharacters(in: whitespaceSet).isEmpty {
       brand = AppConstants.UI.UIStrings.AddTea.Suggestions.mockBrand
     }
   }
@@ -713,8 +715,9 @@ struct AddTeaView: View {
    賞味期限プリセットを適用します。
    */
   private func applyExpiryPreset(_ preset: ExpiryPreset) {
-    let today = Calendar.current.startOfDay(for: Date())
-    expiryDate = Calendar.current.date(
+    let calendar = Calendar.current
+    let today = calendar.startOfDay(for: Date())
+    expiryDate = calendar.date(
       byAdding: .month,
       value: preset.monthOffset,
       to: today
