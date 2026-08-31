@@ -359,7 +359,7 @@ struct TeaTimelineView: View {
     HStack(spacing: AppConstants.UI.Layout.Spacing.hStack) {
       Image(systemName: icon)
         .foregroundStyle(tint)
-      VStack(alignment: .leading, spacing: 2) {
+      VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.tiny) {
         Text(title)
           .font(AppConstants.UI.Typography.Font.caption)
           .foregroundStyle(.secondary)
@@ -559,7 +559,7 @@ private struct TeaLeafCardView: View {
 
       expiryBadge
 
-      VStack(alignment: .leading, spacing: 2) {
+      VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.tiny) {
         Text(
           StringFormatter.format(AppConstants.UI.UIStrings.Labels.remaining, key: "grams", value: tea.remainingGrams)
         )

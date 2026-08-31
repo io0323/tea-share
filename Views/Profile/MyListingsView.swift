@@ -112,7 +112,7 @@ private struct TeaLeafCardView: View {
 
       expiryBadge
 
-      VStack(alignment: .leading, spacing: 2) {
+      VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.tiny) {
         Text(
           StringFormatter.format(AppConstants.UI.UIStrings.Labels.remaining, key: "grams", value: tea.remainingGrams)
         )
