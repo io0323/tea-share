@@ -125,6 +125,8 @@ struct AppConstants {
       static let green: Color = .green
       static let blue: Color = .blue
       static let gray: Color = .gray
+      static let red: Color = .red
+      static let orange: Color = .orange
       static let secondary: Color = .secondary
     }
     
