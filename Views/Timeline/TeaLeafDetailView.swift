@@ -91,7 +91,7 @@ struct TeaLeafDetailView: View {
         .foregroundStyle(.secondary)
 
       HStack(spacing: AppConstants.UI.Layout.Spacing.tag) {
-        tagLabel(teaLeaf.category.rawValue, tint: .green)
+        tagLabel(teaLeaf.category.rawValue, tint: AppConstants.UI.BasicColor.green)
         tagLabel(teaLeaf.tradeStatus.rawValue, tint: statusColor)
       }
     }
@@ -183,7 +183,7 @@ struct TeaLeafDetailView: View {
             .font(AppConstants.UI.Typography.Font.footnote)
             .foregroundStyle(
               editableDescription.count >= AppConstants.TextLimits.descriptionMaxLength
-                ? .orange
+                ? AppConstants.UI.BasicColor.orange
                 : .secondary
             )
         }
@@ -338,11 +338,11 @@ struct TeaLeafDetailView: View {
   private var statusColor: Color {
     switch teaLeaf.tradeStatus {
     case .available:
-      return .green
+      return AppConstants.UI.BasicColor.green
     case .pending:
-      return .orange
+      return AppConstants.UI.BasicColor.orange
     case .completed:
-      return .gray
+      return AppConstants.UI.BasicColor.gray
     }
   }
 

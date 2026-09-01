@@ -142,13 +142,13 @@ struct TradeRequestsView: View {
             approveTrade(trade)
           }
           .buttonStyle(AppConstants.UI.ButtonStyle.borderedProminent)
-          .tint(.green)
+          .tint(AppConstants.UI.BasicColor.green)
 
           Button(AppConstants.UI.UIStrings.Profile.TradeRequests.reject) {
             rejectTrade(trade)
           }
           .buttonStyle(AppConstants.UI.ButtonStyle.bordered)
-          .tint(.red)
+          .tint(AppConstants.UI.BasicColor.red)
         }
       }
     }

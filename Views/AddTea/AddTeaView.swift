@@ -290,7 +290,7 @@ struct AddTeaView: View {
               Text(descriptionCountText)
               .font(AppConstants.UI.Typography.Font.footnote)
               .foregroundStyle(
-                descriptionText.count >= AppConstants.TextLimits.descriptionMaxLength ? .orange : .secondary
+                descriptionText.count >= AppConstants.TextLimits.descriptionMaxLength ? AppConstants.UI.BasicColor.orange : .secondary
               )
               .accessibilityLabel("文字数")
           }
@@ -327,7 +327,7 @@ struct AddTeaView: View {
             ForEach(validationMessages, id: \.self) { message in
               Text(message)
                 .font(AppConstants.UI.Typography.Font.footnote)
-                .foregroundStyle(.red)
+                .foregroundStyle(AppConstants.UI.BasicColor.red)
             }
           }
         }

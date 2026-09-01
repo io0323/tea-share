@@ -196,7 +196,7 @@ struct TeaTimelineView: View {
           .foregroundStyle(AppConstants.UI.BasicColor.white)
           .padding(.horizontal, AppConstants.UI.Padding.default)
           .padding(.vertical, AppConstants.UI.Padding.large)
-          .background(Color.green.opacity(AppConstants.UI.Opacity.greenButton))
+          .background(AppConstants.UI.BasicColor.green.opacity(AppConstants.UI.Opacity.greenButton))
           .clipShape(AppConstants.UI.ClipShape.capsule)
           .shadow(color: AppConstants.UI.ShadowStyle.shadow, radius: AppConstants.UI.Shadow.largeRadius, x: 0, y: AppConstants.UI.Shadow.buttonOffset)
         }
@@ -328,19 +328,19 @@ struct TeaTimelineView: View {
           title: TradeStatus.available.rawValue,
           count: tradeStatusCounts[.available] ?? 0,
           icon: AppConstants.UI.UIStrings.Content.leafFill,
-          tint: .green
+          tint: AppConstants.UI.BasicColor.green
         )
         statusSummaryCard(
           title: TradeStatus.pending.rawValue,
           count: tradeStatusCounts[.pending] ?? 0,
           icon: AppConstants.UI.UIStrings.Content.bubbleLeftAndBubbleRightFill,
-          tint: .orange
+          tint: AppConstants.UI.BasicColor.orange
         )
         statusSummaryCard(
           title: TradeStatus.completed.rawValue,
           count: tradeStatusCounts[.completed] ?? 0,
           icon: AppConstants.UI.UIStrings.Content.checkmarkSealFill,
-          tint: .gray
+          tint: AppConstants.UI.BasicColor.gray
         )
       }
       .padding(.vertical, AppConstants.UI.Padding.verticalSmall)
@@ -537,7 +537,7 @@ private struct TeaLeafCardView: View {
           .overlay {
             Image(systemName: AppConstants.UI.UIStrings.Content.leafFill)
               .font(.system(size: AppConstants.UI.FontSizes.cardIcon))
-              .foregroundStyle(Color.green.opacity(AppConstants.UI.Colors.greenForegroundOpacity))
+              .foregroundStyle(AppConstants.UI.BasicColor.green.opacity(AppConstants.UI.Colors.greenForegroundOpacity))
           }
           .frame(height: AppConstants.UI.Frame.cardHeight)
           .clipShape(AppConstants.UI.ClipShape.roundedRectangleSheet)
@@ -552,7 +552,7 @@ private struct TeaLeafCardView: View {
           .font(AppConstants.UI.Typography.FontScale.cardSubtitle)
           .padding(.horizontal, AppConstants.UI.Padding.badgeHorizontal)
           .padding(.vertical, AppConstants.UI.Padding.badgeVertical)
-          .background(Color.green.opacity(AppConstants.UI.Colors.greenBadgeOpacity))
+          .background(AppConstants.UI.BasicColor.green.opacity(AppConstants.UI.Colors.greenBadgeOpacity))
           .clipShape(AppConstants.UI.ClipShape.capsule)
         statusBadge
       }
@@ -622,11 +622,11 @@ private struct TeaLeafCardView: View {
   private var expiryColor: Color {
     switch tea.expiryStatus {
     case .expired:
-      return .red
+      return AppConstants.UI.BasicColor.red
     case .expiringSoon:
-      return .orange
+      return AppConstants.UI.BasicColor.orange
     case .fresh:
-      return .green
+      return AppConstants.UI.BasicColor.green
     }
   }
 
@@ -663,11 +663,11 @@ private struct TeaLeafCardView: View {
   private var statusColor: Color {
     switch tea.tradeStatus {
     case .available:
-      return .green
+      return AppConstants.UI.BasicColor.green
     case .pending:
-      return .orange
+      return AppConstants.UI.BasicColor.orange
     case .completed:
-      return .gray
+      return AppConstants.UI.BasicColor.gray
     }
   }
 }
@@ -684,13 +684,13 @@ private struct CategoryChip: View {
     Button(action: action) {
       Text(title)
         .font(AppConstants.UI.Typography.Font.subheadline.weight(AppConstants.UI.Typography.FontWeight.medium))
-        .foregroundStyle(isSelected ? .white : Color.green.opacity(AppConstants.UI.Colors.greenTextOpacity))
+        .foregroundStyle(isSelected ? AppConstants.UI.BasicColor.white : AppConstants.UI.BasicColor.green.opacity(AppConstants.UI.Colors.greenTextOpacity))
         .padding(.horizontal, AppConstants.UI.Padding.buttonHorizontal)
         .padding(.vertical, AppConstants.UI.Padding.buttonVertical)
         .background(
           isSelected
-            ? Color.green.opacity(AppConstants.UI.Colors.greenSelectedOpacity)
-            : Color.white.opacity(AppConstants.UI.Opacity.chipBackground)
+            ? AppConstants.UI.BasicColor.green.opacity(AppConstants.UI.Colors.greenSelectedOpacity)
+            : AppConstants.UI.BasicColor.white.opacity(AppConstants.UI.Opacity.chipBackground)
         )
         .clipShape(AppConstants.UI.ClipShape.capsule)
     }
