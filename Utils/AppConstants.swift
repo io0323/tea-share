@@ -168,6 +168,14 @@ struct AppConstants {
         static let maxWidthInfinity: CGFloat = .infinity
         static let leading: Alignment = .leading
         static let center: Alignment = .center
+        static let topLeading: Alignment = .topLeading
+        static let bottomTrailing: Alignment = .bottomTrailing
+      }
+      
+      struct LineLimit {
+        static let cardTitle: ClosedRange<Int> = 2...2
+        static let description: ClosedRange<Int> = 3...6
+        static let detailDescription: ClosedRange<Int> = 3...8
       }
       
       struct Spacing {
