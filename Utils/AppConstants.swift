@@ -178,6 +178,14 @@ struct AppConstants {
         static let detailDescription: ClosedRange<Int> = 3...8
       }
       
+      struct DatePickerSettings {
+        static let dateComponents: DatePickerComponents = .date
+      }
+      
+      struct TextFieldAxis {
+        static let vertical: Axis = .vertical
+      }
+      
       struct Spacing {
         static let tiny: CGFloat = 2
         static let small: CGFloat = 4
