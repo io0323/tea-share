@@ -283,7 +283,7 @@ struct AddTeaView: View {
             text: $descriptionText,
             axis: .vertical
           )
-            .lineLimit(3...6)
+            .lineLimit(AppConstants.UI.LineLimit.description)
             .accessibilityLabel("説明")
           HStack {
             Spacer()

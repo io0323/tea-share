@@ -207,7 +207,7 @@ struct TeaLeafDetailView: View {
           text: $editableDescription,
           axis: .vertical
         )
-          .lineLimit(3...8)
+          .lineLimit(AppConstants.UI.LineLimit.detailDescription)
       } else {
         detailRow(
           AppConstants.UI.UIStrings.Detail.Fields.remaining,

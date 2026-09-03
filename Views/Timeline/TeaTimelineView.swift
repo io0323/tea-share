@@ -143,14 +143,14 @@ struct TeaTimelineView: View {
 
   var body: some View {
     NavigationStack {
-      ZStack(alignment: .bottomTrailing) {
+      ZStack(alignment: AppConstants.UI.FrameAlignment.bottomTrailing) {
         LinearGradient(
           colors: [
             Color(red: 0.86, green: 0.94, blue: 0.86),
             Color(red: 0.95, green: 0.91, blue: 0.84)
           ],
-          startPoint: .topLeading,
-          endPoint: .bottomTrailing
+          startPoint: AppConstants.UI.FrameAlignment.topLeading,
+          endPoint: AppConstants.UI.FrameAlignment.bottomTrailing
         )
         .ignoresSafeArea()
         .opacity(AppConstants.UI.Opacity.backgroundGradient)
@@ -545,7 +545,7 @@ private struct TeaLeafCardView: View {
 
       Text(tea.name)
         .font(AppConstants.UI.Typography.FontScale.cardTitle)
-        .lineLimit(2)
+        .lineLimit(AppConstants.UI.LineLimit.cardTitle)
 
       HStack(spacing: AppConstants.UI.Layout.Spacing.hStack) {
         Text(tea.category.rawValue)

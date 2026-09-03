@@ -98,7 +98,7 @@ private struct TeaLeafCardView: View {
 
       Text(tea.name)
         .font(AppConstants.UI.Typography.FontScale.cardTitle)
-        .lineLimit(2)
+        .lineLimit(AppConstants.UI.LineLimit.cardTitle)
 
       HStack(spacing: AppConstants.UI.Layout.Spacing.hStack) {
         Text(tea.category.rawValue)
