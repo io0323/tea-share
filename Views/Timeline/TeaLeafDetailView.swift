@@ -200,12 +200,12 @@ struct TeaLeafDetailView: View {
         DatePicker(
           AppConstants.UI.UIStrings.Detail.Fields.expiry,
           selection: $editableExpiryDate,
-          displayedComponents: .date
+          displayedComponents: AppConstants.UI.DatePickerSettings.dateComponents
         )
         TextField(
           AppConstants.UI.UIStrings.Labels.description,
           text: $editableDescription,
-          axis: .vertical
+          axis: AppConstants.UI.TextFieldAxis.vertical
         )
           .lineLimit(AppConstants.UI.LineLimit.detailDescription)
       } else {

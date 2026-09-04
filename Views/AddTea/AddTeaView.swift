@@ -273,7 +273,7 @@ struct AddTeaView: View {
           DatePicker(
             AppConstants.UI.UIStrings.AddTea.FormFields.expiry,
             selection: $expiryDate,
-            displayedComponents: .date
+            displayedComponents: AppConstants.UI.DatePickerSettings.dateComponents
           )
           .accessibilityLabel("賞味期限")
           expiryPresetButtons
@@ -281,7 +281,7 @@ struct AddTeaView: View {
           TextField(
             AppConstants.UI.UIStrings.AddTea.FormFields.description,
             text: $descriptionText,
-            axis: .vertical
+            axis: AppConstants.UI.TextFieldAxis.vertical
           )
             .lineLimit(AppConstants.UI.LineLimit.description)
             .accessibilityLabel("説明")
