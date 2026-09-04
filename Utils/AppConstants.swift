@@ -186,6 +186,10 @@ struct AppConstants {
         static let vertical: Axis = .vertical
       }
       
+      struct ScrollViewSettings {
+        static let hideIndicators: Bool = false
+      }
+      
       struct Spacing {
         static let tiny: CGFloat = 2
         static let small: CGFloat = 4

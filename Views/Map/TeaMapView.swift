@@ -117,7 +117,7 @@ struct TeaMapView: View {
         }
 
         VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.section) {
-          ScrollView(.horizontal, showsIndicators: false) {
+          ScrollView(.horizontal, showsIndicators: AppConstants.UI.ScrollViewSettings.hideIndicators) {
             HStack(spacing: AppConstants.UI.Layout.Spacing.chip) {
               ForEach(TeaMapFilter.allCases) { filter in
                 filterChip(filter)
@@ -125,7 +125,7 @@ struct TeaMapView: View {
             }
           }
 
-          ScrollView(.horizontal, showsIndicators: false) {
+          ScrollView(.horizontal, showsIndicators: AppConstants.UI.ScrollViewSettings.hideIndicators) {
             HStack(spacing: AppConstants.UI.Layout.Spacing.chip) {
               categoryChip(
                 title: AppConstants.UI.UIStrings.Labels.allCategories,

@@ -281,7 +281,7 @@ struct TeaTimelineView: View {
    横スクロール可能なカテゴリ選択UIを返します。
    */
   private var categorySelector: some View {
-    ScrollView(.horizontal, showsIndicators: false) {
+    ScrollView(.horizontal, showsIndicators: AppConstants.UI.ScrollViewSettings.hideIndicators) {
       HStack(spacing: AppConstants.UI.Layout.Spacing.hStack) {
         CategoryChip(
           title: AppConstants.UI.UIStrings.Labels.allCategories,
@@ -322,7 +322,7 @@ struct TeaTimelineView: View {
    取引ステータス別サマリーカード群を返します。
    */
   private var tradeStatusSummaryCards: some View {
-    ScrollView(.horizontal, showsIndicators: false) {
+    ScrollView(.horizontal, showsIndicators: AppConstants.UI.ScrollViewSettings.hideIndicators) {
       HStack(spacing: AppConstants.UI.Layout.Spacing.section) {
         statusSummaryCard(
           title: TradeStatus.available.rawValue,
@@ -401,7 +401,7 @@ struct TeaTimelineView: View {
   private var activeFilterSummary: some View {
     VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.medium) {
       if hasActiveFilters {
-        ScrollView(.horizontal, showsIndicators: false) {
+        ScrollView(.horizontal, showsIndicators: AppConstants.UI.ScrollViewSettings.hideIndicators) {
           HStack(spacing: AppConstants.UI.Layout.Spacing.tag) {
             ForEach(activeFilterLabels, id: \.self) { label in
               Text(label)
