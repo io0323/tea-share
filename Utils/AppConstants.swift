@@ -190,6 +190,14 @@ struct AppConstants {
         static let hideIndicators: Bool = false
       }
       
+      struct ToggleSettings {
+        static let switchStyle: ToggleStyle = .switch
+      }
+      
+      struct SafeAreaSettings {
+        static let ignoresSafeArea: Bool = true
+      }
+      
       struct Spacing {
         static let tiny: CGFloat = 2
         static let small: CGFloat = 4

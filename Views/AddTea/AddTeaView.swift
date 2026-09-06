@@ -395,7 +395,7 @@ struct AddTeaView: View {
         if isSaving {
           ZStack {
             Color.black.opacity(AppConstants.UI.Opacity.blackOverlay)
-              .ignoresSafeArea()
+              .ignoresSafeArea(AppConstants.UI.SafeAreaSettings.ignoresSafeArea ? .all : [])
             ProgressView(AppConstants.UI.UIStrings.Actions.saving)
               .padding(AppConstants.UI.Padding.large)
               .background(.regularMaterial)

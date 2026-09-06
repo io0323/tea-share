@@ -152,7 +152,7 @@ struct TeaTimelineView: View {
           startPoint: AppConstants.UI.FrameAlignment.topLeading,
           endPoint: AppConstants.UI.FrameAlignment.bottomTrailing
         )
-        .ignoresSafeArea()
+        .ignoresSafeArea(AppConstants.UI.SafeAreaSettings.ignoresSafeArea ? .all : [])
         .opacity(AppConstants.UI.Opacity.backgroundGradient)
 
         ScrollView {
@@ -274,7 +274,7 @@ struct TeaTimelineView: View {
       Text(AppConstants.UI.UIStrings.Labels.expiringOnly)
         .font(AppConstants.UI.Typography.FontScale.sectionSubtitle)
     }
-    .toggleStyle(.switch)
+    .toggleStyle(AppConstants.UI.ToggleSettings.switchStyle)
   }
 
   /*
