@@ -215,7 +215,7 @@ struct AddTeaView: View {
               .buttonStyle(AppConstants.UI.ButtonStyle.bordered)
               .disabled(isAnalyzingImage)
 
-              Button(role: .destructive) {
+              Button(role: AppConstants.UI.ButtonRole.destructive) {
                 clearSelectedImage()
               } label: {
                 Label(
@@ -315,7 +315,7 @@ struct AddTeaView: View {
             .foregroundStyle(.secondary)
           Button(
             AppConstants.UI.UIStrings.AddTea.Actions.resetForm,
-            role: .destructive
+            role: AppConstants.UI.ButtonRole.destructive
           ) {
             isShowingResetAlert = true
           }
@@ -339,7 +339,7 @@ struct AddTeaView: View {
             .disabled(isSaving)
         }
         ToolbarItem(placement: .topBarTrailing) {
-          Button(AppConstants.UI.UIStrings.Actions.reset, role: .destructive) {
+          Button(AppConstants.UI.UIStrings.Actions.reset, role: AppConstants.UI.ButtonRole.destructive) {
             isShowingResetAlert = true
           }
           .disabled(isSaving)
@@ -379,13 +379,13 @@ struct AddTeaView: View {
       .onChange(of: location) { _, _ in persistDraft() }
       .onChange(of: username) { _, _ in persistDraft() }
       .alert(AppConstants.UI.Alerts.Titles.saveFailed, isPresented: $isShowingErrorAlert) {
-        Button(AppConstants.UI.Alerts.Buttons.ok, role: .cancel) {}
+        Button(AppConstants.UI.Alerts.Buttons.ok, role: AppConstants.UI.ButtonRole.cancel) {}
       } message: {
         Text(errorMessage)
       }
       .alert(AppConstants.UI.Alerts.Titles.resetInput, isPresented: $isShowingResetAlert) {
-        Button(AppConstants.UI.Alerts.Buttons.cancel, role: .cancel) {}
-        Button(AppConstants.UI.Alerts.Buttons.reset, role: .destructive) {
+        Button(AppConstants.UI.Alerts.Buttons.cancel, role: AppConstants.UI.ButtonRole.cancel) {}
+        Button(AppConstants.UI.Alerts.Buttons.reset, role: AppConstants.UI.ButtonRole.destructive) {
           resetForm()
         }
       } message: {

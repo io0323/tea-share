@@ -88,7 +88,7 @@ struct ProfileView: View {
           }
           if isEditing {
             ToolbarItem(placement: .topBarLeading) {
-              Button(AppConstants.UI.Navigation.Toolbar.Buttons.cancel, role: .cancel) {
+              Button(AppConstants.UI.Navigation.Toolbar.Buttons.cancel, role: AppConstants.UI.ButtonRole.cancel) {
                 cancelEditing()
               }
             }
@@ -96,7 +96,7 @@ struct ProfileView: View {
         }
       }
       .alert(AppConstants.UI.Alerts.Titles.saveError, isPresented: $isShowingSaveError) {
-        Button(AppConstants.UI.Alerts.Buttons.ok, role: .cancel) {}
+        Button(AppConstants.UI.Alerts.Buttons.ok, role: AppConstants.UI.ButtonRole.cancel) {}
       } message: {
         Text(saveErrorMessage)
       }

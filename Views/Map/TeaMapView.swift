@@ -325,7 +325,7 @@ private struct TeaMapDetailSheet: View {
     .padding(.horizontal, AppConstants.UI.Padding.huge)
     .padding(.bottom, AppConstants.UI.Padding.bottom)
     .alert(AppConstants.UI.Alerts.Titles.saveError, isPresented: $isShowingSaveError) {
-      Button(AppConstants.UI.Alerts.Buttons.ok, role: .cancel) {}
+      Button(AppConstants.UI.Alerts.Buttons.ok, role: AppConstants.UI.ButtonRole.cancel) {}
     } message: {
       Text(saveErrorMessage)
     }
