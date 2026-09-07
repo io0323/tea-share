@@ -56,19 +56,19 @@ struct TeaLeafDetailView: View {
       }
       if isEditingDetail {
         ToolbarItem(placement: .topBarLeading) {
-          Button(AppConstants.UI.Navigation.Toolbar.Buttons.cancel, role: .cancel) {
+          Button(AppConstants.UI.Navigation.Toolbar.Buttons.cancel, role: AppConstants.UI.ButtonRole.cancel) {
             cancelEditingDetail()
           }
         }
       }
     }
     .alert(AppConstants.UI.Alerts.Titles.saveError, isPresented: $isShowingSaveError) {
-      Button(AppConstants.UI.Alerts.Buttons.ok, role: .cancel) {}
+      Button(AppConstants.UI.Alerts.Buttons.ok, role: AppConstants.UI.ButtonRole.cancel) {}
     } message: {
       Text(saveErrorMessage)
     }
     .alert(AppConstants.UI.Alerts.Titles.tradeRequest, isPresented: $isShowingTradeRequestAlert) {
-      Button(AppConstants.UI.Alerts.Buttons.ok, role: .cancel) {}
+      Button(AppConstants.UI.Alerts.Buttons.ok, role: AppConstants.UI.ButtonRole.cancel) {}
     } message: {
       Text(tradeRequestMessage)
     }

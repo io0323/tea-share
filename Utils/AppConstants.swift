@@ -198,6 +198,11 @@ struct AppConstants {
         static let ignoresSafeArea: Bool = true
       }
       
+      struct ButtonRole {
+        static let destructive: ButtonRole = .destructive
+        static let cancel: ButtonRole = .cancel
+      }
+      
       struct Spacing {
         static let tiny: CGFloat = 2
         static let small: CGFloat = 4
