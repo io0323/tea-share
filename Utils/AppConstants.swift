@@ -203,6 +203,11 @@ struct AppConstants {
         static let cancel: ButtonRole = .cancel
       }
       
+      struct ToolbarPlacement {
+        static let topBarLeading: ToolbarItemPlacement = .topBarLeading
+        static let topBarTrailing: ToolbarItemPlacement = .topBarTrailing
+      }
+      
       struct Spacing {
         static let tiny: CGFloat = 2
         static let small: CGFloat = 4

@@ -102,7 +102,7 @@ struct TeaMapView: View {
         }
         .navigationTitle(AppConstants.UI.Navigation.Titles.map)
         .toolbar {
-          ToolbarItem(placement: .topBarTrailing) {
+          ToolbarItem(placement: AppConstants.UI.ToolbarPlacement.topBarTrailing) {
             Button {
               focusOnDefaultRegion()
             } label: {
