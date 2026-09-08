@@ -45,7 +45,7 @@ struct TeaLeafDetailView: View {
     .navigationTitle(AppConstants.UI.Navigation.Titles.teaDetail)
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
-      ToolbarItem(placement: .topBarTrailing) {
+      ToolbarItem(placement: AppConstants.UI.ToolbarPlacement.topBarTrailing) {
         Button(isEditingDetail ? AppConstants.UI.Navigation.Toolbar.Buttons.done : AppConstants.UI.Navigation.Toolbar.Buttons.edit) {
           if isEditingDetail {
             commitDetailEdits()
@@ -55,7 +55,7 @@ struct TeaLeafDetailView: View {
         }
       }
       if isEditingDetail {
-        ToolbarItem(placement: .topBarLeading) {
+        ToolbarItem(placement: AppConstants.UI.ToolbarPlacement.topBarLeading) {
           Button(AppConstants.UI.Navigation.Toolbar.Buttons.cancel, role: AppConstants.UI.ButtonRole.cancel) {
             cancelEditingDetail()
           }

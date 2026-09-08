@@ -77,7 +77,7 @@ struct ProfileView: View {
       .navigationTitle(AppConstants.UI.Navigation.Titles.profile)
       .toolbar {
         if selectedTab == .profile {
-          ToolbarItem(placement: .topBarTrailing) {
+          ToolbarItem(placement: AppConstants.UI.ToolbarPlacement.topBarTrailing) {
             Button(isEditing ? AppConstants.UI.Navigation.Toolbar.Buttons.done : AppConstants.UI.Navigation.Toolbar.Buttons.edit) {
               if isEditing {
                 saveProfileChanges()
@@ -87,7 +87,7 @@ struct ProfileView: View {
             }
           }
           if isEditing {
-            ToolbarItem(placement: .topBarLeading) {
+            ToolbarItem(placement: AppConstants.UI.ToolbarPlacement.topBarLeading) {
               Button(AppConstants.UI.Navigation.Toolbar.Buttons.cancel, role: AppConstants.UI.ButtonRole.cancel) {
                 cancelEditing()
               }
