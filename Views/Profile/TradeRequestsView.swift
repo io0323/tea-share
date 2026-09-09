@@ -10,6 +10,8 @@ struct TradeRequestsView: View {
   @AppStorage(AppConstants.Storage.currentUserIdKey)
   private var currentUserId = ""
   @State private var selectedTab: TradeRequestTab = .incoming
+  @State private var isShowingErrorAlert = AppConstants.Defaults.UI.isShowingErrorAlert
+  @State private var errorMessage = AppConstants.Defaults.State.errorMessage
 
   /*
    取引リクエストのタブを管理する列挙型です。
@@ -86,6 +88,11 @@ struct TradeRequestsView: View {
         }
         .padding(.vertical, AppConstants.UI.Padding.large)
       }
+    }
+    .alert(AppConstants.UI.Alerts.Titles.saveError, isPresented: $isShowingErrorAlert) {
+      Button(AppConstants.UI.Alerts.Buttons.ok, role: AppConstants.UI.ButtonRole.cancel) {}
+    } message: {
+      Text(errorMessage)
     }
   }
 
@@ -193,7 +200,8 @@ struct TradeRequestsView: View {
     do {
       try modelContext.save()
     } catch {
-      // エラーハンドリングが必要なら追加
+      errorMessage = AppConstants.UI.UIStrings.Profile.TradeRequests.Errors.approveFailed
+      isShowingErrorAlert = true
     }
   }
 
@@ -205,7 +213,8 @@ struct TradeRequestsView: View {
     do {
       try modelContext.save()
     } catch {
-      // エラーハンドリングが必要なら追加
+      errorMessage = AppConstants.UI.UIStrings.Profile.TradeRequests.Errors.rejectFailed
+      isShowingErrorAlert = true
     }
   }
 }

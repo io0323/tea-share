@@ -664,6 +664,11 @@ struct AppConstants {
           static let approve: String = "承認"
           static let reject: String = "拒否"
           static let createdAt: String = "送信日時"
+          
+          struct Errors {
+            static let approveFailed: String = "取引の承認に失敗しました。時間をおいて再度お試しください。"
+            static let rejectFailed: String = "取引の拒否に失敗しました。時間をおいて再度お試しください。"
+          }
         }
         
         struct SaveErrors {
