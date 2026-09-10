@@ -1,10 +1,12 @@
 import Foundation
 import SwiftData
+import OSLog
 
 /*
  端末内の現在ユーザーを解決・管理するユーティリティです。
  */
 enum CurrentUserManager {
+  private static let logger = Logger(subsystem: "com.teashare.app", category: "CurrentUserManager")
 
   /*
    保存済み ID から現在ユーザーを取得します。
@@ -15,6 +17,7 @@ enum CurrentUserManager {
   ) -> User? {
     guard !storedUserId.isEmpty,
           let id = UUID(uuidString: storedUserId) else {
+      logger.debug("Cannot fetch current user: empty or invalid stored user ID")
       return nil
     }
     
@@ -25,7 +28,15 @@ enum CurrentUserManager {
       }
     )
     descriptor.fetchLimit = 1
-    return try? modelContext.fetch(descriptor).first
+    let user = try? modelContext.fetch(descriptor).first
+    
+    if let user = user {
+      logger.debug("Successfully fetched current user: \(user.username)")
+    } else {
+      logger.warning("No user found with stored ID: \(storedUserId)")
+    }
+    
+    return user
   }
 
   /*
@@ -43,6 +54,7 @@ enum CurrentUserManager {
     ) {
       existing.username = username
       existing.location = location
+      logger.debug("Updated existing user profile: \(existing.username)")
       return (existing, false)
     }
 
@@ -51,11 +63,13 @@ enum CurrentUserManager {
       storedUserId = existing.id.uuidString
       existing.username = username
       existing.location = location
+      logger.debug("Updated first available user profile: \(existing.username)")
       return (existing, false)
     }
 
     let user = User(username: username, location: location)
     storedUserId = user.id.uuidString
+    logger.info("Created new user: \(user.username)")
     return (user, true)
   }
 
@@ -77,6 +91,7 @@ enum CurrentUserManager {
     let allDescriptor = FetchDescriptor<User>()
     if let existing = try? modelContext.fetch(allDescriptor).first {
       storedUserId = existing.id.uuidString
+      logger.debug("Bootstrapped to first available user: \(existing.username)")
       return existing
     }
 
@@ -87,6 +102,7 @@ enum CurrentUserManager {
     modelContext.insert(user)
     storedUserId = user.id.uuidString
     try? modelContext.save()
+    logger.info("Bootstrapped new default user: \(user.username)")
     return user
   }
 }
