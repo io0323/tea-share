@@ -1,9 +1,11 @@
 import Foundation
+import OSLog
 
 /*
  入力値のバリデーションを行うユーティリティです。
  */
 enum ValidationHelper {
+  private static let logger = Logger(subsystem: "com.teashare.app", category: "ValidationHelper")
 
   /*
    文字列の長さが指定範囲内か検証します。
@@ -22,17 +24,21 @@ enum ValidationHelper {
     let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
     
     if trimmed.isEmpty {
+      logger.debug("Length validation failed: empty input")
       return (false, "入力必須です")
     }
     
     if let min = minLength, trimmed.count < min {
+      logger.debug("Length validation failed: below minimum (\(trimmed.count) < \(min))")
       return (false, "\(min)文字以上で入力してください")
     }
     
     if let max = maxLength, trimmed.count > max {
+      logger.debug("Length validation failed: above maximum (\(trimmed.count) > \(max))")
       return (false, "\(max)文字以下で入力してください")
     }
     
+    logger.debug("Length validation passed: \(trimmed.count) characters")
     return (true, nil)
   }
 
@@ -51,13 +57,16 @@ enum ValidationHelper {
     maxValue: Int? = nil
   ) -> (isValid: Bool, message: String?) {
     if let min = minValue, value < min {
+      logger.debug("Range validation failed: below minimum (\(value) < \(min))")
       return (false, "\(min)以上の値を入力してください")
     }
     
     if let max = maxValue, value > max {
+      logger.debug("Range validation failed: above maximum (\(value) > \(max))")
       return (false, "\(max)以下の値を入力してください")
     }
     
+    logger.debug("Range validation passed: \(value)")
     return (true, nil)
   }
 
@@ -71,8 +80,10 @@ enum ValidationHelper {
     let calendar = Calendar.current
     let today = calendar.startOfDay(for: Date())
     if date < today {
+      logger.debug("Date validation failed: past date (\(date))")
       return (false, "過去の日付は指定できません")
     }
+    logger.debug("Date validation passed: \(date)")
     return (true, nil)
   }
 
