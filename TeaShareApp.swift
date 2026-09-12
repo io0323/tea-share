@@ -1,11 +1,14 @@
 import SwiftUI
 import SwiftData
+import OSLog
 
 /*
  TeaShareアプリのエントリポイントです。
  */
 @main
 struct TeaShareApp: App {
+  private static let logger = Logger(subsystem: "com.teashare.app", category: "TeaShareApp")
+
   /*
    永続化用のModelContainerを構築します。
    */
@@ -17,9 +20,12 @@ struct TeaShareApp: App {
     )
 
     do {
-      return try ModelContainer(for: schema, configurations: [configuration])
+      let container = try ModelContainer(for: schema, configurations: [configuration])
+      Self.logger.info("ModelContainer initialized successfully")
+      return container
     } catch {
-      fatalError("Could not create ModelContainer: \(error)")
+      Self.logger.error("Failed to create ModelContainer: \(error.localizedDescription)")
+      fatalError("Could not create ModelContainer: \(error.localizedDescription)")
     }
   }()
 
