@@ -1,10 +1,13 @@
 import Foundation
 import SwiftData
+import OSLog
 
 /*
  プレビュー・開発用のModelContainerを提供するヘルパーです。
  */
 enum PreviewContainer {
+  private static let logger = Logger(subsystem: "com.teashare.app", category: "PreviewContainer")
+
   /*
    サンプルデータを投入済みのModelContainerを返します。
    */
@@ -18,9 +21,11 @@ enum PreviewContainer {
         configurations: [configuration]
       )
       insertSampleDataIfNeeded(context: container.mainContext)
+      Self.logger.info("PreviewContainer initialized successfully with sample data")
       return container
     } catch {
-      fatalError("PreviewContainer initialization failed: \(error)")
+      Self.logger.error("PreviewContainer initialization failed: \(error.localizedDescription)")
+      fatalError("PreviewContainer initialization failed: \(error.localizedDescription)")
     }
   }()
 
