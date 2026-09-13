@@ -28,7 +28,14 @@ enum CurrentUserManager {
       }
     )
     descriptor.fetchLimit = 1
-    let user = try? modelContext.fetch(descriptor).first
+    
+    let user: User?
+    do {
+      user = try modelContext.fetch(descriptor).first
+    } catch {
+      logger.error("Failed to fetch current user: \(error.localizedDescription)")
+      user = nil
+    }
     
     if let user = user {
       logger.debug("Successfully fetched current user: \(user.username)")
@@ -59,7 +66,15 @@ enum CurrentUserManager {
     }
 
     let allDescriptor = FetchDescriptor<User>()
-    if let existing = try? modelContext.fetch(allDescriptor).first {
+    let existing: User?
+    do {
+      existing = try modelContext.fetch(allDescriptor).first
+    } catch {
+      logger.error("Failed to fetch all users: \(error.localizedDescription)")
+      existing = nil
+    }
+    
+    if let existing = existing {
       storedUserId = existing.id.uuidString
       existing.username = username
       existing.location = location
@@ -89,7 +104,15 @@ enum CurrentUserManager {
     }
 
     let allDescriptor = FetchDescriptor<User>()
-    if let existing = try? modelContext.fetch(allDescriptor).first {
+    let existing: User?
+    do {
+      existing = try modelContext.fetch(allDescriptor).first
+    } catch {
+      logger.error("Failed to fetch all users: \(error.localizedDescription)")
+      existing = nil
+    }
+    
+    if let existing = existing {
       storedUserId = existing.id.uuidString
       logger.debug("Bootstrapped to first available user: \(existing.username)")
       return existing
@@ -101,7 +124,11 @@ enum CurrentUserManager {
     )
     modelContext.insert(user)
     storedUserId = user.id.uuidString
-    try? modelContext.save()
+    do {
+      try modelContext.save()
+    } catch {
+      logger.error("Failed to save bootstrapped user: \(error.localizedDescription)")
+    }
     logger.info("Bootstrapped new default user: \(user.username)")
     return user
   }

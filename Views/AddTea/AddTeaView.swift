@@ -458,7 +458,15 @@ struct AddTeaView: View {
    */
   private func loadImageFromLibrary(item: PhotosPickerItem) {
     Task {
-      guard let data = try? await item.loadTransferable(type: Data.self) else {
+      let data: Data?
+      do {
+        data = try await item.loadTransferable(type: Data.self)
+      } catch {
+        Self.logger.error("Failed to load image data from PhotosPicker: \(error.localizedDescription)")
+        data = nil
+      }
+      
+      guard let data = data else {
         await MainActor.run {
           presentError(AppConstants.UI.UIStrings.AddTea.Errors.imageLoadFailed)
         }
@@ -466,12 +474,14 @@ struct AddTeaView: View {
       }
       
       guard let image = UIImage(data: data) else {
+        Self.logger.error("Failed to create UIImage from loaded data")
         await MainActor.run {
           presentError(AppConstants.UI.UIStrings.AddTea.Errors.imageLoadFailed)
         }
         return
       }
       
+      Self.logger.debug("Successfully loaded image from PhotosPicker")
       await MainActor.run {
         selectedImage = image
       }
