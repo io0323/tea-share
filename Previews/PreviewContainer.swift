@@ -112,22 +112,36 @@ enum PreviewContainer {
    */
   private static func insertSampleDataIfNeeded(context: ModelContext) {
     let descriptor = FetchDescriptor<TeaLeaf>()
-    let currentCount = (try? context.fetchCount(descriptor)) ?? 0
-    guard currentCount == 0 else { return }
+    let currentCount: Int
+    do {
+      currentCount = try context.fetchCount(descriptor)
+    } catch {
+      Self.logger.error("Failed to fetch tea leaf count: \(error.localizedDescription)")
+      currentCount = 0
+    }
+    
+    guard currentCount == 0 else {
+      Self.logger.debug("Sample data already exists (\(currentCount) tea leaves)")
+      return
+    }
 
+    Self.logger.info("Inserting sample data into preview container")
     let owners = sampleUsers
     owners.forEach { context.insert($0) }
 
     let teas = sampleTeaLeaves
     teas.forEach { context.insert($0) }
 
-    let trade = Trade(
-      teaLeaf: teas[2],
-      requester: owners[0],
-      owner: owners[2],
-      status: .pending
-    )
-    context.insert(trade)
+    if teas.count > 2 && owners.count > 2 {
+      let trade = Trade(
+        teaLeaf: teas[2],
+        requester: owners[0],
+        owner: owners[2],
+        status: .pending
+      )
+      context.insert(trade)
+    }
+    Self.logger.info("Sample data insertion completed")
   }
 
   /*
