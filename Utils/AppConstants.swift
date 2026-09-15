@@ -67,6 +67,33 @@ struct AppConstants {
   }
   
   /*
+   新規出品画面のUI定数を定義します。
+   */
+  struct AddTeaUI {
+    static let defaultRemainingGrams: Int = 50
+    static let stepperMinRemainingGrams: Int = 5
+    static let stepperMaxRemainingGrams: Int = 500
+    static let stepperStepGrams: Int = 5
+    static let quickGramsAmounts: [Int] = [25, 50, 100]
+    static let expiryPresetMonths: [Int] = [1, 3, 6]
+    static let visionTopCandidates: Int = 1
+    static let textSuggestionPrefixCount: Int = 2
+    static let textSuggestionDropFirstCount: Int = 2
+  }
+  
+  /*
+   プレビュー用のUI定数を定義します。
+   */
+  struct PreviewUI {
+    static let sampleTeaRemainingGrams: [Int] = [45, 80, 30, 60]
+    static let sampleTeaExpiryMonths: [Int] = [8, 6, 10, 4]
+    static let sampleTradeTeaIndex: Int = 2
+    static let sampleTradeRequesterIndex: Int = 0
+    static let sampleTradeOwnerIndex: Int = 2
+    static let coordinateRange: ClosedRange<Double> = -0.05...0.05
+  }
+  
+  /*
    UIデザインの定数を定義します。
    */
   struct UI {
@@ -734,7 +761,7 @@ struct AppConstants {
         static let location: String = "未設定"
         static let username: String = "new_user"
         static let editableRemainingGrams: Int = 0
-        static let remainingGrams: Int = 50
+        static let remainingGrams: Int = AddTeaUI.defaultRemainingGrams
       }
       
       struct UI {
