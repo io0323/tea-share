@@ -158,11 +158,11 @@ struct AddTeaView: View {
     var monthOffset: Int {
       switch self {
       case .oneMonth:
-        return 1
+        return AppConstants.AddTeaUI.expiryPresetMonths[0]
       case .threeMonths:
-        return 3
+        return AppConstants.AddTeaUI.expiryPresetMonths[1]
       case .sixMonths:
-        return 6
+        return AppConstants.AddTeaUI.expiryPresetMonths[2]
       }
     }
   }
@@ -263,8 +263,8 @@ struct AddTeaView: View {
           Stepper(
             StringFormatter.format(AppConstants.UI.UIStrings.AddTea.FormFields.remaining, key: "grams", value: remainingGrams),
             value: $remainingGrams,
-            in: 5...500,
-            step: 5
+            in: AppConstants.AddTeaUI.stepperMinRemainingGrams...AppConstants.AddTeaUI.stepperMaxRemainingGrams,
+            step: AppConstants.AddTeaUI.stepperStepGrams
           )
           .accessibilityLabel("残量")
           .accessibilityValue("\(remainingGrams)グラム")
@@ -414,9 +414,9 @@ struct AddTeaView: View {
       Text(AppConstants.UI.UIStrings.AddTea.Actions.quickRemaining)
         .font(AppConstants.UI.Typography.Font.caption)
         .foregroundStyle(.secondary)
-      quickAmountButton(25)
-      quickAmountButton(50)
-      quickAmountButton(100)
+      ForEach(AppConstants.AddTeaUI.quickGramsAmounts, id: \.self) { grams in
+        quickAmountButton(grams)
+      }
       Spacer()
     }
   }
@@ -510,7 +510,7 @@ struct AddTeaView: View {
         return
       }
       let recognized = observations
-        .compactMap { $0.topCandidates(1).first?.string }
+        .compactMap { $0.topCandidates(AppConstants.AddTeaUI.visionTopCandidates).first?.string }
         .joined(separator: " ")
       Task { @MainActor in
         applySuggestedText(recognized)
@@ -543,10 +543,10 @@ struct AddTeaView: View {
     }
 
     if name.trimmingCharacters(in: whitespaceSet).isEmpty {
-      name = tokens.prefix(2).joined(separator: " ")
+      name = tokens.prefix(AppConstants.AddTeaUI.textSuggestionPrefixCount).joined(separator: " ")
     }
     if brand.trimmingCharacters(in: whitespaceSet).isEmpty {
-      brand = tokens.dropFirst(2).prefix(2).joined(separator: " ")
+      brand = tokens.dropFirst(AppConstants.AddTeaUI.textSuggestionDropFirstCount).prefix(AppConstants.AddTeaUI.textSuggestionPrefixCount).joined(separator: " ")
       if brand.isEmpty {
         brand = AppConstants.UI.UIStrings.AddTea.Suggestions.unknownBrand
       }
@@ -713,7 +713,7 @@ struct AddTeaView: View {
     category = .greenTea
     expiryDate = Date()
     descriptionText = ""
-    remainingGrams = 50
+    remainingGrams = AppConstants.AddTeaUI.defaultRemainingGrams
     location = AppConstants.UI.UIStrings.Placeholders.notSet
     username = AppConstants.Defaults.State.username
     selectedImage = nil

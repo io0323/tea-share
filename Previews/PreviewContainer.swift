@@ -45,8 +45,8 @@ enum PreviewContainer {
         name: "八女煎茶",
         brand: "茶寮みどり",
         category: .greenTea,
-        remainingGrams: 45,
-        expiryDate: Calendar.current.date(byAdding: .month, value: 8, to: now)
+        remainingGrams: AppConstants.PreviewUI.sampleTeaRemainingGrams[0],
+        expiryDate: Calendar.current.date(byAdding: .month, value: AppConstants.PreviewUI.sampleTeaExpiryMonths[0], to: now)
           ?? now,
         description: "旨味が濃く、食後にも合う煎茶です。",
         latitude: c1.latitude,
@@ -58,8 +58,8 @@ enum PreviewContainer {
         name: "アッサムCTC",
         brand: "Tea Market",
         category: .blackTea,
-        remainingGrams: 80,
-        expiryDate: Calendar.current.date(byAdding: .month, value: 6, to: now)
+        remainingGrams: AppConstants.PreviewUI.sampleTeaRemainingGrams[1],
+        expiryDate: Calendar.current.date(byAdding: .month, value: AppConstants.PreviewUI.sampleTeaExpiryMonths[1], to: now)
           ?? now,
         description: "ミルクティー向けのしっかりした味わい。",
         latitude: c2.latitude,
@@ -71,8 +71,8 @@ enum PreviewContainer {
         name: "凍頂烏龍",
         brand: "山霧茶舗",
         category: .oolongTea,
-        remainingGrams: 30,
-        expiryDate: Calendar.current.date(byAdding: .month, value: 10, to: now)
+        remainingGrams: AppConstants.PreviewUI.sampleTeaRemainingGrams[2],
+        expiryDate: Calendar.current.date(byAdding: .month, value: AppConstants.PreviewUI.sampleTeaExpiryMonths[2], to: now)
           ?? now,
         description: "華やかな香りと軽い甘みの烏龍茶です。",
         latitude: c3.latitude,
@@ -84,8 +84,8 @@ enum PreviewContainer {
         name: "カモミールブレンド",
         brand: "Leaf Garden",
         category: .herbalTea,
-        remainingGrams: 60,
-        expiryDate: Calendar.current.date(byAdding: .month, value: 4, to: now)
+        remainingGrams: AppConstants.PreviewUI.sampleTeaRemainingGrams[3],
+        expiryDate: Calendar.current.date(byAdding: .month, value: AppConstants.PreviewUI.sampleTeaExpiryMonths[3], to: now)
           ?? now,
         description: "就寝前におすすめの穏やかな味わい。",
         latitude: c4.latitude,
@@ -132,11 +132,15 @@ enum PreviewContainer {
     let teas = sampleTeaLeaves
     teas.forEach { context.insert($0) }
 
-    if teas.count > 2 && owners.count > 2 {
+    let tradeIndex = AppConstants.PreviewUI.sampleTradeTeaIndex
+    let requesterIndex = AppConstants.PreviewUI.sampleTradeRequesterIndex
+    let ownerIndex = AppConstants.PreviewUI.sampleTradeOwnerIndex
+    
+    if teas.count > tradeIndex && owners.count > max(requesterIndex, ownerIndex) {
       let trade = Trade(
-        teaLeaf: teas[2],
-        requester: owners[0],
-        owner: owners[2],
+        teaLeaf: teas[tradeIndex],
+        requester: owners[requesterIndex],
+        owner: owners[ownerIndex],
         status: .pending
       )
       context.insert(trade)
@@ -151,8 +155,8 @@ enum PreviewContainer {
     latitude: Double,
     longitude: Double
   ) {
-    let latitude = 35.681236 + Double.random(in: -0.05...0.05)
-    let longitude = 139.767125 + Double.random(in: -0.05...0.05)
+    let latitude = 35.681236 + Double.random(in: AppConstants.PreviewUI.coordinateRange)
+    let longitude = 139.767125 + Double.random(in: AppConstants.PreviewUI.coordinateRange)
     return (latitude, longitude)
   }
 }
