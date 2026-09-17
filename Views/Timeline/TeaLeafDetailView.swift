@@ -194,7 +194,7 @@ struct TeaLeafDetailView: View {
           StringFormatter.format(AppConstants.UI.UIStrings.Detail.Fields.remainingWithGrams, key: "grams", value: editableRemainingGrams),
           value: $editableRemainingGrams,
           in: AppConstants.ValidationLimits.minRemainingGrams...AppConstants.ValidationLimits.maxRemainingGrams,
-          step: 5
+          step: AppConstants.DetailUI.stepperStepGrams
         )
         .disabled(AppConstants.Defaults.UI.ButtonState.disabled)
         DatePicker(

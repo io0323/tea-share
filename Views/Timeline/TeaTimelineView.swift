@@ -146,8 +146,16 @@ struct TeaTimelineView: View {
       ZStack(alignment: AppConstants.UI.FrameAlignment.bottomTrailing) {
         LinearGradient(
           colors: [
-            Color(red: 0.86, green: 0.94, blue: 0.86),
-            Color(red: 0.95, green: 0.91, blue: 0.84)
+            Color(
+              red: AppConstants.UI.Colors.gradientStartRed,
+              green: AppConstants.UI.Colors.gradientStartGreen,
+              blue: AppConstants.UI.Colors.gradientStartBlue
+            ),
+            Color(
+              red: AppConstants.UI.Colors.gradientEndRed,
+              green: AppConstants.UI.Colors.gradientEndGreen,
+              blue: AppConstants.UI.Colors.gradientEndBlue
+            )
           ],
           startPoint: AppConstants.UI.FrameAlignment.topLeading,
           endPoint: AppConstants.UI.FrameAlignment.bottomTrailing
