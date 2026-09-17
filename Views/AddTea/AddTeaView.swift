@@ -652,7 +652,7 @@ struct AddTeaView: View {
       category = draftTeaLeaf?.category ?? .greenTea
       expiryDate = draftTeaLeaf?.expiryDate ?? Date()
       descriptionText = draftTeaLeaf?.description ?? ""
-      remainingGrams = draftTeaLeaf?.remainingGrams ?? 50
+      remainingGrams = draftTeaLeaf?.remainingGrams ?? AppConstants.AddTeaUI.defaultRemainingGrams
       location = draftTeaLeaf?.owner?.location
         ?? AppConstants.UI.UIStrings.Placeholders.notSet
       username = draftTeaLeaf?.owner?.username

@@ -94,6 +94,13 @@ struct AppConstants {
   }
   
   /*
+   詳細画面のUI定数を定義します。
+   */
+  struct DetailUI {
+    static let stepperStepGrams: Int = 5
+  }
+  
+  /*
    UIデザインの定数を定義します。
    */
   struct UI {
@@ -109,6 +116,13 @@ struct AppConstants {
       static let whiteChipOpacity: Double = 0.85
       static let blackShadowOpacity: Double = 0.12
       static let blackCardShadowOpacity: Double = 0.07
+      
+      static let gradientStartRed: Double = 0.86
+      static let gradientStartGreen: Double = 0.94
+      static let gradientStartBlue: Double = 0.86
+      static let gradientEndRed: Double = 0.95
+      static let gradientEndGreen: Double = 0.91
+      static let gradientEndBlue: Double = 0.84
     }
     
     struct ClipShape {
