@@ -1,6 +1,7 @@
 import SwiftUI
 import MapKit
 import SwiftData
+import OSLog
 
 /*
  マップ表示用のステータスフィルタを管理する列挙型です。
@@ -45,6 +46,8 @@ private enum TeaMapFilter: CaseIterable, Identifiable {
  近隣の交換可能な茶葉を地図上に表示する画面です。
  */
 struct TeaMapView: View {
+  private static let logger = Logger(subsystem: "com.teashare.app", category: "TeaMapView")
+  
   @Query(sort: \TeaLeaf.name) private var teaLeaves: [TeaLeaf]
   @State private var selectedTeaLeaf: TeaLeaf?
   @State private var selectedFilter: TeaMapFilter = .allActive
@@ -82,6 +85,7 @@ struct TeaMapView: View {
           ForEach(mapTeaLeaves) { teaLeaf in
             Annotation(teaLeaf.name, coordinate: teaLeaf.coordinate) {
               Button {
+                Self.logger.debug("Tea leaf selected: \(teaLeaf.name)")
                 selectedTeaLeaf = teaLeaf
               } label: {
                 VStack(spacing: AppConstants.UI.Layout.Spacing.small) {
@@ -187,6 +191,7 @@ struct TeaMapView: View {
    */
   private func filterChip(_ filter: TeaMapFilter) -> some View {
     Button {
+      Self.logger.debug("Filter changed to \(filter.displayLabel)")
       selectedFilter = filter
     } label: {
       Text(filter.displayLabel)
@@ -215,6 +220,7 @@ struct TeaMapView: View {
   ) -> some View {
     let isSelected = selectedCategory == category
     return Button {
+      Self.logger.debug("Category changed to \(title)")
       selectedCategory = category
     } label: {
       Text(title)
@@ -238,6 +244,7 @@ struct TeaMapView: View {
    ステータスとカテゴリの絞り込みを初期化します。
    */
   private func resetFilters() {
+    Self.logger.debug("Resetting map filters to default")
     selectedFilter = .allActive
     selectedCategory = nil
   }
@@ -246,6 +253,7 @@ struct TeaMapView: View {
    地図表示を既定の中心エリアに戻します。
    */
   private func focusOnDefaultRegion() {
+    Self.logger.debug("Focusing map on default region")
     let region = MKCoordinateRegion(
       center: CLLocationCoordinate2D(
         latitude: AppConstants.Location.defaultLatitude,
@@ -257,6 +265,7 @@ struct TeaMapView: View {
       )
     )
     cameraPosition = .region(region)
+    Self.logger.debug("Map camera position updated to default region")
   }
 }
 
@@ -264,6 +273,8 @@ struct TeaMapView: View {
  マップピン選択時のハーフモーダル詳細です。
  */
 private struct TeaMapDetailSheet: View {
+  private static let logger = Logger(subsystem: "com.teashare.app", category: "TeaMapDetailSheet")
+  
   @Environment(\.modelContext) private var modelContext
   @Bindable var teaLeaf: TeaLeaf
   @State private var isShowingSaveError = AppConstants.Defaults.UI.isShowingSaveError
@@ -302,7 +313,8 @@ private struct TeaMapDetailSheet: View {
           }
         }
         .pickerStyle(.segmented)
-        .onChange(of: teaLeaf.tradeStatus) { _, _ in
+        .onChange(of: teaLeaf.tradeStatus) { oldValue, newValue in
+          Self.logger.debug("Trade status changed from \(oldValue.rawValue) to \(newValue.rawValue)")
           saveStatusChange()
         }
       }
@@ -365,6 +377,7 @@ private struct TeaMapDetailSheet: View {
   private func moveToNextStatus() {
     guard let nextStatus else { return }
     
+    Self.logger.debug("Moving tea leaf status from \(teaLeaf.tradeStatus.rawValue) to \(nextStatus.rawValue)")
     teaLeaf.tradeStatus = nextStatus
     saveStatusChange()
   }
@@ -375,7 +388,9 @@ private struct TeaMapDetailSheet: View {
   private func saveStatusChange() {
     do {
       try modelContext.save()
+      Self.logger.debug("Successfully saved tea leaf status change")
     } catch {
+      Self.logger.error("Failed to save tea leaf status change: \(error.localizedDescription)")
       saveErrorMessage =
         AppConstants.UI.UIStrings.Detail.SaveErrors.statusUpdateFailed
       isShowingSaveError = true
