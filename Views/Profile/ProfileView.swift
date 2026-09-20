@@ -1,10 +1,13 @@
 import SwiftUI
 import SwiftData
+import OSLog
 
 /*
  ユーザープロファイルを表示するビューです。
  */
 struct ProfileView: View {
+  private static let logger = Logger(subsystem: "com.teashare.app", category: "ProfileView")
+  
   @Environment(\.modelContext) private var modelContext
   @Query private var users: [User]
   @AppStorage(AppConstants.Storage.currentUserIdKey)
@@ -62,6 +65,9 @@ struct ProfileView: View {
         .pickerStyle(.segmented)
         .padding(.horizontal, AppConstants.UI.Padding.large)
         .padding(.top, AppConstants.UI.Padding.large)
+        .onChange(of: selectedTab) { _, newTab in
+          Self.logger.debug("Profile tab changed to \(newTab.displayLabel)")
+        }
 
         Group {
           switch selectedTab {
@@ -85,6 +91,7 @@ struct ProfileView: View {
                 startEditing()
               }
             }
+            .accessibilityLabel(isEditing ? "保存" : "編集")
           }
           if isEditing {
             ToolbarItem(placement: AppConstants.UI.ToolbarPlacement.topBarLeading) {
@@ -177,11 +184,13 @@ struct ProfileView: View {
    現在ユーザーが未登録の場合に bootstrap します。
    */
   private func bootstrapCurrentUserIfNeeded() {
+    Self.logger.debug("Bootstrapping current user if needed")
     var storedId = currentUserId
     guard CurrentUserManager.fetchCurrentUser(
       modelContext: modelContext,
       storedUserId: storedId
     ) == nil else {
+      Self.logger.debug("Current user already exists, skipping bootstrap")
       return
     }
     
@@ -190,6 +199,9 @@ struct ProfileView: View {
       storedUserId: &storedId
     ) != nil {
       currentUserId = storedId
+      Self.logger.debug("Successfully bootstrapped current user")
+    } else {
+      Self.logger.error("Failed to bootstrap current user")
     }
   }
 
@@ -197,9 +209,13 @@ struct ProfileView: View {
    編集モードを開始します。
    */
   private func startEditing() {
+    Self.logger.debug("Starting profile editing mode")
     if let user = currentUser {
       editedUsername = user.username
       editedLocation = user.location
+      Self.logger.debug("Loaded current profile data for editing")
+    } else {
+      Self.logger.warning("Cannot start editing: current user not found")
     }
     isEditing = true
   }
@@ -208,6 +224,7 @@ struct ProfileView: View {
    編集をキャンセルして表示モードに戻します。
    */
   private func cancelEditing() {
+    Self.logger.debug("Cancelling profile editing")
     isEditing = false
   }
 
@@ -215,7 +232,9 @@ struct ProfileView: View {
    プロファイルの変更を保存します。
    */
   private func saveProfileChanges() {
+    Self.logger.debug("Saving profile changes")
     guard let user = currentUser else {
+      Self.logger.error("Cannot save profile: current user not found")
       saveErrorMessage =
         AppConstants.UI.UIStrings.Profile.SaveErrors.userNotFound
       isShowingSaveError = true
@@ -232,6 +251,7 @@ struct ProfileView: View {
       maxLength: AppConstants.ValidationLimits.maxUsernameLength
     )
  if !usernameValidation.isValid {
+      Self.logger.warning("Username validation failed: \(usernameValidation.message ?? "unknown")")
       saveErrorMessage = usernameValidation.message
       isShowingSaveError = true
       return
@@ -243,6 +263,7 @@ struct ProfileView: View {
       maxLength: trimmedLocation.isEmpty ? nil : AppConstants.ValidationLimits.maxLocationLength
     )
     if !locationValidation.isValid {
+      Self.logger.warning("Location validation failed: \(locationValidation.message ?? "unknown")")
       saveErrorMessage = locationValidation.message
       isShowingSaveError = true
       return
@@ -256,7 +277,9 @@ struct ProfileView: View {
     do {
       try modelContext.save()
       isEditing = false
+      Self.logger.debug("Successfully saved profile changes")
     } catch {
+      Self.logger.error("Failed to save profile changes: \(error.localizedDescription)")
       saveErrorMessage =
         AppConstants.UI.UIStrings.Profile.SaveErrors.saveFailed
       isShowingSaveError = true
