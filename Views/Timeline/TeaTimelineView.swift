@@ -1,10 +1,13 @@
 import SwiftUI
 import SwiftData
+import OSLog
 
 /*
  募集中の茶葉を一覧表示するメインタイムラインです。
  */
 struct TeaTimelineView: View {
+  private static let logger = Logger(subsystem: "com.teashare.app", category: "TeaTimelineView")
+  
   @Query(sort: \TeaLeaf.expiryDate) private var teaLeaves: [TeaLeaf]
   @State private var selectedCategory: TeaCategory?
   @State private var searchText = AppConstants.Defaults.State.searchText
@@ -195,7 +198,10 @@ struct TeaTimelineView: View {
           .padding(.vertical, AppConstants.UI.Padding.large)
         }
 
-        Button(action: { isPresentingAddTea = true }) {
+        Button(action: { 
+          Self.logger.debug("Add tea sheet presented")
+          isPresentingAddTea = true 
+        }) {
           HStack(spacing: AppConstants.UI.Layout.Spacing.tag) {
             Image(systemName: AppConstants.UI.UIStrings.Content.plusIcon)
             Text(AppConstants.UI.UIStrings.Content.plus)
@@ -234,8 +240,14 @@ struct TeaTimelineView: View {
         .autocorrectionDisabled()
         .accessibilityLabel("検索")
         .accessibilityHint("茶葉名、ブランド、場所で検索します")
+        .onChange(of: searchText) { _, newValue in
+          if !newValue.isEmpty {
+            Self.logger.debug("Search text changed: \(newValue)")
+          }
+        }
       if !searchText.isEmpty {
         Button {
+          Self.logger.debug("Search text cleared")
           searchText = ""
         } label: {
           Image(systemName: AppConstants.UI.UIStrings.Content.xmarkCircleFill)
@@ -260,6 +272,9 @@ struct TeaTimelineView: View {
       }
     }
     .pickerStyle(.segmented)
+    .onChange(of: sortOption) { _, newOption in
+      Self.logger.debug("Sort option changed to \(newOption.displayLabel)")
+    }
   }
 
   /*
@@ -272,6 +287,9 @@ struct TeaTimelineView: View {
       }
     }
     .pickerStyle(.segmented)
+    .onChange(of: statusScope) { _, newScope in
+      Self.logger.debug("Status scope changed to \(newScope.displayLabel)")
+    }
   }
 
   /*
@@ -283,6 +301,9 @@ struct TeaTimelineView: View {
         .font(AppConstants.UI.Typography.FontScale.sectionSubtitle)
     }
     .toggleStyle(AppConstants.UI.ToggleSettings.switchStyle)
+    .onChange(of: showExpiringOnly) { _, newValue in
+      Self.logger.debug("Expiry only filter changed to \(newValue)")
+    }
   }
 
   /*
@@ -295,6 +316,7 @@ struct TeaTimelineView: View {
           title: AppConstants.UI.UIStrings.Labels.allCategories,
           isSelected: selectedCategory == nil
         ) {
+          Self.logger.debug("Category filter cleared")
           selectedCategory = nil
         }
 
@@ -303,6 +325,7 @@ struct TeaTimelineView: View {
             title: category.rawValue,
             isSelected: selectedCategory == category
           ) {
+            Self.logger.debug("Category filter changed to \(category.rawValue)")
             selectedCategory = category
           }
         }
@@ -438,6 +461,7 @@ struct TeaTimelineView: View {
    フィルタ条件を初期状態へ戻します。
    */
   private func resetAllFilters() {
+    Self.logger.debug("Resetting all filters to default")
     selectedCategory = nil
     searchText = ""
     sortOption = .expirySoon
