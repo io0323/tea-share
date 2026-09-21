@@ -1,10 +1,13 @@
 import SwiftUI
 import SwiftData
+import OSLog
 
 /*
  ユーザーが出品した茶葉の一覧を表示するビューです。
  */
 struct MyListingsView: View {
+  private static let logger = Logger(subsystem: "com.teashare.app", category: "MyListingsView")
+  
   @Environment(\.modelContext) private var modelContext
   @Query private var teaLeaves: [TeaLeaf]
   @AppStorage(AppConstants.Storage.currentUserIdKey)
@@ -18,10 +21,13 @@ struct MyListingsView: View {
       modelContext: modelContext,
       storedUserId: currentUserId
     ) else {
+      Self.logger.warning("Current user not found, returning empty listings")
       return []
     }
     
-    return teaLeaves.filter { $0.owner?.id == currentUser.id }
+    let listings = teaLeaves.filter { $0.owner?.id == currentUser.id }
+    Self.logger.debug("Found \(listings.count) listings for current user")
+    return listings
   }
 
   var body: some View {
@@ -70,6 +76,8 @@ struct MyListingsView: View {
  茶葉情報をカードで表示する子ビューです。
  */
 private struct TeaLeafCardView: View {
+  private static let logger = Logger(subsystem: "com.teashare.app", category: "TeaLeafCardView")
+  
   let tea: TeaLeaf
 
   var body: some View {
@@ -77,6 +85,7 @@ private struct TeaLeafCardView: View {
       // 画像表示エリア
       if !tea.imagePath.isEmpty,
          let uiImage = TeaImageStorage.loadImage(from: tea.imagePath) {
+        Self.logger.debug("Successfully loaded image for tea leaf: \(tea.name)")
         Image(uiImage: uiImage)
           .resizable()
           .aspectRatio(
@@ -85,6 +94,7 @@ private struct TeaLeafCardView: View {
           .frame(height: AppConstants.UI.Frame.cardHeight)
           .clipShape(AppConstants.UI.ClipShape.roundedRectangleLarge)
       } else {
+        Self.logger.debug("No image available for tea leaf: \(tea.name), using placeholder")
         RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.large)
           .fill(AppConstants.UI.FillColor.green)
           .overlay {
