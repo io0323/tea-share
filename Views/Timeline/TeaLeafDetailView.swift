@@ -1,11 +1,14 @@
 import SwiftUI
 import SwiftData
 import MapKit
+import OSLog
 
 /*
  茶葉カードから遷移する詳細画面です。
  */
 struct TeaLeafDetailView: View {
+  private static let logger = Logger(subsystem: "com.teashare.app", category: "TeaLeafDetailView")
+  
   @Environment(\.modelContext) private var modelContext
   @Bindable var teaLeaf: TeaLeaf
   @State private var isEditingDetail = AppConstants.Defaults.UI.isEditingDetail
@@ -140,6 +143,7 @@ struct TeaLeafDetailView: View {
       Button {
         guard let nextStatus else { return }
         
+        Self.logger.debug("Quick status change from \(teaLeaf.tradeStatus.rawValue) to \(nextStatus.rawValue)")
         teaLeaf.tradeStatus = nextStatus
         saveContext()
       } label: {
@@ -269,6 +273,7 @@ struct TeaLeafDetailView: View {
   private var imageSection: some View {
     Group {
       if let uiImage = TeaImageStorage.loadImage(from: teaLeaf.imagePath) {
+        Self.logger.debug("Successfully loaded image for tea leaf: \(teaLeaf.name)")
         Image(uiImage: uiImage)
           .resizable()
           .aspectRatio(
@@ -277,6 +282,7 @@ struct TeaLeafDetailView: View {
           .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
           .shadow(color: AppConstants.UI.ShadowStyle.imageOpacity, radius: AppConstants.UI.Shadow.imageRadius, x: 0, y: AppConstants.UI.Shadow.imageOffset)
       } else {
+        Self.logger.warning("Failed to load image for tea leaf: \(teaLeaf.name)")
         RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge)
           .fill(AppConstants.UI.FillColor.gray)
           .overlay {
@@ -407,7 +413,9 @@ struct TeaLeafDetailView: View {
   private func saveContext() {
     do {
       try modelContext.save()
+      Self.logger.debug("Successfully saved context")
     } catch {
+      Self.logger.error("Failed to save context: \(error.localizedDescription)")
       saveErrorMessage =
         AppConstants.UI.UIStrings.Detail.SaveErrors.detailSaveFailed
       isShowingSaveError = true
@@ -418,6 +426,7 @@ struct TeaLeafDetailView: View {
    詳細情報の編集状態を開始します。
    */
   private func startEditingDetail() {
+    Self.logger.debug("Starting detail editing for tea leaf: \(teaLeaf.name)")
     editableRemainingGrams = teaLeaf.remainingGrams
     editableExpiryDate = teaLeaf.expiryDate
     editableDescription = teaLeaf.description
@@ -428,6 +437,7 @@ struct TeaLeafDetailView: View {
    詳細情報編集を破棄して表示モードへ戻します。
    */
   private func cancelEditingDetail() {
+    Self.logger.debug("Cancelling detail editing")
     isEditingDetail = false
   }
 
@@ -435,13 +445,16 @@ struct TeaLeafDetailView: View {
    編集内容をモデルへ反映して保存します。
    */
   private func commitDetailEdits() {
+    Self.logger.debug("Committing detail edits for tea leaf: \(teaLeaf.name)")
     teaLeaf.remainingGrams = editableRemainingGrams
     teaLeaf.expiryDate = editableExpiryDate
     teaLeaf.description = editableDescription
     do {
       try modelContext.save()
       isEditingDetail = false
+      Self.logger.debug("Successfully committed detail edits")
     } catch {
+      Self.logger.error("Failed to commit detail edits: \(error.localizedDescription)")
       saveErrorMessage =
         AppConstants.UI.UIStrings.Detail.SaveErrors.detailSaveFailed
       isShowingSaveError = true
@@ -452,18 +465,21 @@ struct TeaLeafDetailView: View {
    取引リクエストを送信します。
    */
   private func submitTradeRequest() {
+    Self.logger.debug("Submitting trade request for tea leaf: \(teaLeaf.name)")
     let currentUser = CurrentUserManager.fetchCurrentUser(
       modelContext: modelContext,
       storedUserId: currentUserId
     ) ?? users.first
     
     guard let currentUser else {
+      Self.logger.warning("Cannot submit trade request: current user not found")
       tradeRequestMessage = AppConstants.UI.Alerts.Messages.userDataNotFound
       isShowingTradeRequestAlert = true
       return
     }
     
     guard let owner = teaLeaf.owner else {
+      Self.logger.warning("Cannot submit trade request: owner not found")
       tradeRequestMessage = AppConstants.UI.Alerts.Messages.ownerDataNotFound
       isShowingTradeRequestAlert = true
       return
@@ -471,6 +487,7 @@ struct TeaLeafDetailView: View {
     
     // 自分自身の茶葉にはリクエストできない
     if currentUser.id == owner.id {
+      Self.logger.debug("Cannot submit trade request: user cannot request their own listing")
       tradeRequestMessage =
         AppConstants.UI.UIStrings.Detail.TradeMessages.ownListing
       isShowingTradeRequestAlert = true
@@ -492,7 +509,9 @@ struct TeaLeafDetailView: View {
       try modelContext.save()
       tradeRequestMessage = AppConstants.UI.UIStrings.Detail.TradeMessages.sent
       isShowingTradeRequestAlert = true
+      Self.logger.debug("Successfully submitted trade request")
     } catch {
+      Self.logger.error("Failed to submit trade request: \(error.localizedDescription)")
       tradeRequestMessage =
         AppConstants.UI.UIStrings.Detail.TradeMessages.sendFailed
       isShowingTradeRequestAlert = true
@@ -503,6 +522,7 @@ struct TeaLeafDetailView: View {
    Apple Mapsで茶葉の位置情報を開きます。
    */
   private func openInMaps() {
+    Self.logger.debug("Opening tea leaf location in Maps: \(teaLeaf.name)")
     let coordinate = CLLocationCoordinate2D(
       latitude: teaLeaf.latitude,
       longitude: teaLeaf.longitude
