@@ -1,10 +1,13 @@
 import SwiftUI
 import SwiftData
+import OSLog
 
 /*
  取引リクエストの一覧を表示するビューです。
  */
 struct TradeRequestsView: View {
+  private static let logger = Logger(subsystem: "com.teashare.app", category: "TradeRequestsView")
+  
   @Environment(\.modelContext) private var modelContext
   @Query private var trades: [Trade]
   @AppStorage(AppConstants.Storage.currentUserIdKey)
@@ -40,15 +43,20 @@ struct TradeRequestsView: View {
       modelContext: modelContext,
       storedUserId: currentUserId
     ) else {
+      Self.logger.warning("Cannot fetch user trades: current user not found")
       return []
     }
 
+    let filteredTrades: [Trade]
     switch selectedTab {
     case .incoming:
-      return trades.filter { $0.owner?.id == currentUser.id }
+      filteredTrades = trades.filter { $0.owner?.id == currentUser.id }
     case .outgoing:
-      return trades.filter { $0.requester?.id == currentUser.id }
+      filteredTrades = trades.filter { $0.requester?.id == currentUser.id }
     }
+    
+    Self.logger.debug("Found \(filteredTrades.count) trades for \(selectedTab.displayLabel) tab")
+    return filteredTrades
   }
 
   /*
@@ -72,6 +80,9 @@ struct TradeRequestsView: View {
       .pickerStyle(.segmented)
       .padding(.horizontal, AppConstants.UI.Padding.large)
       .padding(.top, AppConstants.UI.Padding.large)
+      .onChange(of: selectedTab) { _, newTab in
+        Self.logger.debug("Trade request tab changed to \(newTab.displayLabel)")
+      }
 
       ScrollView {
         VStack(spacing: AppConstants.UI.Layout.Spacing.card) {
@@ -195,11 +206,14 @@ struct TradeRequestsView: View {
    取引リクエストを承認します。
    */
   private func approveTrade(_ trade: Trade) {
+    Self.logger.debug("Approving trade request for tea leaf: \(trade.teaLeaf?.name ?? "unknown")")
     trade.status = .completed
     trade.teaLeaf?.tradeStatus = .completed
     do {
       try modelContext.save()
+      Self.logger.debug("Successfully approved trade request")
     } catch {
+      Self.logger.error("Failed to approve trade request: \(error.localizedDescription)")
       errorMessage = AppConstants.UI.UIStrings.Profile.TradeRequests.Errors.approveFailed
       isShowingErrorAlert = true
     }
@@ -209,10 +223,13 @@ struct TradeRequestsView: View {
    取引リクエストを拒否します。
    */
   private func rejectTrade(_ trade: Trade) {
+    Self.logger.debug("Rejecting trade request for tea leaf: \(trade.teaLeaf?.name ?? "unknown")")
     modelContext.delete(trade)
     do {
       try modelContext.save()
+      Self.logger.debug("Successfully rejected trade request")
     } catch {
+      Self.logger.error("Failed to reject trade request: \(error.localizedDescription)")
       errorMessage = AppConstants.UI.UIStrings.Profile.TradeRequests.Errors.rejectFailed
       isShowingErrorAlert = true
     }
