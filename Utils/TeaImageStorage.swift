@@ -6,11 +6,11 @@ import OSLog
  */
 enum TeaImageStorage {
   private static let logger = Logger(subsystem: "com.teashare.app", category: "TeaImageStorage")
-
+  
   /*
-   画像保存用ディレクトリの URL を返します。
+   画像保存用ディレクトリの URL をキャッシュして返します。
    */
-  private static var directoryURL: URL {
+  private static let directoryURL: URL = {
     let documents = FileManager.default.urls(
       for: .documentDirectory,
       in: .userDomainMask
@@ -19,7 +19,7 @@ enum TeaImageStorage {
       AppConstants.ImageStorage.subdirectory,
       isDirectory: true
     )
-  }
+  }()
 
   /*
    保存先ディレクトリが存在することを保証します。
