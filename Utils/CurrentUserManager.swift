@@ -47,6 +47,24 @@ enum CurrentUserManager {
   }
 
   /*
+   データベースから最初のユーザーを取得します（パフォーマンス最適化のためfetchLimit=1）。
+   */
+  private static func fetchFirstUser(modelContext: ModelContext) -> User? {
+    var descriptor = FetchDescriptor<User>()
+    descriptor.fetchLimit = 1
+    
+    let user: User?
+    do {
+      user = try modelContext.fetch(descriptor).first
+    } catch {
+      logger.error("Failed to fetch first user: \(error.localizedDescription)")
+      user = nil
+    }
+    
+    return user
+  }
+
+  /*
    出品時に所有者ユーザーを解決し、プロフィール情報を更新します。
    */
   static func resolveOwner(
@@ -65,16 +83,7 @@ enum CurrentUserManager {
       return (existing, false)
     }
 
-    let allDescriptor = FetchDescriptor<User>()
-    let existing: User?
-    do {
-      existing = try modelContext.fetch(allDescriptor).first
-    } catch {
-      logger.error("Failed to fetch all users: \(error.localizedDescription)")
-      existing = nil
-    }
-    
-    if let existing = existing {
+    if let existing = fetchFirstUser(modelContext: modelContext) {
       storedUserId = existing.id.uuidString
       existing.username = username
       existing.location = location
@@ -103,16 +112,7 @@ enum CurrentUserManager {
       return user
     }
 
-    let allDescriptor = FetchDescriptor<User>()
-    let existing: User?
-    do {
-      existing = try modelContext.fetch(allDescriptor).first
-    } catch {
-      logger.error("Failed to fetch all users: \(error.localizedDescription)")
-      existing = nil
-    }
-    
-    if let existing = existing {
+    if let existing = fetchFirstUser(modelContext: modelContext) {
       storedUserId = existing.id.uuidString
       logger.debug("Bootstrapped to first available user: \(existing.username)")
       return existing
