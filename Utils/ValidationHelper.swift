@@ -6,6 +6,7 @@ import OSLog
  */
 enum ValidationHelper {
   private static let logger = Logger(subsystem: "com.teashare.app", category: "ValidationHelper")
+  private static let calendar = Calendar.current
 
   /*
    文字列の長さが指定範囲内か検証します。
@@ -77,7 +78,6 @@ enum ValidationHelper {
    - Returns: バリデーション結果（isValid: 有効かどうか, message: エラーメッセージ）
    */
   static func validateNotPast(_ date: Date) -> (isValid: Bool, message: String?) {
-    let calendar = Calendar.current
     let today = calendar.startOfDay(for: Date())
     if date < today {
       logger.debug("Date validation failed: past date (\(date))")
