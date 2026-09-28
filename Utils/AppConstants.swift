@@ -66,6 +66,13 @@ struct AppConstants {
     static let maxTeaNameLength: Int = 100
     static let maxEmailLength: Int = 254
   }
+
+  /*
+   文字列処理用のキャッシュ済みCharacterSetを定義します。
+   */
+  struct CharacterSets {
+    static let whitespaceAndNewlines: CharacterSet = .whitespacesAndNewlines
+  }
   
   /*
    新規出品画面のUI定数を定義します。

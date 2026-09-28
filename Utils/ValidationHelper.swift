@@ -22,7 +22,7 @@ enum ValidationHelper {
     minLength: Int? = nil,
     maxLength: Int? = nil
   ) -> (isValid: Bool, message: String?) {
-    let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
+    let trimmed = value.trimmingCharacters(in: AppConstants.CharacterSets.whitespaceAndNewlines)
     
     if trimmed.isEmpty {
       logger.debug("Length validation failed: empty input")
@@ -106,7 +106,7 @@ enum ValidationHelper {
    - Returns: バリデーション結果（isValid: 有効かどうか, message: エラーメッセージ）
    */
   static func validateEmail(_ email: String) -> (isValid: Bool, message: String?) {
-    let trimmed = email.trimmingCharacters(in: .whitespacesAndNewlines)
+    let trimmed = email.trimmingCharacters(in: AppConstants.CharacterSets.whitespaceAndNewlines)
     
     if trimmed.isEmpty {
       logger.debug("Email validation failed: empty input")
