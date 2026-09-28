@@ -98,4 +98,36 @@ enum ValidationHelper {
     let isValid = results.allSatisfy { $0.isValid }
     return (isValid, messages)
   }
+
+  /*
+   メールアドレス形式が有効か検証します。
+   
+   - Parameter email: 検証するメールアドレス
+   - Returns: バリデーション結果（isValid: 有効かどうか, message: エラーメッセージ）
+   */
+  static func validateEmail(_ email: String) -> (isValid: Bool, message: String?) {
+    let trimmed = email.trimmingCharacters(in: .whitespacesAndNewlines)
+    
+    if trimmed.isEmpty {
+      logger.debug("Email validation failed: empty input")
+      return (false, "入力必須です")
+    }
+    
+    if trimmed.count > AppConstants.ValidationLimits.maxEmailLength {
+      logger.debug("Email validation failed: above maximum (\(trimmed.count) > \(AppConstants.ValidationLimits.maxEmailLength))")
+      return (false, "\(AppConstants.ValidationLimits.maxEmailLength)文字以下で入力してください")
+    }
+    
+    let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+    let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+    let isValid = emailPredicate.evaluate(with: trimmed)
+    
+    if isValid {
+      logger.debug("Email validation passed: \(trimmed)")
+      return (true, nil)
+    } else {
+      logger.debug("Email validation failed: invalid format")
+      return (false, "有効なメールアドレス形式を入力してください")
+    }
+  }
 }

@@ -64,6 +64,7 @@ struct AppConstants {
     static let maxLocationLength: Int = 100
     static let minTeaNameLength: Int = 1
     static let maxTeaNameLength: Int = 100
+    static let maxEmailLength: Int = 254
   }
   
   /*
