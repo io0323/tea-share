@@ -7,6 +7,7 @@ import OSLog
 enum ValidationHelper {
   private static let logger = Logger(subsystem: "com.teashare.app", category: "ValidationHelper")
   private static let calendar = Calendar.current
+  private static let whitespaceSet = CharacterSet.whitespacesAndNewlines
 
   /*
    文字列の長さが指定範囲内か検証します。
@@ -22,7 +23,7 @@ enum ValidationHelper {
     minLength: Int? = nil,
     maxLength: Int? = nil
   ) -> (isValid: Bool, message: String?) {
-    let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
+    let trimmed = value.trimmingCharacters(in: whitespaceSet)
     
     if trimmed.isEmpty {
       logger.debug("Length validation failed: empty input")
