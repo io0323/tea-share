@@ -70,8 +70,7 @@ struct TeaTimelineView: View {
    */
   private var activeFilterLabels: [String] {
     var labels: [String] = []
-    let whitespaceSet = CharacterSet.whitespacesAndNewlines
-    let keyword = searchText.trimmingCharacters(in: whitespaceSet)
+    let keyword = searchText.trimmingCharacters(in: AppConstants.CharacterSets.whitespaceAndNewlines)
     if !keyword.isEmpty {
       labels.append(
         StringFormatter.format(

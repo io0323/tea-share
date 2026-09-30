@@ -107,7 +107,7 @@ enum ValidationHelper {
    - Returns: バリデーション結果（isValid: 有効かどうか, message: エラーメッセージ）
    */
   static func validateEmail(_ email: String) -> (isValid: Bool, message: String?) {
-    let trimmed = email.trimmingCharacters(in: .whitespacesAndNewlines)
+    let trimmed = email.trimmingCharacters(in: AppConstants.CharacterSets.whitespaceAndNewlines)
     
     if trimmed.isEmpty {
       logger.debug("Email validation failed: empty input")
