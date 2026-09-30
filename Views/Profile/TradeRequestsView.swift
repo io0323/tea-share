@@ -15,6 +15,7 @@ struct TradeRequestsView: View {
   @State private var selectedTab: TradeRequestTab = .incoming
   @State private var isShowingErrorAlert = AppConstants.Defaults.UI.isShowingErrorAlert
   @State private var errorMessage = AppConstants.Defaults.State.errorMessage
+  @State private var cachedCurrentUser: User?
 
   /*
    取引リクエストのタブを管理する列挙型です。
@@ -39,6 +40,10 @@ struct TradeRequestsView: View {
    現在ユーザーに関連する取引リクエストを返します。
    */
   private var userTrades: [Trade] {
+    if let cached = cachedCurrentUser {
+      return filterTrades(for: cached)
+    }
+    
     guard let currentUser = CurrentUserManager.fetchCurrentUser(
       modelContext: modelContext,
       storedUserId: currentUserId
@@ -46,13 +51,21 @@ struct TradeRequestsView: View {
       Self.logger.warning("Cannot fetch user trades: current user not found")
       return []
     }
-
+    
+    cachedCurrentUser = currentUser
+    return filterTrades(for: currentUser)
+  }
+  
+  /*
+   指定ユーザーの取引をフィルタリングします。
+   */
+  private func filterTrades(for user: User) -> [Trade] {
     let filteredTrades: [Trade]
     switch selectedTab {
     case .incoming:
-      filteredTrades = trades.filter { $0.owner?.id == currentUser.id }
+      filteredTrades = trades.filter { $0.owner?.id == user.id }
     case .outgoing:
-      filteredTrades = trades.filter { $0.requester?.id == currentUser.id }
+      filteredTrades = trades.filter { $0.requester?.id == user.id }
     }
     
     Self.logger.debug("Found \(filteredTrades.count) trades for \(selectedTab.displayLabel) tab")
@@ -82,6 +95,9 @@ struct TradeRequestsView: View {
       .padding(.top, AppConstants.UI.Padding.large)
       .onChange(of: selectedTab) { _, newTab in
         Self.logger.debug("Trade request tab changed to \(newTab.displayLabel)")
+      }
+      .onChange(of: currentUserId) { _, _ in
+        cachedCurrentUser = nil
       }
 
       ScrollView {
