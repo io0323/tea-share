@@ -12,11 +12,16 @@ struct MyListingsView: View {
   @Query private var teaLeaves: [TeaLeaf]
   @AppStorage(AppConstants.Storage.currentUserIdKey)
   private var currentUserId = ""
+  @State private var cachedCurrentUser: User?
 
   /*
    現在ユーザーが出品した茶葉のみを返します。
    */
   private var myListings: [TeaLeaf] {
+    if let cached = cachedCurrentUser {
+      return filterListings(for: cached)
+    }
+    
     guard let currentUser = CurrentUserManager.fetchCurrentUser(
       modelContext: modelContext,
       storedUserId: currentUserId
@@ -25,7 +30,15 @@ struct MyListingsView: View {
       return []
     }
     
-    let listings = teaLeaves.filter { $0.owner?.id == currentUser.id }
+    cachedCurrentUser = currentUser
+    return filterListings(for: currentUser)
+  }
+  
+  /*
+   指定ユーザーの出品をフィルタリングします。
+   */
+  private func filterListings(for user: User) -> [TeaLeaf] {
+    let listings = teaLeaves.filter { $0.owner?.id == user.id }
     Self.logger.debug("Found \(listings.count) listings for current user")
     return listings
   }
@@ -50,6 +63,9 @@ struct MyListingsView: View {
         }
       }
       .padding(.vertical, AppConstants.UI.Padding.large)
+    }
+    .onChange(of: currentUserId) { _, _ in
+      cachedCurrentUser = nil
     }
   }
 
