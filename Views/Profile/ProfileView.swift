@@ -18,6 +18,7 @@ struct ProfileView: View {
   @State private var isShowingSaveError = AppConstants.Defaults.UI.isShowingSaveError
   @State private var saveErrorMessage = AppConstants.Defaults.State.saveErrorMessage
   @State private var selectedTab: ProfileTab = .profile
+  @State private var cachedCurrentUser: User?
 
   /*
    プロファイルタブを管理する列挙型です。
@@ -45,13 +46,21 @@ struct ProfileView: View {
    端末内の現在ユーザーを返します。
    */
   private var currentUser: User? {
+    if let cached = cachedCurrentUser {
+      return cached
+    }
+    
     if let user = CurrentUserManager.fetchCurrentUser(
       modelContext: modelContext,
       storedUserId: currentUserId
     ) {
+      cachedCurrentUser = user
       return user
     }
-    return users.first
+    
+    let fallbackUser = users.first
+    cachedCurrentUser = fallbackUser
+    return fallbackUser
   }
 
   var body: some View {
@@ -199,6 +208,7 @@ struct ProfileView: View {
       storedUserId: &storedId
     ) != nil {
       currentUserId = storedId
+      cachedCurrentUser = nil
       Self.logger.debug("Successfully bootstrapped current user")
     } else {
       Self.logger.error("Failed to bootstrap current user")
@@ -241,9 +251,8 @@ struct ProfileView: View {
       return
     }
     
-    let whitespaceSet = CharacterSet.whitespacesAndNewlines
-    let trimmedUsername = editedUsername.trimmingCharacters(in: whitespaceSet)
-    let trimmedLocation = editedLocation.trimmingCharacters(in: whitespaceSet)
+    let trimmedUsername = editedUsername.trimmingCharacters(in: AppConstants.CharacterSets.whitespaceAndNewlines)
+    let trimmedLocation = editedLocation.trimmingCharacters(in: AppConstants.CharacterSets.whitespaceAndNewlines)
 
     let usernameValidation = ValidationHelper.validateLength(
       trimmedUsername,
@@ -276,6 +285,7 @@ struct ProfileView: View {
     
     do {
       try modelContext.save()
+      cachedCurrentUser = nil
       isEditing = false
       Self.logger.debug("Successfully saved profile changes")
     } catch {
