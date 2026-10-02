@@ -33,8 +33,7 @@ struct TeaTimelineView: View {
       }
 
     let textFiltered = categoryFiltered.filter { tea in
-      let whitespaceSet = CharacterSet.whitespacesAndNewlines
-      let keyword = searchText.trimmingCharacters(in: whitespaceSet)
+      let keyword = searchText.trimmingCharacters(in: AppConstants.CharacterSets.whitespaceAndNewlines)
       guard !keyword.isEmpty else { return true }
       
       return tea.name.localizedCaseInsensitiveContains(keyword)
