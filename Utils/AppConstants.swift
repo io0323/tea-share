@@ -32,6 +32,29 @@ struct AppConstants {
   }
 
   /*
+   日付フォーマットの設定を定義します。
+   */
+  struct DateFormatters {
+    static let japaneseLocale: Locale = Locale(identifier: "ja_JP")
+    
+    static let dateTimeFormatter: DateFormatter = {
+      let formatter = DateFormatter()
+      formatter.dateStyle = .medium
+      formatter.timeStyle = .short
+      formatter.locale = japaneseLocale
+      return formatter
+    }()
+    
+    static let dateOnlyFormatter: DateFormatter = {
+      let formatter = DateFormatter()
+      formatter.dateStyle = .medium
+      formatter.timeStyle = .none
+      formatter.locale = japaneseLocale
+      return formatter
+    }()
+  }
+
+  /*
    茶葉画像ファイルの保存設定を定義します。
    */
   struct ImageStorage {
