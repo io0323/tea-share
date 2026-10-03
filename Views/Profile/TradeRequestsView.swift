@@ -72,17 +72,6 @@ struct TradeRequestsView: View {
     return filteredTrades
   }
 
-  /*
-   日付フォーマッターを返します。
-   */
-  private let dateFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .medium
-    formatter.timeStyle = .short
-    formatter.locale = Locale(identifier: "ja_JP")
-    return formatter
-  }()
-
   var body: some View {
     VStack(spacing: 0) {
       Picker("", selection: $selectedTab) {
@@ -166,7 +155,7 @@ struct TradeRequestsView: View {
         )
         detailRow(
           AppConstants.UI.UIStrings.Profile.TradeRequests.createdAt,
-          value: dateFormatter.string(from: trade.createdAt)
+          value: AppConstants.DateFormatters.dateTimeFormatter.string(from: trade.createdAt)
         )
       }
 
