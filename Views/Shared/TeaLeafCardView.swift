@@ -155,11 +155,11 @@ struct TeaLeafCardView: View {
   private var statusColor: Color {
     switch tea.tradeStatus {
     case .available:
-      return AppConstants.UI.BasicColor.green
+      return AppConstants.UI.StatusColors.available
     case .pending:
-      return AppConstants.UI.BasicColor.orange
+      return AppConstants.UI.StatusColors.pending
     case .completed:
-      return AppConstants.UI.BasicColor.gray
+      return AppConstants.UI.StatusColors.completed
     }
   }
 }
