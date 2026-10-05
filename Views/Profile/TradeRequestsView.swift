@@ -201,9 +201,9 @@ struct TradeRequestsView: View {
   private func statusColor(for status: TradeStatus) -> Color {
     switch status {
     case .pending:
-      return .orange
+      return AppConstants.UI.StatusColors.tradePending
     case .completed:
-      return .green
+      return AppConstants.UI.StatusColors.tradeCompleted
     }
   }
 

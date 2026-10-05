@@ -156,6 +156,17 @@ struct AppConstants {
       static let gradientEndBlue: Double = 0.84
     }
     
+    /*
+     ステータスごとの色を定義します。
+     */
+    struct StatusColors {
+      static let available: Color = .green
+      static let pending: Color = .orange
+      static let completed: Color = .gray
+      static let tradePending: Color = .orange
+      static let tradeCompleted: Color = .green
+    }
+    
     struct ClipShape {
       static let capsule: Capsule = Capsule()
       static let roundedRectangleLarge: RoundedRectangle = RoundedRectangle(
