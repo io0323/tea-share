@@ -165,6 +165,18 @@ struct AppConstants {
       static let completed: Color = .gray
       static let tradePending: Color = .orange
       static let tradeCompleted: Color = .green
+      static let expired: Color = .red
+      static let expiringSoon: Color = .orange
+      static let fresh: Color = .green
+    }
+    
+    /*
+     期限状態ごとのアイコンを定義します。
+     */
+    struct ExpiryIcons {
+      static let expired: String = "exclamationmarkTriangleFill"
+      static let expiringSoon: String = "clockFill"
+      static let fresh: String = "checkmarkSealFill"
     }
     
     struct ClipShape {

@@ -114,11 +114,11 @@ struct TeaLeafCardView: View {
   private var expiryColor: Color {
     switch tea.expiryStatus {
     case .expired:
-      return AppConstants.UI.BasicColor.red
+      return AppConstants.UI.StatusColors.expired
     case .expiringSoon:
-      return AppConstants.UI.BasicColor.orange
+      return AppConstants.UI.StatusColors.expiringSoon
     case .fresh:
-      return AppConstants.UI.BasicColor.green
+      return AppConstants.UI.StatusColors.fresh
     }
   }
 
@@ -128,11 +128,11 @@ struct TeaLeafCardView: View {
   private var expiryIcon: String {
     switch tea.expiryStatus {
     case .expired:
-      return AppConstants.UI.UIStrings.Content.exclamationmarkTriangleFill
+      return AppConstants.UI.ExpiryIcons.expired
     case .expiringSoon:
-      return AppConstants.UI.UIStrings.Content.clockFill
+      return AppConstants.UI.ExpiryIcons.expiringSoon
     case .fresh:
-      return AppConstants.UI.UIStrings.Content.checkmarkSealFill
+      return AppConstants.UI.ExpiryIcons.fresh
     }
   }
 
