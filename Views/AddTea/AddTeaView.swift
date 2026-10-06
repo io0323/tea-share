@@ -245,12 +245,12 @@ struct AddTeaView: View {
             AppConstants.UI.UIStrings.AddTea.FormFields.name,
             text: $name
           )
-          .accessibilityLabel("茶葉名")
+          .accessibilityLabel(AppConstants.UI.Accessibility.Labels.teaName)
           TextField(
             AppConstants.UI.UIStrings.AddTea.FormFields.brand,
             text: $brand
           )
-          .accessibilityLabel("ブランド")
+          .accessibilityLabel(AppConstants.UI.Accessibility.Labels.brand)
           Picker(
             AppConstants.UI.UIStrings.AddTea.FormFields.category,
             selection: $category
@@ -259,15 +259,15 @@ struct AddTeaView: View {
               Text(category.rawValue).tag(category)
             }
           }
-          .accessibilityLabel("カテゴリ")
+          .accessibilityLabel(AppConstants.UI.Accessibility.Labels.category)
           Stepper(
             StringFormatter.format(AppConstants.UI.UIStrings.AddTea.FormFields.remaining, key: "grams", value: remainingGrams),
             value: $remainingGrams,
             in: AppConstants.AddTeaUI.stepperMinRemainingGrams...AppConstants.AddTeaUI.stepperMaxRemainingGrams,
             step: AppConstants.AddTeaUI.stepperStepGrams
           )
-          .accessibilityLabel("残量")
-          .accessibilityValue("\(remainingGrams)グラム")
+          .accessibilityLabel(AppConstants.UI.Accessibility.Labels.remaining)
+          .accessibilityValue(StringFormatter.format(AppConstants.UI.Accessibility.Hints.remainingValue, key: "grams", value: remainingGrams))
           quickRemainingButtons
 
           DatePicker(
@@ -275,7 +275,7 @@ struct AddTeaView: View {
             selection: $expiryDate,
             displayedComponents: AppConstants.UI.DatePickerSettings.dateComponents
           )
-          .accessibilityLabel("賞味期限")
+          .accessibilityLabel(AppConstants.UI.Accessibility.Labels.expiry)
           expiryPresetButtons
 
           TextField(
@@ -284,7 +284,7 @@ struct AddTeaView: View {
             axis: AppConstants.UI.TextFieldAxis.vertical
           )
             .lineLimit(AppConstants.UI.LineLimit.description)
-            .accessibilityLabel("説明")
+            .accessibilityLabel(AppConstants.UI.Accessibility.Labels.description)
           HStack {
             Spacer()
               Text(descriptionCountText)
@@ -292,7 +292,7 @@ struct AddTeaView: View {
               .foregroundStyle(
                 descriptionText.count >= AppConstants.TextLimits.descriptionMaxLength ? AppConstants.UI.BasicColor.orange : .secondary
               )
-              .accessibilityLabel("文字数")
+              .accessibilityLabel(AppConstants.UI.Accessibility.Labels.characterCount)
           }
         }
 
@@ -301,12 +301,12 @@ struct AddTeaView: View {
             AppConstants.UI.UIStrings.AddTea.FormFields.username,
             text: $username
           )
-          .accessibilityLabel("ユーザー名")
+          .accessibilityLabel(AppConstants.UI.Accessibility.Labels.username)
           TextField(
             AppConstants.UI.UIStrings.AddTea.FormFields.area,
             text: $location
           )
-          .accessibilityLabel("場所")
+          .accessibilityLabel(AppConstants.UI.Accessibility.Labels.location)
         }
 
         Section(AppConstants.UI.UIStrings.AddTea.Sections.draft) {

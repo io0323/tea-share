@@ -541,6 +541,31 @@ struct AppConstants {
         static let plus: String = "茶葉を追加"
       }
       
+      struct Accessibility {
+        struct Labels {
+          static let teaName: String = "茶葉名"
+          static let brand: String = "ブランド"
+          static let category: String = "カテゴリ"
+          static let remaining: String = "残量"
+          static let expiry: String = "賞味期限"
+          static let description: String = "説明"
+          static let characterCount: String = "文字数"
+          static let username: String = "ユーザー名"
+          static let location: String = "場所"
+          static let search: String = "検索"
+          static let clearSearch: String = "検索をクリア"
+          static let addTea: String = "茶葉を出品"
+          static let save: String = "保存"
+          static let edit: String = "編集"
+        }
+        
+        struct Hints {
+          static let addTea: String = "新しい茶葉を登録する画面を開きます"
+          static let search: String = "茶葉名、ブランド、場所で検索します"
+          static let remainingValue: String = "{grams}グラム"
+        }
+      }
+      
       struct Labels {
         static let username: String = "ユーザー名"
         static let id: String = "ID"

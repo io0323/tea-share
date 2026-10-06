@@ -100,7 +100,7 @@ struct ProfileView: View {
                 startEditing()
               }
             }
-            .accessibilityLabel(isEditing ? "保存" : "編集")
+            .accessibilityLabel(isEditing ? AppConstants.UI.Accessibility.Labels.save : AppConstants.UI.Accessibility.Labels.edit)
           }
           if isEditing {
             ToolbarItem(placement: AppConstants.UI.ToolbarPlacement.topBarLeading) {
@@ -142,13 +142,13 @@ struct ProfileView: View {
                     text: $editedUsername
                   )
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .accessibilityLabel("ユーザー名")
+                    .accessibilityLabel(AppConstants.UI.Accessibility.Labels.username)
                   TextField(
                     AppConstants.UI.UIStrings.Labels.location,
                     text: $editedLocation
                   )
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .accessibilityLabel("場所")
+                    .accessibilityLabel(AppConstants.UI.Accessibility.Labels.location)
                 }
               } else {
                 HStack {
