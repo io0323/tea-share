@@ -7,7 +7,7 @@ import OSLog
  茶葉カードから遷移する詳細画面です。
  */
 struct TeaLeafDetailView: View {
-  private static let logger = Logger(subsystem: "com.teashare.app", category: "TeaLeafDetailView")
+  private static let logger = Logger(subsystem: AppConstants.Logging.subsystem, category: AppConstants.Logging.Categories.teaLeafDetailView)
   
   @Environment(\.modelContext) private var modelContext
   @Bindable var teaLeaf: TeaLeaf

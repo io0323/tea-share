@@ -5,7 +5,7 @@ import OSLog
  茶葉画像のディスク保存・読み込みを担うユーティリティです。
  */
 enum TeaImageStorage {
-  private static let logger = Logger(subsystem: "com.teashare.app", category: "TeaImageStorage")
+  private static let logger = Logger(subsystem: AppConstants.Logging.subsystem, category: AppConstants.Logging.Categories.teaImageStorage)
   
   /*
    画像保存用ディレクトリの URL をキャッシュして返します。

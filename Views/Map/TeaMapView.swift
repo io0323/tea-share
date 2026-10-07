@@ -46,7 +46,7 @@ private enum TeaMapFilter: CaseIterable, Identifiable {
  近隣の交換可能な茶葉を地図上に表示する画面です。
  */
 struct TeaMapView: View {
-  private static let logger = Logger(subsystem: "com.teashare.app", category: "TeaMapView")
+  private static let logger = Logger(subsystem: AppConstants.Logging.subsystem, category: AppConstants.Logging.Categories.teaMapView)
   
   @Query(sort: \TeaLeaf.name) private var teaLeaves: [TeaLeaf]
   @State private var selectedTeaLeaf: TeaLeaf?
@@ -273,7 +273,7 @@ struct TeaMapView: View {
  マップピン選択時のハーフモーダル詳細です。
  */
 private struct TeaMapDetailSheet: View {
-  private static let logger = Logger(subsystem: "com.teashare.app", category: "TeaMapDetailSheet")
+  private static let logger = Logger(subsystem: AppConstants.Logging.subsystem, category: AppConstants.Logging.Categories.teaMapDetailSheet)
   
   @Environment(\.modelContext) private var modelContext
   @Bindable var teaLeaf: TeaLeaf

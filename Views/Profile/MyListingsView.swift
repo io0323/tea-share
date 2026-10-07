@@ -6,7 +6,7 @@ import OSLog
  ユーザーが出品した茶葉の一覧を表示するビューです。
  */
 struct MyListingsView: View {
-  private static let logger = Logger(subsystem: "com.teashare.app", category: "MyListingsView")
+  private static let logger = Logger(subsystem: AppConstants.Logging.subsystem, category: AppConstants.Logging.Categories.myListingsView)
   
   @Environment(\.modelContext) private var modelContext
   @Query private var teaLeaves: [TeaLeaf]

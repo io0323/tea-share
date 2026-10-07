@@ -32,6 +32,31 @@ struct AppConstants {
   }
 
   /*
+   ロギング設定を定義します。
+   */
+  struct Logging {
+    static let subsystem: String = "com.teashare.app"
+    
+    struct Categories {
+      static let app: String = "TeaShareApp"
+      static let validationHelper: String = "ValidationHelper"
+      static let currentUserManager: String = "CurrentUserManager"
+      static let teaImageStorage: String = "TeaImageStorage"
+      static let stringFormatter: String = "StringFormatter"
+      static let previewContainer: String = "PreviewContainer"
+      static let addTeaView: String = "AddTeaView"
+      static let teaTimelineView: String = "TeaTimelineView"
+      static let teaLeafDetailView: String = "TeaLeafDetailView"
+      static let teaMapView: String = "TeaMapView"
+      static let teaMapDetailSheet: String = "TeaMapDetailSheet"
+      static let profileView: String = "ProfileView"
+      static let myListingsView: String = "MyListingsView"
+      static let tradeRequestsView: String = "TradeRequestsView"
+      static let teaLeafCardView: String = "TeaLeafCardView"
+    }
+  }
+
+  /*
    日付フォーマットの設定を定義します。
    */
   struct DateFormatters {

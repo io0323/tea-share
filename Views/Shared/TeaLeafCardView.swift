@@ -5,7 +5,7 @@ import OSLog
  茶葉情報をカードで表示する共有ビューです。
  */
 struct TeaLeafCardView: View {
-  private static let logger = Logger(subsystem: "com.teashare.app", category: "TeaLeafCardView")
+  private static let logger = Logger(subsystem: AppConstants.Logging.subsystem, category: AppConstants.Logging.Categories.teaLeafCardView)
   
   let tea: TeaLeaf
 

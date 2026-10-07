@@ -6,7 +6,7 @@ import OSLog
  プレビュー・開発用のModelContainerを提供するヘルパーです。
  */
 enum PreviewContainer {
-  private static let logger = Logger(subsystem: "com.teashare.app", category: "PreviewContainer")
+  private static let logger = Logger(subsystem: AppConstants.Logging.subsystem, category: AppConstants.Logging.Categories.previewContainer)
 
   /*
    サンプルデータを投入済みのModelContainerを返します。

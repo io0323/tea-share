@@ -6,7 +6,7 @@ import OSLog
  募集中の茶葉を一覧表示するメインタイムラインです。
  */
 struct TeaTimelineView: View {
-  private static let logger = Logger(subsystem: "com.teashare.app", category: "TeaTimelineView")
+  private static let logger = Logger(subsystem: AppConstants.Logging.subsystem, category: AppConstants.Logging.Categories.teaTimelineView)
   
   @Query(sort: \TeaLeaf.expiryDate) private var teaLeaves: [TeaLeaf]
   @State private var selectedCategory: TeaCategory?
