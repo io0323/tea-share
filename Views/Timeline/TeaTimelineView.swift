@@ -212,8 +212,8 @@ struct TeaTimelineView: View {
           .clipShape(AppConstants.UI.ClipShape.capsule)
           .shadow(color: AppConstants.UI.ShadowStyle.shadow, radius: AppConstants.UI.Shadow.largeRadius, x: 0, y: AppConstants.UI.Shadow.buttonOffset)
         }
-          .accessibilityLabel("茶葉を出品")
-          .accessibilityHint("新しい茶葉を登録する画面を開きます")
+          .accessibilityLabel(AppConstants.UI.Accessibility.Labels.addTea)
+          .accessibilityHint(AppConstants.UI.Accessibility.Hints.addTea)
           .padding(AppConstants.UI.Padding.huge)
       }
       .navigationTitle(AppConstants.UI.Navigation.Titles.main)
@@ -236,8 +236,8 @@ struct TeaTimelineView: View {
       )
         .textInputAutocapitalization(.never)
         .autocorrectionDisabled()
-        .accessibilityLabel("検索")
-        .accessibilityHint("茶葉名、ブランド、場所で検索します")
+        .accessibilityLabel(AppConstants.UI.Accessibility.Labels.search)
+        .accessibilityHint(AppConstants.UI.Accessibility.Hints.search)
         .onChange(of: searchText) { _, newValue in
           if !newValue.isEmpty {
             Self.logger.debug("Search text changed: \(newValue)")
@@ -251,7 +251,7 @@ struct TeaTimelineView: View {
           Image(systemName: AppConstants.UI.UIStrings.Content.xmarkCircleFill)
             .foregroundStyle(.secondary)
         }
-        .accessibilityLabel("検索をクリア")
+        .accessibilityLabel(AppConstants.UI.Accessibility.Labels.clearSearch)
       }
     }
     .padding(.horizontal, AppConstants.UI.Padding.cardHorizontal)
