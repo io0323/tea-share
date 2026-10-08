@@ -7,7 +7,6 @@ import OSLog
 enum ValidationHelper {
   private static let logger = Logger(subsystem: AppConstants.Logging.subsystem, category: AppConstants.Logging.Categories.validationHelper)
   private static let calendar = Calendar.current
-  private static let whitespaceSet = CharacterSet.whitespacesAndNewlines
 
   /*
    文字列の長さが指定範囲内か検証します。
@@ -23,21 +22,21 @@ enum ValidationHelper {
     minLength: Int? = nil,
     maxLength: Int? = nil
   ) -> (isValid: Bool, message: String?) {
-    let trimmed = value.trimmingCharacters(in: whitespaceSet)
+    let trimmed = value.trimmingCharacters(in: AppConstants.CharacterSets.whitespaceAndNewlines)
     
     if trimmed.isEmpty {
       logger.debug("Length validation failed: empty input")
-      return (false, "入力必須です")
+      return (false, AppConstants.ValidationMessages.required)
     }
     
     if let min = minLength, trimmed.count < min {
       logger.debug("Length validation failed: below minimum (\(trimmed.count) < \(min))")
-      return (false, "\(min)文字以上で入力してください")
+      return (false, StringFormatter.format(AppConstants.ValidationMessages.minLength, key: "min", value: min))
     }
     
     if let max = maxLength, trimmed.count > max {
       logger.debug("Length validation failed: above maximum (\(trimmed.count) > \(max))")
-      return (false, "\(max)文字以下で入力してください")
+      return (false, StringFormatter.format(AppConstants.ValidationMessages.maxLength, key: "max", value: max))
     }
     
     logger.debug("Length validation passed: \(trimmed.count) characters")
@@ -60,12 +59,12 @@ enum ValidationHelper {
   ) -> (isValid: Bool, message: String?) {
     if let min = minValue, value < min {
       logger.debug("Range validation failed: below minimum (\(value) < \(min))")
-      return (false, "\(min)以上の値を入力してください")
+      return (false, StringFormatter.format(AppConstants.ValidationMessages.minValue, key: "min", value: min))
     }
     
     if let max = maxValue, value > max {
       logger.debug("Range validation failed: above maximum (\(value) > \(max))")
-      return (false, "\(max)以下の値を入力してください")
+      return (false, StringFormatter.format(AppConstants.ValidationMessages.maxValue, key: "max", value: max))
     }
     
     logger.debug("Range validation passed: \(value)")
@@ -82,7 +81,7 @@ enum ValidationHelper {
     let today = calendar.startOfDay(for: Date())
     if date < today {
       logger.debug("Date validation failed: past date (\(date))")
-      return (false, "過去の日付は指定できません")
+      return (false, AppConstants.ValidationMessages.pastDate)
     }
     logger.debug("Date validation passed: \(date)")
     return (true, nil)
@@ -111,12 +110,12 @@ enum ValidationHelper {
     
     if trimmed.isEmpty {
       logger.debug("Email validation failed: empty input")
-      return (false, "入力必須です")
+      return (false, AppConstants.ValidationMessages.required)
     }
     
     if trimmed.count > AppConstants.ValidationLimits.maxEmailLength {
       logger.debug("Email validation failed: above maximum (\(trimmed.count) > \(AppConstants.ValidationLimits.maxEmailLength))")
-      return (false, "\(AppConstants.ValidationLimits.maxEmailLength)文字以下で入力してください")
+      return (false, StringFormatter.format(AppConstants.ValidationMessages.maxLength, key: "max", value: AppConstants.ValidationLimits.maxEmailLength))
     }
     
     let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
@@ -128,7 +127,7 @@ enum ValidationHelper {
       return (true, nil)
     } else {
       logger.debug("Email validation failed: invalid format")
-      return (false, "有効なメールアドレス形式を入力してください")
+      return (false, AppConstants.ValidationMessages.invalidEmailFormat)
     }
   }
 }

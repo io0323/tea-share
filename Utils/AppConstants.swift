@@ -116,6 +116,19 @@ struct AppConstants {
   }
 
   /*
+   バリデーションエラーメッセージを定義します。
+   */
+  struct ValidationMessages {
+    static let required: String = "入力必須です"
+    static let minLength: String = "{min}文字以上で入力してください"
+    static let maxLength: String = "{max}文字以下で入力してください"
+    static let minValue: String = "{min}以上の値を入力してください"
+    static let maxValue: String = "{max}以下の値を入力してください"
+    static let pastDate: String = "過去の日付は指定できません"
+    static let invalidEmailFormat: String = "有効なメールアドレス形式を入力してください"
+  }
+
+  /*
    文字列処理用のキャッシュ済みCharacterSetを定義します。
    */
   struct CharacterSets {
