@@ -6,7 +6,7 @@ import OSLog
  ユーザープロファイルを表示するビューです。
  */
 struct ProfileView: View {
-  private static let logger = Logger(subsystem: "com.teashare.app", category: "ProfileView")
+  private static let logger = Logger(subsystem: AppConstants.Logging.subsystem, category: AppConstants.Logging.Categories.profileView)
   
   @Environment(\.modelContext) private var modelContext
   @Query private var users: [User]

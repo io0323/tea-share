@@ -6,7 +6,7 @@ import OSLog
  端末内の現在ユーザーを解決・管理するユーティリティです。
  */
 enum CurrentUserManager {
-  private static let logger = Logger(subsystem: "com.teashare.app", category: "CurrentUserManager")
+  private static let logger = Logger(subsystem: AppConstants.Logging.subsystem, category: AppConstants.Logging.Categories.currentUserManager)
 
   /*
    保存済み ID から現在ユーザーを取得します。

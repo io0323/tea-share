@@ -5,7 +5,7 @@ import OSLog
  入力値のバリデーションを行うユーティリティです。
  */
 enum ValidationHelper {
-  private static let logger = Logger(subsystem: "com.teashare.app", category: "ValidationHelper")
+  private static let logger = Logger(subsystem: AppConstants.Logging.subsystem, category: AppConstants.Logging.Categories.validationHelper)
   private static let calendar = Calendar.current
   private static let whitespaceSet = CharacterSet.whitespacesAndNewlines
 

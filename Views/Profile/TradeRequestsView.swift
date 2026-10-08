@@ -6,7 +6,7 @@ import OSLog
  取引リクエストの一覧を表示するビューです。
  */
 struct TradeRequestsView: View {
-  private static let logger = Logger(subsystem: "com.teashare.app", category: "TradeRequestsView")
+  private static let logger = Logger(subsystem: AppConstants.Logging.subsystem, category: AppConstants.Logging.Categories.tradeRequestsView)
   
   @Environment(\.modelContext) private var modelContext
   @Query private var trades: [Trade]

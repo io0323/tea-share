@@ -7,7 +7,7 @@ import OSLog
  */
 @main
 struct TeaShareApp: App {
-  private static let logger = Logger(subsystem: "com.teashare.app", category: "TeaShareApp")
+  private static let logger = Logger(subsystem: AppConstants.Logging.subsystem, category: AppConstants.Logging.Categories.app)
 
   /*
    永続化用のModelContainerを構築します。

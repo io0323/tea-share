@@ -15,7 +15,7 @@ struct AddTeaView: View {
   @AppStorage(AppConstants.Storage.currentUserIdKey)
   private var currentUserId = ""
   
-  private static let logger = Logger(subsystem: "com.teashare.app", category: "AddTeaView")
+  private static let logger = Logger(subsystem: AppConstants.Logging.subsystem, category: AppConstants.Logging.Categories.addTeaView)
 
   @State private var pickedPhotoItem: PhotosPickerItem?
   @State private var selectedImage: UIImage?
