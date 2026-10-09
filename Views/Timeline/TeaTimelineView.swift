@@ -410,7 +410,7 @@ struct TeaTimelineView: View {
   private var emptyStateView: some View {
     VStack(spacing: AppConstants.UI.Layout.Spacing.emptyState) {
       Image(systemName: AppConstants.UI.UIStrings.Content.tray)
-        .font(.system(size: AppConstants.UI.FontSizes.emptyStateIcon))
+        .font(AppConstants.UI.Typography.Font.emptyStateIcon)
         .foregroundStyle(.secondary)
       Text(AppConstants.UI.UIStrings.Labels.noMatchingTea)
         .font(AppConstants.UI.Typography.FontScale.sectionTitle)

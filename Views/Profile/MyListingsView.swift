@@ -75,7 +75,7 @@ struct MyListingsView: View {
   private var emptyStateView: some View {
     VStack(spacing: AppConstants.UI.Layout.Spacing.emptyState) {
       Image(systemName: AppConstants.UI.UIStrings.Content.leafFill)
-        .font(.system(size: AppConstants.UI.FontSizes.emptyStateIcon))
+        .font(AppConstants.UI.Typography.Font.emptyStateIcon)
         .foregroundStyle(.secondary)
       Text(AppConstants.UI.UIStrings.Profile.MyListings.empty)
         .font(AppConstants.UI.Typography.FontScale.sectionTitle)

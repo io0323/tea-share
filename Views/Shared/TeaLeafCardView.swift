@@ -28,7 +28,7 @@ struct TeaLeafCardView: View {
           .fill(AppConstants.UI.FillColor.green)
           .overlay {
             Image(systemName: AppConstants.UI.UIStrings.Content.leafFill)
-              .font(.system(size: AppConstants.UI.FontSizes.cardIcon))
+              .font(AppConstants.UI.Typography.Font.cardIcon)
               .foregroundStyle(AppConstants.UI.BasicColor.green.opacity(AppConstants.UI.Colors.greenForegroundOpacity))
           }
           .frame(height: AppConstants.UI.Frame.cardHeight)
