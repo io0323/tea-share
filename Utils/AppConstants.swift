@@ -441,6 +441,10 @@ struct AppConstants {
         static let systemSemibold: Font = .systemSemibold
         static let systemLight: Font = .systemLight
         static let systemThin: Font = .systemThin
+        static let emptyStateIcon: Font = .system(size: FontSizes.emptyStateIcon)
+        static let cardIcon: Font = .system(size: FontSizes.cardIcon)
+        static let errorImageIcon: Font = .system(size: FontSizes.errorImageIcon)
+        static let mapMarkerIcon: Font = .system(size: FontSizes.mapMarkerIcon)
       }
       
       struct FontWeight {

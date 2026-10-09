@@ -280,7 +280,7 @@ struct TeaLeafDetailView: View {
           .overlay {
             VStack(spacing: AppConstants.UI.Layout.Spacing.vStack) {
               Image(systemName: AppConstants.UI.UIStrings.Content.photo)
-                .font(.system(size: AppConstants.UI.FontSizes.errorImageIcon))
+                .font(AppConstants.UI.Typography.Font.errorImageIcon)
                 .foregroundStyle(.secondary)
               Text(AppConstants.UI.UIStrings.Placeholders.imageLoadError)
                 .font(AppConstants.UI.Typography.Font.caption)
