@@ -73,7 +73,7 @@ struct TradeRequestsView: View {
   }
 
   var body: some View {
-    VStack(spacing: 0) {
+    VStack(spacing: AppConstants.UI.Spacing.zero) {
       Picker("", selection: $selectedTab) {
         ForEach(TradeRequestTab.allCases) { tab in
           Text(tab.displayLabel).tag(tab)

@@ -65,7 +65,7 @@ struct ProfileView: View {
 
   var body: some View {
     NavigationStack {
-      VStack(spacing: 0) {
+      VStack(spacing: AppConstants.UI.Spacing.zero) {
         Picker("", selection: $selectedTab) {
           ForEach(ProfileTab.allCases) { tab in
             Text(tab.displayLabel).tag(tab)
