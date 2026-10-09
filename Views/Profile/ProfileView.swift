@@ -175,7 +175,7 @@ struct ProfileView: View {
               }
             }
             .padding(AppConstants.UI.Padding.default)
-            .background(Color.gray.opacity(AppConstants.UI.Opacity.grayLight))
+            .background(AppConstants.UI.BasicColor.gray.opacity(AppConstants.UI.Opacity.grayLight))
             .cornerRadius(AppConstants.UI.CornerRadius.card)
           }
           .padding(AppConstants.UI.Padding.default)
