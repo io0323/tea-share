@@ -348,6 +348,7 @@ struct AppConstants {
       }
       
       struct Spacing {
+        static let zero: CGFloat = 0
         static let tiny: CGFloat = 2
         static let small: CGFloat = 4
         static let medium: CGFloat = 6
