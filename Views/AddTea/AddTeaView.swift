@@ -13,7 +13,7 @@ struct AddTeaView: View {
 
   @AppStorage("addtea_draft") private var draftData: Data = Data()
   @AppStorage(AppConstants.Storage.currentUserIdKey)
-  private var currentUserId = ""
+  private var currentUserId = AppConstants.Defaults.State.emptyString
   
   private static let logger = Logger(subsystem: AppConstants.Logging.subsystem, category: AppConstants.Logging.Categories.addTeaView)
 
@@ -587,7 +587,7 @@ struct AddTeaView: View {
     let owner = resolvedOwner.user
 
     let teaLeafId = UUID()
-    var imagePath = ""
+    var imagePath = AppConstants.Defaults.State.emptyString
     if let selectedImage {
       do {
         imagePath = try TeaImageStorage.saveImage(
@@ -706,11 +706,11 @@ struct AddTeaView: View {
    フォーム状態と下書き内容を同時に初期化します。
    */
   private func resetForm() {
-    name = ""
-    brand = ""
+    name = AppConstants.Defaults.State.emptyString
+    brand = AppConstants.Defaults.State.emptyString
     category = .greenTea
     expiryDate = Date()
-    descriptionText = ""
+    descriptionText = AppConstants.Defaults.State.emptyString
     remainingGrams = AppConstants.AddTeaUI.defaultRemainingGrams
     location = AppConstants.UI.UIStrings.Placeholders.notSet
     username = AppConstants.Defaults.State.username

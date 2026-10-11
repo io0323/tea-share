@@ -11,7 +11,7 @@ struct MyListingsView: View {
   @Environment(\.modelContext) private var modelContext
   @Query private var teaLeaves: [TeaLeaf]
   @AppStorage(AppConstants.Storage.currentUserIdKey)
-  private var currentUserId = ""
+  private var currentUserId = AppConstants.Defaults.State.emptyString
   @State private var cachedCurrentUser: User?
 
   /*

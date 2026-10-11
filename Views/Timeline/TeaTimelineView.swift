@@ -246,7 +246,7 @@ struct TeaTimelineView: View {
       if !searchText.isEmpty {
         Button {
           Self.logger.debug("Search text cleared")
-          searchText = ""
+          searchText = AppConstants.Defaults.State.emptyString
         } label: {
           Image(systemName: AppConstants.UI.UIStrings.Content.xmarkCircleFill)
             .foregroundStyle(.secondary)
@@ -461,7 +461,7 @@ struct TeaTimelineView: View {
   private func resetAllFilters() {
     Self.logger.debug("Resetting all filters to default")
     selectedCategory = nil
-    searchText = ""
+    searchText = AppConstants.Defaults.State.emptyString
     sortOption = .expirySoon
     statusScope = .active
     showExpiringOnly = false
