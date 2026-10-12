@@ -76,12 +76,12 @@ struct MyListingsView: View {
     VStack(spacing: AppConstants.UI.Layout.Spacing.emptyState) {
       Image(systemName: AppConstants.UI.UIStrings.Content.leafFill)
         .font(AppConstants.UI.Typography.Font.emptyStateIcon)
-        .foregroundStyle(.secondary)
+        .foregroundStyle(AppConstants.UI.BasicColor.secondary)
       Text(AppConstants.UI.UIStrings.Profile.MyListings.empty)
         .font(AppConstants.UI.Typography.FontScale.sectionTitle)
       Text(AppConstants.UI.UIStrings.Profile.MyListings.emptyHint)
         .font(AppConstants.UI.Typography.Font.footnote)
-        .foregroundStyle(.secondary)
+        .foregroundStyle(AppConstants.UI.BasicColor.secondary)
     }
     .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity)
     .padding(.vertical, AppConstants.UI.Layout.Spacing.large)

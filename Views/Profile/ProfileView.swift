@@ -163,7 +163,7 @@ struct ProfileView: View {
                     .font(AppConstants.UI.Typography.FontScale.sectionTitle)
                   Text(user.id.uuidString)
                     .font(AppConstants.UI.Typography.Font.body)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(AppConstants.UI.BasicColor.secondary)
                 }
 
                 HStack {
