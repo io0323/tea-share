@@ -11,7 +11,7 @@ struct ProfileView: View {
   @Environment(\.modelContext) private var modelContext
   @Query private var users: [User]
   @AppStorage(AppConstants.Storage.currentUserIdKey)
-  private var currentUserId = ""
+  private var currentUserId = AppConstants.Defaults.State.emptyString
   @State private var isEditing = AppConstants.Defaults.UI.isEditing
   @State private var editedUsername = AppConstants.Defaults.State.editedUsername
   @State private var editedLocation = AppConstants.Defaults.State.editedLocation

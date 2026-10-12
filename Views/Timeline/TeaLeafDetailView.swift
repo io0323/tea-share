@@ -21,7 +21,7 @@ struct TeaLeafDetailView: View {
   @State private var tradeRequestMessage = AppConstants.Defaults.State.tradeRequestMessage
   @Query private var users: [User]
   @AppStorage(AppConstants.Storage.currentUserIdKey)
-  private var currentUserId = ""
+  private var currentUserId = AppConstants.Defaults.State.emptyString
 
   var body: some View {
     ScrollView {

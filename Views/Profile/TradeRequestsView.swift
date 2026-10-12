@@ -11,7 +11,7 @@ struct TradeRequestsView: View {
   @Environment(\.modelContext) private var modelContext
   @Query private var trades: [Trade]
   @AppStorage(AppConstants.Storage.currentUserIdKey)
-  private var currentUserId = ""
+  private var currentUserId = AppConstants.Defaults.State.emptyString
   @State private var selectedTab: TradeRequestTab = .incoming
   @State private var isShowingErrorAlert = AppConstants.Defaults.UI.isShowingErrorAlert
   @State private var errorMessage = AppConstants.Defaults.State.errorMessage
