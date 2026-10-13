@@ -13,7 +13,7 @@ struct TeaLeafDetailView: View {
   @Bindable var teaLeaf: TeaLeaf
   @State private var isEditingDetail = AppConstants.Defaults.UI.isEditingDetail
   @State private var editableRemainingGrams = AppConstants.Defaults.State.editableRemainingGrams
-  @State private var editableExpiryDate = Date()
+  @State private var editableExpiryDate = AppConstants.Defaults.State.currentDate
   @State private var editableDescription = AppConstants.Defaults.State.editableDescription
   @State private var isShowingSaveError = AppConstants.Defaults.UI.isShowingSaveError
   @State private var saveErrorMessage = AppConstants.Defaults.State.saveErrorMessage
