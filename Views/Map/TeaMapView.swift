@@ -299,7 +299,7 @@ private struct TeaMapDetailSheet: View {
         .font(AppConstants.UI.Typography.Font.body)
       Text(StringFormatter.format(AppConstants.UI.UIStrings.Labels.status, key: "status", value: teaLeaf.tradeStatus.rawValue))
         .font(AppConstants.UI.Typography.Font.body)
-        .foregroundStyle(.secondary)
+        .foregroundStyle(AppConstants.UI.BasicColor.secondary)
 
       VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.vStack) {
         Text(AppConstants.UI.UIStrings.Labels.updateTradeStatus)

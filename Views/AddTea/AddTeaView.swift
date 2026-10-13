@@ -235,7 +235,7 @@ struct AddTeaView: View {
               ProgressView()
               Text(AppConstants.UI.UIStrings.AddTea.Hints.analyzingImage)
                 .font(AppConstants.UI.Typography.Font.footnote)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(AppConstants.UI.BasicColor.secondary)
             }
           }
         }
@@ -290,7 +290,7 @@ struct AddTeaView: View {
               Text(descriptionCountText)
               .font(AppConstants.UI.Typography.Font.footnote)
               .foregroundStyle(
-                descriptionText.count >= AppConstants.TextLimits.descriptionMaxLength ? AppConstants.UI.BasicColor.orange : .secondary
+                descriptionText.count >= AppConstants.TextLimits.descriptionMaxLength ? AppConstants.UI.BasicColor.orange : AppConstants.UI.BasicColor.secondary
               )
               .accessibilityLabel(AppConstants.UI.Accessibility.Labels.characterCount)
           }
@@ -312,7 +312,7 @@ struct AddTeaView: View {
         Section(AppConstants.UI.UIStrings.AddTea.Sections.draft) {
             Text(AppConstants.UI.UIStrings.AddTea.Hints.autoDraft)
             .font(AppConstants.UI.Typography.Font.footnote)
-            .foregroundStyle(.secondary)
+            .foregroundStyle(AppConstants.UI.BasicColor.secondary)
           Button(
             AppConstants.UI.UIStrings.AddTea.Actions.resetForm,
             role: AppConstants.UI.ButtonRole.destructive
@@ -413,7 +413,7 @@ struct AddTeaView: View {
     HStack(spacing: AppConstants.UI.Layout.Spacing.tag) {
       Text(AppConstants.UI.UIStrings.AddTea.Actions.quickRemaining)
         .font(AppConstants.UI.Typography.Font.caption)
-        .foregroundStyle(.secondary)
+        .foregroundStyle(AppConstants.UI.BasicColor.secondary)
       ForEach(AppConstants.AddTeaUI.quickGramsAmounts, id: \.self) { grams in
         quickAmountButton(grams)
       }
@@ -428,7 +428,7 @@ struct AddTeaView: View {
     HStack(spacing: AppConstants.UI.Layout.Spacing.tag) {
       Text(AppConstants.UI.UIStrings.AddTea.Actions.expiryPreset)
         .font(AppConstants.UI.Typography.Font.caption)
-        .foregroundStyle(.secondary)
+        .foregroundStyle(AppConstants.UI.BasicColor.secondary)
       ForEach(ExpiryPreset.allCases) { preset in
         Button(preset.rawValue) {
           applyExpiryPreset(preset)

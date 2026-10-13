@@ -83,7 +83,7 @@ struct TeaLeafDetailView: View {
         .font(AppConstants.UI.Typography.FontScale.detailTitle)
       Text(teaLeaf.brand)
         .font(AppConstants.UI.Typography.FontScale.detailSubtitle)
-        .foregroundStyle(.secondary)
+        .foregroundStyle(AppConstants.UI.BasicColor.secondary)
 
       HStack(spacing: AppConstants.UI.Layout.Spacing.tag) {
         tagLabel(teaLeaf.category.rawValue, tint: AppConstants.UI.BasicColor.green)
@@ -180,7 +180,7 @@ struct TeaLeafDetailView: View {
             .foregroundStyle(
               editableDescription.count >= AppConstants.TextLimits.descriptionMaxLength
                 ? AppConstants.UI.BasicColor.orange
-                : .secondary
+                : AppConstants.UI.BasicColor.secondary
             )
         }
       }
@@ -249,7 +249,7 @@ struct TeaLeafDetailView: View {
             .font(AppConstants.UI.Typography.FontScale.sectionSubtitle)
           Text(teaLeaf.description.isEmpty ? AppConstants.UI.UIStrings.Placeholders.descriptionEmpty : teaLeaf.description)
             .font(AppConstants.UI.Typography.FontScale.detailBody)
-            .foregroundStyle(.secondary)
+            .foregroundStyle(AppConstants.UI.BasicColor.secondary)
         }
       }
     }
@@ -281,10 +281,10 @@ struct TeaLeafDetailView: View {
             VStack(spacing: AppConstants.UI.Layout.Spacing.vStack) {
               Image(systemName: AppConstants.UI.UIStrings.Content.photo)
                 .font(AppConstants.UI.Typography.Font.errorImageIcon)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(AppConstants.UI.BasicColor.secondary)
               Text(AppConstants.UI.UIStrings.Placeholders.imageLoadError)
                 .font(AppConstants.UI.Typography.Font.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(AppConstants.UI.BasicColor.secondary)
             }
           }
           .frame(height: AppConstants.UI.Frame.imageErrorHeight)
@@ -319,7 +319,7 @@ struct TeaLeafDetailView: View {
           Text(teaLeaf.tradeStatus == .pending ? AppConstants.UI.Alerts.Messages.tradeRequestUnavailable : AppConstants.UI.Alerts.Messages.tradeCompleted)
             .font(AppConstants.UI.Typography.FontScale.statusBody)
         }
-        .foregroundStyle(.secondary)
+        .foregroundStyle(AppConstants.UI.BasicColor.secondary)
         .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
         .padding(.vertical, AppConstants.UI.Padding.verticalMedium)
       }
@@ -395,7 +395,7 @@ struct TeaLeafDetailView: View {
       Spacer()
       Text(value)
         .font(AppConstants.UI.Typography.FontScale.statusBody)
-        .foregroundStyle(.secondary)
+        .foregroundStyle(AppConstants.UI.BasicColor.secondary)
     }
   }
 

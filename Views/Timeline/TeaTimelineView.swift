@@ -229,7 +229,7 @@ struct TeaTimelineView: View {
   private var searchField: some View {
     HStack(spacing: AppConstants.UI.Layout.Spacing.hStack) {
       Image(systemName: AppConstants.UI.UIStrings.Content.magnifyingglass)
-        .foregroundStyle(.secondary)
+        .foregroundStyle(AppConstants.UI.BasicColor.secondary)
       TextField(
         AppConstants.UI.UIStrings.Timeline.Search.placeholder,
         text: $searchText
@@ -249,7 +249,7 @@ struct TeaTimelineView: View {
           searchText = AppConstants.Defaults.State.emptyString
         } label: {
           Image(systemName: AppConstants.UI.UIStrings.Content.xmarkCircleFill)
-            .foregroundStyle(.secondary)
+            .foregroundStyle(AppConstants.UI.BasicColor.secondary)
         }
         .accessibilityLabel(AppConstants.UI.Accessibility.Labels.clearSearch)
       }
@@ -344,7 +344,7 @@ struct TeaTimelineView: View {
       Text(StringFormatter.format(AppConstants.UI.UIStrings.Labels.expiringCount, key: "count", value: expiringCount))
     }
     .font(AppConstants.UI.Typography.FontScale.chipTitle)
-    .foregroundStyle(.secondary)
+    .foregroundStyle(AppConstants.UI.BasicColor.secondary)
   }
 
   /*
@@ -391,7 +391,7 @@ struct TeaTimelineView: View {
       VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.tiny) {
         Text(title)
           .font(AppConstants.UI.Typography.Font.caption)
-          .foregroundStyle(.secondary)
+          .foregroundStyle(AppConstants.UI.BasicColor.secondary)
         Text(
           StringFormatter.format(AppConstants.UI.UIStrings.Labels.countSuffix, key: "count", value: count)
         )
@@ -411,12 +411,12 @@ struct TeaTimelineView: View {
     VStack(spacing: AppConstants.UI.Layout.Spacing.emptyState) {
       Image(systemName: AppConstants.UI.UIStrings.Content.tray)
         .font(AppConstants.UI.Typography.Font.emptyStateIcon)
-        .foregroundStyle(.secondary)
+        .foregroundStyle(AppConstants.UI.BasicColor.secondary)
       Text(AppConstants.UI.UIStrings.Labels.noMatchingTea)
         .font(AppConstants.UI.Typography.FontScale.sectionTitle)
       Text(AppConstants.UI.UIStrings.Labels.changeSearchConditions)
         .font(AppConstants.UI.Typography.Font.footnote)
-        .foregroundStyle(.secondary)
+        .foregroundStyle(AppConstants.UI.BasicColor.secondary)
     }
     .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity)
     .padding(.vertical, AppConstants.UI.Layout.Spacing.large)
@@ -450,7 +450,7 @@ struct TeaTimelineView: View {
       } else {
         Text(AppConstants.UI.UIStrings.Labels.noFilterConditions)
           .font(AppConstants.UI.Typography.Font.footnote)
-          .foregroundStyle(.secondary)
+          .foregroundStyle(AppConstants.UI.BasicColor.secondary)
       }
     }
   }

@@ -64,7 +64,7 @@ struct TeaLeafCardView: View {
           )
         )
           .font(AppConstants.UI.Typography.Font.caption)
-          .foregroundStyle(.secondary)
+          .foregroundStyle(AppConstants.UI.BasicColor.secondary)
       }
     }
     .padding(AppConstants.UI.Padding.cardHorizontal)
