@@ -647,7 +647,7 @@ struct AddTeaView: View {
       draftTeaLeaf = try JSONDecoder().decode(TeaLeaf.self, from: draftData)
       name = draftTeaLeaf?.name ?? ""
       brand = draftTeaLeaf?.brand ?? ""
-      category = draftTeaLeaf?.category ?? .greenTea
+      category = draftTeaLeaf?.category ?? AppConstants.Defaults.Selection.category
       expiryDate = draftTeaLeaf?.expiryDate ?? Date()
       descriptionText = draftTeaLeaf?.description ?? ""
       remainingGrams = draftTeaLeaf?.remainingGrams ?? AppConstants.AddTeaUI.defaultRemainingGrams
@@ -708,7 +708,7 @@ struct AddTeaView: View {
   private func resetForm() {
     name = AppConstants.Defaults.State.emptyString
     brand = AppConstants.Defaults.State.emptyString
-    category = .greenTea
+    category = AppConstants.Defaults.Selection.category
     expiryDate = Date()
     descriptionText = AppConstants.Defaults.State.emptyString
     remainingGrams = AppConstants.AddTeaUI.defaultRemainingGrams
