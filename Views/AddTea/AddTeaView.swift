@@ -31,7 +31,7 @@ struct AddTeaView: View {
   @State private var name = AppConstants.Defaults.State.name
   @State private var brand = AppConstants.Defaults.State.brand
   @State private var category: TeaCategory = AppConstants.Defaults.Selection.category
-  @State private var expiryDate = Date()
+  @State private var expiryDate = AppConstants.Defaults.State.currentDate
   @State private var descriptionText = AppConstants.Defaults.State.descriptionText
   @State private var remainingGrams = AppConstants.Defaults.State.remainingGrams
   @State private var location = AppConstants.Defaults.State.location
@@ -647,8 +647,8 @@ struct AddTeaView: View {
       draftTeaLeaf = try JSONDecoder().decode(TeaLeaf.self, from: draftData)
       name = draftTeaLeaf?.name ?? ""
       brand = draftTeaLeaf?.brand ?? ""
-      category = draftTeaLeaf?.category ?? AppConstants.Defaults.Selection.category
-      expiryDate = draftTeaLeaf?.expiryDate ?? Date()
+      category = draftTeaLeaf?.category ?? .greenTea
+      expiryDate = draftTeaLeaf?.expiryDate ?? AppConstants.Defaults.State.currentDate
       descriptionText = draftTeaLeaf?.description ?? ""
       remainingGrams = draftTeaLeaf?.remainingGrams ?? AppConstants.AddTeaUI.defaultRemainingGrams
       location = draftTeaLeaf?.owner?.location
@@ -708,8 +708,8 @@ struct AddTeaView: View {
   private func resetForm() {
     name = AppConstants.Defaults.State.emptyString
     brand = AppConstants.Defaults.State.emptyString
-    category = AppConstants.Defaults.Selection.category
-    expiryDate = Date()
+    category = .greenTea
+    expiryDate = AppConstants.Defaults.State.currentDate
     descriptionText = AppConstants.Defaults.State.emptyString
     remainingGrams = AppConstants.AddTeaUI.defaultRemainingGrams
     location = AppConstants.UI.UIStrings.Placeholders.notSet
@@ -724,7 +724,7 @@ struct AddTeaView: View {
    */
   private func applyExpiryPreset(_ preset: ExpiryPreset) {
     let calendar = Calendar.current
-    let today = calendar.startOfDay(for: Date())
+    let today = calendar.startOfDay(for: AppConstants.Defaults.State.currentDate)
     expiryDate = calendar.date(
       byAdding: .month,
       value: preset.monthOffset,

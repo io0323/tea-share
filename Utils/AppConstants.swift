@@ -884,6 +884,7 @@ struct AppConstants {
   }
   struct Defaults {
       struct State {
+        static let currentDate: Date = Date()
         static let emptyString: String = ""
         static let searchText: String = ""
         static let errorMessage: String = ""
