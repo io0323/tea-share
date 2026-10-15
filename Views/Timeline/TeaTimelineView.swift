@@ -161,7 +161,7 @@ struct TeaTimelineView: View {
           startPoint: AppConstants.UI.FrameAlignment.topLeading,
           endPoint: AppConstants.UI.FrameAlignment.bottomTrailing
         )
-        .ignoresSafeArea(AppConstants.UI.SafeAreaSettings.ignoresSafeArea ? .all : [])
+        .ignoresSafeArea(AppConstants.UI.SafeAreaSettings.ignoresSafeArea ? AppConstants.UI.SafeAreaSettings.safeAreaEdges : [])
         .opacity(AppConstants.UI.Opacity.backgroundGradient)
 
         ScrollView {

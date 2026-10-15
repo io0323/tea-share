@@ -335,6 +335,7 @@ struct AppConstants {
       
       struct SafeAreaSettings {
         static let ignoresSafeArea: Bool = true
+        static let safeAreaEdges: Edge.Set = .all
       }
       
       struct ButtonRole {
