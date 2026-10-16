@@ -72,8 +72,8 @@ struct ProfileView: View {
           }
         }
         .pickerStyle(.segmented)
-        .padding(.horizontal, AppConstants.UI.Padding.large)
-        .padding(.top, AppConstants.UI.Padding.large)
+        .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.large)
+        .padding(AppConstants.UI.Edge.top, AppConstants.UI.Padding.large)
         .onChange(of: selectedTab) { _, newTab in
           Self.logger.debug("Profile tab changed to \(newTab.displayLabel)")
         }
@@ -185,7 +185,7 @@ struct ProfileView: View {
             .foregroundColor(.gray)
         }
       }
-      .padding(.vertical, AppConstants.UI.Padding.large)
+      .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.large)
     }
   }
 

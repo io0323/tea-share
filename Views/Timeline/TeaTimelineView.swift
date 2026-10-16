@@ -188,12 +188,12 @@ struct TeaTimelineView: View {
                   .buttonStyle(AppConstants.UI.ButtonStyle.plain)
                 }
               }
-              .padding(.horizontal, AppConstants.UI.Padding.large)
-              .padding(.vertical, AppConstants.UI.Padding.large)
+              .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.large)
+              .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.large)
             }
           }
-          .padding(.horizontal, AppConstants.UI.Padding.large)
-          .padding(.vertical, AppConstants.UI.Padding.large)
+          .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.large)
+          .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.large)
         }
 
         Button(action: { 
@@ -206,8 +206,8 @@ struct TeaTimelineView: View {
           }
           .font(AppConstants.UI.Typography.FontScale.buttonTitle)
           .foregroundStyle(AppConstants.UI.BasicColor.white)
-          .padding(.horizontal, AppConstants.UI.Padding.default)
-          .padding(.vertical, AppConstants.UI.Padding.large)
+          .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.default)
+          .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.large)
           .background(AppConstants.UI.BasicColor.green.opacity(AppConstants.UI.Opacity.greenButton))
           .clipShape(AppConstants.UI.ClipShape.capsule)
           .shadow(color: AppConstants.UI.ShadowStyle.shadow, radius: AppConstants.UI.Shadow.largeRadius, x: 0, y: AppConstants.UI.Shadow.buttonOffset)
@@ -254,8 +254,8 @@ struct TeaTimelineView: View {
         .accessibilityLabel(AppConstants.UI.Accessibility.Labels.clearSearch)
       }
     }
-    .padding(.horizontal, AppConstants.UI.Padding.cardHorizontal)
-    .padding(.vertical, AppConstants.UI.Padding.cardVertical)
+    .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.cardHorizontal)
+    .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.cardVertical)
     .background(AppConstants.UI.BackgroundColor.whiteHigh)
     .clipShape(AppConstants.UI.ClipShape.roundedRectangleLarge)
   }
@@ -308,7 +308,7 @@ struct TeaTimelineView: View {
    横スクロール可能なカテゴリ選択UIを返します。
    */
   private var categorySelector: some View {
-    ScrollView(.horizontal, showsIndicators: AppConstants.UI.ScrollViewSettings.hideIndicators) {
+    ScrollView(AppConstants.UI.Edge.horizontal, showsIndicators: AppConstants.UI.ScrollViewSettings.hideIndicators) {
       HStack(spacing: AppConstants.UI.Layout.Spacing.hStack) {
         CategoryChip(
           title: AppConstants.UI.UIStrings.Labels.allCategories,
@@ -328,7 +328,7 @@ struct TeaTimelineView: View {
           }
         }
       }
-      .padding(.vertical, AppConstants.UI.Padding.verticalSmall)
+      .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.verticalSmall)
     }
   }
 
@@ -351,7 +351,7 @@ struct TeaTimelineView: View {
    取引ステータス別サマリーカード群を返します。
    */
   private var tradeStatusSummaryCards: some View {
-    ScrollView(.horizontal, showsIndicators: AppConstants.UI.ScrollViewSettings.hideIndicators) {
+    ScrollView(AppConstants.UI.Edge.horizontal, showsIndicators: AppConstants.UI.ScrollViewSettings.hideIndicators) {
       HStack(spacing: AppConstants.UI.Layout.Spacing.section) {
         statusSummaryCard(
           title: TradeStatus.available.rawValue,
@@ -372,7 +372,7 @@ struct TeaTimelineView: View {
           tint: AppConstants.UI.BasicColor.gray
         )
       }
-      .padding(.vertical, AppConstants.UI.Padding.verticalSmall)
+      .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.verticalSmall)
     }
   }
 
@@ -398,8 +398,8 @@ struct TeaTimelineView: View {
           .font(AppConstants.UI.Typography.FontScale.sectionTitle)
       }
     }
-    .padding(.horizontal, AppConstants.UI.Padding.medium)
-    .padding(.vertical, AppConstants.UI.Padding.extraLarge)
+    .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.medium)
+    .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.extraLarge)
     .background(AppConstants.UI.BackgroundColor.whiteHigh)
     .clipShape(AppConstants.UI.ClipShape.roundedRectangleSheet)
   }
@@ -419,7 +419,7 @@ struct TeaTimelineView: View {
         .foregroundStyle(AppConstants.UI.BasicColor.secondary)
     }
     .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity)
-    .padding(.vertical, AppConstants.UI.Layout.Spacing.large)
+    .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Layout.Spacing.large)
     .background(AppConstants.UI.BackgroundColor.cardBackground)
     .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
   }
@@ -430,13 +430,13 @@ struct TeaTimelineView: View {
   private var activeFilterSummary: some View {
     VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.medium) {
       if hasActiveFilters {
-        ScrollView(.horizontal, showsIndicators: AppConstants.UI.ScrollViewSettings.hideIndicators) {
+        ScrollView(AppConstants.UI.Edge.horizontal, showsIndicators: AppConstants.UI.ScrollViewSettings.hideIndicators) {
           HStack(spacing: AppConstants.UI.Layout.Spacing.tag) {
             ForEach(activeFilterLabels, id: \.self) { label in
               Text(label)
                 .font(AppConstants.UI.Typography.Font.caption.weight(AppConstants.UI.Typography.FontWeight.semibold))
-                .padding(.horizontal, AppConstants.UI.Padding.filterHorizontal)
-                .padding(.vertical, AppConstants.UI.Padding.filterVertical)
+                .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.filterHorizontal)
+                .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.filterVertical)
                 .background(AppConstants.UI.BackgroundColor.whiteHigh)
                 .clipShape(AppConstants.UI.ClipShape.capsule)
             }
@@ -556,8 +556,8 @@ private struct CategoryChip: View {
       Text(title)
         .font(AppConstants.UI.Typography.Font.subheadline.weight(AppConstants.UI.Typography.FontWeight.medium))
         .foregroundStyle(isSelected ? AppConstants.UI.BasicColor.white : AppConstants.UI.BasicColor.green.opacity(AppConstants.UI.Colors.greenTextOpacity))
-        .padding(.horizontal, AppConstants.UI.Padding.buttonHorizontal)
-        .padding(.vertical, AppConstants.UI.Padding.buttonVertical)
+        .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.buttonHorizontal)
+        .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.buttonVertical)
         .background(
           isSelected
             ? AppConstants.UI.BasicColor.green.opacity(AppConstants.UI.Colors.greenSelectedOpacity)
