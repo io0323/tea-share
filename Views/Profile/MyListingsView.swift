@@ -59,10 +59,10 @@ struct MyListingsView: View {
               .buttonStyle(AppConstants.UI.ButtonStyle.plain)
             }
           }
-          .padding(.horizontal, AppConstants.UI.Padding.large)
+          .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.large)
         }
       }
-      .padding(.vertical, AppConstants.UI.Padding.large)
+      .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.large)
     }
     .onChange(of: currentUserId) { _, _ in
       cachedCurrentUser = nil
@@ -84,7 +84,7 @@ struct MyListingsView: View {
         .foregroundStyle(AppConstants.UI.BasicColor.secondary)
     }
     .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity)
-    .padding(.vertical, AppConstants.UI.Layout.Spacing.large)
+    .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Layout.Spacing.large)
   }
 }
 

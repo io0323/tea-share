@@ -311,6 +311,13 @@ struct AppConstants {
         static let bottomTrailing: Alignment = .bottomTrailing
       }
       
+      struct Edge {
+        static let horizontal: Edge.Set = .horizontal
+        static let vertical: Edge.Set = .vertical
+        static let top: Edge.Set = .top
+        static let bottom: Edge.Set = .bottom
+      }
+      
       struct LineLimit {
         static let cardTitle: ClosedRange<Int> = 2...2
         static let description: ClosedRange<Int> = 3...6

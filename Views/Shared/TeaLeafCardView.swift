@@ -42,8 +42,8 @@ struct TeaLeafCardView: View {
       HStack(spacing: AppConstants.UI.Layout.Spacing.hStack) {
         Text(tea.category.rawValue)
           .font(AppConstants.UI.Typography.FontScale.cardSubtitle)
-          .padding(.horizontal, AppConstants.UI.Padding.badgeHorizontal)
-          .padding(.vertical, AppConstants.UI.Padding.badgeVertical)
+          .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.badgeHorizontal)
+          .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.badgeVertical)
           .background(AppConstants.UI.BasicColor.green.opacity(AppConstants.UI.Colors.greenBadgeOpacity))
           .clipShape(AppConstants.UI.ClipShape.capsule)
         statusBadge
@@ -84,8 +84,8 @@ struct TeaLeafCardView: View {
     }
     .font(AppConstants.UI.Typography.Font.caption2.weight(AppConstants.UI.Typography.FontWeight.semibold))
     .foregroundStyle(expiryColor)
-    .padding(.horizontal, AppConstants.UI.Padding.badgeHorizontal)
-    .padding(.vertical, AppConstants.UI.Padding.badgeVertical)
+    .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.badgeHorizontal)
+    .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.badgeVertical)
     .background(expiryColor.opacity(AppConstants.UI.Opacity.badgeBackground))
     .clipShape(AppConstants.UI.ClipShape.capsule)
   }
@@ -143,8 +143,8 @@ struct TeaLeafCardView: View {
     Text(tea.tradeStatus.rawValue)
       .font(AppConstants.UI.Typography.Font.caption2.weight(AppConstants.UI.Typography.FontWeight.semibold))
       .foregroundStyle(statusColor)
-      .padding(.horizontal, AppConstants.UI.Padding.badgeHorizontal)
-      .padding(.vertical, AppConstants.UI.Padding.badgeVertical)
+      .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.badgeHorizontal)
+      .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.badgeVertical)
       .background(statusColor.opacity(AppConstants.UI.Opacity.badgeBackground))
       .clipShape(AppConstants.UI.ClipShape.capsule)
   }

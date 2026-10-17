@@ -80,8 +80,8 @@ struct TradeRequestsView: View {
         }
       }
       .pickerStyle(.segmented)
-      .padding(.horizontal, AppConstants.UI.Padding.large)
-      .padding(.top, AppConstants.UI.Padding.large)
+      .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.large)
+      .padding(AppConstants.UI.Edge.top, AppConstants.UI.Padding.large)
       .onChange(of: selectedTab) { _, newTab in
         Self.logger.debug("Trade request tab changed to \(newTab.displayLabel)")
       }
@@ -99,10 +99,10 @@ struct TradeRequestsView: View {
                 tradeCard(trade)
               }
             }
-            .padding(.horizontal, AppConstants.UI.Padding.large)
+            .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.large)
           }
         }
-        .padding(.vertical, AppConstants.UI.Padding.large)
+        .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.large)
       }
     }
     .alert(AppConstants.UI.Alerts.Titles.saveError, isPresented: $isShowingErrorAlert) {
@@ -127,7 +127,7 @@ struct TradeRequestsView: View {
         .foregroundStyle(AppConstants.UI.BasicColor.secondary)
     }
     .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity)
-    .padding(.vertical, AppConstants.UI.Layout.Spacing.large)
+    .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Layout.Spacing.large)
   }
 
   /*
@@ -142,8 +142,8 @@ struct TradeRequestsView: View {
         Text(trade.status.rawValue)
           .font(AppConstants.UI.Typography.Font.caption.weight(AppConstants.UI.Typography.FontWeight.semibold))
           .foregroundStyle(statusColor(for: trade.status))
-          .padding(.horizontal, AppConstants.UI.Padding.badgeHorizontal)
-          .padding(.vertical, AppConstants.UI.Padding.badgeVertical)
+          .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.badgeHorizontal)
+          .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.badgeVertical)
           .background(statusColor(for: trade.status).opacity(AppConstants.UI.Opacity.badgeBackground))
           .clipShape(AppConstants.UI.ClipShape.capsule)
       }

@@ -94,8 +94,8 @@ struct TeaMapView: View {
                     .foregroundStyle(markerColor(for: teaLeaf.tradeStatus))
                   Text(teaLeaf.category.rawValue)
                     .font(AppConstants.UI.Typography.Font.caption2)
-                    .padding(.horizontal, AppConstants.UI.Padding.buttonHorizontal)
-                    .padding(.vertical, AppConstants.UI.Padding.buttonVertical)
+                    .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.buttonHorizontal)
+                    .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.buttonVertical)
                     .background(AppConstants.UI.BackgroundColor.whiteHigh)
                     .clipShape(AppConstants.UI.ClipShape.capsule)
                 }
@@ -121,7 +121,7 @@ struct TeaMapView: View {
         }
 
         VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.section) {
-          ScrollView(.horizontal, showsIndicators: AppConstants.UI.ScrollViewSettings.hideIndicators) {
+          ScrollView(AppConstants.UI.Edge.horizontal, showsIndicators: AppConstants.UI.ScrollViewSettings.hideIndicators) {
             HStack(spacing: AppConstants.UI.Layout.Spacing.chip) {
               ForEach(TeaMapFilter.allCases) { filter in
                 filterChip(filter)
@@ -129,7 +129,7 @@ struct TeaMapView: View {
             }
           }
 
-          ScrollView(.horizontal, showsIndicators: AppConstants.UI.ScrollViewSettings.hideIndicators) {
+          ScrollView(AppConstants.UI.Edge.horizontal, showsIndicators: AppConstants.UI.ScrollViewSettings.hideIndicators) {
             HStack(spacing: AppConstants.UI.Layout.Spacing.chip) {
               categoryChip(
                 title: AppConstants.UI.UIStrings.Labels.allCategories,
@@ -151,9 +151,9 @@ struct TeaMapView: View {
               Text(AppConstants.UI.UIStrings.Labels.clearFilter)
             }
             .font(AppConstants.UI.Typography.Font.caption.weight(AppConstants.UI.Typography.FontWeight.semibold))
-            .padding(.horizontal, AppConstants.UI.Padding.buttonHorizontal)
-            .padding(.vertical, AppConstants.UI.Padding.buttonVertical)
-            .padding(.vertical, AppConstants.UI.Padding.filterButtonVertical)
+            .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.buttonHorizontal)
+            .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.buttonVertical)
+            .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.filterButtonVertical)
             .background(AppConstants.UI.BasicColor.white.opacity(AppConstants.UI.Opacity.whiteHigh))
             .clipShape(AppConstants.UI.ClipShape.capsule)
           }
@@ -161,13 +161,13 @@ struct TeaMapView: View {
 
           Text(StringFormatter.format(AppConstants.UI.UIStrings.Labels.displayCount, key: "count", value: mapTeaLeaves.count))
             .font(AppConstants.UI.Typography.Font.footnote.weight(AppConstants.UI.Typography.FontWeight.medium))
-            .padding(.horizontal, AppConstants.UI.Padding.chipHorizontal)
-            .padding(.vertical, AppConstants.UI.Padding.chipVertical)
+            .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.chipHorizontal)
+            .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.chipVertical)
             .background(AppConstants.UI.BasicColor.white.opacity(AppConstants.UI.Opacity.whiteHigh))
             .clipShape(AppConstants.UI.ClipShape.capsule)
         }
-        .padding(.horizontal, AppConstants.UI.Padding.default)
-        .padding(.top, AppConstants.UI.Padding.top)
+        .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.default)
+        .padding(AppConstants.UI.Edge.top, AppConstants.UI.Padding.top)
       }
     }
   }
@@ -199,8 +199,8 @@ struct TeaMapView: View {
         .foregroundStyle(
           selectedFilter == filter ? AppConstants.UI.BasicColor.white : AppConstants.UI.BasicColor.green.opacity(AppConstants.UI.Opacity.filterUnselected)
         )
-        .padding(.horizontal, AppConstants.UI.Padding.chipHorizontal)
-        .padding(.vertical, AppConstants.UI.Padding.filterButtonVertical)
+        .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.chipHorizontal)
+        .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.filterButtonVertical)
         .background(
           selectedFilter == filter
             ? AppConstants.UI.BasicColor.green.opacity(AppConstants.UI.Opacity.filterSelected)
@@ -228,8 +228,8 @@ struct TeaMapView: View {
         .foregroundStyle(
           isSelected ? AppConstants.UI.BasicColor.white : AppConstants.UI.BasicColor.blue.opacity(AppConstants.UI.Opacity.filterUnselected)
         )
-        .padding(.horizontal, AppConstants.UI.Padding.chipHorizontal)
-        .padding(.vertical, AppConstants.UI.Padding.filterButtonVertical)
+        .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.chipHorizontal)
+        .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.filterButtonVertical)
         .background(
           isSelected
             ? AppConstants.UI.BasicColor.blue.opacity(AppConstants.UI.Opacity.categorySelected)
@@ -286,7 +286,7 @@ private struct TeaMapDetailSheet: View {
         .fill(AppConstants.UI.FillColor.secondary)
         .frame(height: AppConstants.UI.Frame.errorImageHeight)
         .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.center)
-        .padding(.top, AppConstants.UI.Padding.default)
+        .padding(AppConstants.UI.Edge.top, AppConstants.UI.Padding.default)
 
       Text(teaLeaf.name)
         .font(AppConstants.UI.Typography.Font.title3.weight(AppConstants.UI.Typography.FontWeight.semibold))
@@ -334,8 +334,8 @@ private struct TeaMapDetailSheet: View {
 
       Spacer()
     }
-    .padding(.horizontal, AppConstants.UI.Padding.huge)
-    .padding(.bottom, AppConstants.UI.Padding.bottom)
+    .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.huge)
+    .padding(AppConstants.UI.Edge.bottom, AppConstants.UI.Padding.bottom)
     .alert(AppConstants.UI.Alerts.Titles.saveError, isPresented: $isShowingSaveError) {
       Button(AppConstants.UI.Alerts.Buttons.ok, role: AppConstants.UI.ButtonRole.cancel) {}
     } message: {
