@@ -307,8 +307,13 @@ struct AppConstants {
         static let maxWidthInfinity: CGFloat = .infinity
         static let leading: Alignment = .leading
         static let center: Alignment = .center
+        static let top: Alignment = .top
         static let topLeading: Alignment = .topLeading
         static let bottomTrailing: Alignment = .bottomTrailing
+      }
+      
+      struct VStackAlignment {
+        static let leading: HorizontalAlignment = .leading
       }
       
       struct Edge {

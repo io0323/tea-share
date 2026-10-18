@@ -134,7 +134,7 @@ struct TradeRequestsView: View {
    取引リクエストカードを返します。
    */
   private func tradeCard(_ trade: Trade) -> some View {
-    VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.section) {
+    VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Layout.Spacing.section) {
       HStack {
         Text(trade.teaLeaf?.name ?? AppConstants.UI.UIStrings.Placeholders.unknown)
           .font(AppConstants.UI.Typography.FontScale.cardTitle)
@@ -148,7 +148,7 @@ struct TradeRequestsView: View {
           .clipShape(AppConstants.UI.ClipShape.capsule)
       }
 
-      VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.medium) {
+      VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Layout.Spacing.medium) {
         detailRow(
           AppConstants.UI.UIStrings.Profile.TradeRequests.requester,
           value: trade.requester?.username ?? AppConstants.UI.UIStrings.Placeholders.unknown
