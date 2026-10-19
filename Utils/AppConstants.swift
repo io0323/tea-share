@@ -421,6 +421,13 @@ struct AppConstants {
     }
     
     /*
+     マテリアルスタイルのプリセットです。
+     */
+    struct MaterialStyle {
+      static let regular: Material = .regularMaterial
+    }
+    
+    /*
      SF Symbols などアイコン用の基準サイズです。
      */
     struct FontSizes {
