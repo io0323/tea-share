@@ -10,7 +10,7 @@ struct TeaLeafCardView: View {
   let tea: TeaLeaf
 
   var body: some View {
-    VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.vStack) {
+    VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Layout.Spacing.vStack) {
       // 画像表示エリア
       if !tea.imagePath.isEmpty,
          let uiImage = TeaImageStorage.loadImage(from: tea.imagePath) {
@@ -51,7 +51,7 @@ struct TeaLeafCardView: View {
 
       expiryBadge
 
-      VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.tiny) {
+      VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Layout.Spacing.tiny) {
         Text(
           StringFormatter.format(AppConstants.UI.UIStrings.Labels.remaining, key: "grams", value: tea.remainingGrams)
         )

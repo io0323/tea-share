@@ -80,7 +80,7 @@ struct TeaMapView: View {
 
   var body: some View {
     NavigationStack {
-      ZStack(alignment: .top) {
+      ZStack(alignment: AppConstants.UI.FrameAlignment.top) {
         Map(position: $cameraPosition) {
           ForEach(mapTeaLeaves) { teaLeaf in
             Annotation(teaLeaf.name, coordinate: teaLeaf.coordinate) {
@@ -120,7 +120,7 @@ struct TeaMapView: View {
             .presentationDetents([.fraction(AppConstants.UI.Sheets.Detents.mapDetailFraction), AppConstants.UI.Sheets.Detents.mapDetailMedium])
         }
 
-        VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.section) {
+        VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Layout.Spacing.section) {
           ScrollView(AppConstants.UI.Edge.horizontal, showsIndicators: AppConstants.UI.ScrollViewSettings.hideIndicators) {
             HStack(spacing: AppConstants.UI.Layout.Spacing.chip) {
               ForEach(TeaMapFilter.allCases) { filter in
@@ -301,7 +301,7 @@ private struct TeaMapDetailSheet: View {
         .font(AppConstants.UI.Typography.Font.body)
         .foregroundStyle(AppConstants.UI.BasicColor.secondary)
 
-      VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.vStack) {
+      VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Layout.Spacing.vStack) {
         Text(AppConstants.UI.UIStrings.Labels.updateTradeStatus)
           .font(AppConstants.UI.Typography.FontScale.sectionSubtitle)
         Picker(

@@ -127,16 +127,16 @@ struct ProfileView: View {
    */
   private var profileContent: some View {
     ScrollView {
-      VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.card) {
+      VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Layout.Spacing.card) {
         if let user = currentUser {
-          VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.card) {
+          VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Layout.Spacing.card) {
             Text(AppConstants.UI.UIStrings.Labels.profile)
               .font(AppConstants.UI.Typography.Font.largeTitle)
               .fontWeight(AppConstants.UI.Typography.FontWeight.bold)
 
-            VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.card) {
+            VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Layout.Spacing.card) {
               if isEditing {
-                VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.form) {
+                VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Layout.Spacing.form) {
                   TextField(
                     AppConstants.UI.UIStrings.Labels.username,
                     text: $editedUsername

@@ -25,7 +25,7 @@ struct TeaLeafDetailView: View {
 
   var body: some View {
     ScrollView {
-      VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.card) {
+      VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Layout.Spacing.card) {
         if !teaLeaf.imagePath.isEmpty {
           imageSection
         }
@@ -78,7 +78,7 @@ struct TeaLeafDetailView: View {
    主要情報をまとめたヘッダーカードを返します。
    */
   private var headerCard: some View {
-    VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.section) {
+    VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Layout.Spacing.section) {
       Text(teaLeaf.name)
         .font(AppConstants.UI.Typography.FontScale.detailTitle)
       Text(teaLeaf.brand)
@@ -101,7 +101,7 @@ struct TeaLeafDetailView: View {
    取引状態を変更するセクションを返します。
    */
   private var statusSection: some View {
-    VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.section) {
+    VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Layout.Spacing.section) {
       Text(AppConstants.UI.UIStrings.Detail.Sections.tradeStatus)
         .font(AppConstants.UI.Typography.FontScale.sectionTitle)
 
@@ -128,7 +128,7 @@ struct TeaLeafDetailView: View {
    ワンタップで次ステータスへ進めるセクションを返します。
    */
   private var quickStatusSection: some View {
-    VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.section) {
+    VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Layout.Spacing.section) {
       Text(AppConstants.UI.UIStrings.Detail.Sections.quickActions)
         .font(AppConstants.UI.Typography.FontScale.sectionTitle)
 
@@ -159,7 +159,7 @@ struct TeaLeafDetailView: View {
    残量や期限などの詳細情報を返します。
    */
   private var detailSection: some View {
-    VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.detailSection) {
+    VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Layout.Spacing.detailSection) {
       HStack {
         Text(AppConstants.UI.UIStrings.Detail.Sections.details)
           .font(AppConstants.UI.Typography.FontScale.sectionTitle)
@@ -244,7 +244,7 @@ struct TeaLeafDetailView: View {
         }
         .buttonStyle(AppConstants.UI.ButtonStyle.borderedProminent)
 
-        VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.medium) {
+        VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Layout.Spacing.medium) {
           Text(AppConstants.UI.UIStrings.Labels.description)
             .font(AppConstants.UI.Typography.FontScale.sectionSubtitle)
           Text(teaLeaf.description.isEmpty ? AppConstants.UI.UIStrings.Placeholders.descriptionEmpty : teaLeaf.description)
@@ -296,7 +296,7 @@ struct TeaLeafDetailView: View {
    取引リクエストセクションを返します。
    */
   private var tradeRequestSection: some View {
-    VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.section) {
+    VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Layout.Spacing.section) {
       Text(AppConstants.UI.UIStrings.Detail.Sections.tradeRequest)
         .font(AppConstants.UI.Typography.FontScale.sectionTitle)
 

@@ -165,7 +165,7 @@ struct TeaTimelineView: View {
         .opacity(AppConstants.UI.Opacity.backgroundGradient)
 
         ScrollView {
-          VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.card) {
+          VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Layout.Spacing.card) {
             searchField
             sortSelector
             statusScopeSelector
@@ -388,7 +388,7 @@ struct TeaTimelineView: View {
     HStack(spacing: AppConstants.UI.Layout.Spacing.hStack) {
       Image(systemName: icon)
         .foregroundStyle(tint)
-      VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.tiny) {
+      VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Layout.Spacing.tiny) {
         Text(title)
           .font(AppConstants.UI.Typography.Font.caption)
           .foregroundStyle(AppConstants.UI.BasicColor.secondary)
@@ -428,7 +428,7 @@ struct TeaTimelineView: View {
    アクティブなフィルタ状態と解除操作を返します。
    */
   private var activeFilterSummary: some View {
-    VStack(alignment: .leading, spacing: AppConstants.UI.Layout.Spacing.medium) {
+    VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Layout.Spacing.medium) {
       if hasActiveFilters {
         ScrollView(AppConstants.UI.Edge.horizontal, showsIndicators: AppConstants.UI.ScrollViewSettings.hideIndicators) {
           HStack(spacing: AppConstants.UI.Layout.Spacing.tag) {
