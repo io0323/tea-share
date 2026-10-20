@@ -341,6 +341,10 @@ struct AppConstants {
         static let hideIndicators: Bool = false
       }
       
+      struct ComparisonResult {
+        static let orderedAscending: ComparisonResult = .orderedAscending
+      }
+      
       struct ToggleSettings {
         static let switchStyle: ToggleStyle = .switch
       }

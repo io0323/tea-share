@@ -503,7 +503,7 @@ private enum TeaTimelineSortOption: CaseIterable, Identifiable {
       return teaLeaves.sorted { $0.remainingGrams > $1.remainingGrams }
     case .name:
       return teaLeaves.sorted {
-        $0.name.localizedCompare($1.name) == .orderedAscending
+        $0.name.localizedCompare($1.name) == AppConstants.UI.ComparisonResult.orderedAscending
       }
     }
   }
