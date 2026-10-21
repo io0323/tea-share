@@ -398,7 +398,7 @@ struct AddTeaView: View {
               .ignoresSafeArea(AppConstants.UI.SafeAreaSettings.ignoresSafeArea ? AppConstants.UI.SafeAreaSettings.safeAreaEdges : [])
             ProgressView(AppConstants.UI.UIStrings.Actions.saving)
               .padding(AppConstants.UI.Padding.large)
-              .background(.regularMaterial)
+              .background(AppConstants.UI.MaterialStyle.regular)
               .clipShape(AppConstants.UI.ClipShape.roundedRectangleProgress)
           }
         }
