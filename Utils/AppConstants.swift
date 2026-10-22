@@ -129,6 +129,14 @@ struct AppConstants {
   }
 
   /*
+   ビジョン関連の設定を定義します。
+   */
+  struct Vision {
+    static let usesLanguageCorrection: Bool = true
+    static let topCandidates: Int = 1
+  }
+  
+  /*
    文字列処理用のキャッシュ済みCharacterSetを定義します。
    */
   struct CharacterSets {
@@ -145,7 +153,6 @@ struct AppConstants {
     static let stepperStepGrams: Int = 5
     static let quickGramsAmounts: [Int] = [25, 50, 100]
     static let expiryPresetMonths: [Int] = [1, 3, 6]
-    static let visionTopCandidates: Int = 1
     static let textSuggestionPrefixCount: Int = 2
     static let textSuggestionDropFirstCount: Int = 2
   }

@@ -317,7 +317,7 @@ struct AddTeaView: View {
             AppConstants.UI.UIStrings.AddTea.Actions.resetForm,
             role: AppConstants.UI.ButtonRole.destructive
           ) {
-            isShowingResetAlert = true
+            isShowingResetAlert = AppConstants.Defaults.UI.true
           }
           .disabled(isSaving)
         }
@@ -340,7 +340,7 @@ struct AddTeaView: View {
         }
         ToolbarItem(placement: AppConstants.UI.ToolbarPlacement.topBarTrailing) {
           Button(AppConstants.UI.UIStrings.Actions.reset, role: AppConstants.UI.ButtonRole.destructive) {
-            isShowingResetAlert = true
+            isShowingResetAlert = AppConstants.Defaults.UI.true
           }
           .disabled(isSaving)
         }
@@ -510,7 +510,7 @@ struct AddTeaView: View {
         return
       }
       let recognized = observations
-        .compactMap { $0.topCandidates(AppConstants.AddTeaUI.visionTopCandidates).first?.string }
+        .compactMap { $0.topCandidates(AppConstants.Vision.topCandidates).first?.string }
         .joined(separator: " ")
       Task { @MainActor in
         applySuggestedText(recognized)
@@ -518,7 +518,7 @@ struct AddTeaView: View {
       }
     }
     request.recognitionLevel = .accurate
-    request.usesLanguageCorrection = true
+    request.usesLanguageCorrection = AppConstants.Vision.usesLanguageCorrection
 
     let handler = VNImageRequestHandler(cgImage: cgImage, options: [:])
     do {
