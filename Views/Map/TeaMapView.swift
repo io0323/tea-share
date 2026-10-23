@@ -117,7 +117,7 @@ struct TeaMapView: View {
         }
         .sheet(item: $selectedTeaLeaf) { teaLeaf in
           TeaMapDetailSheet(teaLeaf: teaLeaf)
-            .presentationDetents([.fraction(AppConstants.UI.Sheets.Detents.mapDetailFraction), AppConstants.UI.Sheets.Detents.mapDetailMedium])
+            .presentationDetents([AppConstants.UI.Sheets.Detents.fraction(AppConstants.UI.Sheets.Detents.mapDetailFraction), AppConstants.UI.Sheets.Detents.mapDetailMedium])
         }
 
         VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Layout.Spacing.section) {

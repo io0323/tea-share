@@ -557,6 +557,7 @@ struct AppConstants {
     
     struct Sheets {
       struct Detents {
+        static let fraction: PresentationDetent = .fraction
         static let mapDetailFraction: Double = 0.35
         static let mapDetailMedium: PresentationDetent = .medium
       }
