@@ -399,6 +399,8 @@ struct AppConstants {
       }
       
       struct Shadow {
+        static let x: CGFloat = 0
+        static let y: CGFloat = 0
         static let smallRadius: CGFloat = 3
         static let mediumRadius: CGFloat = 7
         static let largeRadius: CGFloat = 8

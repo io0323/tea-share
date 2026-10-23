@@ -71,7 +71,7 @@ struct TeaLeafCardView: View {
     .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
     .background(AppConstants.UI.BackgroundColor.cardWhite)
     .clipShape(AppConstants.UI.ClipShape.roundedRectangleCard)
-    .shadow(color: AppConstants.UI.ShadowStyle.cardShadow, radius: AppConstants.UI.Shadow.cardRadius, x: 0, y: AppConstants.UI.Shadow.cardOffset)
+    .shadow(color: AppConstants.UI.ShadowStyle.cardShadow, radius: AppConstants.UI.Shadow.cardRadius, x: AppConstants.UI.Shadow.x, y: AppConstants.UI.Shadow.cardOffset)
   }
 
   /*
