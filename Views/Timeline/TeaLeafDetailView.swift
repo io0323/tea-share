@@ -94,7 +94,7 @@ struct TeaLeafDetailView: View {
     .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity, alignment: AppConstants.UI.FrameAlignment.leading)
     .background(AppConstants.UI.BackgroundColor.whiteCard)
     .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
-    .shadow(color: AppConstants.UI.ShadowStyle.blackLight, radius: AppConstants.UI.Shadow.largeRadius, x: 0, y: AppConstants.UI.Shadow.buttonOffset)
+    .shadow(color: AppConstants.UI.ShadowStyle.blackLight, radius: AppConstants.UI.Shadow.largeRadius, x: AppConstants.UI.Shadow.x, y: AppConstants.UI.Shadow.buttonOffset)
   }
 
   /*
@@ -272,7 +272,7 @@ struct TeaLeafDetailView: View {
             contentMode: AppConstants.UI.ImageScaling.scaledToFit
           )
           .clipShape(AppConstants.UI.ClipShape.roundedRectangleExtraLarge)
-          .shadow(color: AppConstants.UI.ShadowStyle.imageOpacity, radius: AppConstants.UI.Shadow.imageRadius, x: 0, y: AppConstants.UI.Shadow.imageOffset)
+          .shadow(color: AppConstants.UI.ShadowStyle.imageOpacity, radius: AppConstants.UI.Shadow.imageRadius, x: AppConstants.UI.Shadow.x, y: AppConstants.UI.Shadow.imageOffset)
       } else {
         Self.logger.warning("Failed to load image for tea leaf: \(teaLeaf.name)")
         RoundedRectangle(cornerRadius: AppConstants.UI.CornerRadius.extraLarge)
