@@ -235,7 +235,7 @@ struct TeaTimelineView: View {
         text: $searchText
       )
         .textInputAutocapitalization(.never)
-        .autocorrectionDisabled()
+        .autocorrectionDisabled(AppConstants.UI.Layout.TextFieldSettings.autocorrectionDisabled)
         .accessibilityLabel(AppConstants.UI.Accessibility.Labels.search)
         .accessibilityHint(AppConstants.UI.Accessibility.Hints.search)
         .onChange(of: searchText) { _, newValue in
