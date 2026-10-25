@@ -210,7 +210,7 @@ struct TeaTimelineView: View {
           .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.large)
           .background(AppConstants.UI.BasicColor.green.opacity(AppConstants.UI.Opacity.greenButton))
           .clipShape(AppConstants.UI.ClipShape.capsule)
-          .shadow(color: AppConstants.UI.ShadowStyle.shadow, radius: AppConstants.UI.Shadow.largeRadius, x: 0, y: AppConstants.UI.Shadow.buttonOffset)
+          .shadow(color: AppConstants.UI.ShadowStyle.shadow, radius: AppConstants.UI.Shadow.largeRadius, x: AppConstants.UI.Shadow.x, y: AppConstants.UI.Shadow.buttonOffset)
         }
           .accessibilityLabel(AppConstants.UI.Accessibility.Labels.addTea)
           .accessibilityHint(AppConstants.UI.Accessibility.Hints.addTea)
