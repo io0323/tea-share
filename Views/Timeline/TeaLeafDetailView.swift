@@ -113,7 +113,7 @@ struct TeaLeafDetailView: View {
           Text(status.rawValue).tag(status)
         }
       }
-      .pickerStyle(.segmented)
+      .pickerStyle(AppConstants.UI.Layout.PickerSettings.segmented)
       .onChange(of: teaLeaf.tradeStatus) { _, _ in
         saveContext()
       }

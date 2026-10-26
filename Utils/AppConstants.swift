@@ -360,6 +360,10 @@ struct AppConstants {
         static let switchStyle: ToggleStyle = .switch
       }
       
+      struct PickerSettings {
+        static let segmented: PickerStyle = .segmented
+      }
+      
       struct SafeAreaSettings {
         static let ignoresSafeArea: Bool = true
         static let safeAreaEdges: Edge.Set = .all
