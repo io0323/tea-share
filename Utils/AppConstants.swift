@@ -344,6 +344,10 @@ struct AppConstants {
         static let vertical: Axis = .vertical
       }
       
+      struct TextFieldSettings {
+        static let autocorrectionDisabled: Bool = true
+      }
+      
       struct ScrollViewSettings {
         static let hideIndicators: Bool = false
       }
