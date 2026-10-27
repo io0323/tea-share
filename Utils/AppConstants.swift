@@ -375,6 +375,10 @@ struct AppConstants {
         static let topBarTrailing: ToolbarItemPlacement = .topBarTrailing
       }
       
+      struct NavigationBar {
+        static let titleDisplayMode: NavigationBarTitleDisplayMode = .inline
+      }
+      
       struct Spacing {
         static let zero: CGFloat = 0
         static let tiny: CGFloat = 2

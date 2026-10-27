@@ -38,7 +38,7 @@ struct TeaLeafDetailView: View {
       .padding(AppConstants.UI.Layout.Padding.extraLarge)
     }
     .navigationTitle(AppConstants.UI.Navigation.Titles.teaDetail)
-    .navigationBarTitleDisplayMode(.inline)
+    .navigationBarTitleDisplayMode(AppConstants.UI.Layout.NavigationBar.titleDisplayMode)
     .toolbar {
       ToolbarItem(placement: AppConstants.UI.ToolbarPlacement.topBarTrailing) {
         Button(isEditingDetail ? AppConstants.UI.Navigation.Toolbar.Buttons.done : AppConstants.UI.Navigation.Toolbar.Buttons.edit) {
