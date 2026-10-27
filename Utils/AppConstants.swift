@@ -352,6 +352,10 @@ struct AppConstants {
         static let hideIndicators: Bool = false
       }
       
+      struct GridItemSettings {
+        static let flexibleWithGridSpacing: GridItem = GridItem(.flexible(), spacing: AppConstants.UI.Layout.Spacing.grid)
+      }
+      
       struct ComparisonResult {
         static let orderedAscending: ComparisonResult = .orderedAscending
       }
