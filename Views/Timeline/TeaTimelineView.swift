@@ -269,7 +269,7 @@ struct TeaTimelineView: View {
         Text(option.displayLabel).tag(option)
       }
     }
-    .pickerStyle(.segmented)
+    .pickerStyle(AppConstants.UI.Layout.PickerSettings.segmented)
     .onChange(of: sortOption) { _, newOption in
       Self.logger.debug("Sort option changed to \(newOption.displayLabel)")
     }
@@ -284,7 +284,7 @@ struct TeaTimelineView: View {
         Text(scope.displayLabel).tag(scope)
       }
     }
-    .pickerStyle(.segmented)
+    .pickerStyle(AppConstants.UI.Layout.PickerSettings.segmented)
     .onChange(of: statusScope) { _, newScope in
       Self.logger.debug("Status scope changed to \(newScope.displayLabel)")
     }

@@ -71,7 +71,7 @@ struct ProfileView: View {
             Text(tab.displayLabel).tag(tab)
           }
         }
-        .pickerStyle(.segmented)
+        .pickerStyle(AppConstants.UI.Layout.PickerSettings.segmented)
         .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.large)
         .padding(AppConstants.UI.Edge.top, AppConstants.UI.Padding.large)
         .onChange(of: selectedTab) { _, newTab in

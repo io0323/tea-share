@@ -312,7 +312,7 @@ private struct TeaMapDetailSheet: View {
             Text(status.rawValue).tag(status)
           }
         }
-        .pickerStyle(.segmented)
+        .pickerStyle(AppConstants.UI.Layout.PickerSettings.segmented)
         .onChange(of: teaLeaf.tradeStatus) { oldValue, newValue in
           Self.logger.debug("Trade status changed from \(oldValue.rawValue) to \(newValue.rawValue)")
           saveStatusChange()
