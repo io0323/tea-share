@@ -434,7 +434,7 @@ struct TeaTimelineView: View {
           HStack(spacing: AppConstants.UI.Layout.Spacing.tag) {
             ForEach(activeFilterLabels, id: \.self) { label in
               Text(label)
-                .font(AppConstants.UI.Typography.Font.caption.weight(AppConstants.UI.Typography.FontWeight.semibold))
+                .font(AppConstants.UI.Typography.FontScale.tagLabel)
                 .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.filterHorizontal)
                 .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.filterVertical)
                 .background(AppConstants.UI.BackgroundColor.whiteHigh)
