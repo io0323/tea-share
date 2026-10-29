@@ -17,8 +17,8 @@ struct TeaTimelineView: View {
   @State private var isPresentingAddTea = AppConstants.Defaults.UI.isPresentingAddTea
 
   private let columns = [
-    GridItem(.flexible(), spacing: AppConstants.UI.Layout.Spacing.grid),
-    GridItem(.flexible(), spacing: AppConstants.UI.Layout.Spacing.grid)
+    AppConstants.UI.Layout.GridItemSettings.flexibleWithGridSpacing,
+    AppConstants.UI.Layout.GridItemSettings.flexibleWithGridSpacing
   ]
 
   /*
