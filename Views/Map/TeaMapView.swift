@@ -150,7 +150,7 @@ struct TeaMapView: View {
               )
               Text(AppConstants.UI.UIStrings.Labels.clearFilter)
             }
-            .font(AppConstants.UI.Typography.Font.caption.weight(AppConstants.UI.Typography.FontWeight.semibold))
+            .font(AppConstants.UI.Typography.FontScale.tagLabel)
             .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.buttonHorizontal)
             .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.buttonVertical)
             .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.filterButtonVertical)
@@ -195,7 +195,7 @@ struct TeaMapView: View {
       selectedFilter = filter
     } label: {
       Text(filter.displayLabel)
-        .font(AppConstants.UI.Typography.Font.caption.weight(AppConstants.UI.Typography.FontWeight.semibold))
+        .font(AppConstants.UI.Typography.FontScale.tagLabel)
         .foregroundStyle(
           selectedFilter == filter ? AppConstants.UI.BasicColor.white : AppConstants.UI.BasicColor.green.opacity(AppConstants.UI.Opacity.filterUnselected)
         )
@@ -224,7 +224,7 @@ struct TeaMapView: View {
       selectedCategory = category
     } label: {
       Text(title)
-        .font(AppConstants.UI.Typography.Font.caption.weight(AppConstants.UI.Typography.FontWeight.semibold))
+        .font(AppConstants.UI.Typography.FontScale.tagLabel)
         .foregroundStyle(
           isSelected ? AppConstants.UI.BasicColor.white : AppConstants.UI.BasicColor.blue.opacity(AppConstants.UI.Opacity.filterUnselected)
         )
@@ -289,7 +289,7 @@ private struct TeaMapDetailSheet: View {
         .padding(AppConstants.UI.Edge.top, AppConstants.UI.Padding.default)
 
       Text(teaLeaf.name)
-        .font(AppConstants.UI.Typography.Font.title3.weight(AppConstants.UI.Typography.FontWeight.semibold))
+        .font(AppConstants.UI.Typography.FontScale.detailTitle)
 
       Text(StringFormatter.format(AppConstants.UI.UIStrings.Labels.seller, key: "username", value: teaLeaf.owner?.username ?? AppConstants.UI.UIStrings.Placeholders.unknown))
         .font(AppConstants.UI.Typography.Font.body)
