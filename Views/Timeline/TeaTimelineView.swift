@@ -434,7 +434,7 @@ struct TeaTimelineView: View {
           HStack(spacing: AppConstants.UI.Layout.Spacing.tag) {
             ForEach(activeFilterLabels, id: \.self) { label in
               Text(label)
-                .font(AppConstants.UI.Typography.Font.caption.weight(AppConstants.UI.Typography.FontWeight.semibold))
+                .font(AppConstants.UI.Typography.FontScale.tagLabel)
                 .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.filterHorizontal)
                 .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.filterVertical)
                 .background(AppConstants.UI.BackgroundColor.whiteHigh)
@@ -554,7 +554,7 @@ private struct CategoryChip: View {
   var body: some View {
     Button(action: action) {
       Text(title)
-        .font(AppConstants.UI.Typography.Font.subheadline.weight(AppConstants.UI.Typography.FontWeight.medium))
+        .font(AppConstants.UI.Typography.FontScale.chipTitle)
         .foregroundStyle(isSelected ? AppConstants.UI.BasicColor.white : AppConstants.UI.BasicColor.green.opacity(AppConstants.UI.Colors.greenTextOpacity))
         .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.buttonHorizontal)
         .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.buttonVertical)

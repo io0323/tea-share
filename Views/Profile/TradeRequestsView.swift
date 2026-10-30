@@ -140,7 +140,7 @@ struct TradeRequestsView: View {
           .font(AppConstants.UI.Typography.FontScale.cardTitle)
         Spacer()
         Text(trade.status.rawValue)
-          .font(AppConstants.UI.Typography.Font.caption.weight(AppConstants.UI.Typography.FontWeight.semibold))
+          .font(AppConstants.UI.Typography.FontScale.tagLabel)
           .foregroundStyle(statusColor(for: trade.status))
           .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.badgeHorizontal)
           .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.badgeVertical)
