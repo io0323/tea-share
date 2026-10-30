@@ -585,6 +585,10 @@ struct AppConstants {
         static let fraction: PresentationDetent = .fraction
         static let mapDetailFraction: Double = 0.35
         static let mapDetailMedium: PresentationDetent = .medium
+        static let mapDetailDetents: [PresentationDetent] = [
+          fraction(mapDetailFraction),
+          mapDetailMedium
+        ]
       }
     }
     
