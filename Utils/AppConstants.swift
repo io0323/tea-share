@@ -521,6 +521,12 @@ struct AppConstants {
         static let detailBody: Font = .body
         static let statusTitle: Font = .subheadline.weight(.semibold)
         static let statusBody: Font = .subheadline
+        static let footnote: Font = .footnote
+        static let caption2: Font = .caption2
+        static let caption2Semibold: Font = .caption2.weight(.semibold)
+        static let footnoteMedium: Font = .footnote.weight(.medium)
+        static let profileTitle: Font = .title
+        static let profileLargeTitle: Font = .largeTitle
       }
     }
     

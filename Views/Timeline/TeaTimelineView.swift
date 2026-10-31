@@ -390,7 +390,7 @@ struct TeaTimelineView: View {
         .foregroundStyle(tint)
       VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Layout.Spacing.tiny) {
         Text(title)
-          .font(AppConstants.UI.Typography.Font.caption)
+          .font(AppConstants.UI.Typography.FontScale.cardBody)
           .foregroundStyle(AppConstants.UI.BasicColor.secondary)
         Text(
           StringFormatter.format(AppConstants.UI.UIStrings.Labels.countSuffix, key: "count", value: count)
@@ -449,7 +449,7 @@ struct TeaTimelineView: View {
         .font(AppConstants.UI.Typography.FontScale.chipTitle)
       } else {
         Text(AppConstants.UI.UIStrings.Labels.noFilterConditions)
-          .font(AppConstants.UI.Typography.Font.footnote)
+          .font(AppConstants.UI.Typography.FontScale.footnote)
           .foregroundStyle(AppConstants.UI.BasicColor.secondary)
       }
     }

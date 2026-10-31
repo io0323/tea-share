@@ -123,7 +123,7 @@ struct TradeRequestsView: View {
       Text(AppConstants.UI.UIStrings.Profile.TradeRequests.empty)
         .font(AppConstants.UI.Typography.FontScale.sectionTitle)
       Text(AppConstants.UI.UIStrings.Profile.TradeRequests.emptyHint)
-        .font(AppConstants.UI.Typography.Font.footnote)
+        .font(AppConstants.UI.Typography.FontScale.footnote)
         .foregroundStyle(AppConstants.UI.BasicColor.secondary)
     }
     .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity)
@@ -187,11 +187,11 @@ struct TradeRequestsView: View {
   private func detailRow(_ title: String, value: String) -> some View {
     HStack {
       Text(title)
-        .font(AppConstants.UI.Typography.Font.caption)
+        .font(AppConstants.UI.Typography.FontScale.cardBody)
         .foregroundStyle(AppConstants.UI.BasicColor.secondary)
       Spacer()
       Text(value)
-        .font(AppConstants.UI.Typography.Font.caption)
+        .font(AppConstants.UI.Typography.FontScale.cardBody)
     }
   }
 
