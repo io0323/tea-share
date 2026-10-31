@@ -55,7 +55,7 @@ struct TeaLeafCardView: View {
         Text(
           StringFormatter.format(AppConstants.UI.UIStrings.Labels.remaining, key: "grams", value: tea.remainingGrams)
         )
-          .font(AppConstants.UI.Typography.Font.caption)
+          .font(AppConstants.UI.Typography.FontScale.cardBody)
         Text(
           StringFormatter.format(
             AppConstants.UI.UIStrings.Labels.area,
@@ -63,7 +63,7 @@ struct TeaLeafCardView: View {
             value: tea.owner?.location ?? AppConstants.UI.UIStrings.Placeholders.notSet
           )
         )
-          .font(AppConstants.UI.Typography.Font.caption)
+          .font(AppConstants.UI.Typography.FontScale.cardBody)
           .foregroundStyle(AppConstants.UI.BasicColor.secondary)
       }
     }
@@ -82,7 +82,7 @@ struct TeaLeafCardView: View {
       Image(systemName: expiryIcon)
       Text(expiryText)
     }
-    .font(AppConstants.UI.Typography.Font.caption2.weight(AppConstants.UI.Typography.FontWeight.semibold))
+    .font(AppConstants.UI.Typography.FontScale.caption2Semibold)
     .foregroundStyle(expiryColor)
     .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.badgeHorizontal)
     .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.badgeVertical)
@@ -141,7 +141,7 @@ struct TeaLeafCardView: View {
    */
   private var statusBadge: some View {
     Text(tea.tradeStatus.rawValue)
-      .font(AppConstants.UI.Typography.Font.caption2.weight(AppConstants.UI.Typography.FontWeight.semibold))
+      .font(AppConstants.UI.Typography.FontScale.caption2Semibold)
       .foregroundStyle(statusColor)
       .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.badgeHorizontal)
       .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.badgeVertical)

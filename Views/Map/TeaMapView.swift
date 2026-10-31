@@ -93,7 +93,7 @@ struct TeaMapView: View {
                     .font(AppConstants.UI.Typography.Font.mapMarkerIcon)
                     .foregroundStyle(markerColor(for: teaLeaf.tradeStatus))
                   Text(teaLeaf.category.rawValue)
-                    .font(AppConstants.UI.Typography.Font.caption2)
+                    .font(AppConstants.UI.Typography.FontScale.caption2)
                     .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.buttonHorizontal)
                     .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.buttonVertical)
                     .background(AppConstants.UI.BackgroundColor.whiteHigh)
@@ -160,7 +160,7 @@ struct TeaMapView: View {
           .buttonStyle(AppConstants.UI.ButtonStyle.plain)
 
           Text(StringFormatter.format(AppConstants.UI.UIStrings.Labels.displayCount, key: "count", value: mapTeaLeaves.count))
-            .font(AppConstants.UI.Typography.Font.footnote.weight(AppConstants.UI.Typography.FontWeight.medium))
+            .font(AppConstants.UI.Typography.FontScale.footnoteMedium)
             .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.chipHorizontal)
             .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.chipVertical)
             .background(AppConstants.UI.BasicColor.white.opacity(AppConstants.UI.Opacity.whiteHigh))
@@ -289,16 +289,16 @@ private struct TeaMapDetailSheet: View {
         .padding(AppConstants.UI.Edge.top, AppConstants.UI.Padding.default)
 
       Text(teaLeaf.name)
-        .font(AppConstants.UI.Typography.Font.title3.weight(AppConstants.UI.Typography.FontWeight.semibold))
+        .font(AppConstants.UI.Typography.FontScale.detailTitle)
 
       Text(StringFormatter.format(AppConstants.UI.UIStrings.Labels.seller, key: "username", value: teaLeaf.owner?.username ?? AppConstants.UI.UIStrings.Placeholders.unknown))
-        .font(AppConstants.UI.Typography.Font.body)
+        .font(AppConstants.UI.Typography.FontScale.detailBody)
       Text(StringFormatter.format(AppConstants.UI.UIStrings.Labels.area, key: "location", value: teaLeaf.owner?.location ?? AppConstants.UI.UIStrings.Placeholders.notSet))
-        .font(AppConstants.UI.Typography.Font.body)
+        .font(AppConstants.UI.Typography.FontScale.detailBody)
       Text(StringFormatter.format(AppConstants.UI.UIStrings.Labels.remaining, key: "grams", value: teaLeaf.remainingGrams))
-        .font(AppConstants.UI.Typography.Font.body)
+        .font(AppConstants.UI.Typography.FontScale.detailBody)
       Text(StringFormatter.format(AppConstants.UI.UIStrings.Labels.status, key: "status", value: teaLeaf.tradeStatus.rawValue))
-        .font(AppConstants.UI.Typography.Font.body)
+        .font(AppConstants.UI.Typography.FontScale.detailBody)
         .foregroundStyle(AppConstants.UI.BasicColor.secondary)
 
       VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Layout.Spacing.vStack) {
