@@ -80,7 +80,7 @@ struct MyListingsView: View {
       Text(AppConstants.UI.UIStrings.Profile.MyListings.empty)
         .font(AppConstants.UI.Typography.FontScale.sectionTitle)
       Text(AppConstants.UI.UIStrings.Profile.MyListings.emptyHint)
-        .font(AppConstants.UI.Typography.Font.footnote)
+        .font(AppConstants.UI.Typography.FontScale.footnote)
         .foregroundStyle(AppConstants.UI.BasicColor.secondary)
     }
     .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity)
