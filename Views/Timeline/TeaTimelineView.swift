@@ -554,7 +554,7 @@ private struct CategoryChip: View {
   var body: some View {
     Button(action: action) {
       Text(title)
-        .font(AppConstants.UI.Typography.Font.subheadline.weight(AppConstants.UI.Typography.FontWeight.medium))
+        .font(AppConstants.UI.Typography.FontScale.chipTitle)
         .foregroundStyle(isSelected ? AppConstants.UI.BasicColor.white : AppConstants.UI.BasicColor.green.opacity(AppConstants.UI.Colors.greenTextOpacity))
         .padding(AppConstants.UI.Edge.horizontal, AppConstants.UI.Padding.buttonHorizontal)
         .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.buttonVertical)

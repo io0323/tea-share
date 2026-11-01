@@ -289,7 +289,7 @@ private struct TeaMapDetailSheet: View {
         .padding(AppConstants.UI.Edge.top, AppConstants.UI.Padding.default)
 
       Text(teaLeaf.name)
-        .font(AppConstants.UI.Typography.Font.title3.weight(AppConstants.UI.Typography.FontWeight.semibold))
+        .font(AppConstants.UI.Typography.FontScale.detailTitle)
 
       Text(StringFormatter.format(AppConstants.UI.UIStrings.Labels.seller, key: "username", value: teaLeaf.owner?.username ?? AppConstants.UI.UIStrings.Placeholders.unknown))
         .font(AppConstants.UI.Typography.Font.body)
