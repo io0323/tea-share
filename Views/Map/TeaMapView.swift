@@ -325,7 +325,7 @@ private struct TeaMapDetailSheet: View {
         HStack {
           Image(systemName: AppConstants.UI.UIStrings.Content.arrowRightCircleFill)
           Text(nextActionTitle)
-            .fontWeight(AppConstants.UI.Typography.FontWeight.semibold)
+            .font(AppConstants.UI.Typography.FontScale.detailAction)
         }
         .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity)
       }

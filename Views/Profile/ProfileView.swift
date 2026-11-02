@@ -131,8 +131,7 @@ struct ProfileView: View {
         if let user = currentUser {
           VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Layout.Spacing.card) {
             Text(AppConstants.UI.UIStrings.Labels.profile)
-              .font(AppConstants.UI.Typography.Font.largeTitle)
-              .fontWeight(AppConstants.UI.Typography.FontWeight.bold)
+              .font(AppConstants.UI.Typography.FontScale.profileLargeTitleBold)
 
             VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Layout.Spacing.card) {
               if isEditing {

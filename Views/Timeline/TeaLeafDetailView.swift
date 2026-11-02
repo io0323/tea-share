@@ -142,7 +142,7 @@ struct TeaLeafDetailView: View {
         HStack {
           Image(systemName: AppConstants.UI.UIStrings.Content.arrowRightCircleFill)
           Text(quickActionTitle)
-            .fontWeight(AppConstants.UI.Typography.FontWeight.semibold)
+            .font(AppConstants.UI.Typography.FontScale.detailAction)
         }
         .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity)
       }
@@ -238,7 +238,7 @@ struct TeaLeafDetailView: View {
           HStack {
             Image(systemName: AppConstants.UI.UIStrings.Content.mapFill)
             Text(AppConstants.UI.UIStrings.Actions.openInMap)
-              .fontWeight(AppConstants.UI.Typography.FontWeight.semibold)
+              .font(AppConstants.UI.Typography.FontScale.detailAction)
           }
           .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity)
         }
@@ -307,7 +307,7 @@ struct TeaLeafDetailView: View {
           HStack {
             Image(systemName: AppConstants.UI.UIStrings.Content.envelopeFill)
             Text(AppConstants.UI.UIStrings.Actions.submitTradeRequest)
-              .fontWeight(AppConstants.UI.Typography.FontWeight.semibold)
+              .font(AppConstants.UI.Typography.FontScale.detailAction)
           }
           .frame(maxWidth: AppConstants.UI.FrameAlignment.maxWidthInfinity)
         }
