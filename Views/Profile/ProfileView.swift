@@ -131,7 +131,7 @@ struct ProfileView: View {
         if let user = currentUser {
           VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Layout.Spacing.card) {
             Text(AppConstants.UI.UIStrings.Labels.profile)
-              .font(AppConstants.UI.Typography.Font.largeTitle)
+              .font(AppConstants.UI.Typography.FontScale.profileLargeTitle)
               .fontWeight(AppConstants.UI.Typography.FontWeight.bold)
 
             VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Layout.Spacing.card) {
@@ -155,14 +155,14 @@ struct ProfileView: View {
                   Text(AppConstants.UI.UIStrings.Labels.username)
                     .font(AppConstants.UI.Typography.FontScale.sectionTitle)
                   Text(user.username)
-                    .font(AppConstants.UI.Typography.Font.body)
+                    .font(AppConstants.UI.Typography.FontScale.sectionBody)
                 }
 
                 HStack {
                   Text(AppConstants.UI.UIStrings.Labels.id)
                     .font(AppConstants.UI.Typography.FontScale.sectionTitle)
                   Text(user.id.uuidString)
-                    .font(AppConstants.UI.Typography.Font.body)
+                    .font(AppConstants.UI.Typography.FontScale.sectionBody)
                     .foregroundColor(AppConstants.UI.BasicColor.secondary)
                 }
 
@@ -170,7 +170,7 @@ struct ProfileView: View {
                   Text(AppConstants.UI.UIStrings.Labels.location)
                     .font(AppConstants.UI.Typography.FontScale.sectionTitle)
                   Text(user.location)
-                    .font(AppConstants.UI.Typography.Font.body)
+                    .font(AppConstants.UI.Typography.FontScale.sectionBody)
                 }
               }
             }
@@ -181,7 +181,7 @@ struct ProfileView: View {
           .padding(AppConstants.UI.Padding.default)
         } else {
           Text(AppConstants.UI.UIStrings.Labels.userDataNotFound)
-            .font(AppConstants.UI.Typography.Font.title)
+            .font(AppConstants.UI.Typography.FontScale.profileTitle)
             .foregroundColor(.gray)
         }
       }
