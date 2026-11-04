@@ -182,7 +182,7 @@ struct ProfileView: View {
         } else {
           Text(AppConstants.UI.UIStrings.Labels.userDataNotFound)
             .font(AppConstants.UI.Typography.FontScale.profileTitle)
-            .foregroundColor(.gray)
+            .foregroundColor(AppConstants.UI.BasicColor.gray)
         }
       }
       .padding(AppConstants.UI.Edge.vertical, AppConstants.UI.Padding.large)
