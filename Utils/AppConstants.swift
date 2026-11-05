@@ -966,6 +966,7 @@ struct AppConstants {
         static let username: String = "new_user"
         static let editableRemainingGrams: Int = 0
         static let remainingGrams: Int = AddTeaUI.defaultRemainingGrams
+        static let newUUID: UUID = UUID()
       }
       
       struct UI {
