@@ -141,13 +141,13 @@ struct ProfileView: View {
                     AppConstants.UI.UIStrings.Labels.username,
                     text: $editedUsername
                   )
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .textFieldStyle(AppConstants.UI.TextFieldStyle.roundedBorder)
                     .accessibilityLabel(AppConstants.UI.Accessibility.Labels.username)
                   TextField(
                     AppConstants.UI.UIStrings.Labels.location,
                     text: $editedLocation
                   )
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .textFieldStyle(AppConstants.UI.TextFieldStyle.roundedBorder)
                     .accessibilityLabel(AppConstants.UI.Accessibility.Labels.location)
                 }
               } else {
