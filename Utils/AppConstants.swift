@@ -454,6 +454,10 @@ struct AppConstants {
         BorderedProminentButtonStyle()
     }
     
+    struct TextFieldStyle {
+      static let roundedBorder: TextFieldStyle = RoundedBorderTextFieldStyle()
+    }
+    
     /*
      マテリアルスタイルのプリセットです。
      */
