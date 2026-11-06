@@ -586,7 +586,7 @@ struct AddTeaView: View {
     currentUserId = storedUserId
     let owner = resolvedOwner.user
 
-    let teaLeafId = UUID()
+    let teaLeafId = AppConstants.Defaults.State.newUUID
     var imagePath = AppConstants.Defaults.State.emptyString
     if let selectedImage {
       do {
