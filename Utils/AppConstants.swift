@@ -61,6 +61,7 @@ struct AppConstants {
    */
   struct DateFormatters {
     static let japaneseLocale: Locale = Locale(identifier: "ja_JP")
+    static let calendar: Calendar = Calendar.current
     
     static let dateTimeFormatter: DateFormatter = {
       let formatter = DateFormatter()

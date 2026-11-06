@@ -723,7 +723,7 @@ struct AddTeaView: View {
    賞味期限プリセットを適用します。
    */
   private func applyExpiryPreset(_ preset: ExpiryPreset) {
-    let calendar = Calendar.current
+    let calendar = AppConstants.DateFormatters.calendar
     let today = calendar.startOfDay(for: AppConstants.Defaults.State.currentDate)
     expiryDate = calendar.date(
       byAdding: .month,
