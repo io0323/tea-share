@@ -281,7 +281,7 @@ private struct TeaMapDetailSheet: View {
   @State private var saveErrorMessage = AppConstants.Defaults.State.saveErrorMessage
 
   var body: some View {
-    VStack(alignment: .leading, spacing: AppConstants.UI.Spacing.default) {
+    VStack(alignment: AppConstants.UI.VStackAlignment.leading, spacing: AppConstants.UI.Spacing.default) {
       AppConstants.UI.ClipShape.capsule
         .fill(AppConstants.UI.FillColor.secondary)
         .frame(height: AppConstants.UI.Frame.errorImageHeight)
