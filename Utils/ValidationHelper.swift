@@ -78,7 +78,7 @@ enum ValidationHelper {
    - Returns: バリデーション結果（isValid: 有効かどうか, message: エラーメッセージ）
    */
   static func validateNotPast(_ date: Date) -> (isValid: Bool, message: String?) {
-    let today = calendar.startOfDay(for: Date())
+    let today = calendar.startOfDay(for: AppConstants.Defaults.State.currentDate)
     if date < today {
       logger.debug("Date validation failed: past date (\(date))")
       return (false, AppConstants.ValidationMessages.pastDate)
