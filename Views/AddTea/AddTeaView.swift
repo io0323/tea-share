@@ -11,7 +11,7 @@ struct AddTeaView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(\.modelContext) private var modelContext
 
-  @AppStorage("addtea_draft") private var draftData: Data = Data()
+  @AppStorage("addtea_draft") private var draftData: Data = AppConstants.Defaults.State.emptyData
   @AppStorage(AppConstants.Storage.currentUserIdKey)
   private var currentUserId = AppConstants.Defaults.State.emptyString
   
@@ -698,7 +698,7 @@ struct AddTeaView: View {
    下書き保存内容を初期値に戻します。
    */
   private func clearDraft() {
-    draftData = Data()
+    draftData = AppConstants.Defaults.State.emptyData
     draftTeaLeaf = nil
   }
 
