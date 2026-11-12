@@ -45,7 +45,7 @@ final class User: Codable, Identifiable {
   var location: String
 
   init(
-    id: UUID = UUID(),
+    id: UUID = AppConstants.Defaults.State.newUUID,
     username: String,
     location: String
   ) {
@@ -89,8 +89,8 @@ extension TeaLeaf {
    今日から賞味期限までの日数を返します。
    */
   var daysUntilExpiry: Int {
-    let calendar = Calendar.current
-    let start = calendar.startOfDay(for: Date())
+    let calendar = AppConstants.DateFormatters.calendar
+    let start = calendar.startOfDay(for: AppConstants.Defaults.State.currentDate)
     let target = calendar.startOfDay(for: expiryDate)
     return calendar.dateComponents([.day], from: start, to: target).day
       ?? 0
@@ -129,7 +129,7 @@ final class TeaLeaf: Codable, Identifiable {
   var owner: User?
 
   init(
-    id: UUID = UUID(),
+    id: UUID = AppConstants.Defaults.State.newUUID,
     name: String,
     brand: String,
     category: TeaCategory,
@@ -230,12 +230,12 @@ final class Trade: Codable, Identifiable {
   var createdAt: Date
 
   init(
-    id: UUID = UUID(),
+    id: UUID = AppConstants.Defaults.State.newUUID,
     teaLeaf: TeaLeaf? = nil,
     requester: User? = nil,
     owner: User? = nil,
     status: TradeStatus = .pending,
-    createdAt: Date = Date()
+    createdAt: Date = AppConstants.Defaults.State.currentDate
   ) {
     self.id = id
     self.teaLeaf = teaLeaf
