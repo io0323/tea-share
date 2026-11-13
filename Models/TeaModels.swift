@@ -45,7 +45,7 @@ final class User: Codable, Identifiable {
   var location: String
 
   init(
-    id: UUID = UUID(),
+    id: UUID = AppConstants.Defaults.State.newUUID,
     username: String,
     location: String
   ) {
@@ -129,7 +129,7 @@ final class TeaLeaf: Codable, Identifiable {
   var owner: User?
 
   init(
-    id: UUID = UUID(),
+    id: UUID = AppConstants.Defaults.State.newUUID,
     name: String,
     brand: String,
     category: TeaCategory,
