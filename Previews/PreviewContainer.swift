@@ -156,8 +156,8 @@ enum PreviewContainer {
     latitude: Double,
     longitude: Double
   ) {
-    let latitude = 35.681236 + Double.random(in: AppConstants.PreviewUI.coordinateRange)
-    let longitude = 139.767125 + Double.random(in: AppConstants.PreviewUI.coordinateRange)
+    let latitude = AppConstants.Location.defaultLatitude + Double.random(in: AppConstants.PreviewUI.coordinateRange)
+    let longitude = AppConstants.Location.defaultLongitude + Double.random(in: AppConstants.PreviewUI.coordinateRange)
     return (latitude, longitude)
   }
 }
