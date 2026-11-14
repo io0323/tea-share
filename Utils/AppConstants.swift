@@ -953,6 +953,7 @@ struct AppConstants {
       struct State {
         static let currentDate: Date = Date()
         static let emptyString: String = ""
+        static let emptyData: Data = Data()
         static let searchText: String = ""
         static let errorMessage: String = ""
         static let saveErrorMessage: String = ""
