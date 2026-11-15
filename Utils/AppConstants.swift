@@ -996,6 +996,8 @@ struct AppConstants {
         static let statusScope: TeaTimelineStatusScope = .active
         static let category: TeaCategory = .greenTea
         static let selectedCategory: TeaCategory? = nil
+        static let tradeStatus: TradeStatus = .available
+        static let tradeRequestStatus: TradeStatus = .pending
       }
     }
 }
