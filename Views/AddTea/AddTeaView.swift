@@ -616,7 +616,7 @@ struct AddTeaView: View {
       description: trimmedDescription,
       latitude: AppConstants.Location.defaultLatitude + Double.random(in: AppConstants.Location.randomLatitudeRange),
       longitude: AppConstants.Location.defaultLongitude + Double.random(in: AppConstants.Location.randomLongitudeRange),
-      tradeStatus: .available,
+      tradeStatus: AppConstants.Defaults.Selection.tradeStatus,
       owner: owner
     )
 
@@ -647,7 +647,7 @@ struct AddTeaView: View {
       draftTeaLeaf = try JSONDecoder().decode(TeaLeaf.self, from: draftData)
       name = draftTeaLeaf?.name ?? ""
       brand = draftTeaLeaf?.brand ?? ""
-      category = draftTeaLeaf?.category ?? .greenTea
+      category = draftTeaLeaf?.category ?? AppConstants.Defaults.Selection.category
       expiryDate = draftTeaLeaf?.expiryDate ?? AppConstants.Defaults.State.currentDate
       descriptionText = draftTeaLeaf?.description ?? ""
       remainingGrams = draftTeaLeaf?.remainingGrams ?? AppConstants.AddTeaUI.defaultRemainingGrams
@@ -683,7 +683,7 @@ struct AddTeaView: View {
       description: trimmedDescription,
       latitude: AppConstants.Location.defaultLatitude,
       longitude: AppConstants.Location.defaultLongitude,
-      tradeStatus: .available,
+      tradeStatus: AppConstants.Defaults.Selection.tradeStatus,
       owner: draftOwner
     )
     
@@ -708,7 +708,7 @@ struct AddTeaView: View {
   private func resetForm() {
     name = AppConstants.Defaults.State.emptyString
     brand = AppConstants.Defaults.State.emptyString
-    category = .greenTea
+    category = AppConstants.Defaults.Selection.category
     expiryDate = AppConstants.Defaults.State.currentDate
     descriptionText = AppConstants.Defaults.State.emptyString
     remainingGrams = AppConstants.AddTeaUI.defaultRemainingGrams
