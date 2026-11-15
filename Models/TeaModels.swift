@@ -137,8 +137,8 @@ final class TeaLeaf: Codable, Identifiable {
     expiryDate: Date,
     imagePath: String = "",
     description: String,
-    latitude: Double = 35.681236,
-    longitude: Double = 139.767125,
+    latitude: Double = AppConstants.Location.defaultLatitude,
+    longitude: Double = AppConstants.Location.defaultLongitude,
     tradeStatus: TradeStatus = .available,
     owner: User? = nil
   ) {
