@@ -139,7 +139,7 @@ final class TeaLeaf: Codable, Identifiable {
     description: String,
     latitude: Double = AppConstants.Location.defaultLatitude,
     longitude: Double = AppConstants.Location.defaultLongitude,
-    tradeStatus: TradeStatus = AppConstants.Defaults.Selection.tradeStatus,
+    tradeStatus: TradeStatus = .available,
     owner: User? = nil
   ) {
     self.id = id
