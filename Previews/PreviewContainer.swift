@@ -13,7 +13,7 @@ enum PreviewContainer {
    */
   static var shared: ModelContainer = {
     let schema = Schema([TeaLeaf.self, User.self, Trade.self])
-    let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
+    let configuration = ModelConfiguration(isStoredInMemoryOnly: AppConstants.ModelConfig.isStoredInMemoryOnlyForPreview)
 
     do {
       let container = try ModelContainer(
