@@ -47,7 +47,7 @@ enum PreviewContainer {
         brand: "茶寮みどり",
         category: .greenTea,
         remainingGrams: AppConstants.PreviewUI.sampleTeaRemainingGrams[0],
-        expiryDate: calendar.date(byAdding: .month, value: AppConstants.PreviewUI.sampleTeaExpiryMonths[0], to: now)
+        expiryDate: calendar.date(byAdding: AppConstants.UI.Layout.CalendarComponents.month, value: AppConstants.PreviewUI.sampleTeaExpiryMonths[0], to: now)
           ?? now,
         description: "旨味が濃く、食後にも合う煎茶です。",
         latitude: c1.latitude,
@@ -60,7 +60,7 @@ enum PreviewContainer {
         brand: "Tea Market",
         category: .blackTea,
         remainingGrams: AppConstants.PreviewUI.sampleTeaRemainingGrams[1],
-        expiryDate: calendar.date(byAdding: .month, value: AppConstants.PreviewUI.sampleTeaExpiryMonths[1], to: now)
+        expiryDate: calendar.date(byAdding: AppConstants.UI.Layout.CalendarComponents.month, value: AppConstants.PreviewUI.sampleTeaExpiryMonths[1], to: now)
           ?? now,
         description: "ミルクティー向けのしっかりした味わい。",
         latitude: c2.latitude,
@@ -73,7 +73,7 @@ enum PreviewContainer {
         brand: "山霧茶舗",
         category: .oolongTea,
         remainingGrams: AppConstants.PreviewUI.sampleTeaRemainingGrams[2],
-        expiryDate: calendar.date(byAdding: .month, value: AppConstants.PreviewUI.sampleTeaExpiryMonths[2], to: now)
+        expiryDate: calendar.date(byAdding: AppConstants.UI.Layout.CalendarComponents.month, value: AppConstants.PreviewUI.sampleTeaExpiryMonths[2], to: now)
           ?? now,
         description: "華やかな香りと軽い甘みの烏龍茶です。",
         latitude: c3.latitude,
@@ -86,7 +86,7 @@ enum PreviewContainer {
         brand: "Leaf Garden",
         category: .herbalTea,
         remainingGrams: AppConstants.PreviewUI.sampleTeaRemainingGrams[3],
-        expiryDate: calendar.date(byAdding: .month, value: AppConstants.PreviewUI.sampleTeaExpiryMonths[3], to: now)
+        expiryDate: calendar.date(byAdding: AppConstants.UI.Layout.CalendarComponents.month, value: AppConstants.PreviewUI.sampleTeaExpiryMonths[3], to: now)
           ?? now,
         description: "就寝前におすすめの穏やかな味わい。",
         latitude: c4.latitude,
