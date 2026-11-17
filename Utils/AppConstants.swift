@@ -341,6 +341,11 @@ struct AppConstants {
         static let dateComponents: DatePickerComponents = .date
       }
       
+      struct CalendarComponents {
+        static let month: Calendar.Component = .month
+        static let day: Calendar.Component = .day
+      }
+      
       struct TextFieldAxis {
         static let vertical: Axis = .vertical
       }
