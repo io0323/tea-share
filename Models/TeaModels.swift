@@ -234,7 +234,7 @@ final class Trade: Codable, Identifiable {
     teaLeaf: TeaLeaf? = nil,
     requester: User? = nil,
     owner: User? = nil,
-    status: TradeStatus = .pending,
+    status: TradeStatus = AppConstants.Defaults.Selection.tradeRequestStatus,
     createdAt: Date = AppConstants.Defaults.State.currentDate
   ) {
     self.id = id
