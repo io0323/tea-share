@@ -32,6 +32,14 @@ struct AppConstants {
   }
 
   /*
+   モデル設定を定義します。
+   */
+  struct ModelConfig {
+    static let isStoredInMemoryOnly: Bool = false
+    static let isStoredInMemoryOnlyForPreview: Bool = true
+  }
+
+  /*
    ロギング設定を定義します。
    */
   struct Logging {

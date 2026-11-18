@@ -16,7 +16,7 @@ struct TeaShareApp: App {
     let schema = Schema([TeaLeaf.self, User.self, Trade.self])
     let configuration = ModelConfiguration(
       schema: schema,
-      isStoredInMemoryOnly: false
+      isStoredInMemoryOnly: AppConstants.ModelConfig.isStoredInMemoryOnly
     )
 
     do {
