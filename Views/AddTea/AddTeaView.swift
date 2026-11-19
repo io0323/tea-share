@@ -726,7 +726,7 @@ struct AddTeaView: View {
     let calendar = AppConstants.DateFormatters.calendar
     let today = calendar.startOfDay(for: AppConstants.Defaults.State.currentDate)
     expiryDate = calendar.date(
-      byAdding: .month,
+      byAdding: AppConstants.UI.Layout.CalendarComponents.month,
       value: preset.monthOffset,
       to: today
     ) ?? today
