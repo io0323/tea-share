@@ -71,6 +71,13 @@ struct AppConstants {
     static let japaneseLocale: Locale = Locale(identifier: "ja_JP")
     static let calendar: Calendar = Calendar.current
     
+    /*
+     数値フォーマットの設定を定義します。
+     */
+    struct NumberFormats {
+      static let coordinateFormat: String = "%.5f"
+    }
+    
     static let dateTimeFormatter: DateFormatter = {
       let formatter = DateFormatter()
       formatter.dateStyle = .medium
