@@ -225,11 +225,11 @@ struct TeaLeafDetailView: View {
         )
         detailRow(
           AppConstants.UI.UIStrings.Detail.Fields.latitude,
-          value: String(format: "%.5f", teaLeaf.latitude)
+          value: String(format: AppConstants.DateFormatters.NumberFormats.coordinateFormat, teaLeaf.latitude)
         )
         detailRow(
           AppConstants.UI.UIStrings.Detail.Fields.longitude,
-          value: String(format: "%.5f", teaLeaf.longitude)
+          value: String(format: AppConstants.DateFormatters.NumberFormats.coordinateFormat, teaLeaf.longitude)
         )
 
         Button {
