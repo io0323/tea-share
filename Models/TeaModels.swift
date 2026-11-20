@@ -92,7 +92,7 @@ extension TeaLeaf {
     let calendar = AppConstants.DateFormatters.calendar
     let start = calendar.startOfDay(for: AppConstants.Defaults.State.currentDate)
     let target = calendar.startOfDay(for: expiryDate)
-    return calendar.dateComponents([.day], from: start, to: target).day
+    return calendar.dateComponents([AppConstants.UI.Layout.CalendarComponents.day], from: start, to: target).day
       ?? 0
   }
 
