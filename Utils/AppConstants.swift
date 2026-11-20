@@ -94,6 +94,7 @@ struct AppConstants {
   struct ImageStorage {
     static let subdirectory: String = "TeaImages"
     static let jpegCompressionQuality: CGFloat = 0.85
+    static let fileExtension: String = "jpg"
     
     struct Errors {
       static let deleteFailed: String = "画像の削除に失敗しました。時間をおいて再度お試しください。"

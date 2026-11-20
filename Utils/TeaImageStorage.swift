@@ -49,7 +49,7 @@ enum TeaImageStorage {
       logger.error("Failed to encode image for tea leaf \(teaLeafId)")
       throw SaveError.encodingFailed
     }
-    let fileName = "\(teaLeafId.uuidString).jpg"
+    let fileName = "\(teaLeafId.uuidString).\(AppConstants.ImageStorage.fileExtension)"
     let fileURL = directoryURL.appendingPathComponent(fileName)
     try data.write(to: fileURL, options: .atomic)
     logger.info("Successfully saved image for tea leaf \(teaLeafId) at \(fileURL.path)")
@@ -97,7 +97,7 @@ enum TeaImageStorage {
    指定された茶葉IDに紐づく画像を削除します。
    */
   static func deleteImage(for teaLeafId: UUID) throws {
-    let fileName = "\(teaLeafId.uuidString).jpg"
+    let fileName = "\(teaLeafId.uuidString).\(AppConstants.ImageStorage.fileExtension)"
     let fileURL = directoryURL.appendingPathComponent(fileName)
     
     guard FileManager.default.fileExists(atPath: fileURL.path) else {
@@ -122,7 +122,7 @@ enum TeaImageStorage {
     )
     
     let paths = contents
-      .filter { $0.pathExtension == "jpg" }
+      .filter { $0.pathExtension == AppConstants.ImageStorage.fileExtension }
       .map { $0.path }
     
     logger.debug("Found \(paths.count) image files in storage")
@@ -164,7 +164,7 @@ enum TeaImageStorage {
     var deletedCount = 0
     
     for fileURL in contents {
-      guard fileURL.pathExtension == "jpg" else { continue }
+      guard fileURL.pathExtension == AppConstants.ImageStorage.fileExtension else { continue }
       
       let fileName = fileURL.deletingPathExtension().lastPathComponent
       guard let teaLeafId = UUID(uuidString: fileName) else { continue }
