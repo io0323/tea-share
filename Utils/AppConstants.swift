@@ -32,6 +32,14 @@ struct AppConstants {
   }
 
   /*
+   モデル設定を定義します。
+   */
+  struct ModelConfig {
+    static let isStoredInMemoryOnly: Bool = false
+    static let isStoredInMemoryOnlyForPreview: Bool = true
+  }
+
+  /*
    ロギング設定を定義します。
    */
   struct Logging {
@@ -343,7 +351,6 @@ struct AppConstants {
       
       struct CalendarComponents {
         static let month: Calendar.Component = .month
-        static let day: Calendar.Component = .day
       }
       
       struct TextFieldAxis {
