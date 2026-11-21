@@ -96,35 +96,35 @@ struct AddTeaView: View {
    前後空白を除いた茶葉名を返します。
    */
   private var trimmedName: String {
-    name.trimmingCharacters(in: .whitespacesAndNewlines)
+    name.trimmingCharacters(in: AppConstants.CharacterSets.whitespaceAndNewlines)
   }
 
   /*
    前後空白を除いたブランド名を返します。
    */
   private var trimmedBrand: String {
-    brand.trimmingCharacters(in: .whitespacesAndNewlines)
+    brand.trimmingCharacters(in: AppConstants.CharacterSets.whitespaceAndNewlines)
   }
 
   /*
    前後空白を除いたユーザー名を返します。
    */
   private var trimmedUsername: String {
-    username.trimmingCharacters(in: .whitespacesAndNewlines)
+    username.trimmingCharacters(in: AppConstants.CharacterSets.whitespaceAndNewlines)
   }
 
   /*
    前後空白を除いたエリア名を返します。
    */
   private var trimmedLocation: String {
-    location.trimmingCharacters(in: .whitespacesAndNewlines)
+    location.trimmingCharacters(in: AppConstants.CharacterSets.whitespaceAndNewlines)
   }
 
   /*
    前後空白を除いた説明文を返します。
    */
   private var trimmedDescription: String {
-    descriptionText.trimmingCharacters(in: .whitespacesAndNewlines)
+    descriptionText.trimmingCharacters(in: AppConstants.CharacterSets.whitespaceAndNewlines)
   }
 
   /*
