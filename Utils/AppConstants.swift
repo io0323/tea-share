@@ -95,6 +95,12 @@ struct AppConstants {
     static let subdirectory: String = "TeaImages"
     static let jpegCompressionQuality: CGFloat = 0.85
     static let fileExtension: String = "jpg"
+    static let writeOptions: Data.WritingOptions = .atomic
+    
+    struct FileManagerSettings {
+      static let searchPathDirectory: FileManager.SearchPathDirectory = .documentDirectory
+      static let searchPathDomainMask: FileManager.SearchPathDomainMask = .userDomainMask
+    }
     
     struct Errors {
       static let deleteFailed: String = "画像の削除に失敗しました。時間をおいて再度お試しください。"
