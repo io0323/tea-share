@@ -71,6 +71,13 @@ struct AppConstants {
     static let japaneseLocale: Locale = Locale(identifier: "ja_JP")
     static let calendar: Calendar = Calendar.current
     
+    /*
+     数値フォーマットの設定を定義します。
+     */
+    struct NumberFormats {
+      static let coordinateFormat: String = "%.5f"
+    }
+    
     static let dateTimeFormatter: DateFormatter = {
       let formatter = DateFormatter()
       formatter.dateStyle = .medium
@@ -96,11 +103,6 @@ struct AppConstants {
     static let jpegCompressionQuality: CGFloat = 0.85
     static let fileExtension: String = "jpg"
     static let writeOptions: Data.WritingOptions = .atomic
-    
-    struct FileManagerSettings {
-      static let searchPathDirectory: FileManager.SearchPathDirectory = .documentDirectory
-      static let searchPathDomainMask: FileManager.SearchPathDomainMask = .userDomainMask
-    }
     
     struct Errors {
       static let deleteFailed: String = "画像の削除に失敗しました。時間をおいて再度お試しください。"
