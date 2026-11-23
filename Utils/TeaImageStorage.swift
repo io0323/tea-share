@@ -30,7 +30,7 @@ enum TeaImageStorage {
       logger.info("Creating image storage directory at \(url.path)")
       try FileManager.default.createDirectory(
         at: url,
-        withIntermediateDirectories: true
+        withIntermediateDirectories: AppConstants.ImageStorage.createIntermediateDirectories
       )
     }
   }
