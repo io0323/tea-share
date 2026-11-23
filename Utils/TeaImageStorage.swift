@@ -51,7 +51,7 @@ enum TeaImageStorage {
     }
     let fileName = "\(teaLeafId.uuidString).\(AppConstants.ImageStorage.fileExtension)"
     let fileURL = directoryURL.appendingPathComponent(fileName)
-    try data.write(to: fileURL, options: .atomic)
+    try data.write(to: fileURL, options: AppConstants.ImageStorage.writeOptions)
     logger.info("Successfully saved image for tea leaf \(teaLeafId) at \(fileURL.path)")
     return fileURL.path
   }
