@@ -14,7 +14,7 @@ enum TeaImageStorage {
     let documents = FileManager.default.urls(
       for: AppConstants.ImageStorage.FileManagerSettings.searchPathDirectory,
       in: AppConstants.ImageStorage.FileManagerSettings.searchPathDomainMask
-    ).first ?? URL(fileURLWithPath: NSTemporaryDirectory())
+    ).first ?? AppConstants.ImageStorage.fallbackDirectory
     return documents.appendingPathComponent(
       AppConstants.ImageStorage.subdirectory,
       isDirectory: true
