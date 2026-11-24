@@ -118,7 +118,7 @@ enum TeaImageStorage {
     let fileManager = FileManager.default
     let contents = try fileManager.contentsOfDirectory(
       at: directoryURL,
-      includingPropertiesForKeys: nil
+      includingPropertiesForKeys: AppConstants.ImageStorage.includingPropertiesForKeys
     )
     
     let paths = contents
@@ -138,7 +138,7 @@ enum TeaImageStorage {
     let fileManager = FileManager.default
     let contents = try fileManager.contentsOfDirectory(
       at: directoryURL,
-      includingPropertiesForKeys: nil
+      includingPropertiesForKeys: AppConstants.ImageStorage.includingPropertiesForKeys
     )
     
     logger.info("Deleting all images (\(contents.count) files)")
@@ -157,7 +157,7 @@ enum TeaImageStorage {
     let fileManager = FileManager.default
     let contents = try fileManager.contentsOfDirectory(
       at: directoryURL,
-      includingPropertiesForKeys: nil
+      includingPropertiesForKeys: AppConstants.ImageStorage.includingPropertiesForKeys
     )
     
     logger.info("Starting cleanup of unused images. Active tea leaf IDs: \(activeTeaLeafIds.count)")
