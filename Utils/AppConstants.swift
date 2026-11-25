@@ -104,6 +104,7 @@ struct AppConstants {
     static let fileExtension: String = "jpg"
     static let writeOptions: Data.WritingOptions = .atomic
     static let createIntermediateDirectories: Bool = true
+    static let isDirectory: Bool = true
     
     struct Errors {
       static let deleteFailed: String = "画像の削除に失敗しました。時間をおいて再度お試しください。"

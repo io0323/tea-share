@@ -17,7 +17,7 @@ enum TeaImageStorage {
     ).first ?? URL(fileURLWithPath: NSTemporaryDirectory())
     return documents.appendingPathComponent(
       AppConstants.ImageStorage.subdirectory,
-      isDirectory: true
+      isDirectory: AppConstants.ImageStorage.isDirectory
     )
   }()
 
