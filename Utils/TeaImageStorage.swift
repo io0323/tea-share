@@ -12,8 +12,8 @@ enum TeaImageStorage {
    */
   private static let directoryURL: URL = {
     let documents = FileManager.default.urls(
-      for: .documentDirectory,
-      in: .userDomainMask
+      for: AppConstants.ImageStorage.FileManagerSettings.searchPathDirectory,
+      in: AppConstants.ImageStorage.FileManagerSettings.searchPathDomainMask
     ).first ?? URL(fileURLWithPath: NSTemporaryDirectory())
     return documents.appendingPathComponent(
       AppConstants.ImageStorage.subdirectory,
@@ -30,7 +30,7 @@ enum TeaImageStorage {
       logger.info("Creating image storage directory at \(url.path)")
       try FileManager.default.createDirectory(
         at: url,
-        withIntermediateDirectories: true
+        withIntermediateDirectories: AppConstants.ImageStorage.createIntermediateDirectories
       )
     }
   }
