@@ -11,7 +11,7 @@ enum TeaImageStorage {
    画像保存用ディレクトリの URL をキャッシュして返します。
    */
   private static let directoryURL: URL = {
-    let documents = FileManager.default.urls(
+    let documents = AppConstants.ImageStorage.fileManager.urls(
       for: AppConstants.ImageStorage.FileManagerSettings.searchPathDirectory,
       in: AppConstants.ImageStorage.FileManagerSettings.searchPathDomainMask
     ).first ?? URL(fileURLWithPath: NSTemporaryDirectory())
@@ -26,9 +26,9 @@ enum TeaImageStorage {
    */
   private static func ensureDirectoryExists() throws {
     let url = directoryURL
-    if !FileManager.default.fileExists(atPath: url.path) {
+    if !AppConstants.ImageStorage.fileManager.fileExists(atPath: url.path) {
       logger.info("Creating image storage directory at \(url.path)")
-      try FileManager.default.createDirectory(
+      try AppConstants.ImageStorage.fileManager.createDirectory(
         at: url,
         withIntermediateDirectories: AppConstants.ImageStorage.createIntermediateDirectories
       )
@@ -62,7 +62,7 @@ enum TeaImageStorage {
   static func loadImage(from path: String) -> UIImage? {
     guard !path.isEmpty else { return nil }
     
-    let fileManager = FileManager.default
+    let fileManager = AppConstants.ImageStorage.fileManager
     guard fileManager.fileExists(atPath: path) else {
       logger.warning("Image file not found at path: \(path)")
       return nil
@@ -83,7 +83,7 @@ enum TeaImageStorage {
   static func deleteImage(at path: String) throws {
     guard !path.isEmpty else { return }
     
-    let fileManager = FileManager.default
+    let fileManager = AppConstants.ImageStorage.fileManager
     guard fileManager.fileExists(atPath: path) else {
       logger.warning("Attempted to delete non-existent image at path: \(path)")
       throw DeleteError.fileNotFound
@@ -100,12 +100,12 @@ enum TeaImageStorage {
     let fileName = "\(teaLeafId.uuidString).\(AppConstants.ImageStorage.fileExtension)"
     let fileURL = directoryURL.appendingPathComponent(fileName)
     
-    guard FileManager.default.fileExists(atPath: fileURL.path) else {
+    guard AppConstants.ImageStorage.fileManager.fileExists(atPath: fileURL.path) else {
       logger.warning("Attempted to delete non-existent image for tea leaf \(teaLeafId)")
       throw DeleteError.fileNotFound
     }
     
-    try FileManager.default.removeItem(at: fileURL)
+    try AppConstants.ImageStorage.fileManager.removeItem(at: fileURL)
     logger.info("Successfully deleted image for tea leaf \(teaLeafId)")
   }
 
@@ -115,7 +115,7 @@ enum TeaImageStorage {
   static func getAllImagePaths() throws -> [String] {
     try ensureDirectoryExists()
     
-    let fileManager = FileManager.default
+    let fileManager = AppConstants.ImageStorage.fileManager
     let contents = try fileManager.contentsOfDirectory(
       at: directoryURL,
       includingPropertiesForKeys: AppConstants.ImageStorage.includingPropertiesForKeys
@@ -135,7 +135,7 @@ enum TeaImageStorage {
   static func deleteAllImages() throws {
     try ensureDirectoryExists()
     
-    let fileManager = FileManager.default
+    let fileManager = AppConstants.ImageStorage.fileManager
     let contents = try fileManager.contentsOfDirectory(
       at: directoryURL,
       includingPropertiesForKeys: AppConstants.ImageStorage.includingPropertiesForKeys
@@ -154,7 +154,7 @@ enum TeaImageStorage {
   static func cleanupUnusedImages(activeTeaLeafIds: Set<UUID>) throws {
     try ensureDirectoryExists()
     
-    let fileManager = FileManager.default
+    let fileManager = AppConstants.ImageStorage.fileManager
     let contents = try fileManager.contentsOfDirectory(
       at: directoryURL,
       includingPropertiesForKeys: AppConstants.ImageStorage.includingPropertiesForKeys
