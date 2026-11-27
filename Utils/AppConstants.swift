@@ -174,6 +174,12 @@ struct AppConstants {
     static let expiryPresetMonths: [Int] = [1, 3, 6]
     static let textSuggestionPrefixCount: Int = 2
     static let textSuggestionDropFirstCount: Int = 2
+    
+    struct ExpiryPresets {
+      static let oneMonth: String = "1か月"
+      static let threeMonths: String = "3か月"
+      static let sixMonths: String = "6か月"
+    }
   }
   
   /*
