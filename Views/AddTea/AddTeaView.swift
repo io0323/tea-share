@@ -146,9 +146,9 @@ struct AddTeaView: View {
    賞味期限のクイック選択を管理する列挙型です。
    */
   private enum ExpiryPreset: String, CaseIterable, Identifiable {
-    case oneMonth = "1か月"
-    case threeMonths = "3か月"
-    case sixMonths = "6か月"
+    case oneMonth = AppConstants.AddTeaUI.ExpiryPresets.oneMonth
+    case threeMonths = AppConstants.AddTeaUI.ExpiryPresets.threeMonths
+    case sixMonths = AppConstants.AddTeaUI.ExpiryPresets.sixMonths
 
     var id: String { rawValue }
 
