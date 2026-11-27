@@ -103,7 +103,7 @@ struct AppConstants {
     static let jpegCompressionQuality: CGFloat = 0.85
     static let fileExtension: String = "jpg"
     static let writeOptions: Data.WritingOptions = .atomic
-    static let fallbackDirectory: URL = URL(fileURLWithPath: NSTemporaryDirectory())
+    static let createIntermediateDirectories: Bool = true
     
     struct Errors {
       static let deleteFailed: String = "画像の削除に失敗しました。時間をおいて再度お試しください。"
